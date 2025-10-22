@@ -718,3 +718,135 @@ Types (Marks) + Paths (Clay) + Containers (Grainframes)
 *"Alpine minimalism shows security through simplicity."*  
 *"Types are safety rails that enable faster, more confident development."*  
 *"80×110: Different but complementary—together they create something neither could alone."*
+---
+
+## **Session 804 Continuation: GNOME Migration & Daemon Infrastructure**
+
+**Timestamp**: `12025-10-22--1830--CDT--moon-vishakha--09thhouse18--kae3g`  
+**Location**: Central Illinois forest (Framework 16 + Ubuntu 24.04 LTS GNOME)  
+**Focus**: System infrastructure, network management, daemon supervision
+
+### **Desktop Environment Migration: Sway → GNOME**
+
+**Context**: Switched back to GNOME for better network management in forest environment with intermittent Starlink + cellular tethering.
+
+**Rationale**:
+- Network Manager GUI handles connection switching better than manual nmcli
+- Less configuration overhead = more time for Grain Network development
+- Built-in Night Light easier than wlsunset/gammastep
+- Ubuntu 24.04 LTS GNOME 46 is stable and well-tested
+
+**Philosophy**: "THE WHOLE GRAIN" - choosing tools that serve the mission over aesthetic perfection.
+
+**Preserved**: Complete Sway configuration archived in grainstore/grainsource-sway/
+
+### **Infrastructure Created**
+
+**1. Graindaemon - Universal S6 Daemon Framework**
+- Template/personal configuration split (fork-friendly)
+- S6 supervision with auto-restart
+- Systemd integration for boot auto-start
+- Multi-service support (Night Light, WiFi, extensible)
+- Health checks and status monitoring
+- ~800 lines of Clojure + documentation
+
+**2. GrainWiFi - Dual-Connection Manager**  
+- Intelligent Starlink ↔ Cellular switching
+- Quality monitoring (ping, packet loss, signal strength)
+- Priority-based routing with hysteresis
+- Desktop notifications via GNOME
+- Forest-optimized retry logic
+- ~600 lines of implementation
+
+**3. Grain Night Light - Warm Filter Daemon**
+- Auto-enables GNOME Night Light at 2000K
+- S6-supervised with continuous monitoring
+- Restores settings if manually changed
+- Systemd user service integration
+- ~400 lines total
+
+### **Graindroid Phone Performance Optimization**
+
+**Updated specifications prioritizing maximum RAM and performance**:
+
+**Processor Rankings** (by max RAM):
+1. Snapdragon 8 Gen 3: 24GB LPDDR5X @ 68.3 GB/s ($200-250)
+2. MediaTek Dimensity 8300: 16GB LPDDR5X @ 68.3 GB/s ($100-140) ⭐ BEST VALUE
+3. Snapdragon 7 Gen 3: 16GB LPDDR5 @ 51.2 GB/s ($120-160)
+4. Unisoc Tiger T820: 8GB LPDDR4X @ 34.1 GB/s ($60-80)
+
+**Key Finding**: MediaTek Dimensity 8300 delivers flagship memory bandwidth at 50% lower cost, ideal for Android development.
+
+**Storage Recommendations**:
+- Maximum: 2TB NVMe PCIe 4.0 @ 7000/6000 MB/s ($180-220)
+- Recommended: 1TB NVMe ($100-130)
+- Minimum: 512GB ($60-80)
+
+**Performance-First Approach**: Accurate pricing with developer needs prioritized.
+
+### **Branching Strategy Standardization**
+
+**Decision**: All repositories use `main` branch only
+
+**Deployment Model**:
+- Source code: `main` branch (mirrored GitHub ↔ Codeberg)
+- GitHub Pages: Deploys from `main` 
+- Codeberg Pages: Deploys from `pages` (auto-built via CI)
+
+**CI/CD**: GitHub Actions handles all mirroring and deployment automatically.
+
+**Philosophy**: Simplicity and standards over custom workflows. One branch to understand, one truth to maintain.
+
+### **Grainstore Dual-Deployment Specification**
+
+**Updated grainstore.edn v0.2.0** with complete dual-platform configuration:
+- All 20+ modules have GitHub + Codeberg URLs
+- Pages URLs for both platforms
+- Dependency graph with status tracking
+- License verification across all modules
+
+**New Modules Added**:
+- graindaemon (daemon framework)
+- grainwifi (connection manager)
+- grain-nightlight (warm lighting)
+- grainlexicon (documentation vocabulary)
+
+### **Technical Excellence**
+
+**Template/Personal Split Pattern** implemented across:
+- Graindaemon configuration
+- GrainWiFi settings
+- All grainstore modules
+- Fork-friendly by design
+
+**S6 Supervision** integrated into:
+- Custom Grain daemon framework
+- GNOME system services
+- Network management tools
+- Extensible for future services
+
+**Health Monitoring**:
+- Automated quality checks
+- Desktop notifications
+- Logging and status reporting
+- Self-healing systems
+
+### **What's Next**
+
+**Priority**: Get warm lighting working on local machine
+1. Install Graindaemon
+2. Configure Grain Night Light
+3. Enable systemd auto-start
+4. Test full lifecycle
+
+**Then**:
+- Initialize grainpbc repositories on both platforms
+- Deploy all Pages sites
+- Set up cross-repo CI/CD mirroring
+- Test GrainWiFi with real Starlink + cellular connections
+
+---
+
+*"Daemon supervision is care made automatic."*  
+*"Warm lighting at 2000K: technical solution to biological need."*  
+*"Forest connectivity: where infrastructure meets nature's intermittency."*
