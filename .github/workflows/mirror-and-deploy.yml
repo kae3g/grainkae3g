@@ -1,0 +1,81 @@
+name: Mirror to Codeberg and Deploy Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  mirror-to-codeberg:
+    name: Mirror main branch to Codeberg
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for proper mirroring
+          
+      - name: Mirror to Codeberg
+        env:
+          CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+        run: |
+          git remote add codeberg https://kae3g:${CODEBERG_TOKEN}@codeberg.org/kae3g/grainkae3g.git || true
+          git push codeberg main --force
+          
+  deploy-github-pages:
+    name: Deploy GitHub Pages from main
+    runs-on: ubuntu-latest
+    needs: mirror-to-codeberg
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        
+  trigger-codeberg-pages:
+    name: Trigger Codeberg Pages Build
+    runs-on: ubuntu-latest
+    needs: mirror-to-codeberg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Setup Babashka
+        uses: turtlequeue/setup-babashka@v1.5.0
+        
+      - name: Build for Codeberg Pages
+        run: bb writings:build-fast
+        
+      - name: Deploy to Codeberg pages branch
+        env:
+          CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          
+          # Build pages branch
+          git checkout -B pages
+          git add -f writings/
+          git add -f web-app/build/
+          git commit -m "chore: deploy pages from main@${{ github.sha }}" || true
+          
+          # Push to Codeberg pages branch
+          git remote add codeberg https://kae3g:${CODEBERG_TOKEN}@codeberg.org/kae3g/grainkae3g.git || true
+          git push codeberg pages --force
+
