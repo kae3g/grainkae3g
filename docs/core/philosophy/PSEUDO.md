@@ -850,3 +850,252 @@ Types (Marks) + Paths (Clay) + Containers (Grainframes)
 *"Daemon supervision is care made automatic."*  
 *"Warm lighting at 2000K: technical solution to biological need."*  
 *"Forest connectivity: where infrastructure meets nature's intermittency."*
+
+---
+
+## 🎨 **SESSION 805: GRAINDISPLAY, GRAINCASKS & GRAINICONS** (October 22, 2025)
+
+### **Display Management & AppImage Package System**
+
+**Major Achievement**: Created comprehensive display management and AppImage package management systems for Grain Network, establishing the foundation for user-controlled visual experiences and declarative application installation.
+
+### **GrainDisplay: Universal Display Management**
+
+**Vision**: Content creators can specify intended display settings via Grainweb metadata, while local users maintain full control over their viewing experience.
+
+**Core Features**:
+- ✅ **GNOME Integration**: Native support for `gsettings` and D-Bus
+- ✅ **Display Metadata System**: Embedded display settings in Grainmark files
+  - Color temperature (1000-6500K warm lighting)
+  - Scaling factors (text/UI sizing)
+  - Color profiles (sRGB, Display P3, grayscale, monochrome)
+  - Accessibility filters (protanopia, deuteranopia, tritanopia)
+  - Display modes (vision, ink, reading, presentation)
+- ✅ **Grainclay Integration**: Immutable URL-safe neovedic timestamped paths
+- ✅ **Local User Control**: Three-tier priority system
+  1. Local user overrides (force-* settings) - highest priority
+  2. Content creator metadata (if honored)
+  3. Local machine defaults - fallback
+- ✅ **Template/Personal Split**: Shared defaults with per-user customization
+- ✅ **Humble UI Settings Interface**: Rich configuration UI (in progress)
+- ✅ **Graindroid Phone Support**: Dual-display architecture (VisionMode/InkMode)
+
+**Display Metadata Example**:
+```clojure
+{:grainmark-name "kae3g/forest-sunset"
+ :immutable-path "12025-10-22--1830--CDT--moon-vishakha--09thhouse18--kae3g"
+ :color-temperature 2000  ;; Warm lighting
+ :color-profile :display-p3
+ :display-mode :reading
+ :filters [:reduce-blue-light]
+ :intended-for [:desktop :graindroid-ink]}
+```
+
+**Local Preferences**:
+```clojure
+{:honor-external-metadata false  ;; Ignore creator settings
+ :force-color-temperature 2000   ;; Always warm
+ :force-filters [:monochrome]    ;; Always grayscale
+ :allow-list []                  ;; Which fields to honor
+ :deny-list [:brightness]}       ;; Never honor brightness
+```
+
+### **Graincasks: AppImage Package Manager**
+
+**Decision**: **NOT using Linuxbrew/Homebrew** - Purpose-built AppImage manager instead.
+
+**Why Not Linuxbrew?**:
+1. AppImages are self-contained - don't fit Homebrew's directory structure
+2. AppImages have built-in update systems (zsync, AppImageUpdate)
+3. Desktop integration requires custom `.desktop` files
+4. AppImages are already portable - Homebrew adds complexity
+
+**Graincasks Philosophy**:
+- EDN-based cask definitions (declarative, version-controlled)
+- Automatic AppImageUpdate integration
+- Icon management via Grainicons
+- Desktop file generation
+- Template/Personal configuration split
+- Version tracking and rollback capability
+
+**Cask Definition Format**:
+```clojure
+{:cask
+ {:name "Cursor"
+  :description "AI-first code editor"
+  :homepage "https://cursor.com"
+  :appimage
+  {:url "https://downloader.cursor.sh/linux/appImage/x64"
+   :update-method :appimageupdate}
+  :desktop
+  {:name "Cursor"
+   :exec "cursor %F"
+   :icon "cursor"  ;; From Grainicons
+   :categories ["Development" "IDE"]}
+  :icon
+  {:source :grainicons
+   :grainicon-name "cursor-grain"}}}
+```
+
+**AppImage Update Methods**:
+1. **AppImageUpdate** (recommended): Delta updates via zsync
+2. **GitHub Releases**: Download from GitHub
+3. **Direct URL**: Static URL downloads
+4. **Manual**: User-controlled updates
+
+**Usage**:
+```bash
+bb cask install cursor    # Install Cursor AppImage
+bb cask update            # Update all AppImages
+bb cask list              # List installed casks
+bb cask uninstall cursor  # Remove AppImage
+```
+
+### **Grainicons: Icon Management Library** (In Progress)
+
+**Vision**: Centralized icon management with template/personal split, supporting multiple icon sources and integration with Graincasks and GrainDisplay.
+
+**Features** (Planned):
+- Template icon library (shared across Grain Network)
+- Personal icon overrides (user-specific customizations)
+- Multiple icon sources:
+  - Grainicons library (built-in)
+  - Web URLs (downloaded and cached)
+  - Custom files (user-provided)
+  - Bundled (from AppImage/application)
+- Icon generation (SVG → PNG at multiple sizes)
+- Desktop integration (`.desktop` file icon references)
+- GrainDisplay integration (display metadata icons)
+
+### **Technical Stack Integration**
+
+**Grainstore v0.3.0 Updates**:
+- Added **HumbleUI** (io.github.humbleui/humbleui) - Cross-platform Clojure UI framework
+- Added **Leiningen** (build automation tool)
+- Added **GrainDisplay** module (depends on: graindaemon, humbleui, grainneovedic, grainclay)
+- Added **Graincasks** module (planned)
+- Added **Grainicons** module (planned)
+
+**Dependencies**:
+```
+GrainDisplay → HumbleUI, Graindaemon, Grainneovedic, Grainclay
+Graincasks → Grainicons, GrainDisplay (optional)
+Grainicons → (standalone)
+```
+
+### **Deployment Status Update**
+
+**Current Reality**:
+- ✅ **GitHub**: `kae3g/grainkae3g` active on both GitHub and Codeberg
+- ⏳ **Codeberg grainpbc org**: Not yet created
+- ⏳ **GitHub grainpbc org**: Created but repositories not yet initialized
+- ⏳ **Module deployment**: All modules in `grainstore/` awaiting deployment
+
+**Next Steps**:
+1. Create `grainpbc` organization on Codeberg
+2. Initialize all grainstore modules as separate repos
+3. Enable GitHub Pages and Codeberg Pages
+4. Set up CI/CD mirroring between platforms
+
+### **Session Highlights**
+
+**Problem Solved**: Sway/GNOME warm lighting conflict
+- Removed `gammastep-indicator.desktop` from autostart
+- Configured GNOME Night Light for manual 24/7 operation at 2000K
+- Eliminated startup error dialogs
+- Clean migration from Sway to GNOME completed
+
+**Display Scaling Adjustments**:
+- Tested 1.75x scaling (175% larger text)
+- Reverted to 1.0x scaling (100% default)
+- All changes applied via `bb scripts/set-scaling.bb`
+
+**Icon Design**:
+- Created Grain Network-themed Cursor icon design
+- SVG-based with warm golden gradient (#D4A574 → #E67E22)
+- Wheat stalk forming cursor arrow
+- "Gr" branding integration
+- Installation script for Ubuntu 24.04 LTS
+
+### **Philosophy & Vision**
+
+**"Local Control, Global Intent"**:
+Content creators can express their intended viewing experience through Grainweb display metadata, but local users always have final say. This respects both creative vision and personal agency.
+
+**"Declarative Over Imperative"**:
+Graincasks uses EDN-based cask definitions instead of imperative installation scripts. This makes configurations version-controllable, shareable, and auditable.
+
+**"Purpose-Built Over Generic"**:
+Rather than adapting Linuxbrew for AppImages, we built Graincasks specifically for AppImage workflows. The right tool for the right job.
+
+**"Template/Personal Everywhere"**:
+The template/personal configuration split pattern (from Graindaemon) is now applied to:
+- GrainDisplay settings
+- Graincasks cask definitions
+- Grainicons icon selections
+
+This pattern allows sharing of default configurations while preserving user customization.
+
+### **Technical Achievements**
+
+**GrainDisplay Metadata System**:
+- Full schema for display settings
+- Validation and error handling
+- Grainclay URL generation
+- Neovedic timestamp integration
+- GNOME `gsettings` command generation
+
+**Graincasks Architecture**:
+- EDN-based cask format
+- AppImageUpdate integration design
+- Desktop file generation logic
+- Icon management system
+- Personal override mechanism
+
+**HumbleUI Integration**:
+- Added to grainstore.edn as external dependency
+- Planned UI components for GrainDisplay settings
+- Cross-platform UI framework for Grain Network apps
+
+### **Development Environment**
+
+**Current Setup**:
+- Ubuntu 24.04 LTS with GNOME
+- Text scaling: 1.0x (100%)
+- Night Light: 2000K (manual 24/7)
+- Cursor IDE: AppImage (to be managed by Graincasks)
+- Forest workspace: Intermittent cellular/Starlink connectivity
+
+**Tools**:
+- Babashka for scripting
+- `gsettings` for GNOME configuration
+- `xrandr` for display information
+- ImageMagick/Inkscape for icon generation (planned)
+
+### **Next Session Goals**
+
+**Graincasks Implementation**:
+1. Complete cask installer (`scripts/cask-install.bb`)
+2. Implement AppImageUpdate integration
+3. Create desktop file generator
+4. Build update mechanism
+5. Test with Cursor AppImage
+
+**Grainicons Implementation**:
+1. Create icon library structure
+2. Implement SVG → PNG conversion
+3. Build icon caching system
+4. Integrate with Graincasks
+5. Add Grain Network icon templates
+
+**Deployment**:
+1. Create Codeberg grainpbc organization
+2. Initialize all grainstore modules as repos
+3. Enable Pages on both platforms
+4. Set up CI/CD mirroring
+
+---
+
+*"Display settings are personal sovereignty in digital space."*  
+*"AppImages need AppImage tools, not generic package managers."*  
+*"Icons are the first impression - make them Grain."*
