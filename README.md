@@ -2,6 +2,33 @@
 
 **Personal sovereignty stack for Ubuntu 24.04 LTS on Framework 16**
 
+---
+
+## 🌐 **Grain Network Websites**
+
+### **Main Sites**
+- 🌾 **Grain Network Hub**: https://kae3g.github.io/grainkae3g/ (coming soon)
+- 📝 **kae3g Writings**: https://kae3g.codeberg.page/12025-10/ | https://kae3g.github.io/12025-10/
+- 🏢 **grainpbc Organization**: https://github.com/grainpbc
+
+### **Core Libraries**
+- 🔧 **clojure-sixos** (typo handling): https://grainpbc.github.io/clojure-sixos/
+- ⚙️ **clojure-s6** (supervision): https://grainpbc.github.io/clojure-s6/
+- 🌐 **clojure-icp** (ICP integration): https://grainpbc.github.io/clojure-icp/
+- 🔄 **clotoko** (Clojure→Motoko): https://grainpbc.github.io/clotoko/
+- 📦 **grain-metatypes** (type system): https://grainpbc.github.io/grain-metatypes/
+
+### **Platform & Apps**
+- 🌐 **grainweb** (browser): https://grainpbc.github.io/grainweb/
+- 🎵 **grainmusic** (streaming): https://grainpbc.github.io/grainmusic/
+- 🌍 **grainspace** (platform): https://grainpbc.github.io/grainspace/
+
+### **Documentation**
+- 📚 **Full Website List**: [docs/infrastructure/GRAIN-NETWORK-WEBSITES.md](docs/infrastructure/GRAIN-NETWORK-WEBSITES.md)
+- 🔗 **Cross-Linking Strategy**: [docs/architecture/GRAIN-MARKDOWN-INDEXING-STRATEGY.md](docs/architecture/GRAIN-MARKDOWN-INDEXING-STRATEGY.md)
+
+---
+
 > **Note:** This is a personal template. Fork this repository and customize it with your own username, content, and configuration. See [Template Customization](#-template-customization) below.
 >
 > **Future:** This project will migrate to the `grainnetwork` GitHub organization as both `grainnetwork/grainstore` (dependency management focus) and `grainnetwork/grainnetwork` (student network focus) - identical mirrors with different README emphasis.
