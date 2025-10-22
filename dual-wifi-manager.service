@@ -1,0 +1,14 @@
+[Unit]
+Description=Dual WiFi Manager - Framework 16
+After=network.target
+
+[Service]
+Type=simple
+User=xy
+WorkingDirectory=/home/xy/kae3g/12025-10
+ExecStart=/usr/bin/bb /home/xy/kae3g/12025-10/scripts/dual-wifi-manager.bb start
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

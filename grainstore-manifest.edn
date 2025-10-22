@@ -1,0 +1,75 @@
+{:grainstore-manifest
+ {:version "1.0.0"
+  :updated "2025-01-22"
+  :description "Upstream sources for all grainstore submodules"
+  
+  :submodules
+  [{:name "clojure-s6"
+    :upstream "https://github.com/grainpbc/clojure-s6.git"
+    :branch "main"
+    :description "s6 supervision wrapper for Clojure"}
+   
+   {:name "clojure-icp"
+    :upstream "https://github.com/grainpbc/clojure-icp.git"
+    :branch "main"
+    :description "ICP/DFINITY integration for Clojure"}
+   
+   {:name "clojure-dfinity"
+    :type :symlink
+    :target "clojure-icp"
+    :description "Symlink to clojure-icp for DFINITY ecosystem compatibility"}
+   
+   {:name "clojure-photos"
+    :upstream "https://github.com/grainpbc/clojure-photos.git"
+    :branch "main"
+    :description "Photo management with Nostr + ICP + Urbit"}
+   
+   {:name "grainspace"
+    :upstream "https://github.com/grainpbc/grainspace.git"
+    :branch "main"
+    :description "Unified decentralized platform"}
+   
+   {:name "grainweb"
+    :upstream "https://github.com/grainpbc/grainweb.git"
+    :branch "main"
+    :description "Browser + Git Explorer + AI Atlas"}
+   
+   {:name "grainwriter"
+    :upstream "https://github.com/grainpbc/grainwriter.git"
+    :branch "main"
+    :description "E-ink writing device firmware and software"}
+   
+   {:name "grainsource"
+    :upstream "https://github.com/grainpbc/grainsource.git"
+    :branch "main"
+    :description "Git-compatible version control system"}
+   
+   {:name "humble-social-client"
+    :upstream "https://github.com/grainpbc/humble-social-client.git"
+    :branch "main"
+    :description "Decentralized social media client"}
+   
+   {:name "grainnixos-qemu-ubuntu-framework16"
+    :upstream "https://github.com/grainpbc/grainnixos-qemu-ubuntu-framework16.git"
+    :branch "main"
+    :description "NixOS QEMU template for Ubuntu on Framework 16"}
+   
+   {:name "kae3g-grainnixos-qemu-ubuntu-framework16"
+    :type :grainversion
+    :template "grainnixos-qemu-ubuntu-framework16"
+    :upstream "https://github.com/kae3g/kae3g-grainnixos-qemu-ubuntu-framework16.git"
+    :branch "main"
+    :description "kae3g's grainversion of NixOS QEMU setup"}]
+  
+  :local-only
+  ;; These are local-only, not pulled from upstream
+  [{:name "nixos-qemu-framework16"
+    :description "Local NixOS QEMU configuration (deprecated, use grainversion)"}]
+  
+  :ignore-patterns
+  [".grainstore"
+   "*-local"
+   "*/secrets.nix"
+   "*/personal/*"]}}
+
+
