@@ -6,6 +6,19 @@
 **Prerequisites**: Lesson 5 (The Harmony of 80 and 110), Basic understanding of data structures  
 **Tools**: Cursor IDE with Auto Mode (all models selected, Grok preferred)
 
+### 🛠️ **Getting Started with Grainbarrel**
+
+This course uses the **`gb` (Grainbarrel)** command for running tasks and scripts. It's a wrapper around Babashka that makes Grain Network tools easier to use.
+
+**Quick Start**:
+```bash
+gb --version       # Check if gb is installed
+gb help            # Show all available commands
+gb grainstore:list # List all Grain Network modules
+```
+
+If you don't have `gb` installed yet, you'll learn about it in Lesson 08!
+
 ---
 
 ## Learning Objectives

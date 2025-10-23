@@ -802,6 +802,70 @@ Pick a problem you have with technology and decide: Should you use an existing t
    - How do screen readers work with display settings?
    - Why is user control important for accessibility?
 
+4. **Blockchain Payments (Preview for Lesson 09)** ⭐
+   - Research ICP (Internet Computer Protocol)
+   - Research Solana blockchain
+   - How could you accept payment for a digital service?
+   - What is a "native transfer" between blockchains?
+
+---
+
+## 💰 **BONUS: Blockchain Micropayments Preview** (15 min)
+
+### **Future Integration: ICP Native Transfer to Solana**
+
+Grain Network services can accept cryptocurrency payments!
+
+**Example: Sketch-to-ASCII Conversion Service**
+
+```clojure
+{:service "grainweb-sketch-to-ascii"
+ :pricing
+ {:free-tier
+  {:conversions-per-day 5
+   :max-resolution :grainframe-5x
+   :watermark true}
+  
+  :paid-tier
+  {:price "0.001 SOL"  ;; ~$0.10 USD
+   :payment-method :icp-native-transfer-solana
+   :conversions-per-day :unlimited
+   :max-resolution :grainframe-20x
+   :watermark false
+   :high-quality true}}
+ 
+ :payment-flow
+ [{:step 1 :action "User uploads sketch photo"}
+  {:step 2 :action "Preview generated with watermark (free)"}
+  {:step 3 :action "User clicks 'Buy High-Quality Version'"}
+  {:step 4 :action "Phantom wallet prompts for 0.001 SOL"}
+  {:step 5 :action "ICP Native Transfer processes payment"}
+  {:step 6 :action "High-quality graincard-10x delivered"}
+  {:step 7 :action "Saved to Grainclay immutable path"}]}
+```
+
+**Key Concepts**:
+
+1. **ICP (Internet Computer Protocol)**: Decentralized cloud platform
+2. **Solana**: Fast, low-fee blockchain for payments
+3. **Native Transfer**: ICP ↔ Solana bridge (cross-chain)
+4. **Phantom Wallet**: Solana wallet (web/iOS/Android)
+5. **Micropayments**: Tiny payments (fractions of a dollar)
+
+**Why This Matters**:
+- Artists can monetize their work directly
+- No credit card fees (3% saved!)
+- Instant settlement (seconds, not days)
+- Works globally (no borders)
+- No middlemen taking cuts
+
+**Discussion Question**: 
+- Would you pay $0.10 to convert your sketch to beautiful ASCII art?
+- How is this different from buying an app on the App Store?
+- What are the pros and cons of cryptocurrency payments?
+
+**Preview Lesson 09**: We'll build a complete payment system using ICP and Solana!
+
 ---
 
 ## 🌐 Real-World Connections
