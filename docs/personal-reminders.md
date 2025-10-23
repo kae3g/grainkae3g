@@ -513,7 +513,40 @@ This note reminds us that we're not just building individual products - we're cr
 - **Connection**: UIUC junior undergraduate student
 - **Current Project**: Fluid dynamics class midterm preparation
 - **Collaboration**: Shared Google Doc for study guide and exam advice
+- **Ideas**: "granule" - baby company concept
 - **Added**: 12025-10-22--1522--CDT--moon-vishakha--09thhouse15--kae3g
+
+---
+
+## granule - baby company, Jenna's idea
+
+**Personal Note**: "granule" - Jenna's idea for a baby company concept. A granule is a small grain, representing the smallest unit of the Grain Network ecosystem. This could refer to:
+
+**Possible Meanings**:
+- **Startup Incubator**: Small companies ("granules") growing into full "grains"
+- **Micro-Services**: Individual service modules that compose into larger systems
+- **Student Projects**: Small educational projects that teach Grain Network principles
+- **Community Businesses**: Tiny independent businesses using Grain Network infrastructure
+
+**Connection to Grain Network**:
+- Grains are made of granules
+- Granules aggregate into grains
+- Each granule is independent but part of the whole
+- Democratic, distributed ownership model
+
+**Potential Applications**:
+- **Granule Studios**: Student-run mini companies learning business
+- **Granule Services**: Micro-services on ICP/Solana (sketch-to-ASCII, etc.)
+- **Granule Education**: Small learning modules composing into full curriculum
+- **Granule Hardware**: Component-level open-hardware projects
+
+**Philosophy**:
+- Start small (granule)
+- Grow organically (grain)
+- Connect to ecosystem (whole grain)
+- Everyone can create their own granule
+
+*Added: October 22, 2025 (12025-10-22--1730--PST)*
 
 ---
 
