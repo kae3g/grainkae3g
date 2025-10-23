@@ -7,3 +7,6 @@
 [submodule "grainstore/vendor/wayland"]
 	path = grainstore/vendor/wayland
 	url = https://gitlab.freedesktop.org/wayland/wayland.git
+[submodule "vms/sixos"]
+	path = vms/sixos
+	url = https://codeberg.org/amjoseph/sixos.git
