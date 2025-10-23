@@ -28,7 +28,7 @@ Eckhart Tolle's profound insight: **Time is a mental construct**. The past exist
 > "The present moment is the only time over which we have dominion."  
 > — Eckhart Tolle
 
-Father Time, then, is not the master of our existence, but rather a story we tell ourselves to make sense of the eternal Now.
+Father Time, then, is not the primary of our existence, but rather a story we tell ourselves to make sense of the eternal Now.
 
 ## 🕰️ The Temporal Illusion
 
@@ -74,7 +74,7 @@ and to which all time returns.
 
 ## 🌌 Beyond Father Time
 
-Father Time, you are not the master,
+Father Time, you are not the primary,
 but the servant of consciousness.
 You measure what cannot be measured,
 you count what cannot be counted,

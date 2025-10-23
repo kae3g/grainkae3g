@@ -255,14 +255,14 @@ Smart system that only updates what changed:
 
 7. **Build index scripts**:
    - [ ] `scripts/generate-indexes.bb`
-   - [ ] Auto-generate master index
+   - [ ] Auto-generate primary index
    - [ ] Auto-generate tag index
 
 ### **Long-Term (Next Month)**
 
 8. **Complete documentation indexing**:
    - [ ] Add frontmatter to all docs
-   - [ ] Create master INDEX.md
+   - [ ] Create primary INDEX.md
    - [ ] Set up GitHub Actions for auto-indexing
 
 9. **Implement remaining features from Session 802**:
