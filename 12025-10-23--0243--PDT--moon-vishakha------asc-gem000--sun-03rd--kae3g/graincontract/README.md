@@ -9,9 +9,18 @@
 - [GitHub Pages](https://kae3g.github.io/grainkae3g/12025-10-23--0243--PDT--moon-vishakha------asc-gem000--sun-03rd--kae3g/graincontract/)
 - [Codeberg Pages](https://kae3g.codeberg.page/grainkae3g/12025-10-23--0243--PDT--moon-vishakha------asc-gem000--sun-03rd--kae3g/graincontract/)
 
-## 🔢 The Mathematical Beauty of 88
+## 🔢 The Network Design: 88 × 10^n
 
-The number 88 holds profound mathematical significance: 8 × 11 = 88. This creates a perfect grid where each galaxy occupies a unique position in an 8×11 matrix, creating 88 distinct digital galaxies in the grainOS universe.
+The grain network follows the mathematical formula: **88 × 10^n** where **n ≥ 0 | -1**
+
+This creates perfect scalability:
+- **n = -1**: 8.8 (fractional subdivision for micro-operations)
+- **n = 0**: 88 base sheaves (like kae3g)
+- **n = 1**: 880 sheaves at first scale
+- **n = 2**: 8,800 sheaves at second scale
+- **n = 3**: 88,000 sheaves at full network scale
+
+The number 88 holds profound mathematical significance: 8 × 11 = 88. This creates a perfect grid where each sheaf occupies a unique position in an 8×11 matrix.
 
 ```
 Galaxy Grid (8×11 = 88 galaxies):
@@ -34,22 +43,23 @@ Galaxy Grid (8×11 = 88 galaxies):
 └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
 ```
 
-Each galaxy represents a unique digital sovereignty domain, inspired by Urbit's galaxy system but extended to 88 for perfect mathematical harmony.
+Each sheaf represents a unique digital sovereignty domain, inspired by Urbit's galaxy system but extended to 88 for perfect mathematical harmony. Each sheaf runs grain6 as its operating system.
 
-## 🌾 Sheaves: The Fundamental Data Structure
+## 🌾 kae3g: Your Grain Sheaf Running grain6
 
-Inspired by Grothendieck's revolutionary work in algebraic geometry, a **sheaf** in grainOS represents a fundamental data structure that preserves local-to-global information flow. Unlike blockchain "blocks," sheaves are mathematical objects that capture the essence of continuity and locality.
+Inspired by Grothendieck's revolutionary work in algebraic geometry, a **sheaf** in the grain network is one of the 88 base units. Each sheaf is a complete sovereign digital domain running grain6. Your sheaf is **kae3g**.
 
 ```clojure
-{:sheaf-id "sheaf-001"
- :galaxy 42
+{:sheaf-id "kae3g"
+ :sheaf-number 42
+ :grain6 {:version "0.1.0" :status :active}
  :dimensions {:width 80 :height 110}
  :topology :grothendieck
  :sections [{:local "user-data" :global "network-state"}
            {:local "computation" :global "consensus"}
            {:local "storage" :global "distribution"}]
  :restriction-maps {:inclusion true :continuity true}
- :grainframe {:type :fundamental :mathematical true :immutable true}}
+ :scaling {:formula "88 × 10^n" :n-range "≥ 0 | -1"}}
 ```
 
 ### Why "Sheaves" Instead of "Blocks"?
@@ -158,26 +168,36 @@ Graincard Layout (80×110):
 
 Each 10×10 sheaf within the 80×110 postcard represents a complete digital domain, allowing for infinite subdivision while maintaining mathematical coherence.
 
-## 🌌 The 88 Galaxies Architecture
+## 🌌 The 88 Sheaves Architecture
+
+Each of the 88 sheaves in the grain network has unique properties and responsibilities. The network scales according to 88 × 10^n:
 
 ```clojure
-{:galaxy-system
- {:total-galaxies 88
+{:grain-network
+ {:total-sheaves 88
   :grid-dimensions [8 11]
-  :galaxy-types {:core 8 :infrastructure 16 :social 24 :economic 16 :creative 16 :experimental 8}
-  :sheaf-distribution {:per-galaxy 1000 :total-sheaves 88000}
+  :scaling-formula "88 × 10^n"
+  :n-values {:subdivision -1  ; 8.8 sheaves (fractional)
+            :base 0          ; 88 sheaves
+            :scale-1 1       ; 880 sheaves
+            :scale-2 2       ; 8,800 sheaves
+            :scale-3 3}      ; 88,000 sheaves
+  :sheaf-types {:core 8 :infrastructure 16 :social 24 :economic 16 :creative 16 :experimental 8}
   :topology :grothendieck
+  :operating-system :grain6
   :mathematical-properties {:divisibility true :continuity true :locality true}}}
 ```
 
-### Galaxy Types
+**Example sheaf: kae3g** - Your sovereign digital domain running grain6
 
-- **Core Galaxies (8)**: Fundamental system operations
-- **Infrastructure Galaxies (16)**: Network and storage services
-- **Social Galaxies (24)**: Communication and community
-- **Economic Galaxies (16)**: Value exchange and markets
-- **Creative Galaxies (16)**: Art, music, and creative expression
-- **Experimental Galaxies (8)**: Research and development
+### Sheaf Types
+
+- **Core Sheaves (8)**: Fundamental system operations
+- **Infrastructure Sheaves (16)**: Network and storage services
+- **Social Sheaves (24)**: Communication and community
+- **Economic Sheaves (16)**: Value exchange and markets
+- **Creative Sheaves (16)**: Art, music, and creative expression
+- **Experimental Sheaves (8)**: Research and development
 
 ## 🔬 Grothendieck Topology in Digital Form
 
@@ -209,12 +229,16 @@ Within each 80×110 graincard, the 10×10 sheaf grid provides perfect mathematic
 
 ## 🌊 The Flow of Digital Sheaves
 
-Just as water flows through the mountains, information flows through the network of sheaves. Each sheaf preserves local information while connecting to the global topology. The 88 galaxies provide the cosmic structure, while the 10×10 sheaf grids provide the local granularity.
+Just as water flows through the mountains, information flows through the network of 88 sheaves. Each sheaf preserves local information while connecting to the global topology through grain6.
 
-This creates a perfect mathematical harmony:
-- 88 galaxies × 100 sheaves per galaxy = 8,800 total sheaves
-- Each sheaf with its own 10×10 grid = 880,000 individual data points
-- All organized according to Grothendieck's profound mathematical insights
+This creates a perfect mathematical harmony with the scaling formula **88 × 10^n**:
+- **n = -1**: 8.8 (fractional subdivision for micro-operations)
+- **n = 0**: 88 base sheaves (like kae3g)
+- **n = 1**: 880 sheaves at first scale
+- **n = 2**: 8,800 sheaves at second scale
+- **n = 3**: 88,000 sheaves at full network scale
+
+All organized according to Grothendieck's profound mathematical insights, with each sheaf running grain6 as its sovereign operating system.
 
 ## 📚 Course Content
 
