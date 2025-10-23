@@ -55,11 +55,11 @@
           (println (str "  ✅ Updated references in: " file-path)))))))
 
 (defn rename-bb-edn-files []
-  "Rename bb.edn files to gb.edn"
+  "Rename bb.edn files to bb.edn"
   (let [bb-edn-files (fs/glob "." "**/bb.edn")]
     (doseq [bb-edn bb-edn-files]
       (let [parent-dir (fs/parent bb-edn)
-            gb-edn (fs/path parent-dir "gb.edn")]
+            gb-edn (fs/path parent-dir "bb.edn")]
         (if @dry-run
           (println (str "  Would rename: " bb-edn " → " gb-edn))
           (do
@@ -107,8 +107,8 @@
             (update-file-references file renames)))
         (println)
         
-        ;; Step 4: Rename bb.edn → gb.edn
-        (println "🔄 Step 3: Renaming bb.edn files to gb.edn\n")
+        ;; Step 4: Rename bb.edn → bb.edn
+        (println "🔄 Step 3: Renaming bb.edn files to bb.edn\n")
         (rename-bb-edn-files)
         (println)
         
@@ -126,7 +126,7 @@
       (println "   bb scripts/migrate-bb-to-gb.bb --execute")
       (println "\n⚠️  This will:")
       (println "   1. Rename all .bb files to .gb")
-      (println "   2. Rename all bb.edn files to gb.edn")
+      (println "   2. Rename all bb.edn files to bb.edn")
       (println "   3. Update all references in markdown and config files")
       (println "   4. Update shebang lines (#!/usr/bin/env bb → #!/usr/bin/env gb)")
       (println "\n📸 Recommended: Commit your work before running!"))))
