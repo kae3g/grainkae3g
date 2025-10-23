@@ -27,6 +27,8 @@
    "milk" "juice"
    "cheese" "nut"
    "egg" "seed"
+   "eggs" "seeds"
+   "omelette" "frittata"
    "animal" "plant"
    "cow" "tree"
    "pig" "vine"
