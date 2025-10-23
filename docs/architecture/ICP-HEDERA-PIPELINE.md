@@ -507,30 +507,25 @@ This integration is inspired by our **ICP-Solana-Urbit** architecture and extend
 
 ```
 
-### Hedera Smart Contract (Solidity)
+### Hedera Native Service Integration
 
-```solidity
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+**Note**: Hedera supports native services without requiring EVM smart contracts.
+We use Hedera's native SDK and consensus service for the ICP bridge:
 
-import "./HederaTokenService.sol";
+```clojure
+;; Hedera Consensus Service integration
+(ns grain-icp-hedera.hedera-consensus
+  "Use Hedera Consensus Service for ICP message verification"
+  (:require [hedera-sdk.consensus :as hcs]))
 
-contract GrainICPBridge {
-    // ICP canister principal
-    bytes32 public icpCanisterPrincipal;
-    
-    // Mapping of ICP tx hash to Hedera consensus timestamp
-    mapping(bytes32 => uint256) public icpToHederaTimestamp;
-    
-    event ICPMessageVerified(bytes32 indexed icpTxHash, uint256 hederaTimestamp);
-    
-    function verifyICPMessage(
-        bytes32 icpTxHash,
-        bytes memory icpSignature,
-        bytes memory message
-    ) public returns (bool) {
-        // Verify ICP threshold signature
-        require(verifyICPSignature(icpTxHash, icpSignature, message), "Invalid ICP signature");
+(defn verify-icp-message
+  "Verify ICP message using Hedera Consensus Service"
+  [icp-tx-hash icp-signature message]
+  (hcs/submit-message
+    {:topic-id hedera-consensus-topic
+     :message {:icp-tx-hash icp-tx-hash
+               :icp-signature icp-signature
+               :payload message}}))
         
         // Record on Hedera
         uint256 timestamp = block.timestamp;
