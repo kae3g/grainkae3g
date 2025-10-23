@@ -2431,3 +2431,77 @@ Write Clojure → Clotoko transpiles → Motoko canister → Deploy to ICP
 
 🌾 **From warm screens to mobile sovereignty - THE WHOLE GRAIN emerges!** 🌾
 
+
+---
+
+## 🔄 **GRAINCOURSE REPOSITORY REORGANIZATION** (October 23, 2025)
+
+### **Problem Identified**
+- Mixed template (grainpbc) with personal (kae3g) content
+- Course content in wrong location (grainkae3g/course/ instead of dedicated repo)
+- Confusion between template repos and personal versioned repos
+
+### **New Organization Strategy**
+
+#### **1. GrainPBC Repos (Templates - Personal Gitignored)**
+```
+grainpbc/graincourse              ← Pure template with personal/ .gitignored
+grainpbc/graincourse-sync         ← Symlink/deployment utilities
+grainpbc/graincourse-title-abbrev ← Course title abbreviation
+grainpbc/graintime                ← Core graintime library
+grainpbc/grainsource-separation   ← Template/personal split pattern
+```
+
+#### **2. kae3g Personal Repos (Personal Content Versioned)**
+```
+kae3g/grainkae3gcourse            ← Personal course content (NOT gitignored)
+kae3g/grainkae3g                  ← Main portfolio site
+kae3g/12025-10                    ← Current writings site
+```
+
+### **Naming Convention**
+- **Template repos**: `grainpbc/{module}` 
+- **Personal repos**: `kae3g/grainkae3g{module}`
+- **Pattern**: All personal kae3g repos prefixed with `grainkae3g`
+
+### **grainkae3gcourse Structure**
+```
+grainkae3gcourse/
+├── .git/                         ← Own git repo (not submodule)
+├── personal/                     ← NOT gitignored here
+│   ├── grain-net-fund/           ← Actual course content
+│   │   ├── 12025-10-23--0053--PDT--moon-vishakha--asc-gem000--sun-4th--kae3g/
+│   │   │   └── index.html
+│   │   └── config.edn
+│   └── README.md
+├── template/                     ← Copied from grainpbc/graincourse
+│   ├── scripts/
+│   └── build.bb
+├── bb.edn                        ← Uses grainpbc dependencies
+├── deps.edn
+└── README.md
+```
+
+### **Benefits**
+1. ✅ **Clean Separation**: Templates vs personal content
+2. ✅ **Versioned Personal**: No .gitignore on personal/ in kae3g repos
+3. ✅ **Reusable Templates**: Others can fork grainpbc repos
+4. ✅ **Clear Naming**: Consistent `grainkae3g{module}` convention
+5. ✅ **Proper Git History**: Each course gets full version control
+
+### **Implementation Checklist**
+- [ ] Create `kae3g/grainkae3gcourse` on GitHub/Codeberg
+- [ ] Move course content from `grainkae3g/course/` to `grainkae3gcourse/personal/`
+- [ ] Update `grainpbc/graincourse` to pure template with .gitignore
+- [ ] Update symlinks in graincourse-sync
+- [ ] Document pattern in grainsource-separation
+- [ ] Update all docs to reflect new structure
+
+### **Related Modules to Apply Pattern**
+- grainkae3gtime (if we need personal time configs)
+- grainkae3gdisplay (personal display configs)
+- grainkae3gzsh (personal shell configs)
+- grainkae3genvvars (personal environment variables)
+
+**Status**: 🚧 In Progress - Reorganizing for clean template/personal separation
+
