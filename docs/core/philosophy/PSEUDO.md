@@ -2669,3 +2669,109 @@ git push codeberg main
 **Deployment**: GitHub + Codeberg Pages ✅  
 **Documentation**: Comprehensive ✅
 
+
+## 🌾 **SESSION 810: HEDERA-ICP NATIVE TRANSFER INTEGRATION** (October 23, 2025)
+
+### **Hedera ↔ ICP Chain Fusion**
+
+**Goal**: Enable native asset transfer between Hedera and Internet Computer using ICP Chain Fusion technology.
+
+**Architecture**:
+```
+Hedera (HBAR, HTS tokens)
+    ↕️
+ICP Chain Fusion Bridge
+    ↕️
+ICP (ckHBAR, ckHTS tokens)
+```
+
+**Key Features**:
+1. **Atomic Swaps**: HBAR ↔ ICP token swaps without intermediaries
+2. **Native Transfers**: Move assets across chains preserving properties
+3. **Zero Trust**: Client-side verification, no bridge operators
+4. **Multi-Signature**: Threshold signatures for security
+5. **Immutable Audit Trail**: All transfers recorded with graintime
+
+**Technical Components**:
+- **ICP Chain Fusion**: Bitcoin-style integration for Hedera
+- **Threshold ECDSA**: ICP canisters control Hedera keys
+- **HTTPS Outcalls**: Query Hedera Mirror Nodes from ICP
+- **Hedera Consensus Service**: Timestamp and order transfers
+- **grain6**: Schedule and monitor cross-chain operations
+
+**Use Cases**:
+1. **Grainphone Payments**: Pay for AI prompts with HBAR or ICP
+2. **Cross-Chain NFTs**: Mint on Hedera, trade on ICP
+3. **DeFi Bridging**: Liquidity pools spanning both networks
+4. **Timestamped Assets**: Hedera HCS + ICP storage + graintime
+5. **Environmental Credits**: Carbon offsets tradeable across chains
+
+**Integration Points**:
+```clojure
+;; grain6 canister manages bridge operations
+(grain6/cross-chain-transfer
+  {:from :hedera
+   :to :icp
+   :asset {:type :hbar :amount 100}
+   :recipient icp-principal
+   :graintime (gt/now "system")})
+
+;; Hedera → ICP
+(defn wrap-hbar
+  "Lock HBAR on Hedera, mint ckHBAR on ICP"
+  [amount hedera-account icp-principal]
+  (-> (hedera/lock-hbar amount hedera-account)
+      (icp/mint-ckhbar icp-principal)
+      (grain6/log-with-graintime)))
+
+;; ICP → Hedera  
+(defn unwrap-hbar
+  "Burn ckHBAR on ICP, release HBAR on Hedera"
+  [amount icp-principal hedera-account]
+  (-> (icp/burn-ckhbar amount icp-principal)
+      (hedera/unlock-hbar hedera-account)
+      (grain6/log-with-graintime)))
+```
+
+**Security Model**:
+- **Threshold Signatures**: ICP subnet signs Hedera transactions
+- **Chain Fusion**: No central bridge, cryptographically verified
+- **Timeout Protection**: Automatic rollback on failure
+- **Audit Trail**: Immutable log with graintime timestamps
+
+**Economic Model**:
+- **Bridge Fees**: Minimal (cover gas only, no middlemen)
+- **ICP Cycles**: Pay for bridge operations
+- **Hedera HBAR**: Pay for HCS timestamping
+- **Transparent Costs**: Grainphone shows per-operation fees
+
+**Roadmap**:
+1. **Phase 1**: Research ICP Chain Fusion + Hedera SDK
+2. **Phase 2**: Proof-of-concept: HBAR ↔ ckHBAR wrapping
+3. **Phase 3**: grain6 canister with cross-chain scheduling
+4. **Phase 4**: Grainphone integration (pay with HBAR or ICP)
+5. **Phase 5**: HTS tokens (fungible + NFTs) support
+6. **Phase 6**: Solana integration (3-chain interop)
+
+**Why This Matters**:
+- **No ETH**: Avoid Ethereum's high fees and centralized bridges
+- **Best of Both**: Hedera's speed + ICP's smart contracts
+- **Sovereign Payments**: Users choose payment chain
+- **Decentralized**: No bridge operators, just math and code
+- **Graintime Auditable**: Every transfer timestamped astronomically
+
+**Technical Challenges**:
+1. Hedera doesn't have Bitcoin-style UTXOs (use HCS for ordering)
+2. ICP Chain Fusion designed for Bitcoin (adapt for Hedera)
+3. Threshold ECDSA for Hedera account control
+4. Mirror Node reliability (use multiple, verified)
+5. Consensus finality (Hedera is fast, ICP slower)
+
+**Resources**:
+- [ICP Chain Fusion Docs](https://internetcomputer.org/docs/current/developer-docs/multi-chain/)
+- [Hedera SDK](https://docs.hedera.com/hedera/sdks-and-apis)
+- [grain6 ICP Design](grainstore/grain6/ICP-CANISTER-DESIGN.md)
+- [Clotoko](grainstore/clotoko/README.md)
+
+---
+
