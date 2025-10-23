@@ -41,10 +41,9 @@ Since `gb` is a **wrapper around `bb`**, it ultimately calls `bb` which needs `b
 - Config files: Still `bb.edn` (Babashka requirement)
 - Internal references: Still use `bb` command to execute
 
-### 🤔 **Future Consideration**:
-- Script files: Currently `.bb`, could migrate to `.gb`
-- 68 `.bb` files in repository
-- Migration tool ready: `scripts/migrate-bb-to-gb.bb`
+### ✅ **Decided Against**:
+- Script files: Keep `.bb` extension (editor support, community recognition)
+- Migration tool: Deleted `scripts/migrate-bb-to-gb.bb` (no longer needed)
 
 ---
 
@@ -158,25 +157,17 @@ If we want full rebranding:
 
 ---
 
-## Migration Tool Available
+## Migration Tool Status
 
-We have `scripts/migrate-bb-to-gb.bb` ready to:
+**Previously Available**: `scripts/migrate-bb-to-gb.bb`
 
-1. Rename all 68 `.bb` files → `.gb`
-2. Rename all 7 `bb.edn` → `gb.edn`
-3. Update 781 file references
-4. Update shebang lines
+**Current Status**: **DELETED** - No longer needed
 
-**Run**:
-```bash
-# Preview changes (dry-run)
-bb scripts/migrate-bb-to-gb.bb
-
-# Execute migration
-bb scripts/migrate-bb-to-gb.bb --execute
-```
-
-**Status**: Available but not executed (keeping `.bb` for now)
+**Reason**: We decided to keep `.bb` files for:
+- Editor syntax highlighting support
+- Community recognition and familiarity
+- Simplicity and pragmatism
+- No real benefit from migration
 
 ---
 

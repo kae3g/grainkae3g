@@ -2,6 +2,22 @@
 
 **Personal sovereignty stack for Ubuntu 24.04 LTS on Framework 16**
 
+> *"From granules to grains to THE WHOLE GRAIN"*  
+> *"Chaos coming out from outside calmly so it's feeling new and what's inside is staying really solid watching observing"*  
+> *"Feeling like a leaf in the wind but feeling like a rock"*
+
+---
+
+## 🌾 **The Grain Network Philosophy**
+
+**"Local Control, Global Intent"** - Content creators suggest, local users decide  
+**"Purpose-Built Over Generic"** - Right tool for the right job  
+**"Declarative Over Imperative"** - EDN configs, not bash scripts  
+**"Template/Personal Everywhere"** - Share defaults, preserve customization  
+**"Real Resources Matter"** - Crypto backed by real hardware/electricity/labor  
+**"Pragmatic Branding Over Dogmatic Renaming"** - gb command, bb.edn files (Babashka requirement)  
+**"From Granules to Grains to THE WHOLE GRAIN"** - Small → Medium → Complete ecosystem
+
 ---
 
 ## 🌐 **Grain Network Websites**
@@ -32,6 +48,36 @@
 > **Note:** This is a personal template. Fork this repository and customize it with your own username, content, and configuration. See [Template Customization](#-template-customization) below.
 >
 > **Future:** This project will migrate to the `grainnetwork` GitHub organization as both `grainnetwork/grainstore` (dependency management focus) and `grainnetwork/grainnetwork` (student network focus) - identical mirrors with different README emphasis.
+
+---
+
+## 🌾 **The Grainbarrel Build System**
+
+**"gb" - The Grain Network's Build System**
+
+```bash
+# Install Grainbarrel
+bb scripts/install-grainbarrel.bb
+
+# Core commands
+gb --version               # Grainbarrel v1.0.0
+gb help                    # Full Grain-themed help
+gb grainstore:validate     # Validate 31 modules
+gb grainstore:stats        # Show statistics
+gb grainstore:list         # List all modules
+gb grainstore:generate-docs # Generate documentation
+
+# Module tasks (cross-module execution)
+gb display:info            # Display information
+gb nightlight:status       # Check warm lighting
+gb wifi:status             # WiFi status
+```
+
+**The Chaos/Solidity Dynamic:**
+- **External**: Calm chaos flowing out (creative expression, 7 modules in 72 hours)
+- **Internal**: Solid core staying grounded (pure functional architecture, core values)
+- **Observer**: You, watching yourself create, documenting the journey
+- **Together**: Productive creativity from stable center
 
 ---
 
