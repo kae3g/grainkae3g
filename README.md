@@ -34,10 +34,29 @@
 - 🔄 **clotoko** (Clojure→Motoko): https://grainpbc.github.io/clotoko/
 - 📦 **grain-metatypes** (type system): https://grainpbc.github.io/grain-metatypes/
 
+### **Developer Tools**
+- 🛠️ **grainbarrel** (build system): https://grainpbc.github.io/grainbarrel/
+- 🐚 **grainzsh** (shell config): https://grainpbc.github.io/grainzsh/
+- 🔒 **grainenvvars** (env variables): https://grainpbc.github.io/grainenvvars/
+- 📦 **graincasks** (AppImage manager): https://grainpbc.github.io/graincasks/
+- 🎨 **grainicons** (icon library): https://grainpbc.github.io/grainicons/
+
+### **System Services**
+- 👁️ **graindisplay** (display mgmt): https://grainpbc.github.io/graindisplay/
+- 🌙 **grain-nightlight** (warm light): https://grainpbc.github.io/grain-nightlight/
+- 📡 **grainwifi** (dual-wifi): https://grainpbc.github.io/grainwifi/
+- ⚙️ **graindaemon** (daemon framework): https://grainpbc.github.io/graindaemon/
+
 ### **Platform & Apps**
 - 🌐 **grainweb** (browser): https://grainpbc.github.io/grainweb/
 - 🎵 **grainmusic** (streaming): https://grainpbc.github.io/grainmusic/
 - 🌍 **grainspace** (platform): https://grainpbc.github.io/grainspace/
+- 📱 **graindroid** (Android phone): https://grainpbc.github.io/graindroid/
+
+### **Community & Impact**
+- 🌱 **grainaltproteinproject** (sustainable food): https://grainpbc.github.io/grainaltproteinproject/
+- 📚 **grainlexicon** (documentation): https://grainpbc.github.io/grainlexicon/
+- 🏢 **grainpbc** (legal/branding): https://grainpbc.github.io/grainpbc/
 
 ### **Documentation**
 - 📚 **Full Website List**: [docs/infrastructure/GRAIN-NETWORK-WEBSITES.md](docs/infrastructure/GRAIN-NETWORK-WEBSITES.md)
@@ -48,6 +67,68 @@
 > **Note:** This is a personal template. Fork this repository and customize it with your own username, content, and configuration. See [Template Customization](#-template-customization) below.
 >
 > **Future:** This project will migrate to the `grainnetwork` GitHub organization as both `grainnetwork/grainstore` (dependency management focus) and `grainnetwork/grainnetwork` (student network focus) - identical mirrors with different README emphasis.
+
+---
+
+## 🐚 **The Grain Developer Environment**
+
+**Complete Stack: grainzsh + grainenvvars + grainbarrel**
+
+### **grainzsh - Shell Configuration**
+
+```bash
+# Install grainzsh with kae3g's minimal lambda prompt
+cd ~/kae3g/grainkae3g/grainstore/grainzsh
+./scripts/install-system.sh
+
+# Your prompt becomes:
+λ 
+
+# With Grain Network integration built-in
+λ gb --version
+λ grain grainbarrel
+λ grain-session
+```
+
+**Features**:
+- 🐚 Minimalist `λ` prompt (lambda - functional programming)
+- 🌾 Grain Network aliases (`gb`, `grain`, etc.)
+- 🔗 kae3g personal config as submodule
+- ⚡ Fast startup (~50ms)
+- 📚 Educational template/personal split
+
+**Repository**: https://github.com/grainpbc/grainzsh
+
+### **grainenvvars - Secure Environment Variables**
+
+```bash
+# Set up environment variables
+cd ~/kae3g/grainkae3g/grainstore/grainenvvars
+
+# Copy template
+cp template/env.template personal/.env
+
+# Edit with your API keys
+nano personal/.env
+
+# Or use 1Password (more secure)
+cp template/load-from-1password.sh.example personal/load-from-1password.sh
+nano personal/load-from-1password.sh
+```
+
+**Supported Services**:
+- 🤖 OpenAI, Anthropic (AI APIs)
+- 🔗 GitHub, Codeberg (Git platforms)
+- ⛓️ ICP, Solana (Blockchain)
+- 📁 Google Drive (Cloud storage)
+
+**Security**:
+- 🔒 Zero secrets in git
+- 🔐 1Password integration
+- 📝 Template/personal split
+- ✅ Educational best practices
+
+**Repository**: https://github.com/grainpbc/grainenvvars
 
 ---
 
