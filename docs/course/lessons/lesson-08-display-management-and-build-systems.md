@@ -993,16 +993,20 @@ Students can create wrappers for tools they use daily:
 
 ## 🎓 Next Lesson Preview
 
-**Lesson 09: Decentralized Package Distribution and CI/CD**
+**Lesson 09: Blockchain Economics and Decentralized Publishing**
 
 Topics:
+- Modern Monetary Theory (MMT) basics (Stephanie Kelton, Randy Wray)
+- ICP/Solana validator economics (USD backing of crypto infrastructure)
+- Micropayments and artist economics
+- Real resources vs. speculation
 - Deploying packages to multiple platforms (GitHub + Codeberg)
 - Continuous Integration / Continuous Deployment
-- Automatic mirroring between repositories
-- Grainclay package distribution
-- GitHub Actions and automation
 
-**Prepare**: Think about how you would share software with friends if you couldn't use the App Store or Google Play.
+**Prepare**: 
+1. Think about how you would share software with friends if you couldn't use the App Store or Google Play
+2. Read: How do taxes work? Where does government money come from?
+3. Optional: Listen to "The Deficit Myth" by Stephanie Kelton (audiobook on Spotify Premium)
 
 ---
 
