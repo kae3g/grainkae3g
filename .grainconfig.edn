@@ -1,0 +1,10 @@
+{:grainconfig
+ {:modules
+  {:grainsync
+   {:defaults
+    {:course-title "kae3g",
+     :course-description "kae3g",
+     :github-owner "kae3g",
+     :github-repo "grainkae3g",
+     :codeberg-owner "kae3g",
+     :codeberg-repo "grainkae3g"}}}}}
