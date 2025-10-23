@@ -55,7 +55,7 @@ jobs:
       - name: Build content with Babashka
         run: |
           echo "Starting babashka build..."
-          bb flow "CI: build content for deployment"
+          bb qb-now
           echo "Babashka build completed successfully"
 
       - name: Build SvelteKit site
