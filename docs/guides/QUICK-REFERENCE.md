@@ -36,8 +36,9 @@ bb writings:watch         # Auto-rebuild on changes
 
 ### Deploying
 ```bash
-bb flow "message"         # Build + commit + push + deploy
-bb deploy:full            # Deploy without commit
+gb flow "message"                    # Triple-deploy: GitHub + Codeberg + org
+gb flow "message" --verbose          # Verbose mode with detailed output
+bb deploy:full                       # Deploy without commit
 ```
 
 ### Development

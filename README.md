@@ -148,6 +148,10 @@ gb grainstore:stats        # Show statistics
 gb grainstore:list         # List all modules
 gb grainstore:generate-docs # Generate documentation
 
+# Deployment (triple-deploy to all remotes)
+gb flow "message"          # GitHub + Codeberg + org deployment
+gb flow "message" --verbose # Verbose mode with detailed output
+
 # Module tasks (cross-module execution)
 gb display:info            # Display information
 gb nightlight:status       # Check warm lighting

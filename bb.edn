@@ -326,10 +326,13 @@
                :task (shell "bb" "scripts/deploy-to-pages.bb" "full")}
   
   ;; Precision flow: build → commit → push → deploy (Coldriver Heal workflow)
-  flow {:doc "Dual-deploy precision flow: build, commit, push to both remotes, deploy (usage: bb flow \"message\")"
-        :task (let [msg (or (first *command-line-args*) 
+  flow {:doc "Triple-deploy precision flow: build, commit, push to all remotes, deploy (usage: bb flow \"message\" [--verbose])"
+        :task (let [args *command-line-args*
+                    verbose? (some (fn [x] (= "--verbose" x)) args)
+                    msg (or (first (remove (fn [x] (= "--verbose" x)) args))
                             "chore: precision flow update")]
-                (println "🌊 Starting dual-deploy precision flow...")
+                (println "🌊 Starting triple-deploy precision flow...")
+                (when verbose? (println "   [VERBOSE MODE ENABLED]"))
                 (println "")
                 (println "1️⃣ Building content to verify...")
                 (shell "bb" "writings:build-fast")
@@ -338,6 +341,9 @@
                 (println "2️⃣ Staging changes...")
                 (shell "git" "add" "-A")
                 (println "✓ Changes staged")
+                (when verbose?
+                  (println "   Files staged:")
+                  (shell "git" "status" "--short"))
                 (println "")
                 (println "3️⃣ Checking for changes...")
                 (let [status (-> (shell {:out :string} "git" "status" "--porcelain")
@@ -350,22 +356,47 @@
                       (println "✨ Dual-deploy precision flow complete! Everything up to date."))
                     (do
                       (println "✓ Changes detected")
+                      (when verbose?
+                        (println "   Changed files:")
+                        (shell "git" "status" "--short"))
                       (println "")
                       (println "4️⃣ Committing...")
                       (shell "git" "commit" "-m" msg)
                       (println "✓ Committed:" msg)
+                      (when verbose?
+                        (println "   Commit hash:")
+                        (shell "git" "rev-parse" "--short" "HEAD"))
                       (println "")
                       (println "5️⃣ Pushing to GitHub personal (origin/main)...")
-                      (shell "git" "push" "origin" "main")
-                      (println "✓ Pushed to GitHub (kae3g)")
+                      (try
+                        (if verbose?
+                          (shell "git" "push" "-v" "origin" "main")
+                          (shell "git" "push" "origin" "main"))
+                        (println "✓ Pushed to GitHub (kae3g)")
+                        (catch Exception e
+                          (println "❌ Failed to push to GitHub (kae3g):" (.getMessage e))
+                          (when verbose? (println "   Error details:" e))))
                       (println "")
                       (println "6️⃣ Pushing to Codeberg personal (codeberg/main)...")
-                      (shell "git" "push" "codeberg" "main")
-                      (println "✓ Pushed to Codeberg (kae3g)")
+                      (try
+                        (if verbose?
+                          (shell "git" "push" "-v" "codeberg" "main")
+                          (shell "git" "push" "codeberg" "main"))
+                        (println "✓ Pushed to Codeberg (kae3g)")
+                        (catch Exception e
+                          (println "❌ Failed to push to Codeberg (kae3g):" (.getMessage e))
+                          (when verbose? (println "   Error details:" e))))
                       (println "")
                       (println "7️⃣ Pushing to GitHub org (grainpbc-github/main)...")
-                      (shell "git" "push" "grainpbc-github" "main")
-                      (println "✓ Pushed to GitHub (grainpbc)")
+                      (try
+                        (if verbose?
+                          (shell "git" "push" "-v" "grainpbc-github" "main")
+                          (shell "git" "push" "grainpbc-github" "main"))
+                        (println "✓ Pushed to GitHub (grainpbc)")
+                        (catch Exception e
+                          (println "⚠️  Failed to push to GitHub org (grainpbc):" (.getMessage e))
+                          (println "   This is expected if repo doesn't exist yet")
+                          (when verbose? (println "   Error details:" e))))
                       (println "")
                       (println "8️⃣ Deploying to Codeberg Pages (pages branch)...")
                       (shell "bb" "scripts/deploy-to-pages.bb" "full")
