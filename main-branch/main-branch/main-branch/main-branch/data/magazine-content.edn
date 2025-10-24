@@ -1,0 +1,198 @@
+{:site {:name "grainkae3g"
+        :tagline "The Personal Sovereignty Stack Revolution"
+        :description "Magazine for decentralized computing, personal sovereignty, and open-source innovation"
+        :username "kae3g"
+        :email "kj3x39@gmail.com"
+        :repository {:github "kae3g/grainkae3g"
+                     :codeberg "kae3g/grainkae3g"
+                     :branch "main"}
+        :music-project "terra4m"
+        :aesthetic "retro terminal vibes"
+        :philosophy "our origin is not here"}
+ 
+ :navigation [{:title "Home" :path "/" :icon "🏠"}
+              {:title "Press Release" :path "/press-release" :icon "📰"}
+              {:title "Writings" :path "/writings" :icon "📝"}
+              {:title "Projects" :path "/projects" :icon "🚀"}
+              {:title "Grainstore" :path "/grainstore" :icon "📦"}
+              {:title "API Docs" :path "/api" :icon "📚"}
+              {:title "Philosophy" :path "/philosophy" :icon "💭"}
+              {:title "Hardware" :path "/hardware" :icon "⚙️"}]
+ 
+ :featured-articles [{:slug "grainweb-announcement"
+                      :title "Grainweb: Challenging OpenAI, Cursor, and Google"
+                      :subtitle "Browser × Git × AI - All Open Source"
+                      :category "Press Release"
+                      :date "2025-01-22"
+                      :featured true
+                      :image nil
+                      :excerpt "Grain PBC unveils Grainweb, a revolutionary platform that unifies web browsing, Git exploration, and AI assistance in one privacy-first application..."}
+                     
+                     {:slug "api-documentation"
+                      :title "Grain Network API Documentation"
+                      :subtitle "Complete Developer Reference"
+                      :category "Technical"
+                      :date "2025-01-22"
+                      :featured true
+                      :image nil
+                      :excerpt "Magazine-style API documentation covering clojure-s6, clojure-icp, clojure-photos, grainweb, grainsource, and the entire Grain ecosystem..."}
+                     
+                     {:slug "press-release-grainkae3g"
+                      :title "Introducing grainkae3g"
+                      :subtitle "A New Era of Digital Autonomy"
+                      :category "Press Release"
+                      :date "2025-01-22"
+                      :featured true
+                      :image nil
+                      :excerpt "Today marks the official launch of grainkae3g, a groundbreaking open-source project that reimagines personal computing sovereignty..."}
+                     
+                     {:slug "dual-wifi-intelligence"
+                      :title "Intelligent Dual WiFi Management"
+                      :subtitle "Cursor-Aware Connection Balancing"
+                      :category "Technical Deep Dive"
+                      :date "2025-01-22"
+                      :featured true
+                      :image nil
+                      :excerpt "The world's first AI-agent-aware WiFi manager that intelligently balances Starlink and cellular connections..."}
+                     
+                     {:slug "icp-urbit-fusion"
+                      :title "Urbit on ICP: Identity Revolution"
+                      :subtitle "Decentralized Identity Meets Chain Fusion"
+                      :category "Blockchain"
+                      :date "2025-01-22"
+                      :featured true
+                      :image nil
+                      :excerpt "Building a fake Urbit galaxy on Internet Computer Protocol demonstrates the power of decentralized identity..."}
+                     
+                     {:slug "grainversion-system"
+                      :title "Grainversion: The Future of Forking"
+                      :subtitle "Personal Versions of Grain Templates"
+                      :category "Technical"
+                      :date "2025-01-22"
+                      :featured true
+                      :image nil
+                      :excerpt "Introducing grainversion - a new approach to template customization that's more poetic and descriptive than traditional forking..."}]
+ 
+ :sections {:projects [{:name "Grainspace"
+                        :description "Unified platform for models, apps, art, and social"
+                        :status "In Development"
+                        :technologies ["Clojure" "ICP" "Rust" "Urbit"]
+                        :link "/projects/grainspace"}
+                       
+                       {:name "clojure-s6"
+                        :description "Functional process supervision for s6"
+                        :status "Alpha"
+                        :technologies ["Clojure" "Babashka" "s6"]
+                        :link "/projects/clojure-s6"}
+                       
+                       {:name "Humble Social Client"
+                        :description "Multi-protocol social media integration"
+                        :status "Planned"
+                        :technologies ["Clojure" "Humble UI" "Nostr" "Bluesky"]
+                        :link "/projects/humble-social"}
+                       
+                       {:name "Maitreya DAW"
+                        :description "Open-source digital audio workstation"
+                        :status "Planned"
+                        :technologies ["Clojure" "Humble UI" "JACK"]
+                        :link "/projects/maitreya"}]
+            
+            :hardware {:device "Framework 16 Laptop"
+                       :display "2560x1600 @ 165Hz"
+                       :os "Ubuntu 24.04 LTS"
+                       :desktop "Sway (Wayland)"
+                       :theme "Red cyberpunk / 2000K warm"
+                       :wifi ["Starlink" "Cellular tethering"]
+                       :features ["Dual WiFi balancing"
+                                  "Framework key mapping (F1-F3, F7-F8)"
+                                  "Screenshot system (Super+Ctrl+3/4/5)"
+                                  "Transparent windows"]}
+            
+            :philosophy [{:principle "Personal Sovereignty"
+                          :description "Your computer should be truly yours"}
+                         {:principle "Decentralization"
+                          :description "Reject centralized control and walled gardens"}
+                         {:principle "Open Source"
+                          :description "Transparency through auditable code"}
+                         {:principle "Repairability"
+                          :description "Hardware you can fix and upgrade"}
+                         {:principle "Privacy"
+                          :description "Self-hosted infrastructure"}]
+            
+            :technologies {:virtualization ["QEMU" "KVM" "SixOS"]
+                           :blockchain ["ICP" "Urbit" "Solana"]
+                           :languages ["Clojure" "Rust" "Hoon" "Nock"]
+                           :systems ["seL4" "RISC-V" "s6" "Wayland"]
+                           :desktop ["Sway" "waybar" "gammastep" "wofi"]}}
+ 
+ :writings {:categories ["Technical Deep Dive"
+                         "Press Release"
+                         "Philosophy"
+                         "Tutorial"
+                         "Blockchain"
+                         "Hardware"
+                         "Design"]
+            
+            :recent-count 10
+            :items-per-page 15}
+ 
+ :grainstore {:modules [{:name "urbit-docs"
+                         :type "Documentation"
+                         :license "MIT"
+                         :source "github.com/urbit/docs"}
+                        
+                        {:name "urbit-source"
+                         :type "Source Code"
+                         :license "MIT"
+                         :source "github.com/urbit/urbit"}
+                        
+                        {:name "wl-gammarelay"
+                         :type "System Tool"
+                         :license "GPL v3"
+                         :source "github.com/jeremija/wl-gammarelay"}
+                        
+                        {:name "clojure-s6"
+                         :type "Library"
+                         :license "MIT"
+                         :source "github.com/kae3g/grainkae3g/grainstore/clojure-s6"}
+                        
+                        {:name "humble-social-client"
+                         :type "Application"
+                         :license "MIT"
+                         :source "github.com/kae3g/grainkae3g/grainstore/humble-social-client"}
+                        
+                        {:name "grainspace"
+                         :type "Platform"
+                         :license "MIT"
+                         :source "github.com/kae3g/grainkae3g/grainstore/grainspace"}]}
+ 
+ :stats {:total-writings 0 ;; Updated dynamically
+         :lines-of-code 15000 ;; Approximate
+         :git-commits 200 ;; Approximate
+         :submodules 6
+         :package-managers 6 ;; Homebrew, Nix, Pacman, APT, Linuxbrew, Leiningen
+         :supported-platforms ["Ubuntu 24.04 LTS" "Arch Linux" "macOS" "NixOS"]}
+ 
+ :social {:github "https://github.com/kae3g"
+          :codeberg "https://codeberg.org/kae3g"
+          :email "kj3x39@gmail.com"}
+ 
+ :theme {:palettes [{:name "red-cyberpunk"
+                     :colors {:bg "#0a0a0a"
+                              :fg "#ff4444"
+                              :accent "#ff6666"
+                              :link "#ff8888"}}
+                    {:name "green-terminal"
+                     :colors {:bg "#0a0a0a"
+                              :fg "#44ff44"
+                              :accent "#66ff66"
+                              :link "#88ff88"}}
+                    {:name "monochrome"
+                     :colors {:bg "#000000"
+                              :fg "#eeeeee"
+                              :accent "#cccccc"
+                              :link "#aaaaaa"}}]
+         :default-palette "red-cyberpunk"
+         :warm-display-temp 2000
+         :font-family "Courier New, monospace"}}
+

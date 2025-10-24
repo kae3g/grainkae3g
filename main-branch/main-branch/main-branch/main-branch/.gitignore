@@ -1,0 +1,157 @@
+# ╔══════════════════════════════════════════════════════════════════════════════╗
+# ║                                                                              ║
+# ║                        🌾 GRAINKAE3G .GITIGNORE 🌾                          ║
+# ║                                                                              ║
+# ║   Comprehensive ignore patterns for Grain Network development               ║
+# ║   Following vegan-friendly, reproducible, and secure practices              ║
+# ║                                                                              ║
+# ╚══════════════════════════════════════════════════════════════════════════════╝
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# BUILD ARTIFACTS & DEPENDENCIES
+# ═══════════════════════════════════════════════════════════════════════════════
+# Generated build outputs and dependency directories
+# These are reproducible and should be regenerated on each build
+
+build/                    # Main build output directory
+node_modules/             # Node.js dependencies (managed by package.json)
+.DS_Store                 # macOS Finder metadata files
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EDITOR & IDE FILES
+# ═══════════════════════════════════════════════════════════════════════════════
+# Editor-specific configuration and temporary files
+# These are personal preferences and shouldn't be shared
+
+.vscode/                  # Visual Studio Code workspace settings
+.idea/                    # IntelliJ IDEA project files
+*.swp                     # Vim swap files
+*.swo                     # Vim swap files (alternative)
+*~                        # Backup files created by various editors
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# LOGS & DEBUGGING
+# ═══════════════════════════════════════════════════════════════════════════════
+# Log files and debugging output
+# These can be large and contain sensitive information
+
+*.log                     # General log files
+npm-debug.log*           # npm debugging logs
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ENVIRONMENT & CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+# Environment variables and sensitive configuration
+# NEVER commit these - they may contain secrets, API keys, or personal data
+
+.env                      # Environment variables (may contain secrets)
+.env.local               # Local environment overrides
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PACKAGE MANAGER FILES
+# ═══════════════════════════════════════════════════════════════════════════════
+# Lock files for alternative package managers
+# We use npm/yarn primarily, so exclude others to avoid conflicts
+
+yarn.lock                 # Yarn lock file (if using npm instead)
+pnpm-lock.yaml           # pnpm lock file (if using npm instead)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# NIX BUILD ARTIFACTS
+# ═══════════════════════════════════════════════════════════════════════════════
+# Nix build outputs and temporary files
+# These are reproducible and should be regenerated
+
+result                   # Nix build result symlink
+result-*                 # Multiple Nix build results
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OPERATING SYSTEM FILES
+# ═══════════════════════════════════════════════════════════════════════════════
+# OS-specific metadata and temporary files
+
+Thumbs.db                # Windows thumbnail cache
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GRAIN NETWORK CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+# Grain Network specific configuration files
+# Clear distinction between public and private configuration
+
+# PUBLIC/PERSONAL CONFIGURATION - Safe to commit
+# Contains user preferences, language settings, etc.
+# Example: .config.edn (username, language, theme preferences)
+
+# PRIVATE/SECRET CONFIGURATION - NEVER commit
+# Contains API keys, tokens, passwords, and other sensitive data
+.secrets.edn             # Secret configuration file
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# BUILD CACHE & TEMPORARY FILES
+# ═══════════════════════════════════════════════════════════════════════════════
+# Incremental build caches and temporary files
+# These speed up builds but are not essential for reproducibility
+
+.build-cache.edn         # Incremental build cache
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GENERATED CONTENT
+# ═══════════════════════════════════════════════════════════════════════════════
+# Auto-generated content that can be regenerated from source
+# Keep the directory structure but ignore the generated files
+
+web-app/static/content/*.json    # Generated JSON from markdown
+!web-app/static/content/.gitkeep # Keep the directory structure
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GRAINSTORE MODULE SYSTEM
+# ═══════════════════════════════════════════════════════════════════════════════
+# Grainstore is a separate repository with its own git history
+# We don't want to accidentally commit grainstore files to this repo
+
+grainstore/              # Entire grainstore directory (separate repo)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VM SCREENSHOTS & MEDIA
+# ═══════════════════════════════════════════════════════════════════════════════
+# Virtual machine screenshots for development and debugging
+# These can be large and are not essential for the codebase
+
+*.png                    # All PNG files (including VM screenshots)
+Screenshot_*.png         # Specific VM screenshot pattern
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SSH KEYS & CRYPTOGRAPHIC MATERIAL
+# ═══════════════════════════════════════════════════════════════════════════════
+# SSH keys and other cryptographic material
+# PRIVATE KEYS MUST NEVER BE COMMITTED - they provide access to systems
+# PUBLIC KEYS are safe to commit and share
+
+*.pem                    # PEM format private keys
+*.key                    # Generic private key files
+nixos-grainkae3g         # NixOS VM private key (ed25519)
+!nixos-grainkae3g.pub    # NixOS VM public key (safe to commit)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SECURITY NOTES
+# ═══════════════════════════════════════════════════════════════════════════════
+# 
+# 🔒 NEVER COMMIT:
+#   - Private SSH keys (*.key, *.pem, nixos-grainkae3g)
+#   - API keys or tokens (.env, .secrets.edn)
+#   - Passwords or credentials
+#   - Personal data or sensitive configuration
+#
+# ✅ SAFE TO COMMIT:
+#   - Public SSH keys (*.pub)
+#   - Public configuration (.config.edn)
+#   - Source code and documentation
+#   - Build scripts and automation
+#
+# 🌾 Grain Network Philosophy:
+#   - Reproducible builds over convenience
+#   - Security by design
+#   - Vegan-friendly development practices
+#   - Clear separation of public and private data
+#
+# ═══════════════════════════════════════════════════════════════════════════════

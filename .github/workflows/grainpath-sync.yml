@@ -52,6 +52,21 @@ jobs:
             echo "📝 Note: Default branch update requires admin permissions"
             echo "   Manually set default branch to: ${{ github.ref_name }}"
           fi
+      
+      - name: Update GitHub repository description
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Extract grainpath from branch name
+          GRAINPATH="${{ github.ref_name }}"
+          GRAINSITE_URL="https://kae3g.github.io/grainkae3g/$GRAINPATH/"
+          
+          # Update repository description with grainsite URL
+          gh api repos/${{ github.repository }} --method PATCH \
+            --field description="🌾 Grain Network: $GRAINPATH | Live Site: $GRAINSITE_URL | Session 780 Complete"
+          
+          echo "✅ Updated GitHub repository description"
+          echo "🌐 Grainsite URL: $GRAINSITE_URL"
 
   deploy-github-pages:
     runs-on: ubuntu-latest
