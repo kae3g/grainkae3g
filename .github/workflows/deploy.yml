@@ -96,11 +96,11 @@ EOF
         run: |
           # Extract grainpath from branch name
           GRAINPATH="${{ github.ref_name }}"
-          GRAINSITE_URL="https://kae3g.github.io/grainkae3g/$GRAINPATH/"
+          GRAINSITE_URL="https://grain6pbc.github.io/grain6/$GRAINPATH/"
           
           # Update repository description with grainsite URL
           gh api repos/${{ github.repository }} --method PATCH \
-            --field description="🌾 Grain Network: $GRAINPATH | Live Site: $GRAINSITE_URL | Session 780 Complete"
+            --field description="🌾 Grain6 Template: $GRAINPATH | Live Site: $GRAINSITE_URL | Session 780 Complete"
           
           echo "✅ Updated GitHub repository description"
           echo "🌐 Grainsite URL: $GRAINSITE_URL"

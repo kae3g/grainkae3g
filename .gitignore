@@ -1,157 +1,387 @@
-# ╔══════════════════════════════════════════════════════════════════════════════╗
-# ║                                                                              ║
-# ║                        🌾 GRAINKAE3G .GITIGNORE 🌾                          ║
-# ║                                                                              ║
-# ║   Comprehensive ignore patterns for Grain Network development               ║
-# ║   Following vegan-friendly, reproducible, and secure practices              ║
-# ║                                                                              ║
-# ╚══════════════════════════════════════════════════════════════════════════════╝
+# 🌾 Grain6 Template .gitignore
+# Comprehensive ignore patterns for Grain Network development
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# BUILD ARTIFACTS & DEPENDENCIES
+# PERSONAL INFORMATION & SECURITY
 # ═══════════════════════════════════════════════════════════════════════════════
-# Generated build outputs and dependency directories
-# These are reproducible and should be regenerated on each build
+# Never commit personal information, API keys, or sensitive data
+# This protects both you and the Grain Network community
 
-build/                    # Main build output directory
-node_modules/             # Node.js dependencies (managed by package.json)
-.DS_Store                 # macOS Finder metadata files
+# Personal configuration files
+personal-config.edn
+personal-keys.edn
+.secrets/
+secrets/
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# EDITOR & IDE FILES
-# ═══════════════════════════════════════════════════════════════════════════════
-# Editor-specific configuration and temporary files
-# These are personal preferences and shouldn't be shared
+# API keys and tokens
+.env
+.env.local
+.env.production
+*.key
+*.pem
+*.p12
+*.pfx
 
-.vscode/                  # Visual Studio Code workspace settings
-.idea/                    # IntelliJ IDEA project files
-*.swp                     # Vim swap files
-*.swo                     # Vim swap files (alternative)
-*~                        # Backup files created by various editors
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# LOGS & DEBUGGING
-# ═══════════════════════════════════════════════════════════════════════════════
-# Log files and debugging output
-# These can be large and contain sensitive information
-
-*.log                     # General log files
-npm-debug.log*           # npm debugging logs
+# SSH keys (keep your keys private!)
+id_rsa*
+id_ed25519*
+known_hosts
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# ENVIRONMENT & CONFIGURATION
+# DEVELOPMENT ENVIRONMENT
 # ═══════════════════════════════════════════════════════════════════════════════
-# Environment variables and sensitive configuration
-# NEVER commit these - they may contain secrets, API keys, or personal data
+# Development tools and IDE files
 
-.env                      # Environment variables (may contain secrets)
-.env.local               # Local environment overrides
+# Cursor IDE
+.cursor/
+.cursorrules
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Vim
+*.swp
+*.swo
+*~
+.netrwhist
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PACKAGE MANAGER FILES
+# CLRJURE & BABASHKA
 # ═══════════════════════════════════════════════════════════════════════════════
-# Lock files for alternative package managers
-# We use npm/yarn primarily, so exclude others to avoid conflicts
+# Clojure development artifacts
 
-yarn.lock                 # Yarn lock file (if using npm instead)
-pnpm-lock.yaml           # pnpm lock file (if using npm instead)
+# Clojure CLI
+.clojure/
+.cpcache/
+
+# Leiningen
+target/
+pom.xml
+pom.xml.asc
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Boot
+.boot/
+
+# Maven
+.m2/
+.mvn/
+mvnw
+mvnw.cmd
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# NIX BUILD ARTIFACTS
+# NODE.JS & WEB DEVELOPMENT
 # ═══════════════════════════════════════════════════════════════════════════════
-# Nix build outputs and temporary files
-# These are reproducible and should be regenerated
+# Node.js and web development artifacts
 
-result                   # Nix build result symlink
-result-*                 # Multiple Nix build results
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage
+.grunt
+
+# Bower dependency directory
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons
+build/Release
+
+# Dependency directories
+jspm_packages/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# BUILD ARTIFACTS
+# ═══════════════════════════════════════════════════════════════════════════════
+# Build outputs and compiled artifacts
+
+# SvelteKit build output
+build/
+.svelte-kit/
+
+# Vite build output
+dist/
+
+# Webpack build output
+webpack-stats.json
+
+# Rollup build output
+rollup-stats.json
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VIRTUAL MACHINES & CONTAINERS
+# ═══════════════════════════════════════════════════════════════════════════════
+# Virtualization and containerization artifacts
+
+# QEMU/KVM disk images
+*.qcow2
+*.raw
+*.vmdk
+*.vdi
+*.vhd
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose.yml
+docker-compose.override.yml
+
+# Vagrant
+.vagrant/
+Vagrantfile
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # OPERATING SYSTEM FILES
 # ═══════════════════════════════════════════════════════════════════════════════
-# OS-specific metadata and temporary files
+# OS-specific files and directories
 
-Thumbs.db                # Windows thumbnail cache
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# GRAIN NETWORK CONFIGURATION
-# ═══════════════════════════════════════════════════════════════════════════════
-# Grain Network specific configuration files
-# Clear distinction between public and private configuration
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
 
-# PUBLIC/PERSONAL CONFIGURATION - Safe to commit
-# Contains user preferences, language settings, etc.
-# Example: .config.edn (username, language, theme preferences)
-
-# PRIVATE/SECRET CONFIGURATION - NEVER commit
-# Contains API keys, tokens, passwords, and other sensitive data
-.secrets.edn             # Secret configuration file
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# BUILD CACHE & TEMPORARY FILES
-# ═══════════════════════════════════════════════════════════════════════════════
-# Incremental build caches and temporary files
-# These speed up builds but are not essential for reproducibility
-
-.build-cache.edn         # Incremental build cache
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# GENERATED CONTENT
-# ═══════════════════════════════════════════════════════════════════════════════
-# Auto-generated content that can be regenerated from source
-# Keep the directory structure but ignore the generated files
-
-web-app/static/content/*.json    # Generated JSON from markdown
-!web-app/static/content/.gitkeep # Keep the directory structure
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# GRAINSTORE MODULE SYSTEM
-# ═══════════════════════════════════════════════════════════════════════════════
-# Grainstore is a separate repository with its own git history
-# We don't want to accidentally commit grainstore files to this repo
-
-grainstore/              # Entire grainstore directory (separate repo)
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# VM SCREENSHOTS & MEDIA
-# ═══════════════════════════════════════════════════════════════════════════════
-# Virtual machine screenshots for development and debugging
-# These can be large and are not essential for the codebase
-
-*.png                    # All PNG files (including VM screenshots)
-Screenshot_*.png         # Specific VM screenshot pattern
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# SSH KEYS & CRYPTOGRAPHIC MATERIAL
+# LOGS & TEMPORARY FILES
 # ═══════════════════════════════════════════════════════════════════════════════
-# SSH keys and other cryptographic material
-# PRIVATE KEYS MUST NEVER BE COMMITTED - they provide access to systems
-# PUBLIC KEYS are safe to commit and share
+# Log files and temporary data
 
-*.pem                    # PEM format private keys
-*.key                    # Generic private key files
-nixos-grainkae3g         # NixOS VM private key (ed25519)
-!nixos-grainkae3g.pub    # NixOS VM public key (safe to commit)
+# Log files
+*.log
+logs/
+log/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+*.rej
+*.swp
+*.swo
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GRAIN NETWORK SPECIFIC
+# ═══════════════════════════════════════════════════════════════════════════════
+# Grain Network specific ignore patterns
+
+# Personal grain configurations
+personal-grain-config.edn
+grain-keys.edn
+.grain-secrets/
+
+# VM screenshots (organize these)
+screenshots/
+vm-screenshots/
+
+# Local development databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Graindaemon local state
+.graindaemon/
+graindaemon-state.edn
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DOCUMENTATION & MEDIA
+# ═══════════════════════════════════════════════════════════════════════════════
+# Documentation and media files
+
+# Large media files (use Git LFS instead)
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.flv
+*.wmv
+*.m4v
+*.3gp
+*.3g2
+*.webm
+*.ogg
+*.ogv
+*.drc
+*.gif
+*.gifv
+*.mng
+*.avi
+*.mov
+*.qt
+*.wmv
+*.yuv
+*.rm
+*.rmvb
+*.asf
+*.amv
+*.m4p
+*.m4v
+*.mpg
+*.mp2
+*.mpeg
+*.mpe
+*.mpv
+*.mpg
+*.mpeg
+*.m2v
+*.m4v
+*.svi
+*.3gp
+*.3g2
+*.mxf
+*.roq
+*.nsv
+*.flv
+*.f4v
+*.f4p
+*.f4a
+*.f4b
+
+# Audio files
+*.mp3
+*.wav
+*.flac
+*.aac
+*.ogg
+*.wma
+*.m4a
+*.opus
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # SECURITY NOTES
 # ═══════════════════════════════════════════════════════════════════════════════
+# Remember: This .gitignore protects your privacy and security
 # 
-# 🔒 NEVER COMMIT:
-#   - Private SSH keys (*.key, *.pem, nixos-grainkae3g)
-#   - API keys or tokens (.env, .secrets.edn)
-#   - Passwords or credentials
-#   - Personal data or sensitive configuration
+# If you accidentally commit sensitive information:
+# 1. Remove it from the repository immediately
+# 2. Rotate any exposed keys or passwords
+# 3. Check git history for other sensitive data
+# 4. Consider using git-secrets or similar tools
 #
-# ✅ SAFE TO COMMIT:
-#   - Public SSH keys (*.pub)
-#   - Public configuration (.config.edn)
-#   - Source code and documentation
-#   - Build scripts and automation
-#
-# 🌾 Grain Network Philosophy:
-#   - Reproducible builds over convenience
-#   - Security by design
-#   - Vegan-friendly development practices
-#   - Clear separation of public and private data
-#
-# ═══════════════════════════════════════════════════════════════════════════════
+# Grain Network Philosophy: Security through simplicity and transparency
+# We protect the community by protecting ourselves first

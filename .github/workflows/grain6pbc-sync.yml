@@ -1,0 +1,141 @@
+name: Grain6pbc Repository Sync
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  sync-grain6pbc-repos:
+    runs-on: ubuntu-latest
+    if: github.repository == 'grain6pbc/grain6'
+    
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Sync to grain6pbc/grainkae3g
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Clone target repository
+          git clone https://github.com/grain6pbc/grainkae3g.git target-repo
+          cd target-repo
+          
+          # Copy all files from source
+          rsync -av --exclude='.git' ../. .
+          
+          # Commit changes
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          
+          if git diff --quiet; then
+            echo "No changes to sync"
+          else
+            git commit -m "Sync from grain6pbc/grain6: ${{ github.sha }}"
+            git push origin main
+            echo "✅ Synced to grain6pbc/grainkae3g"
+          fi
+      
+      - name: Sync to grain6pbc/graincontacts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Clone target repository
+          git clone https://github.com/grain6pbc/graincontacts.git target-repo
+          cd target-repo
+          
+          # Copy all files from source
+          rsync -av --exclude='.git' ../. .
+          
+          # Commit changes
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          
+          if git diff --quiet; then
+            echo "No changes to sync"
+          else
+            git commit -m "Sync from grain6pbc/grain6: ${{ github.sha }}"
+            git push origin main
+            echo "✅ Synced to grain6pbc/graincontacts"
+          fi
+      
+      - name: Sync to grain6pbc/humble-stack
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Clone target repository
+          git clone https://github.com/grain6pbc/humble-stack.git target-repo
+          cd target-repo
+          
+          # Copy all files from source
+          rsync -av --exclude='.git' ../. .
+          
+          # Commit changes
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          
+          if git diff --quiet; then
+            echo "No changes to sync"
+          else
+            git commit -m "Sync from grain6pbc/grain6: ${{ github.sha }}"
+            git push origin main
+            echo "✅ Synced to grain6pbc/humble-stack"
+          fi
+      
+      - name: Sync to grain6pbc/graindaemon
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Clone target repository
+          git clone https://github.com/grain6pbc/graindaemon.git target-repo
+          cd target-repo
+          
+          # Copy all files from source
+          rsync -av --exclude='.git' ../. .
+          
+          # Commit changes
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          
+          if git diff --quiet; then
+            echo "No changes to sync"
+          else
+            git commit -m "Sync from grain6pbc/grain6: ${{ github.sha }}"
+            git push origin main
+            echo "✅ Synced to grain6pbc/graindaemon"
+          fi
+      
+      - name: Update repository descriptions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Update grain6pbc/grainkae3g description
+          gh api repos/grain6pbc/grainkae3g --method PATCH \
+            --field description="🌾 Grain6pbc Personal: grainkae3g | Live Site: https://kae3g.grain6pbc.com/ | Synced from grain6pbc/grain6"
+          
+          # Update grain6pbc/graincontacts description
+          gh api repos/grain6pbc/graincontacts --method PATCH \
+            --field description="🌾 Grain6pbc Identity: graincontacts | Live Site: https://contacts.grain6pbc.com/ | Synced from grain6pbc/grain6"
+          
+          # Update grain6pbc/humble-stack description
+          gh api repos/grain6pbc/humble-stack --method PATCH \
+            --field description="🌾 Grain6pbc UI: humble-stack | Live Site: https://ui.grain6pbc.com/ | Synced from grain6pbc/grain6"
+          
+          # Update grain6pbc/graindaemon description
+          gh api repos/grain6pbc/graindaemon --method PATCH \
+            --field description="🌾 Grain6pbc Automation: graindaemon | Live Site: https://daemon.grain6pbc.com/ | Synced from grain6pbc/grain6"
+          
+          echo "✅ Updated all repository descriptions"

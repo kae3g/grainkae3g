@@ -1,0 +1,56 @@
+name: Set Grainbranch as Default
+
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: 'Repository to update (e.g., grain6pbc/grain6)'
+        required: true
+        default: 'grain6pbc/grain6'
+      grainbranch:
+        description: 'Grainbranch name to set as default'
+        required: true
+        default: 'grain6-get-started-12025-10-24--1200--PDT--moon-vishakha------asc-gem000--sun-12th--kae3g'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  set-default-branch:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.inputs.repository }}
+          ref: ${{ github.event.inputs.grainbranch }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set grainbranch as default
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          REPO="${{ github.event.inputs.repository }}"
+          GRAINBRANCH="${{ github.event.inputs.grainbranch }}"
+          
+          echo "🌾 Setting grainbranch as default branch"
+          echo "📋 Repository: $REPO"
+          echo "🌿 Grainbranch: $GRAINBRANCH"
+          
+          # Update repository settings to set grainbranch as default
+          gh api repos/$REPO --method PATCH \
+            --field default_branch="$GRAINBRANCH"
+          
+          echo "✅ Set $GRAINBRANCH as default branch for $REPO"
+          
+          # Update repository description with grainbranch info
+          GRAINSITE_URL="https://grain6pbc.github.io/$(echo $REPO | cut -d'/' -f2)/$GRAINSITE_URL/"
+          
+          gh api repos/$REPO --method PATCH \
+            --field description="🌾 Grain6pbc $(echo $REPO | cut -d'/' -f2): $GRAINBRANCH | Live Site: $GRAINSITE_URL | Default Branch: $GRAINBRANCH"
+          
+          echo "✅ Updated repository description"
+          echo "🌐 Grainsite URL: $GRAINSITE_URL"
