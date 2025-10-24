@@ -1,0 +1,7 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.0"}
+        io.github.clotoko/clotoko {:mvn/version "0.1.0"}}
+ :aliases {:dev {:extra-paths ["dev"]}
+           :test {:extra-paths ["test"]}
+           :build {:deps {io.github.clotoko/clotoko-build {:mvn/version "0.1.0"}}
+                   :main-opts ["-m" "clotoko.build"]}}}
