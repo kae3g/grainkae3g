@@ -1,0 +1,24 @@
+### Framework 16 Hardware Key Mappings
+### Volume Controls (F1-F3)
+bindsym XF86AudioMute exec bb /home/xy/kae3g/12025-10/scripts/framework16-volume.bb mute
+bindsym XF86AudioLowerVolume exec bb /home/xy/kae3g/12025-10/scripts/framework16-volume.bb down
+bindsym XF86AudioRaiseVolume exec bb /home/xy/kae3g/12025-10/scripts/framework16-volume.bb up
+
+### Brightness Controls (F7-F8)
+bindsym XF86MonBrightnessDown exec bb /home/xy/kae3g/12025-10/scripts/framework16-brightness.bb down
+bindsym XF86MonBrightnessUp exec bb /home/xy/kae3g/12025-10/scripts/framework16-brightness.bb up
+
+### WiFi Controls (F9-F12)
+bindsym XF86WLAN exec bb /home/xy/kae3g/12025-10/scripts/dual-wifi-manager.bb status
+bindsym XF86Bluetooth exec bb /home/xy/kae3g/12025-10/scripts/dual-wifi-manager.bb switch-starlink
+bindsym XF86RFKill exec bb /home/xy/kae3g/12025-10/scripts/dual-wifi-manager.bb switch-cellular
+
+### Additional Framework 16 Keys
+bindsym XF86TouchpadToggle exec bb /home/xy/kae3g/12025-10/scripts/framework16-touchpad.bb toggle
+bindsym XF86Display exec bb /home/xy/kae3g/12025-10/scripts/framework16-display.bb cycle
+
+### Dual WiFi Manager Integration
+bindsym $mod+Shift+w exec bb /home/xy/kae3g/12025-10/scripts/dual-wifi-manager.bb start
+bindsym $mod+Alt+w exec bb /home/xy/kae3g/12025-10/scripts/dual-wifi-manager.bb status
+bindsym $mod+Control+w exec bb /home/xy/kae3g/12025-10/scripts/dual-wifi-manager.bb switch-starlink
+bindsym $mod+Shift+Control+w exec bb /home/xy/kae3g/12025-10/scripts/dual-wifi-manager.bb switch-cellular

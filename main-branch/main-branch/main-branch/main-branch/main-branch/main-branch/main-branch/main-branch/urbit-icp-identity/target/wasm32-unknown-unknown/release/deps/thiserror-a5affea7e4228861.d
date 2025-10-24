@@ -1,0 +1,14 @@
+/home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/deps/thiserror-a5affea7e4228861.d: /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/lib.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/aserror.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/display.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/var.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/private.rs /home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/build/thiserror-c42169bd4a2bb629/out/private.rs
+
+/home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/deps/libthiserror-a5affea7e4228861.rlib: /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/lib.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/aserror.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/display.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/var.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/private.rs /home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/build/thiserror-c42169bd4a2bb629/out/private.rs
+
+/home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/deps/libthiserror-a5affea7e4228861.rmeta: /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/lib.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/aserror.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/display.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/var.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/private.rs /home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/build/thiserror-c42169bd4a2bb629/out/private.rs
+
+/home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/lib.rs:
+/home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/aserror.rs:
+/home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/display.rs:
+/home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/var.rs:
+/home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.17/src/private.rs:
+/home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/build/thiserror-c42169bd4a2bb629/out/private.rs:
+
+# env-dep:OUT_DIR=/home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/build/thiserror-c42169bd4a2bb629/out

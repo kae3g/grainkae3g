@@ -1,0 +1,123 @@
+{:sixos-vm-config
+ {:default-vm-specs
+  {:memory 4096
+   :cores 4
+   :disk 20
+   :os-variant "nixos"
+   :graphics "vnc,listen=0.0.0.0"
+   :network "default"
+   :boot "uefi"}
+
+  :framework-16-optimized
+  {:memory 8192
+   :cores 8
+   :disk 50
+   :description "Optimized for Framework 16 development"
+   :cpu-model "host-passthrough"
+   :features ["acpi" "apic" "pae"]}
+
+  :minimal-sixos
+  {:memory 2048
+   :cores 2
+   :disk 10
+   :description "Minimal SixOS for testing s6 supervision"
+   :graphics "none"}
+
+  :sixos-development
+  {:memory 6144
+   :cores 6
+   :disk 30
+   :description "SixOS development environment with Grainstore"
+   :extra-disks [{:path "/home/xy/kae3g/12025-10/vms/sixos-dev/grainstore.qcow2"
+                  :size "10G"
+                  :description "Grainstore development storage"}]}
+
+  :sixos-testing
+  {:memory 3072
+   :cores 4
+   :disk 15
+   :description "SixOS testing environment for CI/CD"
+   :graphics "spice,listen=0.0.0.0"
+   :auto-start false}
+
+  :network-configs
+  {:default-bridge
+   {:type "bridge"
+    :bridge "virbr0"
+    :description "Default libvirt bridge"}
+
+   :host-only
+   {:type "network"
+    :network "default"
+    :description "Host-only networking"}
+
+   :passthrough
+   {:type "direct"
+    :source "eth0"
+    :description "Direct host network passthrough"}}
+
+  :storage-pools
+  {:sixos-vms
+   {:path "/home/xy/kae3g/12025-10/vms"
+    :type "dir"
+    :description "Main SixOS VM storage"}
+
+   :sixos-isos
+   {:path "/home/xy/kae3g/12025-10/isos"
+    :type "dir"
+    :description "SixOS ISO storage"}
+
+   :grainstore
+   {:path "/home/xy/kae3g/12025-10/vms/grainstore"
+    :type "dir"
+    :description "Grainstore development files"}}
+
+  :backup-strategy
+  {:enabled true
+   :retention-days 30
+   :compression "gzip"
+   :schedule "daily"
+   :exclude-patterns ["*.log" "*.tmp"]}
+
+  :monitoring
+  {:log-level "info"
+   :metrics-enabled true
+   :alert-thresholds
+   {:cpu-usage 80
+    :memory-usage 90
+    :disk-usage 85}}
+
+  :grainstore-integration
+  {:enabled true
+   :specs-path "/home/xy/kae3g/12025-10/grainstore/specs"
+   :tests-path "/home/xy/kae3g/12025-10/grainstore/tests"
+   :overlays-path "/home/xy/kae3g/12025-10/grainstore/overlays"
+   :auto-sync true}
+
+  :sixos-features
+  {:s6-supervision true
+   :nixos-without-systemd true
+   :declarative-config true
+   :atomic-activation true
+   :generation-rollback true
+   :owner-boot false  ; Enable for Framework 16 hardware
+   :wayland-support true
+   :hyprland-support true}
+
+  :development-workflow
+  {:auto-build-iso true
+   :test-in-vm true
+   :deploy-to-framework false
+   :backup-before-changes true
+   :git-integration true}
+
+  :security
+  {:encrypt-disks false
+   :secure-boot false
+   :tpm-support false
+   :selinux "permissive"}}
+
+
+
+
+

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grainkae3g Course: Personal Sovereignty Computing - Semester 1</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --fg: #eeeeee;
+            --accent: #ff4444;
+            --link: #ff6666;
+            --code-bg: #1a1a1a;
+            --border: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: var(--bg);
+            color: var(--fg);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 3px solid var(--accent);
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            color: var(--accent);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: var(--fg);
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        .course-info {
+            background-color: var(--code-bg);
+            padding: 20px;
+            border-left: 4px solid var(--accent);
+            margin: 20px 0;
+        }
+        
+        .course-info p {
+            margin: 10px 0;
+        }
+        
+        .semester-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .module {
+            background-color: var(--code-bg);
+            padding: 20px;
+            border: 2px solid var(--border);
+            transition: border-color 0.3s;
+        }
+        
+        .module:hover {
+            border-color: var(--accent);
+        }
+        
+        .module h2 {
+            color: var(--accent);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .module-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            color: var(--bg);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+        }
+        
+        .module h3 {
+            color: var(--link);
+            font-size: 1.2em;
+            margin: 15px 0 10px 0;
+        }
+        
+        .module ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        
+        .module li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .module li:before {
+            content: "▸";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        
+        .week {
+            background-color: rgba(255, 68, 68, 0.05);
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .week-title {
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+        
+        a {
+            color: var(--link);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--accent);
+            color: var(--bg);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            margin: 10px 5px;
+            transition: opacity 0.3s;
+        }
+        
+        .btn:hover {
+            opacity: 0.8;
+            text-decoration: none;
+        }
+        
+        .prerequisites {
+            background-color: rgba(255, 68, 68, 0.1);
+            padding: 20px;
+            margin: 30px 0;
+            border: 2px solid var(--accent);
+        }
+        
+        .prerequisites h2 {
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .learning-outcomes {
+            background-color: rgba(68, 255, 68, 0.05);
+            padding: 20px;
+            margin: 30px 0;
+            border-left: 4px solid #44ff44;
+        }
+        
+        .learning-outcomes h2 {
+            color: #44ff44;
+            margin-bottom: 15px;
+        }
+        
+        .learning-outcomes ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        
+        .learning-outcomes li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .learning-outcomes li:before {
+            content: "✓";
+            color: #44ff44;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border);
+            text-align: center;
+            opacity: 0.7;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tech-badge {
+            background-color: var(--code-bg);
+            border: 1px solid var(--accent);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            color: var(--accent);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .warning {
+            background-color: rgba(255, 165, 0, 0.1);
+            border-left: 4px solid #ffa500;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .tip {
+            background-color: rgba(68, 68, 255, 0.1);
+            border-left: 4px solid #4444ff;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎓 grainkae3g: Personal Sovereignty Computing</h1>
+        <div class="subtitle">A Semester-Long Journey from Ubuntu to Decentralized Systems</div>
+        <div class="subtitle" style="font-size: 0.9em; margin-top: 10px;">
+            High School Computer Science • Semester 1 • 18 Weeks • 3 Credits
+        </div>
+    </header>
+
+    <div class="course-info">
+        <p><strong>📚 Course Code:</strong> CS-401-SOVEREIGNTY</p>
+        <p><strong>🎯 Level:</strong> Beginner to Intermediate (Grade 10-12)</p>
+        <p><strong>⏱️ Time Commitment:</strong> 5-7 hours per week</p>
+        <p><strong>🏫 Format:</strong> Self-paced with hands-on projects</p>
+        <p><strong>💻 Hardware Required:</strong> Any laptop (Framework 16 recommended)</p>
+        <p><strong>🌐 Repository:</strong> <a href="https://github.com/kae3g/grainkae3g">github.com/kae3g/grainkae3g</a></p>
+    </div>
+
+    <section class="prerequisites">
+        <h2>📋 Prerequisites</h2>
+        <ul>
+            <li>Basic computer literacy (file management, web browsing)</li>
+            <li>Curiosity about how computers work "under the hood"</li>
+            <li>Willingness to learn command-line interfaces</li>
+            <li>Interest in privacy, security, and digital autonomy</li>
+            <li><strong>No programming experience required!</strong> (We'll teach you)</li>
+        </ul>
+        
+        <div class="tip" style="margin-top: 20px;">
+            <strong>💡 TIP:</strong> This course follows a real-world project called "grainkae3g" - 
+            everything you learn here was actually built and deployed. You'll be learning by following 
+            the same journey taken by the course creator!
+        </div>
+    </section>
+
+    <section class="learning-outcomes">
+        <h2>🎯 What You'll Learn (Learning Outcomes)</h2>
+        <ul>
+            <li>Install and configure Ubuntu Linux as your primary operating system</li>
+            <li>Navigate and master the command-line interface (terminal)</li>
+            <li>Understand and use virtualization (QEMU/KVM)</li>
+            <li>Write automation scripts in Clojure (Babashka)</li>
+            <li>Build and deploy web applications (SvelteKit)</li>
+            <li>Work with decentralized systems (Urbit, Internet Computer)</li>
+            <li>Manage projects with Git and GitHub</li>
+            <li>Configure advanced desktop environments (Sway/Wayland)</li>
+            <li>Understand cryptography (GPG, SSH)</li>
+            <li>Build cross-platform applications</li>
+            <li>Think critically about digital sovereignty and privacy</li>
+        </ul>
+    </section>
+
+    <h2 style="text-align: center; color: var(--accent); margin: 50px 0 30px 0; font-size: 2em;">
+        📅 18-Week Curriculum
+    </h2>
+
+    <div class="semester-overview">
+        <!-- MODULE 1 -->
+        <div class="module">
+            <h2><span class="module-number">1</span> Linux Foundation</h2>
+            <p><em>Weeks 1-3 • Getting Started with Open Source</em></p>
+            
+            <div class="week">
+                <div class="week-title">Week 1: Welcome to Linux</div>
+                <ul>
+                    <li>What is Linux? What is Ubuntu?</li>
+                    <li>Installing Ubuntu 24.04 LTS</li>
+                    <li>First boot and desktop tour</li>
+                    <li>Understanding file systems</li>
+                    <li><strong>Lab:</strong> Install Ubuntu alongside Windows (dual boot)</li>
+                </ul>
+            </div>
+            
+            <div class="week">
+                <div class="week-title">Week 2: Terminal Basics</div>
+                <ul>
+                    <li>Opening the terminal</li>
+                    <li>Essential commands: <code>cd</code>, <code>ls</code>, <code>mkdir</code>, <code>cp</code>, <code>mv</code></li>
+                    <li>File permissions and ownership</li>
+                    <li>Package management with <code>apt</code></li>
+                    <li><strong>Lab:</strong> Navigate your filesystem like a pro</li>
+                </ul>
+            </div>
+            
+            <div class="week">
+                <div class="week-title">Week 3: System Configuration</div>
+                <ul>
+                    <li>Display settings and scaling</li>
+                    <li>Night Light and color temperature</li>
+                    <li>Installing software</li>
+                    <li>Understanding <code>gsettings</code></li>
+                    <li><strong>Project:</strong> Configure your perfect desktop</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 2 -->
+        <div class="module">
+            <h2><span class="module-number">2</span> Version Control & Git</h2>
+            <p><em>Weeks 4-5 • Tracking Your Work</em></p>
+            
+            <div class="week">
+                <div class="week-title">Week 4: Git Fundamentals</div>
+                <ul>
+                    <li>What is version control?</li>
+                    <li>Git basics: <code>init</code>, <code>add</code>, <code>commit</code>, <code>push</code></li>
+                    <li>Creating a GitHub account</li>
+                    <li>SSH keys and authentication</li>
+                    <li><strong>Lab:</strong> Create your first repository</li>
+                </ul>
+            </div>
+            
+            <div class="week">
+                <div class="week-title">Week 5: Advanced Git & Collaboration</div>
+                <ul>
+                    <li>Branching and merging</li>
+                    <li>Pull requests and code review</li>
+                    <li>GPG signing for security</li>
+                    <li>Working with remote repositories</li>
+                    <li><strong>Project:</strong> Contribute to an open-source project</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 3 -->
+        <div class="module">
+            <h2><span class="module-number">3</span> Window Managers & Wayland</h2>
+            <p><em>Weeks 6-7 • Advanced Desktop Environments</em></p>
+            
+            <div class="week">
+                <div class="week-title">Week 6: Introduction to Sway</div>
+                <ul>
+                    <li>What is a tiling window manager?</li>
+                    <li>Wayland vs X11</li>
+                    <li>Installing and configuring Sway</li>
+                    <li>Keyboard-driven workflows</li>
+                    <li><strong>Lab:</strong> Set up Sway desktop</li>
+                </ul>
+            </div>
+            
+            <div class="week">
+                <div class="week-title">Week 7: Sway Customization</div>
+                <ul>
+                    <li>Configuration files explained</li>
+                    <li>Status bars (waybar)</li>
+                    <li>Application launchers (wofi)</li>
+                    <li>Color themes and aesthetics</li>
+                    <li><strong>Project:</strong> Build your cyberpunk desktop theme</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 4 -->
+        <div class="module">
+            <h2><span class="module-number">4</span> Programming with Clojure</h2>
+            <p><em>Weeks 8-10 • Functional Programming</em></p>
+            
+            <div class="week">
+                <div class="week-title">Week 8: Introduction to Clojure</div>
+                <ul>
+                    <li>What is functional programming?</li>
+                    <li>Installing Babashka</li>
+                    <li>REPL-driven development</li>
+                    <li>Basic data types and functions</li>
+                    <li><strong>Lab:</strong> Write your first Clojure script</li>
+                </ul>
+            </div>
+            
+            <div class="week">
+                <div class="week-title">Week 9: Data Structures & Logic</div>
+                <ul>
+                    <li>Lists, vectors, maps, sets</li>
+                    <li>Conditionals and loops</li>
+                    <li>Higher-order functions</li>
+                    <li>File I/O operations</li>
+                    <li><strong>Lab:</strong> Build a file organizer</li>
+                </ul>
+            </div>
+            
+            <div class="week">
+                <div class="week-title">Week 10: Automation Scripts</div>
+                <ul>
+                    <li>Shell integration</li>
+                    <li>Command-line arguments</li>
+                    <li>Building utilities</li>
+                    <li>Error handling</li>
+                    <li><strong>Project:</strong> Create a system configuration script</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 5 -->
+        <div class="module">
+            <h2><span class="module-number">5</span> Web Development</h2>
+            <p><em>Weeks 11-13 • Building Modern Websites</em></p>
+            
+            <div class="week">
+                <div class="week-title">Week 11: HTML, CSS, JavaScript Basics</div>
+                <ul>
+                    <li>Web fundamentals review</li>
+                    <li>Installing Node.js and npm</li>
+                    <li>Introduction to SvelteKit</li>
+                    <li>Component-based architecture</li>
+                    <li><strong>Lab:</strong> Build a personal homepage</li>
+                </ul>
+            </div>
+            
+            <div class="week">
+                <div class="week-title">Week 12: SvelteKit Deep Dive</div>
+                <ul>
+                    <li>Routing and navigation</li>
+                    <li>State management</li>
+                    <li>API integration</li>
+                    <li>Static site generation</li>
+                    <li><strong>Lab:</strong> Create a blog platform</li>
+                </ul>
+            </div>
+            
+            <div class="week">
+                <div class="week-title">Week 13: Deployment & Hosting</div>
+                <ul>
+                    <li>GitHub Pages setup</li>
+                    <li>Build pipelines</li>
+                    <li>Custom domains</li>
+                    <li>Performance optimization</li>
+                    <li><strong>Project:</strong> Deploy your magazine-style website</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 6 -->
+        <div class="module">
+            <h2><span class="module-number">6</span> Virtualization & OS Development</h2>
+            <p><em>Weeks 14-15 • Running Multiple Operating Systems</em></p>
+            
+            <div class="week">
+                <div class="week-title">Week 14: QEMU/KVM Fundamentals</div>
+                <ul>
+                    <li>What is virtualization?</li>
+                    <li>Installing QEMU and KVM</li>
+                    <li>Creating virtual machines</li>
+                    <li>Networking and storage</li>
+                    <li><strong>Lab:</strong> Run your first VM</li>
+                </ul>
+            </div>
+            
+            <div class="week">
+                <div class="week-title">Week 15: SixOS and Alternative Systems</div>
+                <ul>
+                    <li>What is NixOS?</li>
+                    <li>Introduction to SixOS (s6 supervision)</li>
+                    <li>Declarative system configuration</li>
+                    <li>Experimental OS development</li>
+                    <li><strong>Project:</strong> Set up a SixOS development VM</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 7 -->
+        <div class="module">
+            <h2><span class="module-number">7</span> Decentralized Systems</h2>
+            <p><em>Weeks 16-17 • Blockchain & Identity</em></p>
+            
+            <div class="week">
+                <div class="week-title">Week 16: Introduction to Urbit</div>
+                <ul>
+                    <li>What is decentralized identity?</li>
+                    <li>Urbit architecture overview</li>
+                    <li>Galaxies, stars, planets, moons</li>
+                    <li>Azimuth smart contracts</li>
+                    <li><strong>Lab:</strong> Explore Urbit documentation</li>
+                </ul>
+            </div>
+            
+            <div class="week">
+                <div class="week-title">Week 17: Internet Computer Protocol (ICP)</div>
+                <ul>
+                    <li>What is the Internet Computer?</li>
+                    <li>Installing DFX (DFINITY SDK)</li>
+                    <li>Writing smart contracts in Rust</li>
+                    <li>Deploying canisters</li>
+                    <li><strong>Project:</strong> Create a fake Urbit galaxy on ICP</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 8 -->
+        <div class="module">
+            <h2><span class="module-number">8</span> Final Project & Philosophy</h2>
+            <p><em>Week 18 • Bringing It All Together</em></p>
+            
+            <div class="week">
+                <div class="week-title">Week 18: Capstone Project</div>
+                <ul>
+                    <li>Design your personal sovereignty stack</li>
+                    <li>Integrate multiple technologies</li>
+                    <li>Document your journey</li>
+                    <li>Present to the class</li>
+                    <li><strong>Final Project:</strong> Build and deploy grainkae3g</li>
+                </ul>
+            </div>
+            
+            <div class="tip" style="margin-top: 20px;">
+                <strong>🎓 Final Project Options:</strong>
+                <ul style="margin-top: 10px; list-style: none;">
+                    <li>→ Personal website with custom Sway theme</li>
+                    <li>→ Automation toolkit in Babashka</li>
+                    <li>→ Decentralized identity system</li>
+                    <li>→ Cross-platform desktop application</li>
+                    <li>→ Your own creative sovereignty project!</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <section style="margin-top: 50px;">
+        <h2 style="color: var(--accent); margin-bottom: 20px;">🛠️ Technology Stack You'll Master</h2>
+        <div class="tech-stack">
+            <span class="tech-badge">Ubuntu 24.04 LTS</span>
+            <span class="tech-badge">Sway (Wayland)</span>
+            <span class="tech-badge">Git & GitHub</span>
+            <span class="tech-badge">Clojure (Babashka)</span>
+            <span class="tech-badge">SvelteKit</span>
+            <span class="tech-badge">QEMU/KVM</span>
+            <span class="tech-badge">Urbit</span>
+            <span class="tech-badge">Internet Computer (ICP)</span>
+            <span class="tech-badge">Rust</span>
+            <span class="tech-badge">s6 supervision</span>
+            <span class="tech-badge">GPG/SSH</span>
+            <span class="tech-badge">Package Managers</span>
+        </div>
+    </section>
+
+    <section style="margin-top: 50px;">
+        <h2 style="color: var(--accent); margin-bottom: 20px;">📚 Course Materials</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+            <a href="week01.html" class="btn">Week 1: Linux Installation →</a>
+            <a href="week02.html" class="btn">Week 2: Terminal Mastery →</a>
+            <a href="week03.html" class="btn">Week 3: System Config →</a>
+            <a href="week04.html" class="btn">Week 4: Git Basics →</a>
+            <a href="week05.html" class="btn">Week 5: Advanced Git →</a>
+            <a href="week06.html" class="btn">Week 6: Sway Desktop →</a>
+            <a href="week07.html" class="btn">Week 7: Customization →</a>
+            <a href="week08.html" class="btn">Week 8: Clojure Intro →</a>
+            <a href="week09.html" class="btn">Week 9: Data Structures →</a>
+            <a href="week10.html" class="btn">Week 10: Automation →</a>
+            <a href="week11.html" class="btn">Week 11: Web Basics →</a>
+            <a href="week12.html" class="btn">Week 12: SvelteKit →</a>
+            <a href="week13.html" class="btn">Week 13: Deployment →</a>
+            <a href="week14.html" class="btn">Week 14: Virtualization →</a>
+            <a href="week15.html" class="btn">Week 15: SixOS →</a>
+            <a href="week16.html" class="btn">Week 16: Urbit →</a>
+            <a href="week17.html" class="btn">Week 17: ICP →</a>
+            <a href="week18.html" class="btn">Week 18: Final Project →</a>
+        </div>
+    </section>
+
+    <section class="warning" style="margin-top: 50px;">
+        <h3 style="color: #ffa500; margin-bottom: 10px;">⚠️ Important Notes for Students</h3>
+        <ul style="list-style: none; padding-left: 20px;">
+            <li style="margin: 10px 0;">→ This is an intensive course - expect to spend 5-7 hours per week</li>
+            <li style="margin: 10px 0;">→ Back up your work frequently (you'll learn why in Week 4!)</li>
+            <li style="margin: 10px 0;">→ Don't be afraid to break things - that's how we learn</li>
+            <li style="margin: 10px 0;">→ Ask for help when stuck - the community is friendly</li>
+            <li style="margin: 10px 0;">→ Keep a learning journal - document your journey</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p><strong>grainkae3g</strong> • Personal Sovereignty Computing Course</p>
+        <p>Created by <a href="https://github.com/kae3g">kae3g</a> • 2025</p>
+        <p style="margin-top: 20px; font-size: 0.9em;">
+            "Our origin is not here" - A journey toward digital autonomy
+        </p>
+        <p style="margin-top: 20px;">
+            <a href="https://github.com/kae3g/grainkae3g">GitHub Repository</a> •
+            <a href="../PRESS-RELEASE-GRAINKAE3G.md">Press Release</a> •
+            <a href="../core/philosophy/PSEUDO.md">Philosophy</a>
+        </p>
+    </footer>
+</body>
+</html>
+
+

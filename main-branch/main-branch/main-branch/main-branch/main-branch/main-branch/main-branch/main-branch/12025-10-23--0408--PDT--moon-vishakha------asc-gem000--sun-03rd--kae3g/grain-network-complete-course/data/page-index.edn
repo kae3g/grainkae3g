@@ -1,0 +1,263 @@
+{:course-metadata
+ {:title "The Grain Network - Complete Sessions 811-812"
+  :grainpath "12025-10-23--0408--PDT--moon-vishakha------asc-gem000--sun-03rd--kae3g/grain-network-complete-course"
+  :session-start 811
+  :session-end 812
+  :total-pages 42
+  :format "graincard10"
+  :dimensions {:width 80 :height 110}
+  :philosophy "88 × 10^n >= 0 | -1, now == next + 1"}
+ 
+ :page-index
+ {;; Introduction and Philosophy (Pages 0000-0009)
+  0000 {:title "Title Page"
+        :colloquial ["start" "beginning" "intro" "first"]
+        :filepath "pages/0000-title.html"}
+  
+  0001 {:title "The 88 Counter Philosophy"
+        :colloquial ["88 counter" "philosophy" "math foundation"]
+        :filepath "pages/0001-88-counter-philosophy.html"}
+  
+  0002 {:title "Temporal Recursion - now == next + 1"
+        :colloquial ["temporal" "recursion" "now next" "time"]
+        :filepath "pages/0002-temporal-recursion.html"}
+  
+  0003 {:title "The Eternal Append-Only Log"
+        :colloquial ["append only" "log" "immutable" "history"]
+        :filepath "pages/0003-append-only-log.html"}
+  
+  0004 {:title "Chaos and Solidity"
+        :colloquial ["chaos" "solidity" "leaf rock" "flow"]
+        :filepath "pages/0004-chaos-solidity.html"}
+  
+  ;; Multi-Chain Architecture (Pages 0010-0019)
+  0010 {:title "Grainkae3gcontract Overview"
+        :colloquial ["contract" "canister" "overview" "intro"]
+        :filepath "pages/0010-grainkae3gcontract-overview.html"}
+  
+  0011 {:title "ICP - Internet Computer Protocol"
+        :colloquial ["icp" "internet computer" "dfinity"]
+        :filepath "pages/0011-icp-protocol.html"}
+  
+  0012 {:title "Hedera Hashgraph"
+        :colloquial ["hedera" "hashgraph" "hbar"]
+        :filepath "pages/0012-hedera-hashgraph.html"}
+  
+  0013 {:title "Solana and Phantom Wallets"
+        :colloquial ["solana" "phantom" "sol" "wallet"]
+        :filepath "pages/0013-solana-phantom.html"}
+  
+  0014 {:title "The {88} Address List"
+        :colloquial ["addresses" "88 list" "multi-chain"]
+        :filepath "pages/0014-88-address-list.html"}
+  
+  ;; Motoko Implementation (Pages 0020-0029)
+  0020 {:title "Motoko Language Introduction"
+        :colloquial ["motoko" "intro" "language"]
+        :filepath "pages/0020-motoko-intro.html"}
+  
+  0021 {:title "Actor Model Programming"
+        :colloquial ["actor" "model" "concurrency"]
+        :filepath "pages/0021-actor-model.html"}
+  
+  0022 {:title "Type Safety with Variants"
+        :colloquial ["types" "variants" "safety"]
+        :filepath "pages/0022-type-safety.html"}
+  
+  0023 {:title "Stable Storage and Upgrades"
+        :colloquial ["stable" "storage" "upgrade"]
+        :filepath "pages/0023-stable-storage.html"}
+  
+  0024 {:title "Motoko Complete Code"
+        :colloquial ["motoko code" "full implementation"]
+        :filepath "pages/0024-motoko-complete.html"}
+  
+  ;; Rust Implementation (Pages 0030-0039)
+  0030 {:title "Rust Security Audit"
+        :colloquial ["rust" "security" "audit"]
+        :filepath "pages/0030-rust-audit.html"}
+  
+  0031 {:title "Memory Safety without GC"
+        :colloquial ["memory" "ownership" "borrow"]
+        :filepath "pages/0031-memory-safety.html"}
+  
+  0032 {:title "Error Handling in Rust"
+        :colloquial ["error" "result" "option"]
+        :filepath "pages/0032-error-handling.html"}
+  
+  0033 {:title "Rust Complete Code"
+        :colloquial ["rust code" "full implementation"]
+        :filepath "pages/0033-rust-complete.html"}
+  
+  0034 {:title "Comparing Motoko and Rust"
+        :colloquial ["compare" "motoko vs rust" "comparison"]
+        :filepath "pages/0034-motoko-rust-comparison.html"}
+  
+  ;; Alpine and Multi-Distro (Pages 0040-0049)
+  0040 {:title "Alpine Linux Introduction"
+        :colloquial ["alpine" "intro" "musl"]
+        :filepath "pages/0040-alpine-intro.html"}
+  
+  0041 {:title "musl libc Benefits"
+        :colloquial ["musl" "libc" "static linking"]
+        :filepath "pages/0041-musl-benefits.html"}
+  
+  0042 {:title "apk Package Manager"
+        :colloquial ["apk" "package" "alpine packages"]
+        :filepath "pages/0042-apk-package-manager.html"}
+  
+  0043 {:title "Building Alpine Packages"
+        :colloquial ["build" "apkbuild" "abuild"]
+        :filepath "pages/0043-building-alpine.html"}
+  
+  0044 {:title "Leiningen for Multi-Distro"
+        :colloquial ["leiningen" "lein" "project.clj"]
+        :filepath "pages/0044-leiningen-multi-distro.html"}
+  
+  ;; NixOS QEMU Setup (Pages 0050-0059)
+  0050 {:title "NixOS in QEMU/KVM"
+        :colloquial ["nixos" "qemu" "kvm" "vm"]
+        :filepath "pages/0050-nixos-qemu.html"}
+  
+  0051 {:title "9p Virtfs - Cursor Workspace Access"
+        :colloquial ["9p" "virtfs" "cursor" "workspace"]
+        :filepath "pages/0051-9p-virtfs.html"}
+  
+  0052 {:title "VM Management Commands"
+        :colloquial ["virsh" "vm commands" "management"]
+        :filepath "pages/0052-vm-management.html"}
+  
+  0053 {:title "Development Workflow"
+        :colloquial ["workflow" "edit test deploy"]
+        :filepath "pages/0053-development-workflow.html"}
+  
+  0054 {:title "NixOS Configuration"
+        :colloquial ["nixos config" "configuration.nix"]
+        :filepath "pages/0054-nixos-config.html"}
+  
+  ;; Graintranscribe YouTube (Pages 0060-0069)
+  0060 {:title "Graintranscribe-YouTube Overview"
+        :colloquial ["transcribe" "youtube" "gemini"]
+        :filepath "pages/0060-graintranscribe-overview.html"}
+  
+  0061 {:title "The Infuse Pattern"
+        :colloquial ["infuse" "sixos" "config merge"]
+        :filepath "pages/0061-infuse-pattern.html"}
+  
+  0062 {:title "Gemini 2.5 Pro API"
+        :colloquial ["gemini" "api" "google ai"]
+        :filepath "pages/0062-gemini-api.html"}
+  
+  0063 {:title "Template Personal Separation"
+        :colloquial ["template" "personal" "separation"]
+        :filepath "pages/0063-template-personal.html"}
+  
+  ;; Advanced Topics (Pages 0070-0099)
+  0070 {:title "The 88 Sheaves Network"
+        :colloquial ["sheaves" "network" "topology"]
+        :filepath "pages/0070-88-sheaves-network.html"}
+  
+  0071 {:title "Kae3g Sheaf - 1-of-88"
+        :colloquial ["kae3g" "genesis" "first sheaf"]
+        :filepath "pages/0071-kae3g-sheaf.html"}
+  
+  0072 {:title "Grainpath and Graintime"
+        :colloquial ["grainpath" "graintime" "timestamps"]
+        :filepath "pages/0072-grainpath-graintime.html"}
+  
+  0073 {:title "Predictive History Framework"
+        :colloquial ["predictive history" "cycles" "patterns"]
+        :filepath "pages/0073-predictive-history.html"}
+  
+  0074 {:title "Fractal Scaling"
+        :colloquial ["fractal" "scaling" "10^n"]
+        :filepath "pages/0074-fractal-scaling.html"}
+  
+  ;; Practical Implementation (Pages 0080-0089)
+  0080 {:title "Setting Up Your Environment"
+        :colloquial ["setup" "environment" "install"]
+        :filepath "pages/0080-setup-environment.html"}
+  
+  0081 {:title "Installing QEMU/KVM"
+        :colloquial ["install qemu" "kvm setup"]
+        :filepath "pages/0081-install-qemu.html"}
+  
+  0082 {:title "Creating NixOS VM"
+        :colloquial ["create vm" "nixos vm"]
+        :filepath "pages/0082-create-nixos-vm.html"}
+  
+  0083 {:title "Mounting Cursor Workspace"
+        :colloquial ["mount workspace" "9p mount"]
+        :filepath "pages/0083-mount-workspace.html"}
+  
+  0084 {:title "Building for Alpine"
+        :colloquial ["build alpine" "lein alpine"]
+        :filepath "pages/0084-build-alpine.html"}
+  
+  ;; Conclusion (Pages 0090-0099)
+  0090 {:title "The Complete Session 811-812 Journey"
+        :colloquial ["journey" "summary" "complete"]
+        :filepath "pages/0090-complete-journey.html"}
+  
+  0091 {:title "Next Steps - Session 813"
+        :colloquial ["next" "future" "813"]
+        :filepath "pages/0091-next-steps.html"}
+  
+  0099 {:title "Index and Navigation"
+        :colloquial ["index" "nav" "contents"]
+        :filepath "pages/0099-index.html"}}
+ 
+ :title-to-page
+ {"The 88 Counter Philosophy" 1
+  "Temporal Recursion" 2
+  "Append-Only Log" 3
+  "Chaos and Solidity" 4
+  "Grainkae3gcontract Overview" 10
+  "ICP Protocol" 11
+  "Hedera Hashgraph" 12
+  "Solana Phantom" 13
+  "88 Address List" 14
+  "Motoko Introduction" 20
+  "Actor Model" 21
+  "Type Safety" 22
+  "Stable Storage" 23
+  "Motoko Code" 24
+  "Rust Audit" 30
+  "Memory Safety" 31
+  "Error Handling" 32
+  "Rust Code" 33
+  "Motoko vs Rust" 34
+  "Alpine Linux" 40
+  "musl libc" 41
+  "apk Manager" 42
+  "Building Alpine" 43
+  "Leiningen" 44
+  "NixOS QEMU" 50
+  "9p Virtfs" 51
+  "VM Management" 52
+  "Workflow" 53
+  "NixOS Config" 54
+  "Graintranscribe YouTube" 60
+  "Infuse Pattern" 61
+  "Gemini API" 62
+  "Template Personal" 63
+  "88 Sheaves Network" 70
+  "Kae3g Genesis" 71
+  "Grainpath Graintime" 72
+  "Predictive History" 73
+  "Fractal Scaling" 74
+  "Setup Environment" 80
+  "Install QEMU" 81
+  "Create NixOS VM" 82
+  "Mount Workspace" 83
+  "Build Alpine" 84
+  "Complete Journey" 90
+  "Next Steps" 91
+  "Index" 99}}
+
+;; Graincard10 Multi-Page Course Index
+;; 80 characters wide × 110 lines per page
+;; Pages numbered 0000-9999 for massive content capacity
+;; Colloquial title lookup via Clojure keymap
+;; Svelte navigation links between pages
+;; Session 811-812 complete content

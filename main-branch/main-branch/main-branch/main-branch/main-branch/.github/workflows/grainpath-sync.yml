@@ -49,16 +49,24 @@ jobs:
             git commit -m "Sync grainpath branch: ${{ github.ref_name }}"
             git push origin main
             echo "✅ Synced grainpath branch to main"
+            echo "📝 Note: Default branch update requires admin permissions"
+            echo "   Manually set default branch to: ${{ github.ref_name }}"
           fi
       
-      - name: Update default branch
+      - name: Update GitHub repository description
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # Update default branch to current grainpath branch
+          # Extract grainpath from branch name
+          GRAINPATH="${{ github.ref_name }}"
+          GRAINSITE_URL="https://kae3g.github.io/grainkae3g/$GRAINPATH/"
+          
+          # Update repository description with grainsite URL
           gh api repos/${{ github.repository }} --method PATCH \
-            --field default_branch=${{ github.ref_name }}
-          echo "✅ Updated default branch to ${{ github.ref_name }}"
+            --field description="🌾 Grain Network: $GRAINPATH | Live Site: $GRAINSITE_URL | Session 780 Complete"
+          
+          echo "✅ Updated GitHub repository description"
+          echo "🌐 Grainsite URL: $GRAINSITE_URL"
 
   deploy-github-pages:
     runs-on: ubuntu-latest
