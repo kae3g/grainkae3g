@@ -1,0 +1,123 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 4,
+    "css": "/home/xy/kae3g/12025-10/configs/waybar/style.css",
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["custom/wl-gammarelay-temperature", "custom/wl-gammarelay-brightness", "pulseaudio", "network", "cpu", "memory", "temperature", "battery", "clock", "tray"],
+    
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}: {icon}",
+        "format-icons": {
+            "1": "󰈹",
+            "2": "󰈹",
+            "3": "󰈹",
+            "4": "󰈹",
+            "5": "󰈹",
+            "6": "󰈹",
+            "7": "󰈹",
+            "8": "󰈹",
+            "9": "󰈹",
+            "10": "󰈹",
+            "urgent": "󰈹",
+            "focused": "󰈹",
+            "default": "󰈹"
+        }
+    },
+    
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    
+    "sway/window": {
+        "format": "{}",
+        "max-length": 50
+    },
+    
+    "custom/wl-gammarelay-temperature": {
+        "format": "{} 󰌵",
+        "exec": "wl-gammarelay --subscribe Temperature",
+        "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100",
+        "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100",
+        "interval": 1
+    },
+    
+    "custom/wl-gammarelay-brightness": {
+        "format": "{} 󰃠",
+        "exec": "wl-gammarelay --subscribe Brightness",
+        "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d +0.02",
+        "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d -0.02",
+        "interval": 1
+    },
+    
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 Muted",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋋",
+            "headset": "󰋋",
+            "phone": "󰄜",
+            "portable": "󰦧",
+            "car": "󰄋",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pavucontrol"
+    },
+    
+    "network": {
+        "format-wifi": "󰤨 {signalStrength}%",
+        "format-ethernet": "󰈀 {ipaddr}/{cidr}",
+        "format-linked": "󰈀 {ifname} (No IP)",
+        "format-disconnected": "󰤭 Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    
+    "cpu": {
+        "format": "󰻠 {usage}%",
+        "interval": 5
+    },
+    
+    "memory": {
+        "format": "󰍛 {percentage}%",
+        "interval": 5
+    },
+    
+    "temperature": {
+        "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "format": "󰔏 {temperatureC}°C",
+        "format-icons": ["󰔏", "󰔏", "󰔏"],
+        "critical-threshold": 80
+    },
+    
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰂄 {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    
+    "clock": {
+        "format": "󰥔 {:%Y-%m-%d %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    
+    "tray": {
+        "spacing": 10
+    }
+}
+
+
+
+
+

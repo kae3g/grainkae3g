@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 0004 - Alpine Linux Priority | Grain Network Course</title>
+    <link rel="stylesheet" href="../styles/graincard10.css">
+</head>
+<body>
+    <div class="graincard10">
+        <header class="page-header">
+            <div class="page-number">0004</div>
+            <h1 class="page-title">Alpine Linux Priority</h1>
+            <div class="grainpath">12025-10-23--0408--PDT--moon-vishakha------asc-gem000--sun-02nd--kae3g</div>
+        </header>
+
+        <main class="page-content">
+            <section class="philosophy-block">
+                <h2>🏔️ Small Footprint, Big Impact</h2>
+                <p>
+                    Alpine Linux embodies the Grain Network philosophy: minimal,
+                    purposeful, efficient. Like a grain of rice - small but complete,
+                    simple but powerful.
+                </p>
+            </section>
+
+            <section class="tech-spec">
+                <h3>Why Alpine Linux?</h3>
+                
+                <div class="reason-block">
+                    <h4>1. musl libc - Clean & Secure</h4>
+                    <p>
+                        Unlike glibc, musl is designed for correctness and simplicity.
+                        Smaller attack surface, cleaner code, better portability.
+                    </p>
+                    <div class="code-block">
+                        <pre><code># musl-based static binary
+ldd /bin/grain6
+    statically linked
+
+# Maximum portability achieved
+                        </code></pre>
+                    </div>
+                </div>
+
+                <div class="reason-block">
+                    <h4>2. apk - Alpine Package Keeper</h4>
+                    <p>
+                        Fast, efficient, no-nonsense package management. Install grain6
+                        with a single command, minimal dependencies.
+                    </p>
+                    <div class="code-block">
+                        <pre><code># Install grain6 on Alpine
+apk add grain6
+
+# That's it. No apt-get update.
+# No yum whatchanged. Just works.
+                        </code></pre>
+                    </div>
+                </div>
+
+                <div class="reason-block">
+                    <h4>3. Small Base Image (~5MB)</h4>
+                    <p>
+                        Docker containers start lean. Perfect for microservices,
+                        IoT devices, embedded systems. 88 containers fit where
+                        1 Ubuntu would bloat.
+                    </p>
+                    <div class="code-block">
+                        <pre><code>FROM alpine:latest
+RUN apk add --no-cache grain6
+CMD ["grain6", "serve"]
+
+# Total image: ~15MB
+# Ubuntu equivalent: ~200MB
+                        </code></pre>
+                    </div>
+                </div>
+
+                <div class="reason-block">
+                    <h4>4. Security-First Design</h4>
+                    <p>
+                        Position Independent Executables (PIE) by default.
+                        Stack-smashing protection. Regular security updates.
+                        Built for hostile environments.
+                    </p>
+                </div>
+            </section>
+
+            <section class="comparison-block">
+                <h3>Multi-Distro Strategy</h3>
+                
+                <table class="distro-table">
+                    <tr>
+                        <th>Priority</th>
+                        <th>Distribution</th>
+                        <th>Primary Use Case</th>
+                    </tr>
+                    <tr>
+                        <td>1️⃣</td>
+                        <td><strong>Alpine Linux</strong></td>
+                        <td>Production, containers, embedded</td>
+                    </tr>
+                    <tr>
+                        <td>2️⃣</td>
+                        <td>NixOS</td>
+                        <td>Reproducible builds, dev environments</td>
+                    </tr>
+                    <tr>
+                        <td>3️⃣</td>
+                        <td>Ubuntu 24.04 LTS</td>
+                        <td>Desktop development, Framework 16</td>
+                    </tr>
+                    <tr>
+                        <td>4️⃣</td>
+                        <td>Debian</td>
+                        <td>Conservative deployments</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="application-block">
+                <h3>Alpine in the Grain Network</h3>
+                
+                <p><strong>grain6:</strong> Process supervision system</p>
+                <ul>
+                    <li>Ships as .apk package first</li>
+                    <li>Statically linked musl binary</li>
+                    <li>Runs in 5MB container</li>
+                </ul>
+
+                <p><strong>grainbox canister:</strong> ICP deployment</p>
+                <ul>
+                    <li>Build environment: Alpine Docker</li>
+                    <li>Minimal dependencies, faster builds</li>
+                    <li>Reproducible with Nix overlays</li>
+                </ul>
+
+                <p><strong>grainphone:</strong> Mobile backend services</p>
+                <ul>
+                    <li>Alpine-based API servers</li>
+                    <li>Efficient resource usage on cloud</li>
+                    <li>Lower hosting costs = more sustainability</li>
+                </ul>
+            </section>
+
+            <section class="wisdom-block">
+                <h3>🌸 Basho on Simplicity</h3>
+                <blockquote>
+                    "In the cicada's cry<br>
+                    No sign can foretell<br>
+                    How soon it must die."
+                </blockquote>
+                <p>
+                    Simple systems are resilient. Complexity is fragility.
+                    Alpine teaches us: do less, do it better, live longer.
+                </p>
+            </section>
+        </main>
+
+        <footer class="page-footer">
+            <nav class="page-navigation">
+                <a href="0003-graincard10-format.html" class="nav-prev">← 0003</a>
+                <a href="../index.html" class="nav-index">Index</a>
+                <a href="0005-leiningen-integration.html" class="nav-next">0005 →</a>
+            </nav>
+            <div class="page-meta">
+                now == next + 1 | 🌾 Grain Network | Page 0004 of 9999
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+

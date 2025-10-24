@@ -1,0 +1,21 @@
+{
+  "username" : "kae3g",
+  "language" : "en",
+  "title" : "Coldriver Tundra",
+  "description" : "Experimental aspiringly helpful generative AI writings",
+  "repository" : {
+    "primary" : {
+      "platform" : "codeberg",
+      "username" : "kae3g",
+      "repo-name" : "12025-10",
+      "branch" : "tundra"
+    },
+    "mirrors" : [ {
+      "platform" : "github",
+      "username" : "kae3g",
+      "repo-name" : "12025-10",
+      "branch" : "tundra"
+    } ]
+  },
+  "plannedLanguages" : [ "es", "de" ]
+}

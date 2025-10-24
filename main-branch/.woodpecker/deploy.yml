@@ -1,0 +1,19 @@
+# Woodpecker CI configuration for Codeberg
+# Build verification only - use 'bb deploy:full' for deployment
+
+steps:
+  build:
+    image: node:20-bookworm-slim
+    commands:
+      - echo "🔧 Verifying SvelteKit build with existing content..."
+      - cd web-app
+      - npm ci
+      - echo "🔧 Running SvelteKit build..."
+      - npm run build
+      - echo "✅ Build verification complete!"
+      - echo "📊 Build output:"
+      - ls -la build/
+      - echo "📊 Content files:"
+      - ls -la static/content/ | head -10
+      - echo ""
+      - echo "ℹ️  To deploy run bb deploy:full locally"

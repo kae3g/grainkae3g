@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grain Network Complete Course | Graincard10 Multi-Page</title>
+    <style>
+        :root { --fg: #b4c5b0; --bg: #1a1410; --accent: #88b879; --code-bg: #242018; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Courier New', monospace; background: var(--bg); color: var(--fg); padding: 40px; text-align: center; }
+        h1 { color: var(--accent); font-size: 2.5em; margin-bottom: 20px; }
+        .message { font-size: 1.2em; margin: 20px 0; }
+        .loading { opacity: 0.7; font-style: italic; }
+    </style>
+</head>
+<body>
+    <h1>🌾 Grain Network Complete Course</h1>
+    <p class="message loading">Loading page router...</p>
+    <p id="debug" style="font-size: 0.9em; opacity: 0.5; margin-top: 20px;"></p>
+
+    <script>
+        // Client-side router for GitHub Pages
+        // Handles: ?page=0001, ?page=88-counter, #0001, direct /0001
+        
+        const pageIndex = {
+            "0000": "pages/0000-title.html",
+            "0001": "pages/0001-88-counter-philosophy.html",
+            "0002": "pages/0002-temporal-recursion.html",
+            "0099": "pages/0099-index.html",
+            
+            // Colloquial title mappings
+            "title": "pages/0000-title.html",
+            "88-counter": "pages/0001-88-counter-philosophy.html",
+            "philosophy": "pages/0001-88-counter-philosophy.html",
+            "temporal": "pages/0002-temporal-recursion.html",
+            "recursion": "pages/0002-temporal-recursion.html",
+            "now-next": "pages/0002-temporal-recursion.html",
+            "index": "pages/0099-index.html"
+        };
+        
+        function getPageFromURL() {
+            // Check URL parameters: ?page=0001
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('page')) {
+                return params.get('page');
+            }
+            
+            // Check hash: #0001
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                return hash;
+            }
+            
+            // Check pathname: /course/0001
+            const path = window.location.pathname;
+            const match = path.match(/\/(\d{4}|[\w-]+)$/);
+            if (match) {
+                return match[1];
+            }
+            
+            return null;
+        }
+        
+        function resolvePage(pageRef) {
+            // Try direct lookup
+            if (pageIndex[pageRef]) {
+                return pageIndex[pageRef];
+            }
+            
+            // Try lowercase
+            const lower = pageRef.toLowerCase();
+            if (pageIndex[lower]) {
+                return pageIndex[lower];
+            }
+            
+            // Default to title page
+            return pageIndex["0000"];
+        }
+        
+        // Get page reference from URL
+        const pageRef = getPageFromURL();
+        document.getElementById('debug').textContent = `Page ref: ${pageRef || 'none (defaulting to title)'}`;
+        
+        // Resolve to actual file
+        const targetPage = resolvePage(pageRef || "0000");
+        
+        // Redirect to the page
+        window.location.href = targetPage;
+    </script>
+</body>
+</html>
