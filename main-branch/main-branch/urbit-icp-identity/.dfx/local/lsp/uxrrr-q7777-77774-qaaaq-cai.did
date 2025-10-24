@@ -1,0 +1,47 @@
+// Candid interface for Urbit Identity Canister
+type IdentityType = variant { Galaxy; Star; Planet; Moon };
+type IdentityStatus = variant { Active; Suspended; Revoked; Pending };
+
+type IdentityMetadata = record {
+  name: text;
+  description: text;
+  avatar: opt text;
+  website: opt text;
+};
+
+type UrbitIdentity = record {
+  address: nat64;
+  parent: opt nat64;
+  children: vec nat64;
+  identity_type: IdentityType;
+  metadata: IdentityMetadata;
+  created_at: nat64;
+  updated_at: nat64;
+  status: IdentityStatus;
+};
+
+type CreateIdentityArgs = record {
+  name: text;
+  description: text;
+  identity_type: IdentityType;
+};
+
+service : {
+  // Identity management
+  create_identity: (CreateIdentityArgs) -> (variant { Ok: nat64; Err: text });
+  get_identity: (nat64) -> (variant { Ok: UrbitIdentity; Err: text });
+  update_identity: (nat64, UrbitIdentity) -> (variant { Ok; Err: text });
+  delete_identity: (nat64) -> (variant { Ok; Err: text });
+  
+  // Address space management
+  allocate_address: (IdentityType) -> (variant { Ok: nat64; Err: text });
+  get_address_info: (nat64) -> (variant { Ok: text; Err: text });
+  
+  // Metadata management
+  update_metadata: (nat64, IdentityMetadata) -> (variant { Ok; Err: text });
+  get_metadata: (nat64) -> (variant { Ok: IdentityMetadata; Err: text });
+  
+  // System functions
+  get_stats: () -> (record { total_identities: nat64; active_identities: nat64 });
+  get_logs: () -> (vec text);
+}

@@ -1,0 +1,314 @@
+# Sway Configuration for Framework 16
+# Optimized for Kaden's personal sovereignty stack
+
+# Variables
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term foot
+set $menu wofi --show drun --width 600 --height 400 --location top
+
+# Font configuration for high-res display
+font "DejaVu Sans Mono 20"
+font "Noto Color Emoji 20"
+
+# Input configuration
+input type:keyboard {
+    xkb_layout us
+    xkb_variant basic
+    xkb_options ctrl:nocaps
+}
+
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
+
+# Output configuration for Framework 16
+output eDP-2 {
+    resolution 2560x1600@165Hz
+    scale 1
+    scale_filter nearest
+    position 0,0
+}
+
+# Background
+exec swaybg -i /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png
+
+# Display warmth (gammastep)
+exec gammastep -O 2000
+
+# Disable default bar
+bar {
+    id "bar-0"
+    mode hide
+}
+
+# Custom red status bar
+bar {
+    id "main-bar"
+    position top
+    height 30
+    
+    # Workspace colors
+    colors {
+        statusline #e5e5e5
+        background #000000
+        focused_workspace #ff0000 #ff0000 #e5e5e5
+        active_workspace #333333 #333333 #e5e5e5
+        inactive_workspace #000000 #000000 #666666
+        urgent_workspace #ff6b6b #ff6b6b #e5e5e5
+    }
+    
+    # Workspace format
+    status_command while date +'%Y-%m-%d %H:%M:%S'; do sleep 1; done
+}
+
+# Display mode keybindings
+bindsym $mod+Control+r exec bb /home/xy/kae3g/12025-10/scripts/display-config.bb red-green-mode
+bindsym $mod+Control+c exec bb /home/xy/kae3g/12025-10/scripts/display-config.bb cyberpunk-mode
+bindsym $mod+Control+m exec bb /home/xy/kae3g/12025-10/scripts/display-config.bb monochrome-mode
+bindsym $mod+Control+n exec bb /home/xy/kae3g/12025-10/scripts/display-config.bb normal-colors
+
+# Night Light keybindings
+bindsym $mod+Control+Minus exec bb /home/xy/kae3g/12025-10/scripts/display-config.bb night-light 2000
+bindsym $mod+Control+Equal exec bb /home/xy/kae3g/12025-10/scripts/display-config.bb night-light 2500
+bindsym $mod+Control+0 exec bb /home/xy/kae3g/12025-10/scripts/display-config.bb disable-night-light
+
+# Basic keybindings
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec $menu
+bindsym $mod+Shift+d exec wofi --show drun --width 600 --height 400 --location top
+bindsym $mod+Alt+d exec dmenu_run
+
+# Cursor IDE shortcuts
+bindsym $mod+Shift+c exec /home/xy/Applications/Cursor-1.7.54-x86_64.AppImage --no-sandbox
+bindsym $mod+Alt+c exec /home/xy/Applications/Cursor-1.7.54-x86_64.AppImage --no-sandbox --new-window
+
+# Screenshot shortcuts
+bindsym $mod+Control+3 exec /home/xy/kae3g/12025-10/scripts/screenshot.sh full
+bindsym $mod+Control+4 exec /home/xy/kae3g/12025-10/scripts/screenshot.sh area
+bindsym $mod+Control+5 exec /home/xy/kae3g/12025-10/scripts/screenshot.sh window
+
+# Window management
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Workspace management
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# Quick workspace switching (for two-workspace workflow)
+bindsym $mod+Alt+Left workspace prev
+bindsym $mod+Alt+Right workspace next
+bindsym $mod+Alt+Up workspace next
+bindsym $mod+Alt+Down workspace prev
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# Layout management
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+
+# Window maximization and floating
+bindsym $mod+m floating toggle, resize set 100 ppt 100 ppt, move position center
+bindsym $mod+Shift+m floating disable
+bindsym $mod+Shift+f floating toggle
+bindsym $mod+Alt+f floating toggle, resize set 80 ppt 80 ppt, move position center
+
+# Maximize floating windows
+bindsym $mod+Shift+equal floating enable, resize set 100 ppt 100 ppt, move position center
+bindsym $mod+Control+Shift+m floating enable, resize set 100 ppt 100 ppt, move position center
+
+# macOS-like window switching (IDE-friendly)
+bindsym $mod+Alt+Tab focus next
+bindsym $mod+Alt+Shift+Tab focus prev
+bindsym $mod+grave focus next_sibling
+bindsym $mod+Shift+grave focus prev_sibling
+bindsym $mod+Alt+grave focus next_sibling
+bindsym $mod+Alt+Shift+grave focus prev_sibling
+
+# Alternative IDE-friendly window switching
+bindsym $mod+Control+Tab focus next
+bindsym $mod+Control+Shift+Tab focus prev
+bindsym $mod+Control+grave focus next_sibling
+bindsym $mod+Control+Shift+grave focus prev_sibling
+
+# Maximized window switching (for floating maximized windows)
+bindsym $mod+Tab focus next
+bindsym $mod+Shift+Tab focus prev
+bindsym $mod+BackSpace focus next
+bindsym $mod+Shift+BackSpace focus prev
+
+# Cycle through floating windows only
+bindsym $mod+Alt+BackSpace exec swaymsg '[floating]' focus next
+bindsym $mod+Control+BackSpace exec swaymsg '[floating]' focus prev
+
+# Window focus
+bindsym $mod+space focus mode_toggle
+bindsym $mod+bracketleft focus parent
+bindsym $mod+bracketright focus child
+
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# Resizing
+bindsym $mod+r mode "resize"
+
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# System management
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit Sway?' -b 'Yes, exit' 'swaymsg exit'
+bindsym $mod+Shift+r reload
+
+# Media keys
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Brightness control
+bindsym XF86MonBrightnessUp exec brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+
+# Window rules - completely remove all borders
+default_border pixel 0
+default_floating_border pixel 0
+for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] titlebar_border_thickness 0
+
+# Specific rules for Brave Browser
+for_window [class="Brave-browser"] border pixel 0
+for_window [class="Brave-browser"] titlebar_border_thickness 0
+
+# Floating windows (macOS-style)
+for_window [class="pavucontrol"] floating enable
+for_window [class="blueman-manager"] floating enable
+for_window [class="nm-connection-editor"] floating enable
+for_window [class="file_progress"] floating enable
+for_window [class="file_progress"] resize set 500 100
+for_window [title="file_progress"] floating enable
+for_window [title="file_progress"] resize set 500 100
+
+# Make specific apps float by default (macOS-style) - DISABLED for workspace workflow
+# for_window [class="Brave-browser"] floating enable
+# for_window [class="Cursor"] floating enable
+# for_window [class="Code"] floating enable
+
+# Gaps
+gaps inner 10
+gaps outer 5
+smart_gaps on
+
+# Colors (retro terminal theme)
+set $bg #1e1e1e
+set $fg #d4d4d4
+set $black #000000
+set $red #cd3131
+set $green #0dbc79
+set $yellow #e5e510
+set $blue #2472c8
+set $magenta #bc3fbc
+set $cyan #11a8cd
+set $white #e5e5e5
+
+# Client colors - completely transparent borders
+client.focused #000000 #000000 #ffffff
+client.focused_inactive #000000 #000000 #666666
+client.unfocused #000000 #000000 #444444
+client.urgent #ff0000 #ff0000 #ffffff
+client.placeholder #000000 #000000 #666666
+client.background $bg
+
+# Bar colors - removed duplicate configuration
+
+# Focus follows mouse
+focus_follows_mouse yes
+
+# Mouse warping
+mouse_warping container
+
+# Hide cursor
+seat seat0 hide_cursor 3000
+
+# XWayland
+xwayland enable
+
+# Default workspace layout
+workspace 1 output eDP-1
+workspace 2 output eDP-1
+workspace 3 output eDP-1
+workspace 4 output eDP-1
+workspace 5 output eDP-1
+
+# Startup applications
+exec_always {
+    # Start wl-gammarelay for display control
+    wl-gammarelay
+    # Set initial display mode
+    bb /home/xy/kae3g/12025-10/scripts/display-config.bb red-green-mode
+}
+
+# Logout (already defined above)
+
+
+
+
+
+
+include framework16-keys

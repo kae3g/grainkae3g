@@ -1,0 +1,12 @@
+[submodule "grainstore/vendor/s6"]
+	path = grainstore/vendor/s6
+	url = https://github.com/skarnet/s6.git
+[submodule "grainstore/vendor/musl"]
+	path = grainstore/vendor/musl
+	url = https://github.com/bminor/musl.git
+[submodule "grainstore/vendor/wayland"]
+	path = grainstore/vendor/wayland
+	url = https://gitlab.freedesktop.org/wayland/wayland.git
+[submodule "vms/sixos"]
+	path = vms/sixos
+	url = https://codeberg.org/amjoseph/sixos.git

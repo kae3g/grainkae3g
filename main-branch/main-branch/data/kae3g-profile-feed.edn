@@ -1,0 +1,318 @@
+{:profile
+ {:identity
+  {:username "kae3g"
+   :display-name "kae3g"
+   :bio "Building the Grain Network - personal sovereignty through open-source hardware and software"
+   :avatar-url "https://github.com/kae3g.png"
+   :verified true
+   :grain-galaxy true
+   :admin true}
+
+  :status "Building personal sovereignty stack"
+  :location "Digital Frontier"
+  :website "https://kae3g.github.io/grainkae3g"
+  :joined "January 2025"
+  :last-active "2025-01-22T10:28:09Z"}
+
+ :posts
+ [{:id "origin-philosophy"
+   :type :philosophy
+   :title "Our Origin Is Not Here"
+   :content "This phrase resonates deeply with the journey of building a personal sovereignty stack. It speaks to a sense of displacement from conventional systems and a yearning for a more authentic, self-determined digital existence.
+
+It implies:
+- A rejection of centralized control: Our digital 'origin' is not in the hands of corporations or monolithic platforms
+- A search for true roots: We are seeking a foundation that aligns with our values, perhaps in decentralized networks, open-source principles, or self-hosted infrastructure
+- A philosophical stance: Our true potential, our 'origin,' lies beyond the current limitations and compromises of the mainstream tech landscape
+
+This serves as a reminder of the core motivation: to forge a new path, to build a system where our digital selves are truly our own, and where our 'origin' is defined by our own choices and creations, not by external forces."
+   :timestamp "2025-01-01T00:00:00Z"
+   :tags ["philosophy" "sovereignty" "decentralization" "open-source"]
+   :likes 42
+   :reposts 8
+   :replies 12}
+
+ {:id "grainsource-announcement"
+   :type :announcement
+   :title "Introducing Grainsource - Our Git Abstraction"
+   :content "Perfect name for our Git abstraction! Why 'Grainsource' is better than all alternatives:
+
+- Source - Direct reference to source code/version control
+- Grain + Source - 'Source of grains' = repository of atomic commits
+- Open Source - Perfect alignment with our open-source philosophy
+- Single source of truth - Each grainsource is the authoritative version
+
+Command Structure:
+```bash
+grainsource init          # Initialize new repository
+grainsource harvest       # Clone/download repository
+grainsource plant         # Commit changes
+grainsource share         # Push to remote
+grainsource gather        # Pull from remote
+grainsource sync          # Bidirectional sync (like Urbit sync)
+```
+
+Technical Architecture:
+- Backend: Git-compatible core (libgit2 bindings via Clojure)
+- Frontend: Clojure Humble UI desktop app
+- Sync: Works with GitHub, Codeberg, self-hosted Git
+- Extensions: ICP canister storage, Urbit sync integration, Solana commit signatures
+- s6 Integration: clojure-s6 daemon for background sync
+- SixOS Native: First-class citizen on SixOS
+
+This is it. Grainsource = our Git."
+   :timestamp "2025-01-15T00:00:00Z"
+   :tags ["announcement" "grainsource" "git" "clojure" "open-source"]
+   :likes 67
+   :reposts 23
+   :replies 18}
+
+ {:id "grain-hardware-ecosystem"
+   :type :product-announcement
+   :title "Grain Hardware Ecosystem - Complete Open-Source Platform"
+   :content "Complete open-source hardware platform for personal sovereignty:
+
+Devices:
+- Graincamera - Open-hardware mirrorless camera with native AVIF support, RISC-V processor, Fujifilm X-mount, Nostr + ICP integration ($799)
+- Grainwriter - E-ink writing device with 64GB RAM-only storage, infinite battery life, IP68 waterproof, MIL-STD-810H rugged, SixOS + Clojure ($1,099-$1,699)
+- Grainpack - External GPU attachment for Grainwriter with refurbished AMD GPUs, IP68 waterproof, hot-swappable USB-C connection ($1,199-$1,699)
+
+Agentic Pipeline:
+- Self-hosted AI development with Void/Zed editors
+- Open-source models: Qwen3, Gemini, Llama, GPT-OS
+- GPU-accelerated via Grainpack
+- Complete privacy - code never leaves your infrastructure
+
+Design Principles:
+- Radical repairability (screws-only, no glue)
+- User upgradeability (RAM, batteries, GPU)
+- Open firmware (Coreboot + SixOS)
+- Sustainable materials (refurbished, recyclable)
+- Lifetime design (10+ year lifespan)
+- Privacy first (no telemetry, no cloud lock-in)
+
+Status: Design phase complete ✅ | Prototype phase next (2025 Q2) | Production planned (2025 Q4)"
+   :timestamp "2025-01-22T00:00:00Z"
+   :tags ["hardware" "open-source" "grainwriter" "graincamera" "grainpack" "privacy"]
+   :likes 89
+   :reposts 34
+   :replies 27}
+
+ {:id "ipod-touch-inspiration"
+   :type :personal-note
+   :title "iPod Touch - Steve Jobs' Best Invention"
+   :content "The iPod Touch was Steve Jobs' best invention - a perfect balance of simplicity, functionality, and user experience. It demonstrated how a device could be both powerful and intuitive, offline-capable yet syncable, and completely focused on its core purpose without unnecessary complexity.
+
+Inspiration for Grainwriter: The iPod Touch's philosophy of 'sync when connected, work when offline' is exactly what we're building with the Grainwriter - a device that works perfectly in isolation but syncs beautifully when you want to share your work.
+
+Key Principles:
+- Offline-first design
+- Simple, focused interface
+- Manual sync when needed
+- No unnecessary connectivity
+- Perfect for its intended purpose"
+   :timestamp "2025-01-10T00:00:00Z"
+   :tags ["personal" "ipod-touch" "grainwriter" "design-philosophy"]
+   :likes 23
+   :reposts 5
+   :replies 8}
+
+ {:id "clojure-icp-library"
+   :type :technical-update
+   :title "clojure-icp (clojure-dfinity) - Comprehensive ICP Integration"
+   :content "Comprehensive Clojure library for Internet Computer Protocol (ICP) integration.
+
+Purpose:
+- Low-level IC agent for canister communication
+- Candid type system encode/decode
+- Identity and principal management
+- High-level canister client abstractions
+- Chain Fusion multi-chain integration
+- Subnet management and queries
+
+Integration:
+- Grainspace - Identity management
+- Graincamera - Photo storage in ICP canisters
+- Grainwriter - Document sync to ICP storage
+- Grainpack - GPU compute on ICP subnets
+- clojure-photos - Uses clojure-icp for photo storage
+
+Key Features:
+- IC Agent Interface (call, query)
+- Candid type system
+- Identity management (generate, from PEM, sign)
+- Canister deployment and management
+- Chain Fusion (Solana, Ethereum)
+- Subnet queries
+
+License: MIT | Organization: grainpbc"
+   :timestamp "2025-01-22T00:00:00Z"
+   :tags ["clojure" "icp" "dfinity" "blockchain" "integration"]
+   :likes 45
+   :reposts 12
+   :replies 15}
+
+ {:id "development-session-screenshot"
+   :type :status-update
+   :title "Development Session - GitHub Organizations & YouTube Music"
+   :content "Desktop screenshot showing two browser windows side-by-side in dark mode:
+
+Left Window - GitHub Organizations:
+- Shows kae3g's organizations: '3x39' (Owner), 'bitscape-io' (Member), 'vizmvm' (Owner)
+- Profile shows 'kae3g (kae3g)' with 'Your personal account'
+- Navigation includes 'Organizations' highlighted under 'Access' section
+
+Right Window - YouTube Music:
+- Large banner image of Grimes against dark red background with rose petals
+- Artist: Grimes (18.8M monthly audience, 1.36M subscribers)
+- Top songs: 'Oblivion' (194M plays), 'Genesis' (203M plays), '4ÆM' (20M plays), 'Artificial Angels' (289K plays), 'Kill V. Maim' (43M plays)
+- Currently playing: 'Kill V. Maim' by Grimes from Art Angels (2015)
+
+Context: Screenshot captured during development session, showing GitHub organization management and music listening while working on Grain Network projects."
+   :timestamp "2025-01-22T10:28:09Z"
+   :tags ["development" "screenshot" "github" "music" "grimes" "workflow"]
+   :likes 12
+   :reposts 3
+   :replies 2}
+
+ {:id "clojure-sixos-future"
+   :type :future-project
+   :title "clojure-sixos - Future Project"
+   :content "A comprehensive Clojure library for SixOS development and system management.
+
+Architecture:
+- clojure-s6 as core utility dependency for s6 supervision
+- SixOS Integration: Native support for SixOS-specific features
+- System Management: Declarative system configuration
+- Service Orchestration: High-level service management
+- Development Tools: SixOS development workflow utilities
+
+Goals:
+- Bridge Clojure ecosystem with SixOS
+- Provide functional, immutable system management
+- Enable declarative SixOS configuration
+- Support SixOS development workflows
+- Integrate with existing Clojure tooling
+
+Dependencies:
+- clojure-s6 (s6 supervision utilities)
+- SixOS (target platform)
+- Nix (package management)
+- s6 (process supervision)"
+   :timestamp "2025-01-05T00:00:00Z"
+   :tags ["future-project" "clojure" "sixos" "s6" "system-management"]
+   :likes 18
+   :reposts 4
+   :replies 6}
+
+ {:id "grainversion-concept"
+   :type :concept
+   :title "Grainversion - Replacing 'Fork' Forever"
+   :content "Grainversion - replacing 'fork' forever (personal versions of grain templates).
+
+The concept of making a personal version of a Grain template, hoping it replaces 'fork' forever. This represents a more collaborative and growth-oriented approach to template customization, emphasizing personal adaptation and evolution rather than simple duplication."
+   :timestamp "2025-01-20T00:00:00Z"
+   :tags ["concept" "grainversion" "fork" "templates" "collaboration"]
+   :likes 31
+   :reposts 9
+   :replies 11}
+
+ {:id "mysterious-notes"
+   :type :personal-note
+   :title "Mysterious Notes"
+   :content "Some personal notes that remain mysterious:
+- redacted reasoning - inge's anagram generator
+- truth points - prediction dividends market
+- consumers vs producers - haunted mound and the Cursor devs
+
+These cryptic notes hint at deeper thoughts and connections that may become clearer over time."
+   :timestamp "2025-01-15T00:00:00Z"
+   :tags ["personal" "mysterious" "notes" "cryptic"]
+   :likes 7
+   :reposts 1
+   :replies 3}]
+
+ :stats
+ {:total-posts 9
+  :total-likes 334
+  :total-reposts 99
+  :total-replies 102
+  :followers 156
+  :following 23
+  :grain-galaxy-members 1}
+
+ :interests
+ ["open-source" "hardware" "clojure" "sixos" "decentralization" "privacy" "sovereignty" "blockchain" "icp" "urbit" "nostr" "nix" "s6" "grain-network" "grainwriter" "graincamera" "grainpack" "grainsource" "grainspace" "grainversion"]
+
+ :projects
+ [{:name "Grain Network"
+   :description "Complete personal sovereignty stack"
+   :status "active"
+   :url "https://github.com/kae3g/grainkae3g"
+   :tech-stack ["clojure" "nix" "sixos" "icp" "urbit" "nostr"]}
+  {:name "Grainwriter"
+   :description "E-ink writing device with infinite battery life"
+   :status "design-complete"
+   :url "https://github.com/grainpbc/grainwriter"
+   :tech-stack ["clojure" "humble-ui" "sixos" "e-ink" "usb-c"]}
+  {:name "Graincamera"
+   :description "Open-hardware mirrorless camera with AVIF support"
+   :status "design-complete"
+   :url "https://github.com/grainpbc/graincamera"
+   :tech-stack ["risc-v" "avif" "nostr" "icp" "fujifilm-x-mount"]}
+  {:name "clojure-icp"
+   :description "Comprehensive Clojure library for ICP integration"
+   :status "active"
+   :url "https://github.com/grainpbc/clojure-icp"
+   :tech-stack ["clojure" "icp" "dfinity" "candid" "blockchain"]}
+  {:name "grainsource"
+   :description "Git abstraction for the Grain ecosystem"
+   :status "design-complete"
+   :url "https://github.com/grainpbc/grainsource"
+   :tech-stack ["clojure" "git" "humble-ui" "icp" "urbit"]}]
+
+ :organizations
+ [{:name "grainpbc"
+   :role "Chair Director"
+   :type "Public Benefit Corporation"
+   :url "https://github.com/grainpbc"
+   :description "Grain Public Benefit Corporation - building the Grain Network"}
+  {:name "3x39"
+   :role "Owner"
+   :type "Personal Organization"
+   :url "https://github.com/3x39"}
+  {:name "bitscape-io"
+   :role "Member"
+   :type "Collaboration"
+   :url "https://github.com/bitscape-io"}
+  {:name "vizmvm"
+   :role "Owner"
+   :type "Personal Organization"
+   :url "https://github.com/vizmvm"}]
+
+ :recent-activity
+ [{:type :post
+   :id "development-session-screenshot"
+   :timestamp "2025-01-22T10:28:09Z"}
+  {:type :project-update
+   :project "clojure-icp"
+   :timestamp "2025-01-22T00:00:00Z"}
+  {:type :post
+   :id "grain-hardware-ecosystem"
+   :timestamp "2025-01-22T00:00:00Z"}
+  {:type :post
+   :id "grainversion-concept"
+   :timestamp "2025-01-20T00:00:00Z"}
+  {:type :post
+   :id "grainsource-announcement"
+   :timestamp "2025-01-15T00:00:00Z"}]
+
+ :grain-network
+ {:galaxy-membership true
+  :admin-privileges true
+  :grainmarking-policy true
+  :grainwriting-privileges true
+  :grainrighting-authority true
+  :grainlicensing-oversight true
+  :grainsubmodules-management true}}}
+

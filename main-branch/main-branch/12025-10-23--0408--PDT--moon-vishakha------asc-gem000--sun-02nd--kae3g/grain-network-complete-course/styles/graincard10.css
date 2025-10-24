@@ -1,0 +1,289 @@
+/* Graincard10 CSS - 80×110 Portrait Format */
+:root {
+    --fg: #b4c5b0;
+    --bg: #1a1410;
+    --accent: #88b879;
+    --code-bg: #242018;
+    --code-fg: #b8c8b4;
+    --border: #5a4a38;
+    --highlight: #c89a54;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: var(--bg);
+    color: var(--fg);
+    padding: 20px;
+    line-height: 1.4;
+    font-size: 14px;
+}
+
+.graincard {
+    max-width: 80ch;
+    margin: 0 auto;
+    border: 2px solid var(--accent);
+    background: rgba(136, 184, 121, 0.05);
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.graincard-header {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 15px;
+}
+
+.graincard-header h1 {
+    color: var(--accent);
+    font-size: 1.8em;
+    margin-bottom: 8px;
+}
+
+.graincard-header h2 {
+    color: var(--highlight);
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+.graincard-content {
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.philosophy-box {
+    background: var(--code-bg);
+    padding: 15px;
+    border-left: 4px solid var(--accent);
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.philosophy-box p {
+    margin: 8px 0;
+}
+
+.philosophy-box strong {
+    color: var(--accent);
+    font-size: 1.1em;
+}
+
+.mathematical-box {
+    background: rgba(136, 184, 121, 0.1);
+    padding: 15px;
+    border: 1px solid var(--accent);
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.mathematical-box h3 {
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.mathematical-box p {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1em;
+    margin: 8px 0;
+}
+
+.mathematical-box ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.mathematical-box li {
+    margin: 5px 0;
+}
+
+.practical-box {
+    background: rgba(200, 154, 84, 0.1);
+    padding: 15px;
+    border: 1px solid var(--highlight);
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.practical-box h3 {
+    color: var(--highlight);
+    margin-bottom: 10px;
+}
+
+.practical-box ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.practical-box li {
+    margin: 5px 0;
+}
+
+.practical-box strong {
+    color: var(--accent);
+}
+
+.course-info {
+    margin: 20px 0;
+}
+
+.course-info h3 {
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.course-info ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.course-info li {
+    margin: 5px 0;
+}
+
+.grainpath-link {
+    background: rgba(136, 184, 121, 0.15);
+    padding: 15px;
+    border: 1px solid var(--accent);
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.grainpath-link h4 {
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.grainpath-link code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.grainpath-link a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.grainpath-link a:hover {
+    text-decoration: underline;
+}
+
+.session-info {
+    background: rgba(200, 154, 84, 0.1);
+    padding: 15px;
+    border: 1px solid var(--highlight);
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.session-info h3 {
+    color: var(--highlight);
+    margin-bottom: 10px;
+}
+
+.session-info p {
+    margin: 5px 0;
+}
+
+.graincard-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-link {
+    color: var(--accent);
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.nav-link:hover {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.nav-link.prev {
+    border-color: var(--highlight);
+    color: var(--highlight);
+}
+
+.nav-link.prev:hover {
+    background: var(--highlight);
+    color: var(--bg);
+}
+
+.page-number {
+    color: var(--highlight);
+    font-family: 'Courier New', monospace;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        font-size: 12px;
+    }
+    
+    .graincard {
+        padding: 15px;
+        min-height: 70vh;
+    }
+    
+    .graincard-header h1 {
+        font-size: 1.5em;
+    }
+    
+    .graincard-header h2 {
+        font-size: 1.1em;
+    }
+    
+    .graincard-footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .navigation {
+        justify-content: center;
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .graincard {
+        border: 2px solid black;
+        background: white;
+    }
+    
+    .nav-link {
+        display: none;
+    }
+}
