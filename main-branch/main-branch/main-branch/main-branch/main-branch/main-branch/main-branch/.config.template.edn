@@ -1,0 +1,42 @@
+;; Public/Personal Configuration Template for kae3g
+;; Copy to .config.edn and customize with your personal preferences
+;; .config.edn is in .gitignore but contains NO sensitive data
+;; Safe to share with collaborators or include in screenshots
+
+{:site
+ {:username "kae3g"              ; Your display name/username
+  :language "en"                 ; Primary language code (en, es, de, fr, ja, zh, ar, etc.)
+  :title "Coldriver Tundra"     ; Site title
+  :description "Experimental aspiringly helpful generative AI writings"}
+
+ :author
+ {:name "Your Name"             ; Full name for commits and copyright
+  :email "your.email@example.com"  ; Public email
+  :url nil}                      ; Optional personal website
+
+ :repository
+ {:primary
+  {:platform "codeberg"          ; Primary hosting platform
+   :username "kae3g"             ; Codeberg username
+   :repo-name "12025-10"         ; Repository name
+   :branch "tundra"}             ; Default branch
+  
+  :mirrors
+  [{:platform "github"           ; Mirror/dual-deploy platform
+    :username "kae3g"            ; GitHub username
+    :repo-name "12025-10"        ; Same repo name
+    :branch "tundra"}]}          ; Same branch name
+
+ :localization
+ {:timezone "America/Los_Angeles"
+  :locale "en-US"
+  :date-format "YYYY-MM-DD"
+  :planned-languages ["es" "de"]}  ; Future language support
+
+ :preferences
+ {:editor "cursor"               ; cursor, vscode, vim, emacs, etc.
+  :theme "dark"                  ; dark, light, auto
+  :monospace-font "Courier New"}}
+
+;; NOTE: This file is for PUBLIC/PERSONAL settings only.
+;; For PRIVATE/SECRET data (API keys, tokens), see .secrets.template.edn

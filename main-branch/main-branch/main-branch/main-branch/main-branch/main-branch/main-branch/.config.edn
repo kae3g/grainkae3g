@@ -1,0 +1,41 @@
+;; Public/Personal Configuration for kae3g
+;; Safe to share with collaborators or include in screenshots
+;; For PRIVATE/SECRET data (API keys, tokens), see .secrets.edn
+
+{:site
+ {:username "kae3g"
+  :language "en"
+  :title "Coldriver Tundra"
+  :description "Experimental aspiringly helpful generative AI writings"}
+
+ :author
+ {:name "kae3g"
+  :email "kj3x39@gmail.com"  ; Primary email for development
+  :url nil}
+
+ :repository
+ {:primary
+  {:platform "codeberg"
+   :username "kae3g"
+   :repo-name "12025-10"
+   :branch "tundra"}
+  
+  :mirrors
+  [{:platform "github"
+    :username "kae3g"
+    :repo-name "12025-10"
+    :branch "tundra"}]}
+
+ :localization
+ {:timezone "America/Los_Angeles"
+  :locale "en-US"
+  :date-format "YYYY-MM-DD"
+  :planned-languages ["es" "de"]}
+
+ :preferences
+ {:editor "cursor"
+  :theme "dark"
+  :monospace-font "Courier New"}}
+
+;; NOTE: This file is for PUBLIC/PERSONAL settings only.
+;; For PRIVATE/SECRET data (API keys, tokens), see .secrets.edn
