@@ -1,0 +1,22 @@
+{:paths ["grainstore/grainbarrel"]
+ 
+ :tasks
+ {:requires ([babashka.process :refer [shell]])
+  
+  ;; Delegate all tasks to grainbarrel
+  ;; This allows running 'bb flow' from root
+  :init (do
+          (def grainbarrel-dir "grainstore/grainbarrel")
+          (System/setProperty "user.dir" (str (System/getProperty "user.dir"))))
+  
+  ;; Flow - Dual-deploy precision flow
+  flow
+  {:doc "Dual-deploy precision flow: commit, push to GitHub + Codeberg (usage: bb flow \"message\")"
+   :task (shell {:dir "grainstore/grainbarrel"} "bb" "flow" (or (first *command-line-args*) "chore: precision flow update"))}
+  
+  ;; Pass through all other tasks to grainbarrel
+  :enter (fn [_] (println "🌾 Grainbarrel"))}}
+
+;; grainkae3g root bb.edn
+;; Delegates to grainstore/grainbarrel for all build tasks
+;; Run 'bb flow' from root for dual-deploy precision workflow

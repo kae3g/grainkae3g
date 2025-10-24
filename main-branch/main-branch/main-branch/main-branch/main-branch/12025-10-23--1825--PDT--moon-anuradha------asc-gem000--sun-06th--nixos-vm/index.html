@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NixOS VM + s6 + musl Course - Grain Network</title>
+    <style>
+        body { font-family: monospace; max-width: 80ch; margin: 2em auto; padding: 0 1em; background: #1a1a1a; color: #00ff00; }
+        h1, h2 { color: #00ff00; border-bottom: 2px solid #00ff00; }
+        a { color: #00bfff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .lesson { margin: 1em 0; padding: 1em; border: 1px solid #333; }
+        .graintime { color: #ffaa00; font-size: 0.9em; }
+        .docs-link { background: #2d2d2d; padding: 0.5em; margin: 0.5em 0; }
+        pre { background: #0d0d0d; padding: 1em; overflow-x: auto; border-left: 3px solid #00ff00; }
+    </style>
+</head>
+<body>
+    <h1>🌾 NixOS VM + s6 + musl Supervision Course</h1>
+    <p class="graintime">Grainpath: 12025-10-23--1825--PDT--moon-anuradha------asc-gem000--sun-06th--nixos-vm</p>
+    <p><strong>Level</strong>: High School | <strong>Duration</strong>: 10 Lessons | <strong>Hands-On</strong>: Yes!</p>
+    
+    <h2>📚 Course Overview</h2>
+    <p>Learn to build a complete virtualization and supervision stack from scratch:</p>
+    <ul>
+        <li>🖥️  QEMU/KVM virtualization on Ubuntu 24.04 LTS</li>
+        <li>📦 NixOS 25.11 Unstable with Flakes</li>
+        <li>🏠 Home Manager for declarative user environments</li>
+        <li>🛡️  s6 supervision (Alpine Linux approach)</li>
+        <li>🏔️  musl libc for static, secure binaries</li>
+        <li>🌾 grain6 + grainwifi integration</li>
+    </ul>
+
+    <h2>🔗 Official Documentation References</h2>
+    <div class="docs-link">
+        <strong>Ubuntu 24.04 LTS</strong>:
+        <ul>
+            <li><a href="https://ubuntu.com/server/docs/virtualization-qemu" target="_blank">QEMU/KVM Guide</a></li>
+            <li><a href="https://ubuntu.com/server/docs/virtualization-libvirt" target="_blank">libvirt Documentation</a></li>
+        </ul>
+    </div>
+    <div class="docs-link">
+        <strong>NixOS 25.11 Unstable</strong>:
+        <ul>
+            <li><a href="https://nixos.org/manual/nixos/unstable/" target="_blank">NixOS Manual</a></li>
+            <li><a href="https://nixos.org/manual/nixos/unstable/#sec-installation" target="_blank">Installation Guide</a></li>
+            <li><a href="https://search.nixos.org/packages" target="_blank">Package Search</a></li>
+        </ul>
+    </div>
+    <div class="docs-link">
+        <strong>s6 Supervision</strong>:
+        <ul>
+            <li><a href="https://skarnet.org/software/s6/" target="_blank">s6 Official Documentation</a></li>
+            <li><a href="https://skarnet.org/software/s6/unit-conversion.html" target="_blank">systemd to s6 Conversion</a></li>
+        </ul>
+    </div>
+    <div class="docs-link">
+        <strong>musl libc</strong>:
+        <ul>
+            <li><a href="https://musl.libc.org/" target="_blank">musl Homepage</a></li>
+            <li><a href="https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper" target="_blank">Alpine APK</a></li>
+        </ul>
+    </div>
+
+    <h2>📖 Lessons</h2>
+    
+    <div class="lesson">
+        <h3><a href="pages/lesson-01.html">Lesson 01: Introduction to Virtualization</a></h3>
+        <p>Understanding VMs, QEMU, KVM, and why we virtualize</p>
+        <p><em>Docs: grainstore/grainsource-nixos-qemu-kvm/README.md (Phase 1)</em></p>
+    </div>
+
+    <div class="lesson">
+        <h3><a href="pages/lesson-02.html">Lesson 02: Installing QEMU/KVM on Ubuntu</a></h3>
+        <p>Following Ubuntu official documentation step-by-step</p>
+        <p><em>Docs: grainstore/grainsource-nixos-qemu-kvm/README.md (Phase 1-2)</em></p>
+    </div>
+
+    <div class="lesson">
+        <h3><a href="pages/lesson-03.html">Lesson 03: Creating Your First NixOS VM</a></h3>
+        <p>32GB RAM, 8 CPUs, shared folders via 9p virtfs</p>
+        <p><em>Docs: grainstore/grainsource-nixos-qemu-kvm/README.md (Phase 3)</em></p>
+    </div>
+
+    <div class="lesson">
+        <h3><a href="pages/lesson-04.html">Lesson 04: NixOS Installation & Partitioning</a></h3>
+        <p>UEFI/GPT partitioning, mounting, generating configuration</p>
+        <p><em>Docs: grainstore/grainsource-nixos-qemu-kvm/NIXOS-INSTALL-GUIDE.md (Phase 2-3)</em></p>
+    </div>
+
+    <div class="lesson">
+        <h3><a href="pages/lesson-05.html">Lesson 05: NixOS Flakes & Reproducible Builds</a></h3>
+        <p>Understanding flakes, inputs, and nixos-rebuild</p>
+        <p><em>Docs: grainstore/grainsource-nixos-qemu-kvm/nixos-configs/flake.nix</em></p>
+    </div>
+
+    <div class="lesson">
+        <h3><a href="pages/lesson-06.html">Lesson 06: Home Manager Integration</a></h3>
+        <p>Declarative user environments, ZSH, Git, dotfiles</p>
+        <p><em>Docs: grainstore/grainsource-nixos-qemu-kvm/nixos-configs/home.nix</em></p>
+    </div>
+
+    <div class="lesson">
+        <h3><a href="pages/lesson-07.html">Lesson 07: s6 Supervision Basics</a></h3>
+        <p>Understanding process supervision, s6 vs systemd</p>
+        <p><em>Docs: grainstore/grainsource-s6-ubuntu/README.md (Phase 1-6)</em></p>
+    </div>
+
+    <div class="lesson">
+        <h3><a href="pages/lesson-08.html">Lesson 08: musl libc & Static Binaries</a></h3>
+        <p>Why musl? Building from source, Alpine Linux approach</p>
+        <p><em>Docs: grainstore/grainsource-s6-ubuntu/MUSL-INTEGRATION.md</em></p>
+    </div>
+
+    <div class="lesson">
+        <h3><a href="pages/lesson-09.html">Lesson 09: Building s6 from Source</a></h3>
+        <p>Compiling skalibs, execline, s6 with musl-gcc</p>
+        <p><em>Docs: grainstore/grainsource-s6-musl/README.md</em></p>
+    </div>
+
+    <div class="lesson">
+        <h3><a href="pages/lesson-10.html">Lesson 10: grain6 + grainwifi Integration</a></h3>
+        <p>Time-aware supervision, dual-wifi management, Humble UI</p>
+        <p><em>Docs: grainstore/grain6/examples/grainwifi-humble.edn</em></p>
+    </div>
+
+    <h2>🎓 Course Philosophy</h2>
+    <pre>
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║   "Local Control, Global Intent"                            ║
+║                                                              ║
+║   Build your infrastructure from source                     ║
+║   Understand every layer of the stack                       ║
+║   Own your binaries, version control everything             ║
+║                                                              ║
+║   From Ubuntu → QEMU/KVM → NixOS → s6 → musl                ║
+║   From generic → declarative → reproducible → portable      ║
+║                                                              ║
+║   now == next + 1 🌾                                        ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+    </pre>
+
+    <p><a href="../../">← Back to Grain Network</a></p>
+</body>
+</html>

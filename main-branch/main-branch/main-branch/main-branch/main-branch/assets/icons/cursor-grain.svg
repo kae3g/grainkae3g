@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Warm gradient for 2000K feel -->
+    <linearGradient id="warmGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E67E22;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D4A574;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B6F47;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Earth background gradient -->
+    <radialGradient id="earthGradient">
+      <stop offset="0%" style="stop-color:#4A6741;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3D2817;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="url(#earthGradient)"/>
+  
+  <!-- Wheat stalk forming cursor arrow -->
+  <g id="wheatCursor" fill="url(#warmGradient)" stroke="#FFF8E7" stroke-width="3">
+    <!-- Main stem (cursor shaft) -->
+    <rect x="245" y="150" width="22" height="200" rx="4"/>
+    
+    <!-- Wheat grains (top) -->
+    <ellipse cx="230" cy="160" rx="12" ry="20" transform="rotate(-30 230 160)"/>
+    <ellipse cx="282" cy="160" rx="12" ry="20" transform="rotate(30 282 160)"/>
+    
+    <ellipse cx="225" cy="190" rx="12" ry="22" transform="rotate(-25 225 190)"/>
+    <ellipse cx="287" cy="190" rx="12" ry="22" transform="rotate(25 287 190)"/>
+    
+    <ellipse cx="220" cy="220" rx="14" ry="24" transform="rotate(-20 220 220)"/>
+    <ellipse cx="292" cy="220" rx="14" ry="24" transform="rotate(20 292 220)"/>
+    
+    <!-- Arrow point at bottom -->
+    <polygon points="256,370 210,320 245,320 245,300 267,300 267,320 302,320"/>
+  </g>
+  
+  <!-- "Gr" letters integrated -->
+  <text x="380" y="180" font-family="monospace" font-size="80" font-weight="bold" fill="url(#warmGradient)" stroke="#FFF8E7" stroke-width="2">Gr</text>
+  
+  <!-- Cursor text at bottom -->
+  <text x="256" y="450" font-family="sans-serif" font-size="48" font-weight="300" fill="#FFF8E7" text-anchor="middle" opacity="0.8">Cursor</text>
+  
+  <!-- Subtle grain texture (small dots) -->
+  <g opacity="0.15" fill="#FFF8E7">
+    <circle cx="180" cy="200" r="2"/>
+    <circle cx="330" cy="240" r="2"/>
+    <circle cx="160" cy="280" r="2"/>
+    <circle cx="350" cy="300" r="2"/>
+    <circle cx="200" cy="380" r="2"/>
+    <circle cx="310" cy="360" r="2"/>
+  </g>
+</svg>
+

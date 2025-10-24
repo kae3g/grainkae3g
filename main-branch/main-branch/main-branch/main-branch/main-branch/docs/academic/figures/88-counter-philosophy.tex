@@ -1,0 +1,38 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{amsmath}
+
+\begin{document}
+\begin{tikzpicture}[scale=1.2]
+    % Title
+    \node[font=\Large\bfseries] at (0, 4) {88 Counter Philosophy};
+    
+    % Central equation
+    \node[font=\large] at (0, 3) {88 × 10^n = ∞};
+    
+    % Scale levels
+    \node[font=\normalsize] at (-3, 2) {88 × 10^0 = 88};
+    \node[font=\small] at (-3, 1.5) {Individual grain};
+    
+    \node[font=\normalsize] at (-1, 2) {88 × 10^1 = 880};
+    \node[font=\small] at (-1, 1.5) {Small bundle};
+    
+    \node[font=\normalsize] at (1, 2) {88 × 10^2 = 8,800};
+    \node[font=\small] at (1, 1.5) {Large sheaf};
+    
+    \node[font=\normalsize] at (3, 2) {88 × 10^3 = 88,000};
+    \node[font=\small] at (3, 1.5) {Warehouse};
+    
+    % Arrows showing progression
+    \draw[->, thick] (-2.5, 2) -- (-1.5, 2);
+    \draw[->, thick] (-0.5, 2) -- (0.5, 2);
+    \draw[->, thick] (1.5, 2) -- (2.5, 2);
+    
+    % Bottom text
+    \node[font=\large] at (0, 0.5) {now == next + 1};
+    
+    % Decorative elements
+    \draw[thick] (-4, -0.5) -- (4, -0.5);
+    \draw[thick] (-4, 3.5) -- (4, 3.5);
+\end{tikzpicture}
+\end{document}
