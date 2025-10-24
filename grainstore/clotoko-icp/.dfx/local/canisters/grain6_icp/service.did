@@ -1,0 +1,14 @@
+service : {
+  getGrainbook: (bookId: text) -> (text) query;
+  getGraincontacts: (username: text) -> (text) query;
+  getGraincourse: (courseId: text) -> (text) query;
+  getGrainpath: (path: text) -> (text) query;
+  getGraintime: (author: text) -> (text) query;
+  status: () -> (text) query;
+  updateGrainbook: (bookId: text) -> (text);
+  updateGraincontacts: (username: text) -> (text);
+  updateGraincourse: (courseId: text) -> (text);
+  updateGrainpath: (path: text) -> (text);
+  updateGraintime: (author: text) -> (text);
+  whoami: () -> (principal) query;
+}
