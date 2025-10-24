@@ -43,3 +43,4 @@ web-app/static/content/*.json
 
 # Grainstore (separate repo)
 grainstore/
+*.png
