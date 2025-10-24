@@ -52,6 +52,8 @@ jobs:
           fi
       
       - name: Update default branch
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           # Update default branch to current grainpath branch
           gh api repos/${{ github.repository }} --method PATCH \
