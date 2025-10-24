@@ -38,6 +38,41 @@
 - **In Essays**: 9298, Your Tundra (bb flow section)
 - **Connection**: Water at 4°C = most dense, most organized, most mature
 
+### **Ken Wheeler** (Contemporary)
+- **Field**: Physics, electromagnetic theory, scalar field research
+- **Key Concepts**: Theoria Apophasis, longitudinal wave propagation, scalar compression
+- **Relevance**: Advanced electromagnetic field theory, apophatic understanding through negation
+- **Connection**: Longitudinal waves and scalar compression align with cosmic flow philosophy
+- **Philosophy**: Understanding through negation, transcendence through theoretical exploration
+
+### **Nikola Tesla** (1856-1943)
+- **Field**: Electrical engineering, physics, inventor
+- **Key Contributions**: Alternating current, wireless power transmission, scalar electromagnetic fields
+- **Relevance**: Scalar compression techniques, longitudinal wave research, cosmic energy concepts
+- **Connection**: Tesla's work on scalar fields relates to Schauberger's vortex theory and Pollack's crystalline structures
+- **Famous Concepts**: Wardenclyffe Tower, scalar fields, wireless energy transmission
+
+### **Charles Proteus Steinmetz** (1865-1923)
+- **Field**: Electrical engineering, mathematics
+- **Key Contributions**: AC circuit theory, complex number analysis, hysteresis theory
+- **Relevance**: Mathematical foundations of electrical engineering, complex analysis
+- **Connection**: Bridge between Tesla's innovations and practical electrical engineering
+- **Famous Work**: "Electric Discharges, Waves and Impulses" (1914)
+
+### **Oliver Heaviside** (1850-1925)
+- **Field**: Electrical engineering, mathematics, physics
+- **Key Contributions**: Vector calculus, electromagnetic field theory, operational calculus
+- **Relevance**: Mathematical tools for electromagnetic analysis, field theory foundations
+- **Connection**: Developed mathematical framework for Maxwell's electromagnetic theory
+- **Famous Concepts**: Heaviside step function, Heaviside layer (ionosphere)
+
+### **Eric P. Dollard** (Contemporary)
+- **Field**: Electrical engineering, scalar field research, Tesla technology
+- **Key Research**: Longitudinal wave propagation, scalar electromagnetic fields, Tesla coil technology
+- **Relevance**: Modern continuation of Tesla's scalar field research, longitudinal wave theory
+- **Connection**: Bridges historical Tesla research with contemporary scalar field applications
+- **Philosophy**: Revival and advancement of Tesla's lost electromagnetic technologies
+
 ### **Richard Borcherds** (b. 1959)
 - **Field**: Mathematics, Lie groups, representation theory
 - **Relevance**: Advanced mathematical structures for system modeling
