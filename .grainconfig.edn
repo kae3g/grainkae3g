@@ -7,4 +7,11 @@
      :github-owner "kae3g",
      :github-repo "grainkae3g",
      :codeberg-owner "kae3g",
-     :codeberg-repo "grainkae3g"}}}}}
+     :codeberg-repo "grainkae3g"}},
+   :graintime
+   {:defaults
+    {:location "San Rafael, CA, USA",
+     :latitude 37.9735,
+     :longitude -122.5311,
+     :timezone "America/Los_Angeles",
+     :username "kae3g"}}}}}

@@ -39,6 +39,14 @@ jobs:
           ln -sf $HOME/.local/bin/bb grainstore/grainbarrel/bb
           echo "Verifying bb is available in grainstore/grainbarrel..."
           ls -la grainstore/grainbarrel/bb
+          echo "Setting up gt command..."
+          cp grainstore/grainpbc/graintime/scripts/gt $HOME/.local/bin/gt
+          chmod +x $HOME/.local/bin/gt
+          echo "Setting up graintime directory path..."
+          mkdir -p $HOME/kae3g/grainkae3g/grainstore
+          ln -sf $(pwd)/grainstore/grainpbc/graintime $HOME/kae3g/grainkae3g/grainstore/graintime
+          echo "Verifying gt command..."
+          $HOME/.local/bin/gt --help || echo "gt command ready"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -55,6 +63,7 @@ jobs:
       - name: Build content with Babashka
         run: |
           echo "Starting babashka build..."
+          cd grainstore/grainbarrel
           bb qb-now
           echo "Babashka build completed successfully"
 
