@@ -1,0 +1,41 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{amsmath}
+
+\begin{document}
+\begin{tikzpicture}[scale=1.5]
+    % Title
+    \node[font=\Large\bfseries] at (0, 4) {Grain Network Multi-Chain Architecture};
+    
+    % Blockchain nodes
+    \node[circle, draw, thick, fill=blue!20] (icp) at (-2, 2) {ICP};
+    \node[circle, draw, thick, fill=green!20] (hedera) at (0, 2) {Hedera};
+    \node[circle, draw, thick, fill=purple!20] (solana) at (2, 2) {Solana};
+    
+    % Central grain network
+    \node[circle, draw, thick, fill=yellow!20, minimum size=1.5cm] (grain) at (0, 0) {Grain Network};
+    
+    % Applications
+    \node[rectangle, draw, thick, fill=orange!20] (grain6) at (-2, -2) {grain6};
+    \node[rectangle, draw, thick, fill=red!20] (grainphone) at (2, -2) {grainphone};
+    
+    % Connections
+    \draw[thick] (icp) -- (grain);
+    \draw[thick] (hedera) -- (grain);
+    \draw[thick] (solana) -- (grain);
+    \draw[thick] (grain) -- (grain6);
+    \draw[thick] (grain) -- (grainphone);
+    
+    % Labels
+    \node[font=\small] at (-2, 1.5) {Internet Computer};
+    \node[font=\small] at (0, 1.5) {Hedera Hashgraph};
+    \node[font=\small] at (2, 1.5) {Solana};
+    
+    \node[font=\small] at (-2, -2.5) {Time-aware supervision};
+    \node[font=\small] at (2, -2.5) {Mobile interface};
+    
+    % Bottom text
+    \node[font=\normalsize] at (0, -3.5) {Multi-Chain Sovereignty • Template/Personal Separation};
+    \node[font=\normalsize] at (0, -4) {Local Control, Global Intent • 88 × 10^n Scaling};
+\end{tikzpicture}
+\end{document}

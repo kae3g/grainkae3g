@@ -1,0 +1,14 @@
+/home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/deps/serde-3829e565ac5ca3f2.d: /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/build/serde-548240b6947f0ce4/out/private.rs
+
+/home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/deps/libserde-3829e565ac5ca3f2.rlib: /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/build/serde-548240b6947f0ce4/out/private.rs
+
+/home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/deps/libserde-3829e565ac5ca3f2.rmeta: /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/build/serde-548240b6947f0ce4/out/private.rs
+
+/home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs:
+/home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs:
+/home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs:
+/home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs:
+/home/xy/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs:
+/home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/build/serde-548240b6947f0ce4/out/private.rs:
+
+# env-dep:OUT_DIR=/home/xy/kae3g/12025-10/urbit-icp-identity/target/wasm32-unknown-unknown/release/build/serde-548240b6947f0ce4/out

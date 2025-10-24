@@ -1,0 +1,96 @@
+MIT License
+
+Copyright (c) 2025 kae3g
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+🌾 Grain Network Philosophy:
+
+This software is part of the Grain Network - a sovereign, multi-chain, 
+append-only system for building next-generation distributed applications.
+
+The Grain Network is built on principles of:
+- Local Control, Global Intent
+- Purpose-Built Over Generic
+- Declarative Over Imperative
+- Template/Personal Everywhere
+- Real Resources Matter
+- Pragmatic Branding
+- Temporal Recursion (now == next + 1)
+
+For more information about the Grain Network philosophy, see:
+- README.md - Project overview and quick start
+- README-GLOW.md - Glow's gentle guidance
+- README-TRISH.md - Trish's practical wisdom
+- CONTRIBUTING-NONTECHNICAL.md - Non-technical contribution guide
+- CONTRIBUTING-TECHNICAL.md - Technical contribution guide
+- docs/core/philosophy/PSEUDO.md - Core philosophical principles
+
+---
+
+🛠️ Technical Details:
+
+This repository contains:
+- Core Grain Network modules and libraries
+- Multi-chain integration (ICP, Hedera, Solana)
+- Humble UI applications and desktop environment
+- Educational materials and documentation
+- Build system and development tools
+
+Key Technologies:
+- Clojure - Core programming language
+- Babashka - Fast Clojure scripting
+- Motoko - ICP smart contracts
+- Rust - Security-audited blockchain code
+- Humble UI - Clojure-based desktop applications
+- Sway - Tiling window manager
+- Alpine Linux - Musl-based development environment
+
+---
+
+🌟 Community:
+
+The Grain Network is built by a community of developers, designers, 
+educators, and visionaries who believe in creating technology that 
+serves humanity.
+
+Join our community:
+- GitHub: https://github.com/kae3g/grainkae3g
+- Codeberg: https://codeberg.org/kae3g/grainkae3g
+- Documentation: https://kae3g.github.io/grainkae3g/
+
+---
+
+💫 Acknowledgments:
+
+This project stands on the shoulders of giants:
+- Urbit/Tlon Corporation - Philosophical inspiration
+- DFINITY Foundation - ICP blockchain technology
+- The Clojure community - Functional programming excellence
+- The Rust community - Memory safety and performance
+- The Linux community - Open source foundation
+- All contributors who have made this project possible
+
+---
+
+Now == Next + 1
+
+From granules to grains to THE WHOLE GRAIN 🌾

@@ -1,0 +1,88 @@
+{:page-index
+ {;; Page 0000: Title Page
+  "0000" {:file "pages/0000-title.html"
+           :title "Grain Network Complete Course"
+           :subtitle "Graincard10 Multi-Page System"
+           :colloquial ["title" "home" "main" "index"]}
+  
+  ;; Page 0001: 88 Counter Philosophy
+  "0001" {:file "pages/0001-88-counter-philosophy.html"
+           :title "88 Counter Philosophy"
+           :subtitle "The Eternal Now == Next + 1"
+           :colloquial ["88-counter" "philosophy" "counter" "88" "now-next"]}
+  
+  ;; Page 0002: Temporal Recursion
+  "0002" {:file "pages/0002-temporal-recursion.html"
+           :title "Temporal Recursion"
+           :subtitle "Each Session Contains All Previous"
+           :colloquial ["temporal" "recursion" "session" "time" "eternal"]}
+  
+  ;; Page 0003: Graincard10 Format
+  "0003" {:file "pages/0003-graincard10-format.html"
+           :title "Graincard10 Format"
+           :subtitle "80×110 Portrait, 110×80 Landscape"
+           :colloquial ["graincard10" "format" "portrait" "landscape" "80x110"]}
+  
+  ;; Page 0004: Alpine Linux Priority
+  "0004" {:file "pages/0004-alpine-linux-priority.html"
+           :title "Alpine Linux Priority"
+           :subtitle "musl libc + apk Package Manager"
+           :colloquial ["alpine" "linux" "musl" "apk" "priority"]}
+  
+  ;; Page 0005: Leiningen Integration
+  "0005" {:file "pages/0005-leiningen-integration.html"
+           :title "Leiningen Integration"
+           :subtitle "Clojure Build Automation + Nixpkgs"
+           :colloquial ["leiningen" "clojure" "nixpkgs" "build" "automation"]}
+  
+  ;; Page 0006: NixOS QEMU/KVM
+  "0006" {:file "pages/0006-nixos-qemu-kvm.html"
+           :title "NixOS QEMU/KVM"
+           :subtitle "Ubuntu 24.04 LTS → NixOS VM → Cursor Access"
+           :colloquial ["nixos" "qemu" "kvm" "ubuntu" "cursor" "vm"]}
+  
+  ;; Page 0007: Graintranscribe-YouTube
+  "0007" {:file "pages/0007-graintranscribe-youtube.html"
+           :title "Graintranscribe-YouTube"
+           :subtitle "Gemini 2.5 Pro + SixOS Infuse Pattern"
+           :colloquial ["graintranscribe" "youtube" "gemini" "transcription" "ai"]}
+  
+  ;; Page 0008: Multi-Chain Canisters
+  "0008" {:file "pages/0008-multi-chain-canisters.html"
+           :title "Multi-Chain Canisters"
+           :subtitle "ICP + Hedera + Solana Phantom Wallets"
+           :colloquial ["canisters" "multi-chain" "icp" "hedera" "solana" "blockchain"]}
+  
+  ;; Page 0009: Grain6 Sheaf Architecture
+  "0009" {:file "pages/0009-grain6-sheaf-architecture.html"
+           :title "Grain6 Sheaf Architecture"
+           :subtitle "88 × 10^n Network Design"
+           :colloquial ["grain6" "sheaf" "architecture" "network" "88x10n"]}
+  
+  ;; Page 0010: Client-Side Routing
+  "0010" {:file "pages/0010-client-side-routing.html"
+           :title "Client-Side Routing"
+           :subtitle "GitHub Pages Static Site Navigation"
+           :colloquial ["routing" "client-side" "github-pages" "static" "navigation"]}
+  
+  ;; Page 0099: Index/Table of Contents
+  "0099" {:file "pages/0099-index.html"
+           :title "Course Index"
+           :subtitle "Complete Table of Contents"
+           :colloquial ["index" "contents" "toc" "table"]}}
+
+ :navigation
+ {:next-page "0001"
+  :prev-page "0000"
+  :total-pages 11
+  :current-session 813
+  :philosophy "now == next + 1"}
+
+ :metadata
+ {:created "12025-10-23--0408--PDT--moon-vishakha------asc-gem000--sun-02nd--kae3g"
+  :format "graincard10"
+  :orientation "portrait"
+  :dimensions "80×110"
+  :total-capacity 10000
+  :current-pages 11
+  :philosophy "88 × 10^n scaling"}}
