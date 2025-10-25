@@ -6,6 +6,7 @@
   - Non-interactive mode: pass location and team as arguments
   - Multiple locations: San Rafael, Kyoto, Barcelona, London, Caspar"
   (:require [graintime.core :as core]
+            [graintime.format76 :as f76]
             [graintime.locations :as loc]
             [clojure.string :as str]))
 
