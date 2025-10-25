@@ -100,3 +100,6 @@ These are the victims of your daily decisions. The next wave of cruelty is being
 
 **Application to grain6pbc 14 Repos**:
 Each zodiac sign embodies both PLACE and BODY - our repos should embody both FUNCTION (place) and ESSENCE (body part/energy). The 12 zodiac + Rahu + Ketu = complete cosmic/code architecture.
+
+## Ken Wheeler Fashion
+- Ken Wheeler looks so cool with a hat!
