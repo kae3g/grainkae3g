@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grainflow - Deploy Transcendently</title>
+    <style>
+        :root {
+            --light-bg: #FFF8F0;
+            --light-text: #2C1810;
+            --light-accent: #C74440;
+            --light-green: #2D5C2E;
+            --light-border: #E8D5C4;
+            
+            --dark-bg: #1A1410;
+            --dark-text: #F8F0E8;
+            --dark-accent: #E85C58;
+            --dark-green: #4CAF50;
+            --dark-border: #3A2C24;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        body.light {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+        }
+        
+        body.dark {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+        }
+        
+        body.light header {
+            border-bottom: 2px solid var(--light-border);
+        }
+        
+        body.dark header {
+            border-bottom: 2px solid var(--dark-border);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+        
+        body.light h1 {
+            color: var(--light-accent);
+        }
+        
+        body.dark h1 {
+            color: var(--dark-accent);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        
+        .theme-toggle:hover {
+            opacity: 1;
+        }
+        
+        .versions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+        }
+        
+        body.light .versions {
+            background: rgba(199, 68, 64, 0.05);
+            border: 1px solid var(--light-border);
+        }
+        
+        body.dark .versions {
+            background: rgba(232, 92, 88, 0.05);
+            border: 1px solid var(--dark-border);
+        }
+        
+        .version-link {
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        body.light .version-link {
+            background: var(--light-accent);
+            color: white;
+        }
+        
+        body.light .version-link:hover {
+            background: var(--light-green);
+        }
+        
+        body.dark .version-link {
+            background: var(--dark-accent);
+            color: var(--dark-bg);
+        }
+        
+        body.dark .version-link:hover {
+            background: var(--dark-green);
+        }
+        
+        .command {
+            font-family: 'Courier New', monospace;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+            font-size: 1.1rem;
+        }
+        
+        body.light .command {
+            background: var(--light-border);
+            border-left: 4px solid var(--light-accent);
+        }
+        
+        body.dark .command {
+            background: var(--dark-border);
+            border-left: 4px solid var(--dark-accent);
+        }
+        
+        .flow-diagram {
+            text-align: center;
+            margin: 3rem 0;
+            font-family: monospace;
+            line-height: 2;
+        }
+        
+        .accent {
+            font-weight: 600;
+        }
+        
+        body.light .accent {
+            color: var(--light-accent);
+        }
+        
+        body.dark .accent {
+            color: var(--dark-accent);
+        }
+        
+        .green {
+            font-weight: 600;
+        }
+        
+        body.light .green {
+            color: var(--light-green);
+        }
+        
+        body.dark .green {
+            color: var(--dark-green);
+        }
+        
+        section {
+            margin: 3rem 0;
+        }
+        
+        h2 {
+            margin-bottom: 1rem;
+        }
+        
+        body.light h2 {
+            color: var(--light-green);
+        }
+        
+        body.dark h2 {
+            color: var(--dark-green);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            opacity: 0.6;
+        }
+        
+        body.light footer {
+            border-top: 1px solid var(--light-border);
+        }
+        
+        body.dark footer {
+            border-top: 1px solid var(--dark-border);
+        }
+        
+        code {
+            font-family: 'Courier New', monospace;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+        }
+        
+        body.light code {
+            background: var(--light-border);
+        }
+        
+        body.dark code {
+            background: var(--dark-border);
+        }
+    </style>
+</head>
+<body class="dark">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <span class="sun">☀️</span><span class="moon" style="display:none">🌙</span>
+    </button>
+    
+    <div class="container">
+        <header>
+            <h1>grainflow</h1>
+            <p class="tagline">Flow through all platforms. Deploy transcendently.</p>
+        </header>
+        
+        <div class="versions">
+            <a href="README.md" class="version-link">📖 Full Guide</a>
+            <a href="LISTEN.md" class="version-link">🎧 Audio Version</a>
+            <a href="GRAINCARD.md" class="version-link">🃏 Graincard</a>
+            <a href="GRAINCARD-AUDIO.md" class="version-link">🎵 Graincard Audio</a>
+        </div>
+        
+        <section>
+            <h2>The Command</h2>
+            <div class="command">
+                bb flow "your message"
+            </div>
+            <p>That's grainflow. One command. Everything flows.</p>
+        </section>
+        
+        <section>
+            <h2>What Flows</h2>
+            <div class="flow-diagram">
+                Your Code<br>
+                ↓<br>
+                <span class="accent">grainflow</span><br>
+                ↓<br>
+                ┌────┬────┬────┐<br>
+                ↓    ↓    ↓    ↓<br>
+                GitHub Codeberg Pages Sync<br>
+                ↓<br>
+                <span class="green">Live Everywhere</span>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Why Flow</h2>
+            <p>
+                <span class="accent">Ten steps become one.</span>
+                Complexity becomes simple.
+                Push becomes flow.
+            </p>
+            <p style="margin-top: 1rem;">
+                Your brain saves energy. Your time multiplies. Your code reaches users.
+            </p>
+        </section>
+        
+        <section>
+            <h2>The Vision</h2>
+            <p>
+                Today: Flow to <span class="green">GitHub + Codeberg</span>
+            </p>
+            <p>
+                Tomorrow: Flow to <span class="green">ICP + Hedera + Solana L2</span>
+            </p>
+            <p style="margin-top: 1rem;">
+                Same command. More reach. Infinite flow.
+            </p>
+        </section>
+        
+        <section>
+            <h2>Zero Knowledge Integration</h2>
+            <p>
+                Prove without revealing. Deploy without configuring.
+            </p>
+            <p style="margin-top: 1rem;">
+                <span class="green">Zero knowledge</span> about deployment complexity.
+                <span class="accent">Full knowledge</span> that it worked.
+            </p>
+        </section>
+        
+        <section>
+            <h2>For Hackers</h2>
+            <p>
+                Built on <span class="green">DeOS principles</span>:
+                Deterministic. Immutable. Composable. Declarative.
+            </p>
+            <p style="margin-top: 1rem;">
+                Source code is simple. Read it. Understand it. Trust it.
+            </p>
+        </section>
+        
+        <section>
+            <h2>The Promise</h2>
+            <p>
+                ✓ Append-only (never delete)<br>
+                ✓ Synchronized (all platforms)<br>
+                ✓ Automatic (no manual steps)<br>
+                ✓ Simple (stays that way forever)
+            </p>
+        </section>
+        
+        <footer>
+            <p><strong>teamflow12</strong> - Pisces ♓ / XII. The Hanged Man</p>
+            <p style="margin-top: 0.5rem;">Flow simply. Deploy beautifully. Transcend automatically.</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">now == next + 1 🌾🌊</p>
+        </footer>
+    </div>
+    
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const sun = document.querySelector('.sun');
+            const moon = document.querySelector('.moon');
+            
+            if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                sun.style.display = 'none';
+                moon.style.display = 'inline';
+            } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                sun.style.display = 'inline';
+                moon.style.display = 'none';
+            }
+            
+            localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+        }
+        
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            toggleTheme();
+        }
+    </script>
+</body>
+</html>
+
