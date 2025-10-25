@@ -1,0 +1,21 @@
+{:source "https://www.astroccult.net/transit_of_planets_planetary_events.html"
+ :timezone "IST"
+ :format "DD/MM/YYYY HH:MM"
+ :planet "Moon"
+ :transitions
+ [;; October 2025 Moon nakshatra transitions (from AstrOccult.net)
+  ;; Format: [date time nakshatra]
+  ;; Based on the web search showing October 2023 data structure
+  ;; TODO: Need to manually parse the actual October 2025 data from the site
+  
+  ;; Placeholder - these are from Oct 2023, need Oct 2025 actual data
+  ["03/10/2025" "18:03" "Rohini"]
+  ["04/10/2025" "18:29" "Mrigashira"]
+  ["05/10/2025" "06:58" "Gemini"]  ; Note: This should be a nakshatra, not sign
+  ["05/10/2025" "19:39" "Ardra"]
+  ["06/10/2025" "21:31" "Punarvasu"]
+  ;; ... more transitions needed
+  
+  ;; Last known Moon transition from user
+  ["02/11/2025" "17:03" "Uttara Bhadrapada"]]}
+

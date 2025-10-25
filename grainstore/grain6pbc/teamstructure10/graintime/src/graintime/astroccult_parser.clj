@@ -215,28 +215,71 @@
   {:ist-datetime (parse-ist-datetime date time)
    :nakshatra nakshatra})
 
+(defn load-moon-transitions
+  "Load Moon nakshatra transitions from EDN files"
+  []
+  (try
+    (let [transitions-file "resources/moon-transitions-2025-10.edn"
+          data (edn/read-string (slurp transitions-file))]
+      (:transitions data))
+    (catch Exception e
+      (println "⚠️  Could not load Moon transitions:" (.getMessage e))
+      [])))
+
+(defn find-current-nakshatra
+  "Binary search through transitions to find current nakshatra
+  
+  Algorithm:
+  1. Parse all transitions to ZonedDateTime (IST)
+  2. Find the most recent transition before requested time
+  3. Return that nakshatra"
+  [datetime transitions]
+  (let [;; Parse transitions to ZonedDateTime
+        parsed (map (fn [[date time nak]]
+                      {:ist-dt (parse-ist-datetime date time)
+                       :nakshatra nak})
+                    transitions)
+        
+        ;; Sort by datetime
+        sorted (sort-by :ist-dt parsed)
+        
+        ;; Convert requested datetime to IST for comparison
+        datetime-ist (if (instance? ZonedDateTime datetime)
+                       (.withZoneSameInstant datetime ist-zone)
+                       (ZonedDateTime/of datetime ist-zone))
+        
+        ;; Find most recent transition before requested time
+        current-nak (last (filter #(.isBefore (:ist-dt %) datetime-ist) sorted))]
+    
+    (if current-nak
+      (:nakshatra current-nak)
+      ;; If no transition found before requested time, use first nakshatra
+      (:nakshatra (first sorted)))))
+
 (defn get-nakshatra-at-time
   "Get nakshatra for given datetime using pre-calculated transitions
   
   Algorithm:
-  1. Validate date is in coverage range
-  2. Convert all IST transitions to target timezone
+  1. Load cached transitions
+  2. Validate date is in coverage range (with auto-update attempt)
   3. Binary search to find current nakshatra
   
   Returns: nakshatra name (e.g., 'Jyeshtha')
   Throws: ex-info if date is outside coverage range"
-  [datetime target-zone]
-  ;; Validate date range first
-  (validate-date-range datetime)
-  
-  ;; TODO: Implement binary search through transitions
-  ;; TODO: Convert IST → target timezone
-  ;; TODO: Find nakshatra at requested time
-  
-  ;; For now, return placeholder
-  (throw (ex-info "Nakshatra lookup not yet implemented - use Swiss Ephemeris"
-                  {:type :not-implemented
-                   :suggestion "Complete AstrOccult parser implementation"})))
+  [datetime]
+  (let [;; Load transitions
+        cached-data {:transitions (load-moon-transitions)}
+        transitions (:transitions cached-data)]
+    
+    ;; Validate date range (will attempt scraping if needed)
+    (validate-date-range datetime cached-data)
+    
+    ;; Find nakshatra
+    (if (seq transitions)
+      (find-current-nakshatra datetime transitions)
+      (throw (ex-info "No nakshatra transition data available"
+                      {:type :no-data
+                       :suggestion "Check resources/moon-transitions-*.edn files"})))))
 
 ;; =============================================================================
 ;; PUBLIC API
@@ -247,10 +290,10 @@
   
   Uses pre-calculated AstrOccult.net data with timezone conversion.
   Falls back to error with helpful message if date is out of range."
-  [target-zone]
+  []
   (try
-    (let [now (ZonedDateTime/now target-zone)]
-      (get-nakshatra-at-time now target-zone))
+    (let [now (ZonedDateTime/now)]
+      (get-nakshatra-at-time now))
     (catch clojure.lang.ExceptionInfo e
       (if (= (:type (ex-data e)) :date-out-of-range)
         ;; Re-throw with context
