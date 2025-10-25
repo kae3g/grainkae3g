@@ -12,6 +12,8 @@
 ;; This file contains legacy code for reference only
 ;; Real-time fallback: Users can check https://www.astromitra.com/transit/planetary-transit-in-nakshatra.php
 
+(def astromitra-url "https://www.astromitra.com/transit/planetary-transit-in-nakshatra.php") ; DEPRECATED - for reference only
+
 (defn format-timezone
   "Format timezone offset as timezone abbreviation"
   [offset-hours]
@@ -119,14 +121,11 @@
     {:hour midnight-hour :minute (:minute noon) :fractional (+ midnight-hour (/ (:minute noon) 60.0))}))
 
 (defn parse-transit-table
-  "Parse the HTML table from Astromitra.com to extract planetary positions
+  "DEPRECATED: Old Astromitra scraping code (not used)
   
-  Based on Astromitra.com Tropical Zodiac data for Oct 22, 2025 22:03:51 PDT
-  Location: Sonoma, California, United States"
+  We now use AstrOccult.net pre-calculated data via astroccult_parser.clj"
   [html]
-  ;; This would need a proper HTML parser like hickory
-  ;; For now, return mock data based on the real Astromitra.com tropical chart
-  ;; Based on the actual tropical chart data from Oct 22, 2025 22:03:51 PDT
+  ;; DEPRECATED: Mock data for backward compatibility only
   {:sun {:sign "Scorpio" :degree "0°03'" :nakshatra "Chitra" :pada 4 :lord "Mars"}
    :moon {:sign "Scorpio" :degree "18°31'" :nakshatra "Vishakha" :pada 2 :lord "Jupiter"}
    :mars {:sign "Scorpio" :degree "21°14'" :nakshatra "Vishakha" :pada 3 :lord "Jupiter"}
@@ -147,7 +146,7 @@
     ...}"
   []
   (try
-    (let [response (http/get astromitra-base-url
+    (let [response (http/get astromitra-url
                            {:headers {"User-Agent" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"}})
           html (:body response)]
       (parse-transit-table html))
