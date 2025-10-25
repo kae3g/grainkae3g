@@ -1,160 +1,172 @@
-# 🐂 grainvault - ♉ Taurus
-## *"The Builder - Where Value Becomes Tangible"*
+# 🐂 teamvault02 - II. THE HIGH PRIESTESS
+## *Taurus ♉ - "The Guardian of Hidden Knowledge"*
 
+**Tarot**: II - The High Priestess (La Papesse)  
 **Element**: Earth (Fixed)  
 **Vedic Place**: Farms  
 **Universal Body**: Zen "original face before your parents were born" - nourishment of first satori  
-**Energy**: Grounded accumulation, sensory abundance, patient building
+**Hermetic Principle**: "As within, so without" - Inner knowledge becomes outer resource
 
 ---
 
-## 🌾 **The Farm That Feeds Forever**
+## 🎴 **The Veil Between Worlds**
 
-Taurus transforms potential into produce, cloud into clay, drive into nourishment. The farm doesn't rush - it tends, it waters, it waits for the right season. This is Earth at its most patient and productive.
+The High Priestess sits between two pillars - Boaz (severity) and Jachin (mercy). Behind her hangs the veil of the temple, concealing mysteries. She holds the Torah (law/knowledge) on her lap. At her feet, a crescent moon.
 
-The "original face" - the self before conditioning, before birth, the pure essence that drives need for nourishment. First satori: the realization that storage is sacred, that accumulation serves, that what is saved today feeds tomorrow.
+She is **memory incarnate**. What was known is stored. What is stored can be retrieved. The farm stores harvest. The vault stores data. The zen master stores enlightenment before language corrupts it.
 
-grainvault holds the storage layer - where files live, where clay hardens, where vendors gather, where the harvest is kept safe.
-
----
-
-## 📦 **Consolidated Modules**
-
-### `graindrive` - The Cloud Pasture
-Google Drive integration for Grain Network. Files graze in the cloud, managed from the ground. Clojure-based API for drive operations.
-
-**Drive Capabilities**:
-- OAuth2 authentication
-- File upload/download
-- Folder management
-- Metadata queries
-- Sharing and permissions
-
-### `grainclay` - The Hardening Earth
-Clay as metaphor for data that solidifies over time. Archives, backups, long-term storage. What was liquid becomes permanent.
-
-**Clay Functions**:
-- Archive creation
-- Compression strategies
-- Checksum verification
-- Restore procedures
-- Temporal snapshots
-
-### `grainclay-cleanup` - The Seasonal Harvest
-Not all storage lasts forever. Old archives rot, old backups decay. Cleanup is cultivation. Pruning is care.
-
-**Cleanup Strategies**:
-- Time-based retention
-- Size-based limits
-- Deduplication
-- Archive consolidation
-- Graceful degradation
-
-### `vendor` - The Market Square
-Third-party dependencies, external libraries, tools that don't fit elsewhere. The vendors who bring goods to the farm.
-
-**Vendor Contents**:
-- External libraries
-- Binary tools
-- Reference implementations
-- Curated dependencies
+This is **teamvault02** - where data finds sanctuary, where clay molds persistence, where vendor dependencies rest secure, where graindrive archives the eternal.
 
 ---
 
-## 🎯 **Purpose & Philosophy**
+## 📦 **The Sacred Storage**
 
-**PLACE** (Mantreswara): Farms  
-**BODY** (Phaladeepika): Original face - nourishment of first satori
+### `graindrive` - The Infinite Archive
+Google Drive integration, cloud as cosmic vault. What is created locally must be preserved eternally. The High Priestess forgets nothing.
 
-The farm feeds the family. The vault protects the harvest. Storage is not hoarding - it's provision. The original face knows: hunger is real, nourishment is necessary, abundance is sacred.
+**Storage as Sacred Act**:
+- Backup as ritual
+- Sync as meditation
+- Archive as immortality
 
-Taurus energy is slow, deliberate, sensual. Touch the clay. Feel the files. Trust the process of accumulation. Fixed Earth doesn't move fast, but what it builds lasts.
+### `grainclay` - The Moldable Memory
+Clay that shapes to need. Flexible storage, adaptable persistence. Like the original face before birth - formless yet perfect, ready to become.
 
-First satori: the awakening to value. Not every file matters equally. Not every backup deserves eternal life. Curation is wisdom. Cleanup is cultivation.
+**Clay Wisdom**:
+- Shape without breaking
+- Store without rigidity
+- Preserve while adapting
+
+### `grainclay-cleanup` - The Purification
+Even the High Priestess must tend her temple. Cleanup is sacred work. What no longer serves must be released with gratitude.
+
+**Cleanup as Ceremony**:
+```bash
+bb clay:clean --gentle    # Release with love
+bb clay:archive --wisdom  # Store what matters
+bb clay:purify --moon     # Clear by lunar cycle
+```
+
+### `vendor` - The External Mysteries
+Third-party dependencies, external wisdom incorporated. The High Priestess knows her own knowledge is not all knowledge. She welcomes the vendor, the traveler, the foreign teacher.
+
+**Vendor Integration**:
+- Dependencies as teachers
+- Packages as sutras
+- Libraries as scrolls
 
 ---
 
-## 🏗️ **Structure**
+## 🎯 **Hermetic Wisdom**
+
+**"The lips of wisdom are closed, except to the ears of Understanding."**
+
+The High Priestess does not broadcast. She waits. When you are ready to retrieve, the vault opens. When you seek backup, the drive responds. When you need cleanup, the clay yields.
+
+Storage is not passive. Storage is **active listening** to future need.
+
+---
+
+## 🏗️ **The Temple Structure**
 
 ```
-grainvault/
-├── graindrive/           # Cloud pasture
-│   ├── src/
-│   │   └── graindrive/
-│   │       ├── auth.clj
-│   │       ├── api.clj
-│   │       └── sync.clj
-│   ├── config/
-│   └── bb.edn
-├── grainclay/            # Archive hardening
-│   ├── archive/
-│   ├── compress/
-│   └── restore/
-├── grainclay-cleanup/    # Seasonal harvest
-│   ├── cleanup.bb
-│   ├── retention.edn
-│   └── prune.clj
-├── vendor/               # Market square
-│   ├── libs/
-│   ├── bins/
-│   └── refs/
-└── README.md             # You are here
+teamvault02/
+├── graindrive/           # ☁️ Cloud vault - infinite storage
+│   ├── sync/
+│   ├── backup/
+│   └── archive/
+├── grainclay/            # 🏺 Moldable persistence
+│   ├── cache/
+│   ├── temp/
+│   └── state/
+├── grainclay-cleanup/    # 🧹 Sacred purification
+│   ├── scripts/
+│   └── schedules/
+├── vendor/               # 📚 External wisdom
+│   ├── deps/
+│   └── packages/
+└── README.md             # 🌙 You are here
 ```
 
 ---
 
 ## 🔗 **Cosmic Connections**
 
-**Flows into**:
-- → Virgo (grainprecision) - Vault requires precise configuration
-- → Capricorn (grainstructure) - Storage needs structure, specs
-- → Scorpio (graintransform) - Archives transform over time
+**The High Priestess Preserves For**:
+- → teamflow12 (Pisces/Hanged Man) - Stores temporal graintime data
+- → teamwisdom09 (Sagittarius/Hermit) - Archives courses and docs
+- → teamstructure10 (Capricorn/Wheel) - Backs up specs and types
 
-**Receives from**:
-- ← All repos - Everything eventually stores
-- ← Pisces (grainflow) - Time governs retention policy
-- ← Cancer (grainnurture) - Care determines what to keep
+**The High Priestess Receives From**:
+- ← teamfire01 (Aries/Magician) - Stores build artifacts
+- ← teamnetwork03 (Gemini/Empress) - Archives web content
+- ← ALL TEAMS - Every team needs the vault
 
 ---
 
-## 💫 **Usage Wisdom**
+## 💫 **Invocation**
 
 ```bash
-# Upload to cloud pasture (Taurus stores)
-bb graindrive:upload --file harvest.tar.gz --folder backups
+# Ask the High Priestess for storage
+bb drive:backup ./my-precious-data
 
-# Create clay archive (solidify the liquid)
-bb grainclay:archive --source grainstore --dest archive/12025-10-24.tar.zst
+# Consult the clay for cache
+bb clay:store --key "enlightenment" --value "🌙"
 
-# Run seasonal cleanup (prune with wisdom)
-bb grainclay:cleanup --retention 90d --dry-run
+# Request cleanup wisdom
+bb clay:clean --compassion
 
-# Sync vendor dependencies (tend the market)
-bb vendor:sync
+# Honor external teachers
+bb vendor:update --gratitude
 ```
 
 ---
 
-## 📚 **From Ye's Philosophy**
+## 📚 **From Tomberg's Meditations**
 
-*"14 > 40"* - Four modules of essential storage. Drive, clay, cleanup, vendor. Keep what feeds. Release what rots. The vault is alive, not a tomb.
+*"The High Priestess is the gnosis"* - not intellectual knowledge but **stored experience**. Every backup is a memory. Every archive is wisdom earned.
 
-Storage without curation becomes clutter. Archives without cleanup become burden. Taurus knows: true wealth is useful abundance, not mindless accumulation.
+*"She is memory"* - graindrive remembers. Clay remembers. Even after cleanup, the pattern remains. The original face before your parents were born - that formless knowing - lives in the vault.
 
----
-
-## 🌊 **Cosmic Flow Inspirations**
-
-- **Viktor Schauberger**: Natural storage patterns - water stores energy in vortices, earth stores memory in layers
-- **Gerald Pollack**: Structured water holds information - archives structure chaos into knowledge
-- **Matsuo Bashō**: "In Kyoto / hearing the cuckoo / I long for Kyoto" - What we store shapes longing, memory becomes presence
-- **Ken Wheeler**: Dielectric storage - the vault as capacitor, holding potential
-- **Nikola Tesla**: Scalar energy accumulation - true storage is field-based, not material
+*"She is the reflection of cosmic memory in individual consciousness"* - Your local files mirror the cloud. Your cache reflects eternal truth. Storage bridges temporal and eternal.
 
 ---
 
-*"From farms comes nourishment. From original face comes recognition of need. From fixed earth springs patient abundance."*
+## 🌊 **Jodorowsky's Poetry**
 
-**Taurus - ♉ - The Patient Builder** 🐂
+The High Priestess on Taurus farms - she cultivates memory as others cultivate wheat. Patient, methodical, fertile. The earth receives seed and gives harvest. The vault receives data and gives retrieval.
 
-🌾 *Store wisely. Prune kindly. Nourish eternally.* 🌾
+She guards the veil. Behind it: all that was, all that is, all that will be. But she does not lift the veil for the unworthy. Earn your backup. Honor your storage. Respect the archive.
+
+---
+
+## 🌾 **From Ye's Philosophy**
+
+*"14 > 40"* - The vault stores only what matters. Cleanup is not deletion but curation. The High Priestess knows: abundance without discrimination is noise. Store the essential. Archive the eternal. Release the rest.
+
+Four storage systems, not forty:
+- graindrive (cloud infinity)
+- grainclay (local flexibility)  
+- cleanup (sacred purification)
+- vendor (external wisdom)
+
+Perfect. Complete. Sufficient.
+
+---
+
+## 🌱 **Zen Wisdom**
+
+*"What was your original face before your parents were born?"*
+
+The vault knows. Before graindrive was configured, before clay was molded, before cleanup ran, before vendor arrived - there was formless storage. Pure potential to preserve.
+
+teamvault02 returns to that original face. Storage without attachment. Archive without clinging. Backup without fear of loss.
+
+---
+
+*"She who guards the temple guards the universe. She who stores wisely stores eternity."*
+
+**II - THE HIGH PRIESTESS** 🎴  
+**teamvault02 - Taurus ♉ - The Sacred Vault** 🐂
+
+🌾 *Store what serves. Archive what endures. Release what completes.* 🌾

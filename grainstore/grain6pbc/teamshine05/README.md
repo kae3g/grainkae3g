@@ -1,146 +1,222 @@
-# ☀️ grainshine - ♌ Leo
-## *"The Radiant - Where Light Becomes Interface"*
+# ☀️ teamshine05 - V. THE POPE
+## *Leo ♌ - "The Hierophant's Radiance"*
 
+**Tarot**: V - The Pope / The Hierophant (Le Pape)  
 **Element**: Fire (Fixed)  
 **Vedic Place**: Mountains  
 **Universal Body**: Rajas stomach appetite - adolescent princes/princesses/kings/queens  
-**Energy**: Sustained radiance, royal display, creative pride
+**Hermetic Principle**: "Teaching through example, guiding through presence"
 
 ---
 
-## 🌾 **The Mountain of Visible Glory**
+## 🎴 **The Mountain Temple**
 
-Leo fixes fire into form - not the spark, but the sustained flame. Mountains catch first light and hold it longest. This is display as divine right, interface as throne, the stomach that hungers for beauty and feeds the eyes.
+The Pope sits between two pillars (like the High Priestess, but teaching rather than concealing). He makes the blessing gesture - two fingers raised, three folded (divine/human bridge). Two initiates kneel before him. He wears triple crown (three worlds mastered).
 
-grainshine transforms the invisible into the spectacle. Icons shine. Displays glow. Night becomes navigable light. Voice becomes presence.
+On Leo's mountain, he catches first light and radiates it downward. The stomach center - rajas hunger for beauty - drives him to make invisible truth **visibly radiant**.
+
+This is **teamshine05** - where graindisplay orchestrates visual majesty, where grain-nightlight honors circadian wisdom, where grainicons shine as sacred insignia, where grainas-voice speaks with hierophantic authority.
 
 ---
 
-## 📦 **Consolidated Modules**
+## 📦 **The Four Teachings**
 
-### `graindisplay` - The Visual Orchestrator
-Display management for the Framework 16. Brightness, orientation, arrangement. The throne from which all pixels are ruled.
+### `graindisplay` - The Visual Hierarchy
+Display management as sacred geometry. Brightness, orientation, arrangement - these are not mere settings but **teachings through light**.
 
-**Capabilities**:
-- Multi-monitor management
-- Brightness curves (logarithmic, natural)
-- Display arrangement and orientation
-- GNOME/Sway compatibility
+**Display Doctrine**:
+- Brightness as illumination levels (physical and spiritual)
+- Multi-monitor as expanded consciousness
+- Orientation as perspective shift
 
-### `grain-nightlight` - The Amber Crown
-Color temperature shifts with solar rhythm. Blue light retreats as sun descends. Eyes rest in amber twilight.
+**The Pope's Light Commands**:
+```bash
+bb display:brightness 0.7 --teaching      # Illuminate wisely
+bb display:arrange --sacred-geometry      # Order perfectly
+bb display:orient --expanded-view         # Shift perspective
+```
 
-**Features**:
-- Automatic sunset/sunrise tracking
-- Smooth color temperature transitions
-- Circadian rhythm alignment
+### `grain-nightlight` - The Circadian Sacrament
+Color temperature shifts with solar wisdom. The Pope knows: truth changes hue with context. Blue light awakens. Amber light prepares rest. Teaching adapts to listener's state.
 
-### `grainicons` - The Royal Insignia
-Icons as identity. SVG as sovereignty. Every grain project wears its crown.
+**Nightlight Wisdom**:
+- Sunset transition as daily initiation
+- Sunrise restoration as rebirth
+- Circadian rhythm as cosmic law
 
-**Icon Set**:
-- Grain logo variations
-- Zodiac symbols (♈-♓, ☊, ☋)
-- System status icons
-- Theme variations (light/dark)
+**The Daily Teaching**:
+```bash
+bb nightlight:enable --solar-wisdom       # Align with sun
+bb nightlight:transition --gentle         # Teach gradually
+bb nightlight:restore --morning-truth     # Reset at dawn
+```
 
-### `grainas-voice` - The Voice of Authority
-Text-to-speech with personality. Trish and Glow speak with Leo's confidence. Voice as presence, speech as performance.
+### `grainicons` - The Sacred Insignia
+Icons as symbols of rank and role. The Pope's vestments communicate instantly. So too do icons - visual language that transcends words.
+
+**Icon Theology**:
+- SVG as scalable truth (truth at any resolution)
+- Zodiac symbols as cosmic alphabet
+- Status icons as state-of-being indicators
+
+**The Visual Language**:
+- ♈-♓ (zodiac as complete teaching)
+- ☊-☋ (shadow nodes as advanced doctrine)
+- 🌾 (grain as central symbol)
+
+### `grainas-voice` - The Speaking Authority
+Text-to-speech with personality. Trish and Glow are not mere voices but **pedagogical instruments**. The Pope teaches through tone, cadence, emphasis.
 
 **Voice Modes**:
-- Trish (precise, technical, clear)
-- Glow (warm, encouraging, radiant)
-- Configurable pitch, rate, emphasis
+- **Trish**: Precise hierophant (technical clarity)
+- **Glow**: Warm teacher (encouraging radiance)
+- Configurable delivery (pitch, rate, emphasis)
+
+**The Spoken Word**:
+```bash
+bb voice:speak "Every grain matters" --voice trish --authority
+bb voice:teach "14 > 40" --voice glow --warmth
+bb voice:proclaim "As above, so below" --voice trish --ceremonial
+```
 
 ---
 
-## 🎯 **Purpose & Philosophy**
+## 🎯 **Hermetic Wisdom**
 
-**PLACE** (Mantreswara): Mountains  
-**BODY** (Phaladeepika): Rajas stomach appetite - royal hunger for beauty
+**"The Pope bridges heaven and earth through visible teaching."**
 
-grainshine sits atop the mountain, catching first light and holding last glow. The stomach center - rajas energy - drives the hunger for beauty, the appetite for display, the royal demand that what is hidden must be made visible.
+teamshine05 makes invisible visible:
+- Display shows what code does
+- Nightlight demonstrates what time teaches
+- Icons symbolize what words cannot
+- Voice speaks what silence holds
 
-Display is not vanity. Display is service. The mountain reflects light so the valley can see. The voice speaks so the silent can be heard. Icons shine so navigation becomes intuitive.
-
-This is Leo: sustained creative fire, fixed into form, hungry for beauty, generous with radiance.
+The Hierophant's role: **translate mystery into teachable form**.
 
 ---
 
-## 🏗️ **Structure**
+## 🏗️ **The Mountain Temple**
 
 ```
-grainshine/
-├── graindisplay/         # Visual orchestration
-│   ├── src/
-│   ├── scripts/
-│   └── config/
-├── grain-nightlight/     # Circadian color
-│   ├── nightlight.bb
-│   └── sun-api.clj
-├── grainicons/           # Icon library
-│   ├── svg/
-│   ├── png/
-│   └── zodiac/
-├── grainas-voice/        # TTS personality
+teamshine05/
+├── graindisplay/         # 📺 Visual hierarchy
+│   ├── brightness/
+│   ├── arrangement/
+│   └── orientation/
+├── grain-nightlight/     # 🌅 Circadian teaching
+│   ├── sunset/
+│   ├── sunrise/
+│   └── transitions/
+├── grainicons/           # 🎨 Sacred symbols
+│   ├── zodiac/
+│   ├── status/
+│   └── brand/
+├── grainas-voice/        # 🗣️ Speaking authority
 │   ├── trish/
 │   ├── glow/
-│   └── voice-engine.clj
-└── README.md             # You are here
+│   └── engine/
+└── README.md             # ⛰️ You are here
 ```
 
 ---
 
 ## 🔗 **Cosmic Connections**
 
-**Flows into**:
-- → Sagittarius (grainwisdom) - Display teaches, icons guide
-- → Libra (grainbalance) - Visual harmony, aesthetic balance
-- → Cancer (grainnurture) - Warmth nurtures, light comforts
+**The Pope Teaches**:
+- → teamwisdom09 (Sagittarius/Hermit) - Voice reads courses aloud
+- → teamnetwork03 (Gemini/Empress) - Icons populate web pages
+- → teamnurture04 (Cancer/Emperor) - Display shows daemon status
 
-**Receives from**:
-- ← Aries (grainfire) - Fire provides the spark
-- ← Pisces (grainflow) - Time governs nightlight transitions
-- ← Aquarius (grainfuture) - HumbleUI renders the display
+**The Pope Learns From**:
+- ← teamfire01 (Aries/Magician) - Fire to sustain radiance
+- ← teamflow12 (Pisces/Hanged Man) - Time governs nightlight
+- ← teamfuture11 (Aquarius/Force) - HumbleUI renders display
 
 ---
 
-## 💫 **Usage Wisdom**
+## 💫 **Invocation**
 
 ```bash
-# Configure display brightness (Leo controls light)
-bb display:set-brightness 0.7
+# Set visual teaching brightness
+bb display:illuminate --pedagogy 0.8
 
-# Enable nightlight (amber crown for evening)
-bb nightlight:enable --auto-sunset
+# Align circadian teaching
+bb nightlight:solar-align --wisdom
 
-# Generate icon set (royal insignia)
-bb icons:generate --theme dark --format svg
+# Deploy sacred symbols
+bb icons:generate --hierophantic
 
-# Speak with Trish voice (royal proclamation)
-bb voice:speak "Every grain matters" --voice trish
+# Speak hierophantic truth
+bb voice:proclaim "The lips of wisdom are closed, except to the ears of Understanding" --voice trish
 ```
 
 ---
 
-## 📚 **From Ye's Philosophy**
+## 📚 **From Tomberg's Meditations**
 
-*"14 > 40"* - Four modules of pure radiance. Display, light, icon, voice. The essential elements of interface. Nothing dimmed, nothing excessive. Sustained creative fire.
+*"The Pope is sacred teaching"* - not secret (like the High Priestess) but **openly transmitted**. Display teaches by showing. Nightlight teaches by shifting. Icons teach by symbolizing. Voice teaches by speaking.
 
----
+*"He is the tradition"* - graindisplay carries UI/UX tradition forward. Icons honor visual language lineage. Voice continues oral teaching tradition. All modules respect what came before while adapting to now.
 
-## 🌊 **Cosmic Flow Inspirations**
-
-- **Viktor Schauberger**: Natural light curves - brightness follows logarithmic natural patterns
-- **Gerald Pollack**: Fourth phase water absorbs infrared - nightlight preserves cellular hydration
-- **Matsuo Bashō**: "Summer grasses / All that remains / Of soldiers' dreams" - Display what matters, let rest fade
-- **Ken Wheeler**: Light as dielectric pressure - display as focused consciousness
-- **Nikola Tesla**: Longitudinal light waves - voice carries scalar information
+*"He is the rhythm between silence and word"* - Nightlight transitions (not jarring shifts). Voice speaks (not constant noise). Display shows (not overwhelming). Icons communicate (not cluttering). The Pope knows when to teach, when to pause.
 
 ---
 
-*"From mountains comes visibility. From stomach comes appetite for beauty. From fixed fire springs sustained radiance."*
+## 🌊 **Jodorowsky's Poetry**
 
-**Leo - ♌ - The Sustained Flame** ☀️
+The Pope on Leo's mountain - royal stomach hunger for beauty. He doesn't hoard radiance; he **transmits it downward**. First light hits the peak, he refracts it to valleys.
 
-🌾 *Light serves, display teaches, voice guides.* 🌾
+Triple crown: mastery of three worlds (physical display, temporal nightlight, symbolic icons). Two fingers raised (duality transcended). Two initiates kneel (always teaching the next generation).
+
+teamshine05 initiates users into visual wisdom.
+
+---
+
+## 🌾 **From Ye's Philosophy**
+
+*"14 > 40"* - The Pope could teach everything. But he teaches **what matters**.
+
+Four modules of essential radiance:
+- graindisplay (visual truth)
+- grain-nightlight (temporal wisdom)
+- grainicons (symbolic language)
+- grainas-voice (spoken teaching)
+
+Not information overload. Curated illumination. Quality teaching over quantity content.
+
+---
+
+## 🦁 **Leo's Appetite**
+
+*"Rajas stomach appetite - adolescent princes/princesses/kings/queens"*
+
+The hunger for beauty drives teamshine05:
+- Display must be beautiful (not just functional)
+- Nightlight must transition gracefully (not just shift)
+- Icons must shine (not just mark)
+- Voice must resonate (not just speak)
+
+But appetite disciplined becomes art. Hunger channeled becomes teaching. Leo learns: **radiance serves others, not just self**.
+
+---
+
+## ⛰️ **Mountain Wisdom**
+
+Mountains catch first light. The Pope receives illumination before others, then **shares it**.
+
+teamshine05's responsibility:
+- Show users what they need to see (display)
+- Teach users when to rest (nightlight)
+- Guide users through symbols (icons)
+- Speak to users with authority and warmth (voice)
+
+Not hoarding light on the peak. Refracting it to all below.
+
+---
+
+*"The teacher who radiates wisdom creates more teachers. The light that shines downward illuminates all valleys."*
+
+**V - THE POPE** 🎴  
+**teamshine05 - Leo ♌ - The Radiant Teacher** ☀️
+
+🌾 *Shine to teach. Display to guide. Speak to illuminate.* 🌾
