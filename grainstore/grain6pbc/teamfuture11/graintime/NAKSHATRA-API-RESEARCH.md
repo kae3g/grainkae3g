@@ -221,7 +221,28 @@ Test against known values from:
 
 ---
 
-**Status:** Research complete. Simple mean motion is **insufficient** (76° error!). Must implement Swiss Ephemeris.
+**Status:** Research complete. Multiple paths forward identified.
+
+## Solution Path Chosen
+
+**PRIMARY: AstrOccult.net + Swiss Ephemeris Hybrid**
+
+1. **Short-term (Oct 2023 - Nov 2025):** Use AstrOccult.net pre-calculated Moon data
+   - Coverage: Oct 3, 2023 → Nov 2, 2025 (IST-based)
+   - Format: DD/MM/YYYY HH:MM IST
+   - Source: https://www.astroccult.net/transit_of_planets_planetary_events.html
+   - Strategy: Parse once, cache in EDN, binary search for lookups
+
+2. **Long-term (any date, any location):** Swiss Ephemeris calculations
+   - Formula: Tropical → apply ayanamsa → Sidereal → divide by 13.333° → nakshatra
+   - Verify against AstrOccult IST data first
+   - Once verified, works for ANY date (past, present, future)
+   - See: SWISS-EPHEMERIS-CONVERSION.md
+
+3. **Fallback for out-of-range dates:** Glow-style error
+   - Points to: https://www.astromitra.com/transit/planetary-transit-in-nakshatra.php
+   - Real-time lookups when our data doesn't cover it
+   - See: astroccult_parser.clj
 
 ## Immediate Action Plan
 
