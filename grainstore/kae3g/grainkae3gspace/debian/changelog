@@ -1,0 +1,25 @@
+grainspace (0.1.0-1) unstable; urgency=medium
+
+  * Initial release of Grainspace
+  * Features:
+    - ICP (Internet Computer Protocol) canister integration
+    - Nostr decentralized social protocol support
+    - Urbit personal server network integration
+    - Grainspace Network identity management
+    - Self-hosted AI development (Qwen3, Gemini, Llama, GPT-OS)
+    - Native AVIF photo management
+    - E-ink writing device integration (Grainwriter)
+    - External GPU acceleration support (Grainpack)
+    - Decentralized identity via Urbit Azimuth
+    - Multi-chain payment support (ICP + Solana)
+  * Supported platforms:
+    - Ubuntu 20.04 LTS and later
+    - Debian 11 (Bullseye) and later
+  * Package management:
+    - Systemd service integration
+    - s6 supervision support
+    - Comprehensive documentation
+
+ -- kae3g <kj3x39@gmail.com>  Wed, 22 Jan 2025 00:00:00 +0000
+
+

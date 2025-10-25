@@ -1,0 +1,12 @@
+[submodule "docs/urbit-docs"]
+	path = docs/urbit-docs
+	url = https://github.com/urbit/docs.git
+[submodule "docs/urbit-source"]
+	path = docs/urbit-source
+	url = https://github.com/urbit/urbit.git
+[submodule "tools/wl-gammarelay"]
+	path = tools/wl-gammarelay
+	url = https://github.com/jeremija/wl-gammarelay.git
+[submodule "urbit-source"]
+	path = urbit-source
+	url = https://github.com/urbit/urbit.git

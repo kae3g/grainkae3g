@@ -1,0 +1,6 @@
+service : {
+  getHomePage: () -> (text) query;
+  getProduct: (productId: text) -> (text) query;
+  status: () -> (text) query;
+  whoami: () -> (text) query;
+}

@@ -1,0 +1,45 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        org.clojure/core.async {:mvn/version "1.6.673"}
+        
+        ;; HTTP client for IC agent calls
+        clj-http/clj-http {:mvn/version "3.12.3"}
+        
+        ;; JSON/EDN handling
+        cheshire/cheshire {:mvn/version "5.11.0"}
+        
+        ;; Candid interface (custom implementation)
+        ;; Note: No official Clojure Candid library yet
+        
+        ;; Cryptography for signatures
+        buddy/buddy-core {:mvn/version "1.11.423"}
+        buddy/buddy-sign {:mvn/version "3.5.351"}
+        
+        ;; WebSocket for canister updates
+        http-kit/http-kit {:mvn/version "2.7.0"}
+        
+        ;; Base64 encoding (built-in Java)
+        
+        ;; Logging
+        org.clojure/tools.logging {:mvn/version "1.2.4"}
+        ch.qos.logback/logback-classic {:mvn/version "1.4.5"}
+        
+        ;; Time utilities
+        clojure.java-time/clojure.java-time {:mvn/version "1.1.0"}}
+ 
+ :aliases {:dev {:extra-paths ["dev" "test"]
+                 :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
+                              criterium/criterium {:mvn/version "0.4.6"}
+                              nubank/matcher-combinators {:mvn/version "3.8.5"}}}
+           
+           :test {:extra-paths ["test"]
+                  :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
+                               lambdaisland/kaocha {:mvn/version "1.77.1236"}}}
+           
+           :build {:deps {io.github.clojure/tools.build {:git/tag "v0.9.2" :git/sha "fe6b140"}}
+                   :ns-default build}
+           
+           :repl {:extra-deps {nrepl/nrepl {:mvn/version "1.0.0"}
+                               cider/cider-nrepl {:mvn/version "0.30.0"}}}}}
+
+

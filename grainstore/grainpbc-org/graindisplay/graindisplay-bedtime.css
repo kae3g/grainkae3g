@@ -1,0 +1,393 @@
+/* GrainDisplay Bedtime Warm Theme */
+/* 🌾 Grain Network - Warm Red-Orange Bedtime Colors */
+
+:root {
+  /* Primary Colors */
+  --warm-red: #D2691E;        /* Chocolate - Primary accent */
+  --deep-orange: #FF8C00;     /* Dark Orange - Secondary accent */
+  --burnt-orange: #CC5500;    /* Burnt Orange - Tertiary accent */
+  --warm-brown: #8B4513;      /* Saddle Brown - Dark accents */
+  
+  /* Background Colors */
+  --warm-black: #1A0F0A;      /* Very dark red-brown */
+  --warm-dark: #2D1B13;       /* Dark red-brown */
+  --warm-gray: #3D2B1F;       /* Medium red-brown */
+  --warm-light: #4A3429;      /* Light red-brown */
+  
+  /* Text Colors */
+  --warm-white: #FFF8DC;      /* Cornsilk - Primary text */
+  --warm-cream: #F5DEB3;      /* Wheat - Secondary text */
+  --warm-beige: #DEB887;      /* Burlywood - Tertiary text */
+  --warm-gold: #DAA520;       /* Goldenrod - Accent text */
+  
+  /* Semantic Colors */
+  --primary: var(--warm-red);
+  --secondary: var(--deep-orange);
+  --accent: var(--burnt-orange);
+  --background: var(--warm-black);
+  --surface: var(--warm-dark);
+  --text: var(--warm-white);
+  --text-secondary: var(--warm-cream);
+  --text-muted: var(--warm-beige);
+  --border: var(--warm-gray);
+  --shadow: rgba(210, 105, 30, 0.3);
+  --glow: rgba(255, 140, 0, 0.4);
+}
+
+/* Base Styles */
+.grain-display {
+  background: var(--background);
+  color: var(--text);
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  line-height: 1.6;
+  transition: all 0.3s ease;
+}
+
+/* Warm Gradients */
+.grain-gradient-warm {
+  background: linear-gradient(135deg, var(--warm-red), var(--deep-orange));
+}
+
+.grain-gradient-cozy {
+  background: linear-gradient(45deg, var(--warm-brown), var(--burnt-orange));
+}
+
+.grain-gradient-sunset {
+  background: linear-gradient(180deg, var(--warm-red), var(--deep-orange), var(--warm-brown));
+}
+
+/* Warm Shadows and Glows */
+.grain-shadow-warm {
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+.grain-glow-warm {
+  box-shadow: 0 0 20px var(--glow);
+}
+
+.grain-glow-soft {
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.2);
+}
+
+/* Buttons */
+.grain-btn-warm {
+  background: var(--warm-red);
+  color: var(--warm-white);
+  border: 2px solid var(--deep-orange);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.grain-btn-warm:hover {
+  background: var(--deep-orange);
+  box-shadow: 0 0 15px var(--glow);
+  transform: translateY(-2px);
+  border-color: var(--warm-red);
+}
+
+.grain-btn-warm:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.grain-btn-secondary {
+  background: transparent;
+  color: var(--warm-gold);
+  border: 2px solid var(--warm-gold);
+}
+
+.grain-btn-secondary:hover {
+  background: var(--warm-gold);
+  color: var(--warm-black);
+  box-shadow: 0 0 12px rgba(218, 165, 32, 0.4);
+}
+
+/* Cards */
+.grain-card-warm {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 15px var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.grain-card-warm:hover {
+  box-shadow: 0 8px 25px var(--shadow);
+  transform: translateY(-2px);
+}
+
+.grain-card-warm h1,
+.grain-card-warm h2,
+.grain-card-warm h3 {
+  color: var(--warm-gold);
+  margin-top: 0;
+}
+
+/* Code Blocks */
+.grain-code-warm {
+  background: var(--warm-black);
+  border: 1px solid var(--warm-brown);
+  border-radius: 8px;
+  padding: 16px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: var(--warm-cream);
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.grain-code-warm .comment {
+  color: var(--warm-brown);
+  font-style: italic;
+}
+
+.grain-code-warm .keyword {
+  color: var(--deep-orange);
+  font-weight: bold;
+}
+
+.grain-code-warm .string {
+  color: var(--warm-beige);
+}
+
+.grain-code-warm .function {
+  color: var(--warm-gold);
+}
+
+.grain-code-warm .number {
+  color: var(--warm-red);
+}
+
+/* Links */
+.grain-link-warm {
+  color: var(--warm-gold);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.grain-link-warm:hover {
+  color: var(--deep-orange);
+  text-shadow: 0 0 8px var(--glow);
+  border-bottom-color: var(--deep-orange);
+}
+
+.grain-link-warm:visited {
+  color: var(--warm-beige);
+}
+
+/* Forms */
+.grain-input-warm {
+  background: var(--warm-black);
+  color: var(--warm-white);
+  border: 2px solid var(--warm-gray);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.grain-input-warm:focus {
+  outline: none;
+  border-color: var(--deep-orange);
+  box-shadow: 0 0 8px var(--glow);
+}
+
+.grain-input-warm::placeholder {
+  color: var(--warm-beige);
+  opacity: 0.7;
+}
+
+/* Navigation */
+.grain-nav-warm {
+  background: var(--surface);
+  border-bottom: 2px solid var(--warm-red);
+  padding: 16px 0;
+}
+
+.grain-nav-warm a {
+  color: var(--warm-cream);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.grain-nav-warm a:hover {
+  background: var(--warm-red);
+  color: var(--warm-white);
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.grain-nav-warm a.active {
+  background: var(--deep-orange);
+  color: var(--warm-black);
+  font-weight: bold;
+}
+
+/* Tables */
+.grain-table-warm {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px var(--shadow);
+}
+
+.grain-table-warm th {
+  background: var(--warm-red);
+  color: var(--warm-white);
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.grain-table-warm td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--warm-cream);
+}
+
+.grain-table-warm tr:hover {
+  background: var(--warm-gray);
+}
+
+/* Alerts and Notifications */
+.grain-alert-warm {
+  background: var(--warm-dark);
+  border: 2px solid var(--warm-red);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.grain-alert-warm.success {
+  border-color: var(--warm-gold);
+  background: rgba(218, 165, 32, 0.1);
+}
+
+.grain-alert-warm.warning {
+  border-color: var(--deep-orange);
+  background: rgba(255, 140, 0, 0.1);
+}
+
+.grain-alert-warm.error {
+  border-color: var(--warm-red);
+  background: rgba(210, 105, 30, 0.1);
+}
+
+/* Scrollbars */
+.grain-display ::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.grain-display ::-webkit-scrollbar-track {
+  background: var(--warm-black);
+}
+
+.grain-display ::-webkit-scrollbar-thumb {
+  background: var(--warm-red);
+  border-radius: 6px;
+  border: 2px solid var(--warm-black);
+}
+
+.grain-display ::-webkit-scrollbar-thumb:hover {
+  background: var(--deep-orange);
+}
+
+/* Animations */
+@keyframes grain-glow-pulse {
+  0%, 100% { box-shadow: 0 0 5px var(--glow); }
+  50% { box-shadow: 0 0 20px var(--glow); }
+}
+
+.grain-glow-pulse {
+  animation: grain-glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes grain-fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.grain-fade-in {
+  animation: grain-fade-in 0.6s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .grain-card-warm {
+    padding: 16px;
+    margin: 8px;
+  }
+  
+  .grain-btn-warm {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+  
+  .grain-code-warm {
+    padding: 12px;
+    font-size: 13px;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --warm-red: #FF6B35;
+    --deep-orange: #FF8C00;
+    --warm-white: #FFFFFF;
+    --warm-black: #000000;
+    --shadow: rgba(255, 107, 53, 0.5);
+    --glow: rgba(255, 140, 0, 0.6);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .grain-btn-warm,
+  .grain-card-warm,
+  .grain-link-warm {
+    transition: none;
+  }
+  
+  .grain-glow-pulse {
+    animation: none;
+  }
+  
+  .grain-fade-in {
+    animation: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .grain-display {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .grain-card-warm {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+  
+  .grain-btn-warm {
+    background: #f0f0f0 !important;
+    color: black !important;
+    border: 1px solid #ccc !important;
+  }
+}

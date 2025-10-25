@@ -1,0 +1,95 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        babashka/fs {:mvn/version "0.4.19"}
+        org.babashka/cli {:mvn/version "0.8.58"}}
+ 
+ :tasks
+ {;; Development tasks
+  dev
+  {:doc "Run GrainDisplay in development mode"
+   :task (clojure "-M:dev -m graindisplay.core")}
+  
+  ;; Build tasks
+  compile
+  {:doc "Compile Clojure sources"
+   :task (clojure "-M -e '(compile 'graindisplay.core)'")}
+  
+  uberjar
+  {:doc "Build uberjar"
+   :task (clojure "-T:build uber")}
+  
+  native
+  {:doc "Build native image with GraalVM"
+   :task (shell "bb scripts/build-appimage.bb native")}
+  
+  appimage
+  {:doc "Build AppImage"
+   :task (shell "bb scripts/build-appimage.bb appimage")}
+  
+  build-all
+  {:doc "Complete build pipeline"
+   :task (shell "bb scripts/build-appimage.bb all")}
+  
+  ;; Install tasks
+  install-gnome
+  {:doc "Install GNOME integration"
+   :task (clojure "-M -m graindisplay.gnome-service install")}
+  
+  install-local
+  {:doc "Install theme locally"
+   :task (shell "bb scripts/apply-local.bb all")}
+  
+  ;; Service tasks
+  start
+  {:doc "Start GrainDisplay service"
+   :task (clojure "-M -m graindisplay.gnome-service start")}
+  
+  stop
+  {:doc "Stop GrainDisplay service"
+   :task (clojure "-M -m graindisplay.gnome-service stop")}
+  
+  status
+  {:doc "Check service status"
+   :task (clojure "-M -m graindisplay.gnome-service status")}
+  
+  ;; Theme tasks
+  demo
+  {:doc "Generate and open HTML demo"
+   :task (shell "bb scripts/apply-local.bb demo && xdg-open graindisplay-demo.html")}
+  
+  css
+  {:doc "Generate CSS variables"
+   :task (shell "bb scripts/apply-local.bb css")}
+  
+  terminal
+  {:doc "Generate terminal colors"
+   :task (shell "bb scripts/apply-local.bb terminal")}
+  
+  ;; Export tasks
+  export-svelte
+  {:doc "Export SvelteKit components"
+   :task (clojure "-M -m graindisplay.svelte-ui export ./svelte-export")}
+  
+  export-css
+  {:doc "Export CSS variables"
+   :task (clojure "-M -m graindisplay.svelte-ui css ./css-export")}
+  
+  ;; Clean tasks
+  clean
+  {:doc "Clean build artifacts"
+   :task (shell "bb scripts/build-appimage.bb clean && rm -rf target/ classes/ .cpcache/")}
+  
+  ;; Test tasks
+  test
+  {:doc "Run tests"
+   :task (clojure "-M:test")}
+  
+  ;; Graintime integration
+  grainpath
+  {:doc "Generate grainpath for this module"
+   :task (shell "gt grainpath module kae3g graindisplay")}
+  
+  ;; Help
+  help
+  {:doc "Show available tasks"
+   :task (clojure "-T:build help")}}}

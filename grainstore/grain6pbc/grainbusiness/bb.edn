@@ -1,0 +1,68 @@
+{:paths ["src" "scripts" "template" "personal" "graincards" "domains"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        babashka.fs {:mvn/version "0.3.4"}
+        clj-http {:mvn/version "3.12.3"}
+        clj-time {:mvn/version "0.15.2"}
+        java-time {:mvn/version "0.3.3"}}
+ :tasks
+ {;; Core grainbusiness commands
+  grainbusiness:help
+  {:doc "Show grainbusiness help"
+   :task (shell "bb" "scripts/grainbusiness-help.bb")}
+  
+  grainbusiness:generate
+  {:doc "Generate business plan graincards from domains"
+   :task (shell "bb" "scripts/grainbusiness-generate.bb")}
+  
+  grainbusiness:deploy
+  {:doc "Deploy grainbusiness to GitHub + Codeberg Pages"
+   :task (shell "bb" "scripts/grainbusiness-deploy.bb")}
+  
+  ;; Domain management
+  grainbusiness:domains:list
+  {:doc "List all owned domains and their status"
+   :task (shell "bb" "scripts/grainbusiness-domains-list.bb")}
+  
+  grainbusiness:domains:analyze
+  {:doc "Analyze domains for business potential"
+   :task (shell "bb" "scripts/grainbusiness-domains-analyze.bb")}
+  
+  grainbusiness:domains:generate-plans
+  {:doc "Generate business plans for each domain"
+   :task (shell "bb" "scripts/grainbusiness-domains-generate-plans.bb")}
+  
+  ;; Graincard generation
+  grainbusiness:graincards:create
+  {:doc "Create graincard for business plan"
+   :task (shell "bb" "scripts/grainbusiness-graincards-create.bb")}
+  
+  grainbusiness:graincards:list
+  {:doc "List all generated graincards"
+   :task (shell "bb" "scripts/grainbusiness-graincards-list.bb")}
+  
+  grainbusiness:graincards:deploy
+  {:doc "Deploy graincards to Pages"
+   :task (shell "bb" "scripts/grainbusiness-graincards-deploy.bb")}
+  
+  ;; Grainmarks integration
+  grainbusiness:grainmarks:import
+  {:doc "Import grainmarks for business analysis"
+   :task (shell "bb" "scripts/grainbusiness-grainmarks-import.bb")}
+  
+  grainbusiness:grainmarks:analyze
+  {:doc "Analyze grainmarks for business opportunities"
+   :task (shell "bb" "scripts/grainbusiness-grainmarks-analyze.bb")}
+  
+  ;; Grainlib integration
+  grainbusiness:grainlib:import
+  {:doc "Import grainlib for strong typing"
+   :task (shell "bb" "scripts/grainbusiness-grainlib-import.bb")}
+  
+  grainbusiness:grainlib:validate
+  {:doc "Validate business plans with grainlib types"
+   :task (shell "bb" "scripts/grainbusiness-grainlib-validate.bb")}
+  
+  ;; Default task
+  :default
+  {:task (shell "bb" "scripts/grainbusiness-help.bb")}}}
+

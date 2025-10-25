@@ -1,0 +1,123 @@
+{:paths ["src" "scripts" "template" "personal"]
+ :deps {}
+ :tasks
+ {:requires ([babashka.process :refer [shell]]
+             [clojure.string :as str]
+             [clojure.java.io :as io])
+  
+  ;; Core vegan-friendly rewrite functionality
+  vegan-rewrite
+  {:doc "Apply comprehensive vegan-friendly terminology rewrite across all file types"
+   :requires ([babashka.process :refer [shell]]
+              [clojure.string :as str])
+   :task (do
+           (println "🌱 grainsource-vegan: Applying comprehensive vegan-friendly rewrite...")
+           (println "")
+           (println "📁 Processing .md files...")
+           (shell "find . -name '*.md' -exec sed -i 's/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g; s/meat/grain/g; s/beef/wheat/g; s/pork/corn/g; s/chicken/rice/g; s/fish/bean/g; s/dairy/plant/g; s/milk/juice/g; s/cheese/nut/g; s/animal/plant/g; s/cow/tree/g; s/pig/vine/g' {} +")
+           (println "✅ .md files processed")
+           (println "")
+           (println "📁 Processing .clj files...")
+           (shell "find . -name '*.clj' -exec sed -i 's/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g; s/meat/grain/g; s/beef/wheat/g; s/pork/corn/g; s/chicken/rice/g; s/fish/bean/g; s/dairy/plant/g; s/milk/juice/g; s/cheese/nut/g; s/animal/plant/g; s/cow/tree/g; s/pig/vine/g' {} +")
+           (println "✅ .clj files processed")
+           (println "")
+           (println "📁 Processing .html files...")
+           (shell "find . -name '*.html' -exec sed -i 's/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g; s/meat/grain/g; s/beef/wheat/g; s/pork/corn/g; s/chicken/rice/g; s/fish/bean/g; s/dairy/plant/g; s/milk/juice/g; s/cheese/nut/g; s/animal/plant/g; s/cow/tree/g; s/pig/vine/g' {} +")
+           (println "✅ .html files processed")
+           (println "")
+           (println "📁 Processing .bb files...")
+           (shell "find . -name '*.bb' -exec sed -i 's/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g; s/meat/grain/g; s/beef/wheat/g; s/pork/corn/g; s/chicken/rice/g; s/fish/bean/g; s/dairy/plant/g; s/milk/juice/g; s/cheese/nut/g; s/animal/plant/g; s/cow/tree/g; s/pig/vine/g' {} +")
+           (println "✅ .bb files processed")
+           (println "")
+           (println "🌱 Vegan-friendly rewrite complete!")
+           (println "🌾 Plant-based development philosophy applied throughout"))}
+
+  ;; Template/personal separation management
+  template-setup
+  {:doc "Set up template/personal separation for grainsource-vegan"
+   :task (do
+           (println "🌱 Setting up template/personal separation...")
+           (shell "mkdir" "-p" "template" "personal")
+           (when (.exists (io/file "template/config.edn"))
+             (shell "cp" "template/config.edn" "personal/config.edn"))
+           (println "✅ Template/personal separation ready"))}
+
+  ;; 6os grainclay deployment
+  deploy-6os
+  {:doc "Deploy grainsource-vegan to 6os grainclay system"
+   :requires ([babashka.process :refer [shell]]
+              [clojure.string :as str])
+   :task (do
+           (println "🌱 Deploying grainsource-vegan to 6os grainclay...")
+           (println "")
+           (println "1️⃣ Building grainsource-vegan...")
+           (shell "bb" "uberjar")
+           (println "✅ Build complete")
+           (println "")
+           (println "2️⃣ Deploying to 6os grainclay...")
+           (shell "cp" "-r" "." "../6oskae3g/grainstore/grain6pbc/grainsource-vegan/")
+           (println "✅ Deployed to 6os grainclay")
+           (println "")
+           (println "3️⃣ Updating 6os grainclay configuration...")
+           (shell "cd" "../6oskae3g" "&&" "git" "add" "-A" "&&" "git" "commit" "-m" "feat: deploy grainsource-vegan to 6os grainclay system")
+           (println "✅ 6os grainclay updated")
+           (println "")
+           (println "🌱 grainsource-vegan deployment to 6os grainclay complete!"))}
+
+  ;; Integration with qb draw flow
+  qb-integration
+  {:doc "Integrate grainsource-vegan with qb draw flow pipeline"
+   :requires ([babashka.process :refer [shell]]
+              [clojure.string :as str])
+   :task (do
+           (println "🌱 Integrating grainsource-vegan with qb draw flow...")
+           (println "")
+           (println "1️⃣ Updating qb draw flow pipeline...")
+           (shell "cd" "../../grainbarrel" "&&" "bb" "vegan-rewrite")
+           (println "✅ qb draw flow updated")
+           (println "")
+           (println "2️⃣ Testing integration...")
+           (shell "cd" "../../grainbarrel" "&&" "bb" "qb-draw-flow" "test: grainsource-vegan integration")
+           (println "✅ Integration test complete")
+           (println "")
+           (println "🌱 grainsource-vegan integration with qb draw flow complete!"))}
+
+  ;; Complete workflow
+  flow
+  {:doc "Complete grainsource-vegan workflow: template setup, vegan rewrite, 6os deployment, qb integration"
+   :requires ([babashka.process :refer [shell]]
+              [clojure.string :as str])
+   :task (do
+           (println "🌱 grainsource-vegan complete workflow...")
+           (println "")
+           (println "1️⃣ Setting up template/personal separation...")
+           (shell "bb" "template-setup")
+           (println "")
+           (println "2️⃣ Applying vegan-friendly rewrite...")
+           (shell "bb" "vegan-rewrite")
+           (println "")
+           (println "3️⃣ Deploying to 6os grainclay...")
+           (shell "bb" "deploy-6os")
+           (println "")
+           (println "4️⃣ Integrating with qb draw flow...")
+           (shell "bb" "qb-integration")
+           (println "")
+           (println "🌱 grainsource-vegan complete workflow finished!")
+           (println "🌾 Plant-based development philosophy applied throughout")
+           (println "🌾 Multi-chain sovereignty maintained")
+           (println "🌾 now == next + 1"))}
+
+  ;; Default task
+  :default (fn [& args]
+             (println "🌱 grainsource-vegan - Plant-based development utility")
+             (println "")
+             (println "Available tasks:")
+             (println "  bb vegan-rewrite    - Apply vegan-friendly terminology")
+             (println "  bb template-setup   - Set up template/personal separation")
+             (println "  bb deploy-6os       - Deploy to 6os grainclay system")
+             (println "  bb qb-integration   - Integrate with qb draw flow")
+             (println "  bb flow             - Complete workflow")
+             (println "")
+             (println "🌾 Plant-based development philosophy")
+             (println "🌾 Multi-chain sovereignty principles")
+             (println "🌾 now == next + 1"))}}

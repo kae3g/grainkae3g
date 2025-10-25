@@ -1,0 +1,61 @@
+{:gemini
+ {:api-key "REPLACE_WITH_YOUR_GEMINI_API_KEY"  ; Get from https://aistudio.google.com/apikey
+  :model "gemini-2.5-pro-latest"
+  :temperature 0.2  ; Lower = more factual, higher = more creative
+  :max-tokens 1000000  ; 1M context window
+  :safety-settings {:harassment :block-none
+                    :hate-speech :block-none
+                    :sexually-explicit :block-low-and-above
+                    :dangerous-content :block-low-and-above}}
+ 
+ :output
+ {:dir "personal/transcriptions"
+  :format :markdown  ; or :text, :json, :edn
+  :filename-pattern "{video-id}_{date}"  ; Variables: {video-id}, {title}, {date}, {graintime}
+  :include-timestamps true
+  :include-speakers true
+  :include-summary true
+  :include-key-points true
+  :include-visual-descriptions true  ; Describe slides, code, demos
+  :chunk-size 5  ; minutes per chunk for long videos
+  :overwrite false}  ; Don't overwrite existing transcriptions
+ 
+ :youtube
+ {:extract-metadata true  ; Get title, description, duration, etc.
+  :download-thumbnail false
+  :quality-preference :highest  ; or :medium, :lowest
+  :language-hint "en"}  ; Help with transcription accuracy
+ 
+ :grainpath
+ {:generate true  ; Create grainpath-stamped output
+  :use-graintime true}  ; Use gt for timestamps
+ 
+ :prompts
+ {:transcription "Please transcribe this YouTube video with the following requirements:
+  
+1. Include precise timestamps for each section
+2. Identify different speakers if multiple people are talking
+3. Describe any visual elements shown (slides, code, demos)
+4. Maintain technical accuracy
+5. Format as clean, readable text
+
+Please provide a complete transcript with timestamps in [HH:MM:SS] format."
+  
+  :summary "Please provide a concise summary of this YouTube video including:
+
+1. Main topic and purpose
+2. Key points (3-5 bullet points)
+3. Target audience
+4. Notable quotes or insights
+5. Conclusions or takeaways"
+  
+  :code-extraction "Please extract all code snippets shown in this video, including:
+
+1. Programming language
+2. Context/purpose of the code
+3. Timestamp when it appears
+4. Full code with proper formatting"}}
+
+;; Template configuration for graintranscribe-youtube
+;; Copy this to personal/config.edn and customize
+;; Personal config overrides template values

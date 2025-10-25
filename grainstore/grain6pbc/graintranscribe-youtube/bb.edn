@@ -1,0 +1,43 @@
+{:paths ["src" "scripts" "test"]
+ 
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        babashka/fs {:mvn/version "0.5.27"}
+        clj-http {:mvn/version "3.12.3"}
+        cheshire/cheshire {:mvn/version "5.12.0"}}
+ 
+ :tasks
+ {;; Transcription tasks
+  transcribe:video
+  {:doc "Transcribe YouTube video using Gemini 2.5 Pro (usage: bb transcribe:video <url>)"
+   :task (shell "bb" "scripts/transcribe-video.bb" (or (first *command-line-args*) ""))}
+  
+  transcribe:batch
+  {:doc "Batch transcribe multiple YouTube videos from a file"
+   :task (shell "bb" "scripts/transcribe-batch.bb" (or (first *command-line-args*) "urls.txt"))}
+  
+  ;; Configuration management
+  config:show
+  {:doc "Show current graintranscribe-youtube configuration"
+   :task (shell "bb" "scripts/config-show.bb")}
+  
+  config:setup
+  {:doc "Setup graintranscribe-youtube configuration from template"
+   :task (shell "bb" "scripts/config-setup.bb")}
+  
+  config:validate
+  {:doc "Validate API key and configuration"
+   :task (shell "bb" "scripts/config-validate.bb")}
+  
+  ;; Output management
+  output:list
+  {:doc "List all transcribed videos"
+   :task (shell "bb" "scripts/output-list.bb")}
+  
+  output:clean
+  {:doc "Clean old transcription files"
+   :task (shell "bb" "scripts/output-clean.bb")}
+  
+  ;; Testing
+  test
+  {:doc "Run tests for graintranscribe-youtube"
+   :task (shell "bb" "test/graintranscribe_test.bb")}}}

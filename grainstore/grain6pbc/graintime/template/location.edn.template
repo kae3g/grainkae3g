@@ -1,0 +1,44 @@
+{:location
+ {:city "San Rafael"
+  :state "CA"
+  :country "USA"
+  :timezone "America/Los_Angeles"
+  :timezone-abbr "PST/PDT"
+  
+  ;; Coordinates for astronomical calculations
+  :latitude 37.9735
+  :longitude -122.5311
+  
+  ;; Ayanamsa (precession correction for sidereal)
+  ;; Options: :lahiri (most common), :raman, :krishnamurti
+  :ayanamsa :lahiri
+  
+  ;; Zodiac system
+  ;; :tropical (Western) or :sidereal (Vedic)
+  :zodiac :tropical
+  
+  ;; Nakshatra system (always sidereal)
+  :nakshatra-system :sidereal
+  
+  ;; House system
+  ;; :placidus, :koch, :equal, :whole-sign
+  :house-system :whole-sign}
+ 
+ :api
+ {:provider :swiss-ephemeris  ; or :astro-seek, :cosmic-insights
+  :mode :local                ; :local (Swiss Ephemeris files) or :remote (API)
+  
+  ;; For remote APIs (optional)
+  :endpoints
+  {:astro-seek "https://horoscopes.astro-seek.com/api"
+   :cosmic-insights "https://api.cosmicinsights.net/v1"}
+  
+  ;; API keys (set in personal config or grainenvvars)
+  :api-keys
+  {:astro-seek nil  ; Set in personal/.env or 1Password
+   :cosmic-insights nil}}
+ 
+ :cache
+ {:enabled true
+  :ttl-hours 24  ; Cache astronomical data for 24 hours
+  :directory ".graintime-cache"}}

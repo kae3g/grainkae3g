@@ -1,0 +1,61 @@
+{:paths ["src" "specs" "types" "api"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        org.clojure/spec.alpha {:mvn/version "0.3.218"}
+        org.clojure/core.specs.alpha {:mvn/version "0.2.62"}
+        babashka.fs {:mvn/version "0.3.4"}}
+ :tasks
+ {;; Core grainlib commands
+  grainlib:help
+  {:doc "Show grainlib help"
+   :task (shell "bb" "scripts/grainlib-help.bb")}
+  
+  grainlib:spec:validate
+  {:doc "Validate data against Clojure specs"
+   :task (shell "bb" "scripts/grainlib-spec-validate.bb")}
+  
+  grainlib:spec:generate
+  {:doc "Generate test data from specs"
+   :task (shell "bb" "scripts/grainlib-spec-generate.bb")}
+  
+  grainlib:type:check
+  {:doc "Type check with Hoon/Haskell inspiration"
+   :task (shell "bb" "scripts/grainlib-type-check.bb")}
+  
+  grainlib:api:generate
+  {:doc "Generate API documentation from specs"
+   :task (shell "bb" "scripts/grainlib-api-generate.bb")}
+  
+  grainlib:api:validate
+  {:doc "Validate API endpoints against specs"
+   :task (shell "bb" "scripts/grainlib-api-validate.bb")}
+  
+  ;; Grain6 integration
+  grainlib:grain6:specs
+  {:doc "Generate grain6 API specs"
+   :task (shell "bb" "scripts/grainlib-grain6-specs.bb")}
+  
+  grainlib:grain6:types
+  {:doc "Generate grain6 type definitions"
+   :task (shell "bb" "scripts/grainlib-grain6-types.bb")}
+  
+  grainlib:grain6:api
+  {:doc "Generate grain6 API reference"
+   :task (shell "bb" "scripts/grainlib-grain6-api.bb")}
+  
+  ;; Documentation generation
+  grainlib:docs:generate
+  {:doc "Generate comprehensive API documentation"
+   :task (shell "bb" "scripts/grainlib-docs-generate.bb")}
+  
+  grainlib:docs:car-manual
+  {:doc "Generate car manual style documentation"
+   :task (shell "bb" "scripts/grainlib-docs-car-manual.bb")}
+  
+  grainlib:docs:wiki
+  {:doc "Generate searchable wiki documentation"
+   :task (shell "bb" "scripts/grainlib-docs-wiki.bb")}
+  
+  ;; Default task
+  :default
+  {:task (shell "bb" "scripts/grainlib-help.bb")}}}
+

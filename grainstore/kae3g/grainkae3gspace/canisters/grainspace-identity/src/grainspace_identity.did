@@ -1,0 +1,57 @@
+// Candid interface for Grainspace Identity Canister
+type IdentityType = variant { Galaxy; Star; Planet; Moon };
+type VerificationStatus = variant { Pending; Verified; Failed; Revoked };
+
+type UrbitIdentity = record {
+  address: nat64;
+  identity_type: IdentityType;
+  verified: bool;
+  created_at: nat64;
+  updated_at: nat64;
+};
+
+type SocialConnection = record {
+  platform: text;
+  connected: bool;
+  access_token: opt text;
+  connected_at: nat64;
+};
+
+type GrainspaceIdentity = record {
+  unified_id: text;
+  urbit_identity: UrbitIdentity;
+  icp_principal: text;
+  verification_status: VerificationStatus;
+  social_connections: vec SocialConnection;
+  platform_access: vec text;
+  created_at: nat64;
+  last_sync: nat64;
+};
+
+type CreateIdentityArgs = record {
+  urbit_address: nat64;
+  identity_type: IdentityType;
+};
+
+service : {
+  // Identity management
+  create_identity: (CreateIdentityArgs) -> (variant { Ok: text; Err: text });
+  get_identity: (text) -> (variant { Ok: GrainspaceIdentity; Err: text });
+  get_identity_by_urbit_address: (nat64) -> (variant { Ok: GrainspaceIdentity; Err: text });
+  list_identities: () -> (vec text);
+  
+  // Social platform integration
+  connect_social_platform: (text, text) -> (variant { Ok; Err: text });
+  disconnect_social_platform: (text, text) -> (variant { Ok; Err: text });
+  
+  // Platform access
+  grant_platform_access: (text, text) -> (variant { Ok; Err: text });
+  
+  // Verification and sync
+  verify_identity: (text) -> (variant { Ok: bool; Err: text });
+  sync_identity: (text) -> (variant { Ok; Err: text });
+  
+  // Statistics
+  get_identity_stats: () -> (vec record { key: text; value: nat64 });
+}
+

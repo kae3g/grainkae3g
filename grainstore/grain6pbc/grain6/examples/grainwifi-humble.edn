@@ -1,0 +1,258 @@
+{;; 🌾 grain6 + GrainWiFi + Humble 6OS Integration
+ ;; Time-Aware Dual-WiFi Management with Beautiful UI
+ 
+ :service
+ {:name "grainwifi-humble"
+  :display-name "GrainWiFi Dual-Connection Manager"
+  :description "Forest cabin dual-wifi (Starlink + Cellular) with time-aware switching"
+  :icon "🛰️📱"
+  
+  :supervision
+  {:type :grain6
+   :restart :always
+   :log-level :info
+   :log-file "/tmp/grainwifi-grain6.log"}
+  
+  ;; Time-aware connection preferences
+  :schedule
+  {:strategy :adaptive
+   
+   ;; Work hours: Prefer Starlink (better for video calls)
+   :work-hours
+   {:solar-house [9 10 11]  ; Career houses (mid-morning to noon)
+    :prefer :starlink
+    :min-quality 70
+    :switch-threshold 2}
+   
+   ;; Evening: More aggressive fallback (downloads while cooking)
+   :evening
+   {:solar-house [6 7 8]  ; Evening houses
+    :prefer :starlink
+    :min-quality 50
+    :switch-threshold 1}
+   
+   ;; Night: Conservative switching (don't wake me up)
+   :night
+   {:solar-house [1 2 3 4]  ; Night houses
+    :prefer :cellular  ; More stable at night
+    :min-quality 40
+    :switch-threshold 5
+    :notify false}
+   
+   ;; Storm mode: Pre-emptive cellular (future: weather API)
+   :storm-mode
+   {:enabled false  ; Manual toggle
+    :prefer :cellular
+    :reason "Starlink unreliable in storms"}
+   
+   ;; Meditation hours: No notifications
+   :meditation
+   {:nakshatra ["rohini" "pushya" "uttara-phalguni"]
+    :notify false
+    :priority :stability}}  ; Don't switch unless necessary
+  
+  ;; Connection configurations
+  :connections
+  {:starlink
+   {:name "Starlink"
+    :priority 1
+    :preferred true
+    :ssid "Starlink"  ; Your actual SSID
+    :quality-checks
+    {:ping-host "1.1.1.1"
+     :ping-count 3
+     :ping-timeout 2000
+     :bandwidth-test false}  ; Too slow for frequent checks
+    :forest-optimized
+    {:retry-attempts 10
+     :exponential-backoff true
+     :max-backoff 300
+     :obst
+ruction-aware true}}  ; Trees blocking satellite
+   
+   :cellular
+   {:name "iPhone-Tethering"  ; Your actual connection name
+    :priority 2
+    :preferred false
+    :quality-checks
+    {:ping-host "8.8.8.8"
+     :ping-count 3
+     :ping-timeout 3000
+     :data-usage-tracking true}  ; Monitor cellular data
+    :cost-aware
+    {:warn-at-mb 5000  ; 5 GB warning
+     :limit-mb 10000}}}  ; 10 GB hard limit
+  
+  ;; Monitoring configuration
+  :monitoring
+  {:check-interval 30  ; Check every 30 seconds
+   :retry-interval 10
+   :switch-threshold 3  ; 3 failures before switch
+   :hysteresis 60  ; Wait 60s before switching back
+   :graintime-logging true}  ; Log all events with graintime
+  
+  ;; Desktop notifications (via Humble UI)
+  :notifications
+  {:enabled true
+   :priority :normal
+   :icons
+   {:starlink "🛰️"
+    :cellular "📱"
+    :switching "🔄"
+    :warning "⚠️"
+    :success "✅"}
+   :messages
+   {:connected "Connected to {connection}"
+    :quality-degraded "{connection} quality degraded to {quality}%"
+    :switching "Switching to {connection}: {reason}"
+    :restored "{connection} restored (quality: {quality}%)"
+    :data-warning "Cellular data: {usage}MB used ({remaining}MB remaining)"}}
+  
+  ;; Humble UI configuration
+  :humble-ui
+  {:window
+   {:title "GrainWiFi - Forest Cabin Connectivity"
+    :width 600
+    :height 400
+    :resizable true
+    :theme :dark}
+   
+   :components
+   [{:type :header
+     :text "🌲 Forest Cabin WiFi Status"
+     :style {:font-size 20 :color "#00ff00"}}
+    
+    {:type :connection-status
+     :id :current-connection
+     :live-update true
+     :refresh-interval 5000  ; Update every 5 seconds
+     :display [:icon :name :quality :latency :bandwidth]}
+    
+    {:type :quality-meter
+     :id :quality-graph
+     :connections [:starlink :cellular]
+     :history-duration 3600  ; Show last hour
+     :style {:height 150}}
+    
+    {:type :switch-history
+     :id :switch-log
+     :max-items 20
+     :show-graintime true
+     :show-reason true}
+    
+    {:type :data-usage
+     :id :cellular-data
+     :connection :cellular
+     :period :monthly
+     :warn-threshold 5000
+     :limit 10000}
+    
+    {:type :manual-controls
+     :buttons
+     [{:label "Switch to Starlink 🛰️"
+       :action {:type :switch :target :starlink}}
+      {:label "Switch to Cellular 📱"
+       :action {:type :switch :target :cellular}}
+      {:label "Auto-Select 🔄"
+       :action {:type :auto}}
+      {:label "Storm Mode 🌧️"
+       :action {:type :toggle-storm}}]}
+    
+    {:type :graintime-clock
+     :id :grain-clock
+     :show-solar-house true
+     :show-nakshatra true
+     :location "Forest Cabin, Central Illinois"}]
+   
+   :layout :vertical
+   :padding 16
+   :spacing 12}
+  
+  ;; grain6-specific event handlers
+  :grain6-events
+  {:on-sunrise
+   {:action :check-starlink
+    :reason "Morning - Starlink usually better"}
+   
+   :on-sunset
+   {:action :switch-cellular
+    :reason "Evening - Trees blocking satellite"}
+   
+   :on-solar-house-change
+   {:trigger [10]  ; 10th house (noon)
+    :action :prefer-starlink
+    :reason "Peak sun - best satellite visibility"}
+   
+   :on-nakshatra-change
+   {:trigger ["rohini"]
+    :action :stability-mode
+    :reason "Meditation - minimize disruptions"}
+   
+   :on-quality-alert
+   {:threshold 40
+    :action :log-and-notify
+    :graintime-stamp true}}
+  
+  ;; Integration with other grain services
+  :grain-integration
+  {:graindisplay
+   {:coordinate true
+    :reason "Don't switch during screen color transitions"}
+   
+   :grainbackup
+   {:pause-switching true
+    :reason "Keep stable connection during backups"}
+   
+   :graincourse
+   {:notify-build-start true
+    :prefer :starlink
+    :reason "Faster uploads to GitHub/Codeberg"}
+   
+   :graintime
+   {:location-sync true
+    :reason "Use graintime location for solar calculations"}}
+  
+  ;; Forest-specific optimizations
+  :forest-mode
+  {:enabled true
+   :features
+   {:tree-obstruction-aware true
+    :weather-pattern-learning true
+    :seasonal-adjustment true
+    :wind-sensitivity true  ; High winds affect Starlink
+    :rain-fallback true}
+   
+   :seasonal-preferences
+   {:spring {:prefer :starlink :reason "Clear skies"}
+    :summer {:prefer :starlink :reason "Stable weather"}
+    :fall {:prefer :cellular :reason "Leaf coverage"}
+    :winter {:prefer :cellular :reason "Snow on dish"}}}
+  
+  ;; Humble IPC for cross-service communication
+  :ipc
+  {:protocol :humble-ipc
+   :events [:connection-change :quality-alert :switch-complete]
+   :subscribers [:graindaemon :grain6-scheduler :humble-tray]}
+  
+  ;; Logging with graintime
+  :logging
+  {:format :graintime-edn
+   :file "/tmp/grainwifi-grain6.log"
+   :events
+   {:connection-change {:level :info :graintime true}
+    :quality-check {:level :debug :graintime true}
+    :switch-attempt {:level :info :graintime true}
+    :switch-complete {:level :info :graintime true}
+    :error {:level :error :graintime true}}
+   
+   :example-log-entry
+   {:graintime "12025-10-23--1430--CST--moon-vishakha--asc-gem000--sun-10th--forest"
+    :event :connection-change
+    :from :starlink
+    :to :cellular
+    :reason "Starlink quality < 40% (tree obstruction)"
+    :quality-before 35
+    :quality-after 68
+    :solar-house 10
+    :nakshatra "vishakha"
+    :location "Forest Cabin, IL"}}}

@@ -1,0 +1,40 @@
+{:qb
+ {:version "0.1.0"
+  :description "Universal Quarterback for Grain Network"
+  :philosophy "now == next + 1"
+  
+  ;; Core settings
+  :core
+  {:default-commit-message "chore: qb flow update"
+   :auto-push true
+   :dual-deploy true
+   :verbose false}
+  
+  ;; Deployment settings
+  :deployment
+  {:github
+   {:enabled true
+    :remote "origin"
+    :branch "main"
+    :pages-url "https://kae3g.github.io/grainkae3g/"}
+   :codeberg
+   {:enabled true
+    :remote "codeberg"
+    :branch "main"
+    :pages-url "https://kae3g.codeberg.page/grainkae3g/"}}
+  
+  ;; Grain Network integration
+  :grain-network
+  {:modules ["grainbarrel" "graintime" "graincourse" "grainsync"]
+   :sync-interval "daily"
+   :backup-enabled true}
+  
+  ;; Workflow settings
+  :workflows
+  {:flow
+   {:stages ["stage" "commit" "push-github" "push-codeberg" "deploy"]
+    :timeout 300}
+   :deploy
+   {:stages ["build" "test" "deploy-github" "deploy-codeberg"]
+    :timeout 600}}}
+

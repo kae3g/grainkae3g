@@ -1,0 +1,32 @@
+# Woodpecker CI - Codeberg Pages Deployment
+# Automatically syncs main branch to pages branch
+
+when:
+  event: push
+  branch: main
+
+steps:
+  sync-pages-branch:
+    image: alpine/git:latest
+    commands:
+      # Configure git
+      - git config user.name "Woodpecker CI"
+      - git config user.email "ci@codeberg.org"
+      
+      # Fetch all branches
+      - git fetch origin
+      
+      # Create/update pages branch from main
+      - git checkout -B pages
+      - git push origin pages --force
+      
+      # Return to main
+      - git checkout main
+    
+  notify-success:
+    image: alpine:latest
+    commands:
+      - echo "✅ Codeberg Pages branch synced successfully"
+      - echo "🌐 Pages will deploy to https://kae3g.codeberg.page/$(basename $CI_REPO)"
+      - echo "⏱️  Give it 1-2 minutes to rebuild"
+

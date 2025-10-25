@@ -1,0 +1,27 @@
+#!/bin/sh
+# prerm script for grainspace
+
+set -e
+
+case "$1" in
+    remove|upgrade|deconfigure)
+        # Stop service if running
+        if [ -d /run/systemd/system ]; then
+            deb-systemd-invoke stop grainspace.service >/dev/null || true
+        fi
+    ;;
+
+    failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
+
+

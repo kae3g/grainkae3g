@@ -1,0 +1,40 @@
+# Grainenvvars - SECURITY CRITICAL .gitignore
+# NEVER commit actual secrets or personal configurations!
+
+# Personal environment files (MOST IMPORTANT!)
+personal/.env
+personal/.env.*
+personal/*.env
+personal/**/.env
+personal/**/*.env
+
+# 1Password loading scripts with real values
+personal/load-from-1password.sh
+personal/load-*.sh
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# ALLOW template files to be committed
+!template/
+!template/*
+!template/**/*
+
+# ALLOW example/documentation files
+!*.example
+!*.template
+!*.sample
+
+# ALLOW personal directory structure (but not contents)
+!personal/.gitkeep
+

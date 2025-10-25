@@ -1,0 +1,14 @@
+[Unit]
+Description=Grain Night Light - GNOME Warm Filter Daemon (2000K)
+Documentation=https://grainpbc.github.io/grain-nightlight
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/bb %h/kae3g/grainkae3g/grainstore/grain-nightlight/scripts/enable-on-boot.bb
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
+
+

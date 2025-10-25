@@ -1,0 +1,42 @@
+{:paths ["src" "scripts" "test"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        babashka/fs {:mvn/version "0.2.14"}
+        clj-http {:mvn/version "3.12.3"}
+        clj-time {:mvn/version "0.15.2"}
+        java-time {:mvn/version "0.2.2"}}
+ :tasks
+ {;; GrainURL Generation
+  grainurl:generate
+  {:doc "Generate grainurl for grain6 sheaf"
+   :task (shell "bb" "scripts/grainurl-generate.bb")}
+  
+  grainurl:deploy
+  {:doc "Deploy grainurl to GitHub Pages via GitHub Actions"
+   :task (shell "bb" "scripts/grainurl-deploy.bb")}
+  
+  ;; TDE9N Sheaf Management
+  tde9n:create
+  {:doc "Create tde9n sheaf (1-of-88) with grainurl"
+   :task (shell "bb" "scripts/tde9n-create.bb")}
+  
+  tde9n:deploy
+  {:doc "Deploy tde9n sheaf to GitHub Pages"
+   :task (shell "bb" "scripts/tde9n-deploy.bb")}
+  
+  ;; GitHub Integration
+  github:update-description
+  {:doc "Update GitHub repository description with grainpath URL"
+   :task (shell "bb" "scripts/github-update-description.bb")}
+  
+  github:test-description
+  {:doc "Test GitHub description update"
+   :task (shell "bb" "scripts/github-test-description.bb")}
+  
+  ;; Configuration
+  config:show
+  {:doc "Show grain6-grainurl configuration"
+   :task (shell "bb" "scripts/config-show.bb")}
+  
+  config:update
+  {:doc "Update grain6-grainurl configuration"
+   :task (shell "bb" "scripts/config-update.bb")}}}

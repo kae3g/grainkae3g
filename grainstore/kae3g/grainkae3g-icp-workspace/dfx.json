@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "canisters": {
+    "grain6_icp": {
+      "main": "src/grain6_icp_motoko/main.mo",
+      "type": "motoko"
+    },
+    "grain6_website": {
+      "main": "src/grain6_website_motoko/main.mo",
+      "type": "motoko"
+    },
+    "grain6-website-clojure": {
+      "main": "src/grain6-website-clojure_motoko/main.mo",
+      "type": "motoko"
+    },
+    "grainthrift-clojure": {
+      "main": "src/grainthrift-clojure_motoko/main.mo",
+      "type": "motoko"
+    },
+    "grainthrift-simple": {
+      "main": "src/grainthrift-simple_motoko/main.mo",
+      "type": "motoko"
+    },
+    "grainthrift-with-pricing": {
+      "main": "src/grainthrift-with-pricing_motoko/main.mo",
+      "type": "motoko"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:4943",
+      "type": "ephemeral"
+    }
+  }
+}

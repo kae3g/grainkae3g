@@ -1,0 +1,5 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        babashka/fs {:mvn/version "0.5.20"}
+        babashka/process {:mvn/version "0.5.21"}}}
+

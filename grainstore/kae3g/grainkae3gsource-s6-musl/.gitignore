@@ -1,0 +1,6 @@
+# Build artifacts (ephemeral)
+build/
+install/
+
+# Source tarballs are KEPT in git for reproducibility
+# (do NOT ignore src/)

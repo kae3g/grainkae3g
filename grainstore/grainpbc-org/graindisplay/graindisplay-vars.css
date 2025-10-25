@@ -1,0 +1,27 @@
+/* GrainDisplay Bedtime Warm Theme - CSS Variables */
+:root {
+  /* Primary Colors */
+  --warm-red: #D2691E;        /* Chocolate - Primary accent */
+  --deep-orange: #FF8C00;     /* Dark Orange - Secondary accent */
+  --burnt-orange: #CC5500;    /* Burnt Orange - Tertiary accent */
+  --warm-brown: #8B4513;      /* Saddle Brown - Dark accents */
+  
+  /* Background Colors */
+  --warm-black: #1A0F0A;      /* Very dark red-brown */
+  --warm-dark: #2D1B13;       /* Dark red-brown */
+  --warm-gray: #3D2B1F;       /* Medium red-brown */
+  --warm-light: #4A3429;      /* Light red-brown */
+  
+  /* Text Colors */
+  --warm-white: #FFF8DC;      /* Cornsilk - Primary text */
+  --warm-cream: #F5DEB3;      /* Wheat - Secondary text */
+  --warm-beige: #DEB887;      /* Burlywood - Tertiary text */
+  --warm-gold: #DAA520;       /* Goldenrod - Accent text */
+}
+
+/* Quick apply to any element */
+.grain-warm {
+  background: var(--warm-black);
+  color: var(--warm-white);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}

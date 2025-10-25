@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrainDisplay Bedtime Warm Theme Demo</title>
+    <style>
+        :root {
+            --warm-red: #D2691E;
+            --deep-orange: #FF8C00;
+            --burnt-orange: #CC5500;
+            --warm-brown: #8B4513;
+            --warm-black: #1A0F0A;
+            --warm-dark: #2D1B13;
+            --warm-gray: #3D2B1F;
+            --warm-white: #FFF8DC;
+            --warm-cream: #F5DEB3;
+            --warm-beige: #DEB887;
+            --warm-gold: #DAA520;
+        }
+        body {
+            background: var(--warm-black);
+            color: var(--warm-white);
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .grain-btn {
+            background: var(--warm-red);
+            color: var(--warm-white);
+            border: 2px solid var(--deep-orange);
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 8px;
+        }
+        .grain-btn:hover {
+            background: var(--deep-orange);
+            box-shadow: 0 0 15px rgba(255, 140, 0, 0.4);
+            transform: translateY(-2px);
+        }
+        .grain-card {
+            background: var(--warm-dark);
+            border: 1px solid var(--warm-gray);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px 0;
+            box-shadow: 0 4px 15px rgba(210, 105, 30, 0.2);
+        }
+        .grain-code {
+            background: var(--warm-black);
+            border: 1px solid var(--warm-brown);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--warm-cream);
+            overflow-x: auto;
+        }
+        .grain-link {
+            color: var(--warm-gold);
+            text-decoration: none;
+        }
+        .grain-link:hover {
+            color: var(--deep-orange);
+            text-shadow: 0 0 8px rgba(255, 140, 0, 0.6);
+        }
+        h1, h2, h3 { color: var(--warm-gold); }
+        .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    </style>
+</head>
+<body>
+    <h1>🌾 GrainDisplay Bedtime Warm Theme</h1>
+    <p>Cozy red-orange colors for comfortable evening viewing</p>
+
+    <div class="grain-card">
+        <h2>🌙 Bedtime Colors</h2>
+        <p>Warm red-orange palette designed for evening comfort:</p>
+        <ul>
+            <li><strong>Warm Red:</strong> #D2691E (Chocolate)</li>
+            <li><strong>Deep Orange:</strong> #FF8C00 (Dark Orange)</li>
+            <li><strong>Warm Black:</strong> #1A0F0A (Very dark red-brown)</li>
+            <li><strong>Warm White:</strong> #FFF8DC (Cornsilk)</li>
+        </ul>
+    </div>
+
+    <div class="grain-card">
+        <h2>🎨 Interactive Elements</h2>
+        <div class="demo-grid">
+            <button class="grain-btn">Primary Button</button>
+            <button class="grain-btn">Another Button</button>
+        </div>
+        <p>This is a <a href="#" class="grain-link">warm golden link</a> with hover effects.</p>
+    </div>
+
+    <div class="grain-card">
+        <h2>💻 Code Example</h2>
+        <div class="grain-code">
+            <pre>// GrainDisplay Bedtime Warm Theme
+const warmRed = '#D2691E';
+const deepOrange = '#FF8C00';
+const warmBlack = '#1A0F0A';
+const warmWhite = '#FFF8DC';
+
+console.log('🌾 From granules to grains to THE WHOLE GRAIN');</pre>
+        </div>
+    </div>
+
+    <div class="grain-card">
+        <h2>🌾 Grain Network Philosophy</h2>
+        <p><em>"From granules to grains to THE WHOLE GRAIN"</em></p>
+        <p>The warm bedtime theme embodies the comfort and nourishment of the Grain Network. Just as grains provide sustenance, these colors provide visual comfort for evening work and study.</p>
+    </div>
+</body>
+</html>

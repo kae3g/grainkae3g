@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+# gt - Graintime: Neovedic timestamp generator
+# Wrapper for Babashka tasks in grainstore/graintime
+
+# Grain Network branding
+GRAINTIME_VERSION="1.0.0"
+GRAINTIME_DIR="$HOME/kae3g/grainkae3g/grainstore/graintime"
+
+# Check if Babashka is installed
+if ! command -v bb &> /dev/null; then
+    echo "🌾 Graintime requires Babashka (bb)"
+    echo "   Install from: https://babashka.org"
+    exit 1
+fi
+
+# Handle special commands
+case "$1" in
+    --version|-v)
+        echo "🌾 Graintime v$GRAINTIME_VERSION"
+        echo "   Neovedic timestamps for Grain Network"
+        bb --version | grep "babashka" | sed 's/^/   /'
+        exit 0
+        ;;
+    --help|-h|help)
+        cat << 'EOF'
+🌾 Graintime - Neovedic Timestamp System
+
+USAGE:
+  gt now AUTHOR                    Generate current graintime
+  gt at AUTHOR DATE-STRING         Generate graintime at specific date/time
+  gt config [setup|show|reset]     Configure your location interactively
+  gt grainpath TYPE AUTHOR NAME    Generate grainpath with graintime
+  gt parse GRAINTIME               Parse graintime string
+  gt human GRAINTIME               Format for human reading
+
+EXAMPLES:
+  # Configure your location (interactive dialog)
+  gt config
+  # => Prompts: Enter your location: San Francisco, CA
+  # => ✅ Location saved!
+
+  # Show current location
+  gt config show
+  # => 📍 Current Location: San Francisco, CA (37.7749°N, 122.4194°W)
+
+  # Generate current graintime
+  gt now kae3g
+  # => 12025-10-22--2127--PDT--moon-jyeshtha--asc-gemini022--sun-06thhouse--kae3g
+
+  # Generate graintime at specific date/time
+  gt at kae3g "2025-10-22 12:00"
+  # => 12025-10-22--1200--PDT--moon-jyeshtha--asc-gemini022--sun-10thhouse--kae3g
+
+  # Use Unix date command output
+  gt at kae3g "$(date -Iseconds)"
+  # => Uses current time from date command
+
+  # Generate grainpath
+  gt grainpath course kae3g blockchain-basics
+  # => /course/kae3g/blockchain-basics/12025-10-22--2127--PDT--moon-jyeshtha--asc-gemini022--sun-06thhouse--kae3g/
+
+  # Use custom location (Unix format)
+  gt at kae3g --loc 40.7128,-74.0060 "2025-10-22 12:00"
+  # => Calculates for New York, NY coordinates
+
+  gt parse "12025-10-22--2127--PDT--moon-jyeshtha--asc-gemini022--sun-06thhouse--kae3g"
+  # => Parsed components
+
+  gt human "12025-10-22--2127--PDT--moon-jyeshtha--asc-gemini022--sun-06thhouse--kae3g"
+  # => Human-readable format
+
+DATE FORMATS (same as Unix date command):
+  • ISO 8601:       2025-10-22T21:30:45-07:00
+  • RFC 3339:       2025-10-22 21:30:45-07:00
+  • Simple:         2025-10-22 21:30:45
+  • Simple short:   2025-10-22 21:30
+  • Date only:      2025-10-22
+  • Unix date:      Tue Oct 22 21:30:45 PDT 2025
+
+GRAINTIME FORMAT:
+  {holocene-year}-{month}-{day}--{time}--{tz}--moon-{nakshatra}--asc-{sign}{degree}--sun-{house}thhouse--{author}
+
+COMPONENTS:
+  • Holocene: Year + 10000 (12025 instead of 2025)
+  • Moon: Vedic nakshatra (27 lunar mansions)
+  • Ascendant: Rising sign with degree (Vedic sidereal)
+  • Sun House: Solar House Clock with counterclockwise progression (1→12→11→10→...→1)
+    - 1st = Sunrise, 10th = Noon, 7th = Sunset, 4th = Midnight
+  • Author: Creator identifier
+
+For more help: gb graintime:help
+
+🌾 From granules to grains to THE WHOLE GRAIN
+EOF
+        exit 0
+        ;;
+esac
+
+# Change to graintime directory and run Babashka task
+cd "$GRAINTIME_DIR" || {
+    echo "❌ Cannot find graintime directory: $GRAINTIME_DIR"
+    exit 1
+}
+
+# Execute Babashka task
+exec bb "$@"

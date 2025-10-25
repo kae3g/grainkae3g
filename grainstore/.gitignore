@@ -1,0 +1,22 @@
+# Generated documentation (regenerate with: gb grainstore:generate-docs)
+EXTERNAL-DEPENDENCIES.md
+MODULES.md
+DEPENDENCY-GRAPH.md
+
+# Personal configurations (not tracked)
+*.personal.edn
+personal/
+
+# Build artifacts
+target/
+*.jar
+.cpcache/
+.nrepl-port
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+

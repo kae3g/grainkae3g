@@ -1,0 +1,73 @@
+# Contributor: kae3g <kj3x39@gmail.com>
+# Maintainer: kae3g <kj3x39@gmail.com>
+pkgname=grain6
+pkgver=0.1.0
+pkgrel=0
+pkgdesc="Time-aware process supervision (graintime + s6 + Behn-inspired) - Kae3g Sheaf (1-of-88)"
+url="https://github.com/grainpbc/grain6"
+arch="all"
+license="MIT"
+depends="s6 s6-rc babashka musl"
+makedepends="leiningen openjdk17 musl-dev"
+install=""
+subpackages="$pkgname-doc"
+source="grain6-$pkgver.tar.gz::https://github.com/grainpbc/grain6/archive/v$pkgver.tar.gz"
+builddir="$srcdir/$pkgname-$pkgver"
+
+# 88 Counter Philosophy: 88 × 10^n >= 0 | -1
+# now == next + 1
+
+build() {
+	cd "$builddir"
+	
+	# Build with Leiningen (creates uberjar)
+	lein uberjar
+	
+	# Compile Babashka scripts
+	bb --version
+}
+
+check() {
+	cd "$builddir"
+	
+	# Run tests with Leiningen
+	lein test
+	
+	# Validate Babashka scripts
+	bb test
+}
+
+package() {
+	cd "$builddir"
+	
+	# Install uberjar
+	install -Dm644 target/uberjar/grain6-*-standalone.jar \
+		"$pkgdir"/usr/share/grain6/grain6.jar
+	
+	# Install Babashka scripts
+	install -Dm755 bin/grain6 "$pkgdir"/usr/bin/grain6
+	
+	# Install s6 service definitions
+	install -dm755 "$pkgdir"/etc/s6/sv/grain6
+	install -Dm755 s6/run "$pkgdir"/etc/s6/sv/grain6/run
+	install -Dm755 s6/finish "$pkgdir"/etc/s6/sv/grain6/finish
+	
+	# Install configuration
+	install -Dm644 template/grain6.conf "$pkgdir"/etc/grain6/grain6.conf.template
+	
+	# Install documentation
+	install -Dm644 README.md "$pkgdir"/usr/share/doc/$pkgname/README.md
+	install -Dm644 LICENSE "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
+	
+	# Install graintime integration
+	install -Dm755 scripts/grain6-graintime.sh "$pkgdir"/usr/bin/grain6-graintime
+}
+
+sha512sums="
+SKIP
+"
+
+# Alpine APKBUILD for grain6
+# musl libc for static linking and security
+# apk for efficient package management
+# Template/personal separation maintained through /etc/grain6/

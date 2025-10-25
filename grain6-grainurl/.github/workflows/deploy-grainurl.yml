@@ -1,0 +1,110 @@
+name: Deploy Grain6 GrainURL to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-24.04-lts
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Ubuntu 24.04 LTS Environment
+      run: |
+        echo "🌾 Setting up Ubuntu 24.04 LTS environment for grain6-grainurl"
+        sudo apt-get update
+        sudo apt-get install -y curl wget git
+        
+    - name: Setup Java (for Babashka)
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        
+    - name: Install Babashka
+      run: |
+        curl -sLO https://raw.githubusercontent.com/babashka/babashka/master/install
+        chmod +x install
+        ./install --dir ~/.local/bin
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+        
+    - name: Setup Grainenvvars
+      run: |
+        echo "🔐 Setting up grainenvvars for personal configuration"
+        mkdir -p ~/.grainenvvars
+        echo "GRAIN6_GRAINURL_ENABLED=true" >> ~/.grainenvvars/grain6-grainurl.env
+        echo "GITHUB_PAGES_BASE=https://kae3g.github.io/grainkae3g" >> ~/.grainenvvars/grain6-grainurl.env
+        echo "CODEBERG_PAGES_BASE=https://kae3g.codeberg.page/grainkae3g" >> ~/.grainenvvars/grain6-grainurl.env
+        echo "TDE9N_SHEAF_POSITION=1-of-88" >> ~/.grainenvvars/grain6-grainurl.env
+        
+    - name: Load Grainenvvars
+      run: |
+        echo "📋 Loading grainenvvars configuration"
+        set -a
+        source ~/.grainenvvars/grain6-grainurl.env
+        set +a
+        env | grep GRAIN
+        
+    - name: Generate GrainURL
+      run: |
+        echo "🌾 Generating grainurl for grain6 sheaf"
+        cd grainstore/kae3g/grain6-grainurl
+        bb grainurl:generate
+        
+    - name: Create TDE9N Sheaf
+      run: |
+        echo "🎯 Creating tde9n sheaf (1-of-88)"
+        cd grainstore/kae3g/grain6-grainurl
+        bb tde9n:create
+        
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Build Grain6 GrainURL Site
+      run: |
+        echo "🏗️ Building grain6-grainurl site"
+        cd grainstore/kae3g/grain6-grainurl
+        bb grainurl:deploy
+        
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: grainstore/kae3g/grain6-grainurl/dist
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+      
+    - name: Update GitHub Description
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo "📝 Updating GitHub repository description with grainpath URL"
+        cd grainstore/kae3g/grain6-grainurl
+        bb github:update-description
+        
+    - name: 88 Counter Philosophy Integration
+      run: |
+        echo "🔄 Integrating 88 counter philosophy"
+        echo "Now == Next + 1: $(date)"
+        echo "TDE9N Sheaf Position: 1-of-88"
+        echo "Grain6 Framework: Ubuntu 24.04 LTS"
+        echo "Grainenvvars: Personal configuration loaded"

@@ -1,0 +1,59 @@
+{:grainsource-vegan
+ {:version "0.1.0"
+  :description "Plant-based development utility for Grain Network"
+  :philosophy "Local Control, Global Intent, Purpose-Built, Template/Personal Everywhere"
+  
+  :vegan-mappings
+  {:animal-based
+   {"meat" "grain"
+    "beef" "wheat"
+    "pork" "corn"
+    "chicken" "rice"
+    "fish" "bean"
+    "dairy" "plant"
+    "milk" "juice"
+    "cheese" "nut"
+    "egg" "seed"
+    "eggs" "seeds"
+    "omelette" "frittata"
+    "animal" "plant"
+    "cow" "tree"
+    "pig" "vine"}}
+   
+  :problematic-tech
+  {"master" "primary"
+   "slave" "secondary"
+   "blacklist" "blocklist"
+   "whitelist" "allowlist"}
+   
+  :violent-terms
+  {"kill" "grow"
+   "dead" "dormant"
+   "die" "rest"
+   "death" "rest"
+   "slaughter" "harvest"
+   "butcher" "gather"}}
+   
+  :file-types
+  [".md" ".clj" ".html" ".bb" ".js" ".ts" ".py" ".rs" ".go" ".java"]
+  
+  :integration
+  {:qb-draw-flow true
+   :6os-grainclay true
+   :multi-chain-sovereignty true
+   :ascii-art-documentation true}
+   
+  :environmental-impact
+  {:plant-based-philosophy true
+   :sustainable-terminology true
+   :inclusive-language true
+   :environmental-consciousness true
+   :compassionate-coding true}
+   
+  :grain-network-philosophy
+  {:local-control "Each plant grows in its own space"
+   :global-intent "All plants work together in the ecosystem"
+   :purpose-built "Each component serves its specific purpose"
+   :template-personal "Base templates that can be personalized"
+   :real-resources-matter "Sustainable, plant-based development"
+   :scaling "88 × 10^n scaling: From seeds to forests"}}}

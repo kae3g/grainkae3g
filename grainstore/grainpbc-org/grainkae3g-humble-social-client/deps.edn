@@ -1,0 +1,21 @@
+{:deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        io.github.HumbleUI/HumbleUI {:mvn/version "0.4.0"}
+        org.clojure/core.async {:mvn/version "1.6.681"}
+        clojure.java-time/java-time {:mvn/version "1.2.0"}
+        clj-http/clj-http {:mvn/version "3.12.3"}
+        cheshire/cheshire {:mvn/version "5.11.0"}
+        crypto-random/crypto-random {:mvn/version "1.2.1"}
+        org.clojure/data.json {:mvn/version "2.4.0"}}
+ :paths ["src" "resources"]
+ :aliases {:dev {:extra-paths ["dev" "test"]
+                 :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
+                             cider/cider-nrepl {:mvn/version "0.45.0"}}}
+          :test {:extra-paths ["test"]
+                 :extra-deps {lambdaisland/kaocha {:mvn/version "1.87.1366"}}}
+          :build {:deps {io.github.clojure/tools.build {:git/tag "v0.9.6" :git/sha "d47c0a83"}}
+                  :paths ["target" "classes" "resources"]}
+          :uberjar {:replace-deps {org.clojure/clojure {:mvn/version "1.11.1"}}
+                    :replace-paths ["target/uberjar"]}}
+ :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
+             "clojars" {:url "https://repo.clojars.org/"}}}
+

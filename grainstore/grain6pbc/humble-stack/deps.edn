@@ -1,0 +1,9 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.0"}
+        humble-desktop/humble-desktop {:local/root "../humble-desktop"}
+        grain-musl/grain-musl {:local/root "../grain-musl"}
+        humble-gc/humble-gc {:local/root "../humble-gc"}
+        grain-clj/grain-clj {:local/root "../grain-clj"}
+        humble-repl/humble-repl {:local/root "../humble-repl"}}
+ :aliases {:dev {:extra-paths ["dev"]}
+           :test {:extra-paths ["test"]}}}

@@ -1,0 +1,23 @@
+.repl-port
+.nrepl-port
+.state
+hs_err_pid*.log
+.cpcache
+target
+*.diff
+/script/repl_local.sh
+clj-async-profiler
+
+# Calva specific
+
+.calva/
+.lsp/
+.portal/
+
+# clj-kondo specific
+
+.clj-kondo/.cache/
+
+# Python script
+
+**/__pycache__/

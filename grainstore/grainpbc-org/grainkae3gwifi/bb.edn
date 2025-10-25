@@ -1,0 +1,56 @@
+{:min-bb-version "1.3.186"
+ :paths ["src"]
+ :deps {babashka/fs {:mvn/version "0.5.20"}
+        babashka/process {:mvn/version "0.5.21"}}
+ :tasks
+ {:requires ([babashka.fs :as fs]
+             [babashka.process :as p])
+  
+  grainwifi:start
+  {:doc "Start GrainWiFi monitoring daemon"
+   :task (shell "bb" "scripts/grainwifi-start.bb" (or (first *command-line-args*) ""))}
+  
+  grainwifi:stop
+  {:doc "Stop GrainWiFi daemon"
+   :task (shell "bb" "scripts/grainwifi-stop.bb")}
+  
+  grainwifi:status
+  {:doc "Show current connection status"
+   :task (shell "bb" "scripts/grainwifi-status.bb")}
+  
+  grainwifi:switch
+  {:doc "Switch to specific connection (starlink|cellular|auto)"
+   :task (shell "bb" "scripts/grainwifi-switch.bb" (or (first *command-line-args*) "auto"))}
+  
+  grainwifi:test
+  {:doc "Test GrainWiFi functionality"
+   :task (do
+           (println "🧪 Testing GrainWiFi...")
+           (println "")
+           (println "1. Checking nmcli availability...")
+           (let [result (p/shell {:out :string :continue true} "which" "nmcli")]
+             (if (= 0 (:exit result))
+               (println "   ✅ nmcli found")
+               (println "   ❌ nmcli not found - install network-manager")))
+           (println "")
+           (println "2. Checking notify-send...")
+           (let [result (p/shell {:out :string :continue true} "which" "notify-send")]
+             (if (= 0 (:exit result))
+               (println "   ✅ notify-send found")
+               (println "   ❌ notify-send not found - install libnotify-bin")))
+           (println "")
+           (println "3. Listing available connections...")
+           (let [result (p/shell {:out :string :continue true} "nmcli" "connection" "show")]
+             (if (= 0 (:exit result))
+               (do
+                 (println "   ✅ NetworkManager available")
+                 (println "")
+                 (println "   Available connections:")
+                 (doseq [line (take 10 (clojure.string/split-lines (:out result)))]
+                   (println (str "   " line))))
+               (println "   ❌ NetworkManager not available"))))}
+  
+  grainwifi:install
+  {:doc "Install GrainWiFi systemd service"
+   :task (shell "bb" "scripts/grainwifi-install.bb")}}}
+

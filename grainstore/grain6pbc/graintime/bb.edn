@@ -1,0 +1,17 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}}
+ 
+ :tasks
+ {now
+  {:doc "Generate graintime for author"
+   :task (let [author (or (first *command-line-args*) "kae3g")]
+           (load-file "src/graintime/location_dialog.clj")
+           (load-file "src/graintime/sunset.clj")
+           (load-file "src/graintime/solar_houses.clj")
+           (load-file "src/graintime/astromitra.clj")
+           (load-file "src/graintime/core.clj")
+           (let [graintime ((resolve 'graintime.core/generate-graintime-with-validation) author)
+                 validation ((resolve 'graintime.core/validate-graintime-length) graintime)]
+             (when-not (:valid validation)
+               (println (str "⚠️  " (:message validation))))
+             (println graintime)))}}}

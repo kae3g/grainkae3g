@@ -1,0 +1,20 @@
+# Grainzsh - Template/Personal Split
+# Only ignore personal config files, not the directory structure
+
+# Personal configurations (not tracked in template repo)
+personal/*.zshrc
+personal/.zsh_history
+personal/local-*.zsh
+
+# But DO track the personal/kae3g submodule
+!personal/kae3g/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+

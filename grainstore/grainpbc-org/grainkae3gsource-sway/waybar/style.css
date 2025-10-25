@@ -1,0 +1,41 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrains Mono", "Font Awesome 6 Free";
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #e5e5e5;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #e5e5e5;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.focused {
+    background-color: #ff0000;
+    border-bottom: 3px solid #ff0000;
+}
+
+#workspaces button.urgent {
+    background-color: #ff6b6b;
+    border-bottom: 3px solid #ff6b6b;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+#clock {
+    padding: 0 10px;
+    margin: 0 4px;
+    color: #e5e5e5;
+    background-color: rgba(0, 0, 0, 0.5);
+}

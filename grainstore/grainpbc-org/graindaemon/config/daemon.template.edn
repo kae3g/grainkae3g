@@ -1,0 +1,81 @@
+{:graindaemon
+ {:version "0.1.0"
+  
+  ;; Paths (relative to $HOME)
+  :s6-root "~/.s6"
+  :log-dir "~/.local/share/graindaemon/logs"
+  :pid-dir "~/.local/share/graindaemon/pids"
+  :config-dir "~/.config/graindaemon"
+  
+  ;; Supervisor configuration
+  :supervisor
+  {:enabled true
+   :scan-interval 5                    ;; Scan for new services every 5 seconds
+   :auto-restart true                  ;; Auto-restart failed services
+   :max-restarts 5                     ;; Max restarts per hour before giving up
+   :restart-delay 10                   ;; Seconds between restarts
+   :health-check-interval 30           ;; Health check every 30 seconds
+   :log-level :info}                   ;; :debug :info :warn :error
+  
+  ;; Service definitions
+  ;; REPLACE values below with your personal settings in daemon.edn
+  :services
+  {:nightlight
+   {:enabled false                     ;; REPLACE: true to enable
+    :type :gnome-nightlight
+    :description "GNOME Night Light warm filter daemon"
+    :config
+    {:temperature 2000                 ;; REPLACE: 1000-4000 (lower = warmer)
+     :schedule-automatic false         ;; REPLACE: true for sunset/sunrise schedule
+     :schedule-from 20.0               ;; 8 PM (if automatic)
+     :schedule-to 6.0                  ;; 6 AM (if automatic)
+     :monitor-interval 30              ;; Check every 30 seconds
+     :auto-restore true}}              ;; Auto-restore if disabled
+   
+   :wifi
+   {:enabled false                     ;; REPLACE: true to enable
+    :type :grain-wifi
+    :description "Dual-WiFi connection manager (Starlink + Cellular)"
+    :config
+    {:starlink-name "Starlink"         ;; REPLACE: Your Starlink connection name
+     :cellular-name "Cellular-Tethering"  ;; REPLACE: Your cellular hotspot name
+     :starlink-priority 1              ;; Lower = higher priority
+     :cellular-priority 2
+     :check-interval 30                ;; Check connection every 30 seconds
+     :auto-switch true                 ;; Auto-switch to better connection
+     :hysteresis 60                    ;; Wait 60s before switching back
+     :min-quality 40                   ;; Minimum acceptable quality (0-100)
+     :notify true}}                    ;; Show desktop notifications
+   
+   ;; Example custom service (disabled by default)
+   :example-service
+   {:enabled false
+    :type :custom
+    :description "Example custom service template"
+    :config
+    {:interval 60
+     :option "default-value"}}}
+  
+  ;; Logging configuration
+  :logging
+  {:enabled true
+   :log-to-file true
+   :log-to-stdout true
+   :max-file-size "10MB"               ;; Rotate logs at 10MB
+   :max-files 5                        ;; Keep last 5 log files
+   :format "timestamp level service message"}
+  
+  ;; Health check configuration
+  :health-checks
+  {:enabled true
+   :interval 30                        ;; Run health checks every 30 seconds
+   :timeout 5                          ;; Health check timeout in seconds
+   :notify-on-failure true             ;; Desktop notification on health check failure
+   :max-failures 3}                    ;; Mark unhealthy after 3 failures
+  
+  ;; Auto-start configuration
+  :auto-start
+  {:enabled true                       ;; Enable auto-start on boot
+    :method :systemd                    ;; :systemd or :gnome-autostart
+    :delay 5}}}                         ;; Delay start by 5 seconds after boot
+

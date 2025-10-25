@@ -1,0 +1,20 @@
+# Personal location configurations
+personal/*.edn
+!personal/.gitkeep
+!personal/kae3g-san-rafael.edn
+
+# Cache
+.graintime-cache/
+*.cache
+
+# Swiss Ephemeris data files (user downloads locally)
+ephemeris/
+swisseph/
+
+# API keys (should be in grainenvvars)
+.env
+*.key
+
+# Build artifacts
+target/
+.cpcache/

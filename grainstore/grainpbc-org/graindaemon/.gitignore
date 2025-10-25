@@ -1,0 +1,29 @@
+# Personal configuration (never commit!)
+config/daemon.edn
+
+# Logs
+*.log
+logs/
+.local/
+
+# PIDs
+*.pid
+pids/
+
+# Build artifacts
+target/
+.cpcache/
+.nrepl-port
+.clj-kondo/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.idea/
+*.iml
+

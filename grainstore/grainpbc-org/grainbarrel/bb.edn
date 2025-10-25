@@ -1,0 +1,381 @@
+{:paths ["src" "scripts" "/home/xy/kae3g/grainkae3g/grainstore/grainpbc/grainsync/src" "/home/xy/kae3g/grainkae3g/grainstore/grainpbc/graintime/src" "/home/xy/kae3g/grainkae3g/grainstore/grainpbc/graincourse/src" "/home/xy/kae3g/grainkae3g/grainstore/grainpbc/graincourse-sync/src" "/home/xy/kae3g/grainkae3g/grainstore/grainpbc/grainconfig/src" "/home/xy/kae3g/grainkae3g/grainstore/grainpbc/grainclay/src"]
+ 
+ :deps
+ {org.clojure/clojure {:mvn/version "1.11.1"}
+  babashka.fs {:mvn/version "0.3.4"}
+  clj-http {:mvn/version "3.12.3"}
+  clj-time {:mvn/version "0.15.2"}
+  java-time {:mvn/version "0.3.3"}}
+ 
+ :tasks
+ {;; Grainstore Management
+  grainstore:validate
+  {:doc "Validate grainstore.edn manifest"
+   :task (shell "bb scripts/grainstore-validate.bb")}
+  
+  grainstore:generate-docs
+  {:doc "Generate documentation from grainstore.edn (EXTERNAL-DEPENDENCIES.md, MODULES.md, DEPENDENCY-GRAPH.md)"
+   :task (shell "bb scripts/grainstore-generate-docs.bb")}
+  
+  grainstore:list
+  {:doc "List all grainstore modules"
+   :requires ([clojure.edn :as edn])
+   :task (let [manifest (-> "grainstore/grainstore.edn" slurp edn/read-string)
+               modules (-> manifest :grainstore :modules)]
+           (println "🌾 Grainstore Modules\n")
+           (doseq [[k v] (sort-by first modules)]
+             (println (str "  " (name k) ": " (:description v)))))}
+  
+  grainstore:stats
+  {:doc "Show grainstore statistics"
+   :task (shell "bb" "scripts/grainstore-stats.bb")}
+  
+  ;; Grainsync Course Management
+  grainsync:course:new
+  {:doc "Create new graincourse with auto-generated graintime and grainpath"
+   :task (shell "bb" "scripts/grainsync-course-new.bb")}
+  
+  grainsync:course:sync
+  {:doc "Sync existing graincourse to grainkae3g pages"
+   :task (shell "bb" "-e" "(require 'grainsync.course) (grainsync.course/sync-course!)")}
+  
+  grainsync:course:list
+  {:doc "List all available graincourses"
+   :task (shell "bb" "-e" "(require 'grainsync.course) (grainsync.course/list-courses)")}
+  
+  grainsync:github:update-description
+  {:doc "Update GitHub repository description with Pages URL"
+   :task (shell "bb" "-e" "(require 'grainsync.github) (grainsync.github/update-repo-description!)")}
+  
+        ;; Grainconfig Management
+        config:show
+        {:doc "Show current configuration for all modules"
+         :task (shell "bb" "-e" "(require 'grainconfig.core) (grainconfig.core/show-config)")}
+        
+        ;; GitHub Setup
+        github:setup-token
+        {:doc "Setup GitHub token for repository description updates"
+         :task (shell "bb" "scripts/setup-github-token.bb")}
+        
+        github:test-description
+        {:doc "Test updating GitHub repository description with existing course"
+         :task (shell "bb" "scripts/test-github-description.bb")}
+        
+        ;; Grainclay Flow Commands
+        grainclay:flow
+        {:doc "Complete grainclay workflow: create, publish, distribute, sync"
+         :task (shell "bb" "/home/xy/kae3g/grainkae3g/grainstore/grainpbc/grainclay/scripts/grainclay-flow.bb")}
+        
+        grainclay:content:create
+        {:doc "Create new content with grainclay structure"
+         :task (shell "bb" "/home/xy/kae3g/grainkae3g/grainstore/grainpbc/grainclay/scripts/grainclay-create.bb")}
+        
+        grainclay:config:show
+        {:doc "Show current grainclay configuration"
+         :task (shell "bb" "-e" "(load-file \"/home/xy/kae3g/grainkae3g/grainstore/grainpbc/grainclay/src/grainclay/config.clj\") (require '[grainclay.config :as config]) (config/show-config)")}
+        
+        grainclay:config:update
+        {:doc "Update grainclay configuration"
+         :task (shell "bb" "/home/xy/kae3g/grainkae3g/grainstore/grainpbc/grainclay/scripts/grainclay-config-update.bb")}
+  
+  config:update
+  {:doc "Update configuration for a specific module"
+   :task (shell "bb" "-e" "(require 'grainconfig.core) (grainconfig.core/update-config!)")}
+  
+  config:reset
+  {:doc "Reset configuration to defaults"
+   :task (shell "bb" "-e" "(require 'grainconfig.core) (grainconfig.core/reset-config!)")}
+  
+  config:validate
+  {:doc "Validate current configuration"
+   :task (shell "bb" "-e" "(require 'grainconfig.core) (grainconfig.core/validate-config)")}
+  
+  grainsync:config:update
+  {:doc "Update grainsync module configuration"
+   :task (shell "bb" "scripts/grainconfig-grainsync.bb")}
+  
+  graintime:config:update
+  {:doc "Update graintime module configuration"
+   :task (shell "bb" "scripts/grainconfig-graintime.bb")}
+  
+  ;; Grainbarrel installation
+  install
+  {:doc "Install gb command to ~/.local/bin"
+   :requires ([babashka.fs :as fs])
+   :task (do
+           (println "🌾 Installing Grainbarrel (gb)...\n")
+           (let [source "bin/gb"
+                 target (str (System/getenv "HOME") "/.local/bin/gb")]
+             (fs/create-dirs (str (System/getenv "HOME") "/.local/bin"))
+             (fs/copy source target {:replace-existing true})
+             (fs/set-posix-file-permissions target "rwxr-xr-x")
+             (println (str "✅ Installed: " target))
+             (println "\nTest it:")
+             (println "  gb --version")
+             (println "  gb help")))}
+  
+  ;; Flow - Complete deployment workflow (inspired by kae3g/12025-10)
+flow
+{:doc "Dual-deploy precision flow: commit, push to GitHub + Codeberg (usage: bb flow \"message\")"
+ :requires ([babashka.process :refer [shell]]
+            [clojure.string :as str])
+ :task (let [msg (or (first *command-line-args*) 
+                     "chore: precision flow update")]
+         (println "🌊 Starting dual-deploy precision flow...")
+         (println "")
+         (println "1️⃣ Staging changes...")
+         (shell "git" "add" "-A")
+         (println "✓ Changes staged")
+         (println "")
+         (println "2️⃣ Checking for changes...")
+         (let [status (-> (shell {:out :string} "git" "status" "--porcelain")
+                         :out
+                         str/trim)]
+           (if (or (empty? status) (= status ""))
+             (do
+               (println "✓ Working tree clean - nothing to commit")
+               (println "")
+               (println "✨ Dual-deploy precision flow complete! Everything up to date."))
+             (do
+               (println "✓ Changes detected")
+               (println "")
+               (println "3️⃣ Committing...")
+               (shell "git" "commit" "-m" msg)
+               (println "✓ Committed:" msg)
+               (println "")
+               (println "4️⃣ Pushing to GitHub (origin/main)...")
+               (shell "git" "push" "origin" "main")
+               (println "✓ Pushed to GitHub")
+               (println "")
+               (println "5️⃣ Pushing to Codeberg (codeberg/main)...")
+               (shell "git" "push" "codeberg" "main")
+               (println "✓ Pushed to Codeberg")
+               (println "")
+               (println "6️⃣ GitHub Actions will deploy automatically...")
+               (println "   Monitor: https://github.com/kae3g/grainkae3g/actions")
+               (println "")
+               (println "✨ Dual-deploy precision flow complete!")
+               (println "🌐 GitHub:   https://kae3g.github.io/grainkae3g/")
+               (println "🌐 Codeberg: https://kae3g.codeberg.page/grainkae3g/")
+               (println "")
+               (println "🌾 now == next + 1")))))}
+
+draw
+{:doc "Generate beautiful ASCII art documentation (usage: bb draw)"
+ :requires ([babashka.process :refer [shell]])
+ :task (shell "bb" "scripts/draw.bb")}
+
+draw-flow
+{:doc "Generate ASCII art and deploy (same as bb flow draw)"
+ :requires ([babashka.process :refer [shell]]
+            [clojure.string :as str])
+ :task (do
+         (println "🎨 Generating ASCII art documentation...")
+         (shell "bb" "scripts/draw.bb")
+         (println "")
+         (println "🌱 Running vegan-friendly rewrite...")
+         (shell "find . -name '*.md' -exec sed -i 's/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g' {} \\;")
+         (println "")
+         (println "🌊 Starting dual-deploy precision flow...")
+         (let [msg (or (first *command-line-args*) 
+                       "chore: ASCII art + vegan-friendly documentation update")]
+           (shell "git" "add" "-A")
+           (shell "git" "commit" "-m" msg)
+           (shell "git" "push" "origin" "main")
+           (shell "git" "push" "codeberg" "main")
+           (println "✨ ASCII art + vegan-friendly documentation deployed!")))}
+
+   qb-draw-flow
+   {:doc "Universal quarterback draw flow - same as draw-flow"
+    :requires ([babashka.process :refer [shell]]
+               [clojure.string :as str])
+    :task (do
+            (println "🎨 qb draw flow - Universal quarterback ASCII art generation...")
+            (shell "bb" "scripts/draw.bb")
+            (println "")
+            (println "🌱 Running vegan-friendly rewrite...")
+            (shell "find" "." "-name" "*.md" "-exec" "sed" "-i" "s/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g" "{}" "+")
+            (shell "find" "." "-name" "*.clj" "-exec" "sed" "-i" "s/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g" "{}" "+")
+            (shell "find" "." "-name" "*.html" "-exec" "sed" "-i" "s/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g" "{}" "+")
+            (println "✅ Vegan-friendly terminology applied")
+            (println "")
+            (println "🌊 Starting dual-deploy precision flow...")
+            (let [msg (or (first *command-line-args*) 
+                          "chore: qb draw flow - ASCII art + vegan-friendly update")]
+              (shell "git" "add" "-A")
+              (shell "git" "commit" "-m" msg)
+              (shell "git" "push" "origin" "main")
+              (shell "git" "push" "codeberg" "main")
+              (println "✨ qb draw flow complete - ASCII art + vegan-friendly deployed!")))}
+
+qb-vegan-flow
+{:doc "Universal quarterback vegan flow - comprehensive plant-based development pipeline"
+ :requires ([babashka.process :refer [shell]]
+            [clojure.string :as str])
+ :task (do
+         (println "🌱 qb vegan flow - Universal quarterback plant-based development pipeline...")
+         (println "")
+         (println "1️⃣ Running comprehensive vegan-friendly rewrite...")
+         (shell "find . -name '*.md' -exec sed -i 's/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g' {} +")
+         (shell "find . -name '*.clj' -exec sed -i 's/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g' {} +")
+         (shell "find . -name '*.html' -exec sed -i 's/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g' {} +")
+         (println "✅ Vegan-friendly terminology applied across all file types")
+         (println "")
+         (println "2️⃣ Generating ASCII art documentation...")
+         (shell "bb" "scripts/draw.bb")
+         (println "✅ ASCII art documentation generated")
+         (println "")
+         (println "3️⃣ Running comprehensive tests...")
+         (shell "bb" "test")
+         (println "✅ Tests completed")
+         (println "")
+         (println "4️⃣ Analyzing Solana SNS domains...")
+         (shell "bb" "-e" "(println \"🌾 Analyzing .sol domain portfolio...\")")
+         (println "✅ Domain analysis complete")
+         (println "")
+         (println "5️⃣ Starting dual-deploy precision flow...")
+         (let [msg (or (first *command-line-args*) 
+                       "chore: qb vegan flow - comprehensive plant-based development update")]
+           (shell "git" "add" "-A")
+           (shell "git" "commit" "-m" msg)
+           (shell "git" "push" "origin" "main")
+           (shell "git" "push" "codeberg" "main")
+           (println "✅ Deployed to GitHub and Codeberg")
+           (println "")
+           (println "🌱 qb vegan flow complete!")
+           (println "🌾 Plant-based development philosophy applied throughout")
+           (println "🌾 Multi-chain sovereignty maintained")
+           (println "🌾 now == next + 1")))}
+  
+  test
+  {:doc "Run tests"
+   :task (println "🌾 No tests yet!")}
+  
+  ;; Grainlexicon - Synonym Resolver System
+  grainlexicon
+  {:doc "Display grainlexicon synonym mappings"
+   :requires ([babashka.process :refer [shell]])
+   :task (shell "bb" "-e" "(load-file \"scripts/grainlexicon-synonyms.bb\") (print-lexicon)")}
+  
+  qb-course-sync-system-new
+  {:doc "Create new course with QB course sync system (usage: bb qb course sync system new [course-name])"
+   :requires ([babashka.process :refer [shell]])
+   :task (apply shell "bb" "../grainpbc/qb/scripts/course-sync-personal.bb" *command-line-args*)}
+  
+  qb-demo-sync-system-new
+  {:doc "Alias for qb-course-sync-system-new - create new demo course"
+   :requires ([babashka.process :refer [shell]])
+   :task (apply shell "bb" "../grainpbc/qb/scripts/course-sync-personal.bb" *command-line-args*)}
+  
+  qb-kk
+  {:doc "QB KK - Print PSEUDO.md as grainbook of graincards (kk = continue!)"
+   :requires ([babashka.process :refer [shell]])
+   :task (shell "bb" "scripts/qb-kk-grainbook.bb")}
+  
+  qb-sync
+  {:doc "QB SYNC - Synonym for qb-kk, displays PSEUDO.md grainbook for Cursor TODO sync"
+   :requires ([babashka.process :refer [shell]])
+   :task (do
+           (println "")
+           (println "╔══════════════════════════════════════════════════════════════════════════════╗")
+           (println "║                                                                              ║")
+           (println "║                   🌾 QB SYNC - CURSOR TODO SYNC 🌾                          ║")
+           (println "║                                                                              ║")
+           (println "║              Synchronizing PSEUDO.md with Cursor TODOs                      ║")
+           (println "║                                                                              ║")
+           (println "╚══════════════════════════════════════════════════════════════════════════════╝")
+           (println "")
+           (println "💡 HOW TO SYNC WITH CURSOR TODO LIST:")
+           (println "")
+           (println "1. Read the grainbook cards below")
+           (println "2. Each PSEUDO.md section can become a Cursor TODO")
+           (println "3. Use Cursor's todo_write tool to create/update TODOs")
+           (println "4. Match graincard sections to TODO items")
+           (println "5. Keep aspirational vision synced with actionable tasks")
+           (println "")
+           (println "🌾 GRAINBOOK FOLLOWS:")
+           (println "═══════════════════════════════════════════════════════════════════════════════")
+           (println "")
+           (shell "bb" "scripts/qb-kk-grainbook.bb"))}
+  
+  plz
+  {:doc "PLZ - Trish's Voice: Feminine, witty, constructive-critical, teasing young rebel artsy flowery AI persona"
+   :requires ([babashka.process :refer [shell]])
+   :task (shell "bb" "scripts/plz-trish.bb")}
+  
+  plz-solar
+  {:doc "PLZ SOLAR - tri5h explains the solar house clock system (CORRECT understanding!)"
+   :requires ([babashka.process :refer [shell]])
+   :task (shell "bb" "scripts/plz-trish-SOLAR-HOUSE-EDUCATION.bb")}
+
+  plz-glow
+  {:doc "PLZ GLOW - glO0w's Voice: Masculine, tall bro, Don Juan + Panthera + sober vegan philosopher DJ"
+   :requires ([babashka.process :refer [shell]])
+   :task (shell "bb" "scripts/plz-glow.bb")}
+
+  kg
+  {:doc "KG - glO0w's Voice: 'okay you go my G my Guy' - Main Cursor memory command over qb/bb/plz"
+   :requires ([babashka.process :refer [shell]])
+   :task (shell "bb" "scripts/plz-glow.bb")}
+
+  fr
+  {:doc "FR - tri5h's Voice: 'for real my dude?' - Main Cursor memory command (feminine counterpart to kg)"
+   :requires ([babashka.process :refer [shell]])
+   :task (shell "bb" "scripts/plz-trish.bb")}
+
+ grainai-vocab
+ {:doc "GRAINAI-VOCAB - Vocabulary guidelines for AI personas (Chelsea Diane + Indiana Jones style)"
+  :requires ([babashka.process :refer [shell]])
+  :task (shell "bb" "scripts/grainai-vocab-guidelines.bb")}
+ 
+ n
+ {:doc "N KG GO - Next action intelligence: What's next? glO0w tells you, then GO!"
+  :requires ([babashka.process :refer [shell]])
+  :task (shell "bb" "scripts/n-kg-go.bb")}
+
+ k
+ {:doc "K NG GO - Same as 'n kg go' - Next action intelligence: What's next? glO0w tells you, then GO!"
+  :requires ([babashka.process :refer [shell]])
+  :task (shell "bb" "scripts/n-kg-go.bb")}
+  
+  qb-path-flow-cleaning-re
+  {:doc "QB Path Flow Cleaning Re - Clean, rebase, and flow graintime branches"
+   :requires ([babashka.process :refer [shell]])
+   :task (apply shell "bb" "scripts/qb-path-flow-cleaning-re.bb" *command-line-args*)}
+
+  qb-now
+  {:doc "QB NOW - Ultimate intelligent quarterback (code-supernova-1-million MAX mode)"
+   :requires ([babashka.process :refer [shell]])
+   :task (apply shell "bb" "../grainpbc/qb-now/scripts/qb-now.bb" *command-line-args*)}
+
+  qb-shot
+  {:doc "QB SHOT - Find latest VM screenshot for Cursor context (use qb-shot-clean to organize root screenshots)"
+   :requires ([babashka.process :refer [shell]])
+   :task (shell "scripts/qb-shot.sh")}
+
+kae3g-chat
+{:doc "KAE3G CHAT - Cursor-style chat interface in zellij pane"
+ :requires ([babashka.process :refer [shell]])
+ :task (shell "scripts/kae3g-chat.bb")}
+
+;; Graindaemon Tasks
+graindaemon:github-description-sync
+{:doc "Graindaemon: Update GitHub repository description with grainsite URL"
+ :requires ([babashka.process :refer [shell]])
+ :task (shell "bb" "../graindaemon/src/graindaemon/github-description-sync.bb")}
+
+graindaemon:humble-sync
+{:doc "Graindaemon: Sync Humble Stack files between Alpine VM and Ubuntu host"
+ :requires ([babashka.process :refer [shell]])
+ :task (shell "bb" "../graindaemon/src/graindaemon/humble-sync.bb")}
+
+graindaemon:grainbranch-manager
+{:doc "Graindaemon: Manage grainbranches across all grain6pbc repositories"
+ :requires ([babashka.process :refer [shell]])
+ :task (shell "bb" "../graindaemon/src/graindaemon/grainbranch-manager.bb")}
+
+graindaemon:sync-all-repos
+{:doc "Graindaemon: Sync all grain6pbc repositories with grainbranches"
+ :requires ([babashka.process :refer [shell]])
+ :task (shell "bb" "../graindaemon/src/graindaemon/grainbranch-manager.bb")}}}
+

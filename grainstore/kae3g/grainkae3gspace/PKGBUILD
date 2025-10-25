@@ -1,0 +1,206 @@
+# Maintainer: kae3g <kj3x39@gmail.com>
+# PKGBUILD for Grainspace - Unified decentralized platform for the Grain Network
+
+pkgname=grainspace
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Unified decentralized platform for the Grain Network"
+arch=('x86_64' 'aarch64')
+url="https://grain.network"
+license=('MIT')
+depends=(
+  'clojure'        # Clojure runtime
+  'jdk17-openjdk'  # Java 17 for Clojure
+  'nodejs'         # For web interface
+  'git'            # For grainsource integration
+)
+makedepends=(
+  'clojure'
+  'leiningen'
+  'npm'
+)
+optdepends=(
+  'dfx: ICP canister development'
+  's6: Process supervision (for SixOS integration)'
+  'postgresql: Database backend (optional)'
+)
+backup=('etc/grainspace/config.edn')
+source=(
+  "$pkgname-$pkgver.tar.gz::https://github.com/grainpbc/$pkgname/archive/refs/tags/v$pkgver.tar.gz"
+)
+sha256sums=('SKIP') # Update with actual hash when releasing
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  
+  # Set up Java environment
+  export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+  export PATH=$JAVA_HOME/bin:$PATH
+  
+  # Download Clojure dependencies
+  clojure -P
+  
+  # Build the application
+  clojure -M:build
+  
+  # Build web interface (if present)
+  if [ -d "web-app" ]; then
+    cd web-app
+    npm install
+    npm run build
+    cd ..
+  fi
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  
+  # Install binaries
+  install -Dm755 "target/grainspace" "$pkgdir/usr/bin/grainspace"
+  
+  # Install libraries
+  install -d "$pkgdir/usr/lib/grainspace"
+  cp -r target/lib/* "$pkgdir/usr/lib/grainspace/"
+  
+  # Install Clojure source (for REPL access)
+  install -d "$pkgdir/usr/share/grainspace/src"
+  cp -r src/* "$pkgdir/usr/share/grainspace/src/"
+  
+  # Install web interface
+  if [ -d "web-app/build" ]; then
+    install -d "$pkgdir/usr/share/grainspace/web"
+    cp -r web-app/build/* "$pkgdir/usr/share/grainspace/web/"
+  fi
+  
+  # Install configuration
+  install -Dm644 "config/config.edn" "$pkgdir/etc/grainspace/config.edn"
+  
+  # Install systemd service
+  install -Dm644 /dev/stdin "$pkgdir/usr/lib/systemd/system/grainspace.service" <<EOF
+[Unit]
+Description=Grainspace Service
+After=network.target
+
+[Service]
+Type=simple
+User=grainspace
+Group=grainspace
+WorkingDirectory=/var/lib/grainspace
+ExecStart=/usr/bin/grainspace serve
+Restart=on-failure
+RestartSec=5s
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/grainspace /var/log/grainspace
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+  # Install s6 service (for SixOS integration)
+  install -d "$pkgdir/etc/s6/sv/grainspace"
+  install -Dm755 /dev/stdin "$pkgdir/etc/s6/sv/grainspace/run" <<EOF
+#!/bin/sh
+exec chpst -u grainspace:grainspace /usr/bin/grainspace serve
+EOF
+
+  # Install documentation
+  install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+  if [ -d "docs" ]; then
+    cp -r docs/* "$pkgdir/usr/share/doc/$pkgname/"
+  fi
+  
+  # Install license
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  
+  # Create data directories
+  install -dm750 "$pkgdir/var/lib/grainspace"
+  install -dm750 "$pkgdir/var/log/grainspace"
+}
+
+# Post-install script
+post_install() {
+  # Create grainspace user and group
+  if ! getent group grainspace > /dev/null; then
+    groupadd -r grainspace
+  fi
+  
+  if ! getent passwd grainspace > /dev/null; then
+    useradd -r -g grainspace -d /var/lib/grainspace -s /sbin/nologin \
+      -c "Grainspace service user" grainspace
+  fi
+  
+  # Set ownership of data directories
+  chown -R grainspace:grainspace /var/lib/grainspace
+  chown -R grainspace:grainspace /var/log/grainspace
+  
+  echo ""
+  echo "🌾 Grainspace has been installed!"
+  echo ""
+  echo "Configuration: /etc/grainspace/config.edn"
+  echo "Data directory: /var/lib/grainspace"
+  echo "Log directory: /var/log/grainspace"
+  echo ""
+  echo "To start Grainspace with systemd:"
+  echo "  sudo systemctl enable grainspace"
+  echo "  sudo systemctl start grainspace"
+  echo ""
+  echo "To start Grainspace with s6:"
+  echo "  s6-service add default grainspace"
+  echo ""
+  echo "To run manually:"
+  echo "  grainspace serve"
+  echo ""
+  echo "For more information:"
+  echo "  grainspace help"
+  echo "  https://grain.network/docs"
+  echo ""
+}
+
+# Post-upgrade script
+post_upgrade() {
+  post_install
+  
+  echo ""
+  echo "Grainspace has been upgraded to version $pkgver"
+  echo "Please restart the service:"
+  echo "  sudo systemctl restart grainspace"
+  echo ""
+}
+
+# Pre-remove script
+pre_remove() {
+  # Stop and disable service
+  if systemctl is-active grainspace > /dev/null 2>&1; then
+    systemctl stop grainspace
+  fi
+  
+  if systemctl is-enabled grainspace > /dev/null 2>&1; then
+    systemctl disable grainspace
+  fi
+}
+
+# Post-remove script
+post_remove() {
+  # Optionally remove user and group
+  # (commented out to preserve data)
+  # if getent passwd grainspace > /dev/null; then
+  #   userdel grainspace
+  # fi
+  
+  # if getent group grainspace > /dev/null; then
+  #   groupdel grainspace
+  # fi
+  
+  echo ""
+  echo "Grainspace has been removed."
+  echo "Data directory /var/lib/grainspace has been preserved."
+  echo "To remove data: sudo rm -rf /var/lib/grainspace"
+  echo ""
+}
+
+

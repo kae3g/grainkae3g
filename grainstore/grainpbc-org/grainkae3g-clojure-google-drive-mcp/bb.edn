@@ -1,0 +1,41 @@
+{:paths ["src"]
+ 
+ :deps {org.clojure/core.async {:mvn/version "1.6.681"}
+        org.clojure/data.json {:mvn/version "2.4.0"}
+        cheshire/cheshire {:mvn/version "5.12.0"}}
+ 
+ :tasks
+ {:requires ([clojure.java.shell :refer [sh]]
+             [clojure.string :as str])
+  
+  test
+  {:doc "Run tests"
+   :task (sh "clojure" "-M:dev:test")}
+  
+  test:watch
+  {:doc "Run tests in watch mode"
+   :task (sh "clojure" "-M:dev:test" "--watch")}
+  
+  test:coverage
+  {:doc "Run tests with coverage"
+   :task (sh "clojure" "-M:dev:test" "--plugin" "kaocha.plugin/cloverage")}
+  
+  build
+  {:doc "Build uberjar"
+   :task (sh "clojure" "-T:build" "uber")}
+  
+  clean
+  {:doc "Clean build artifacts"
+   :task (do
+           (sh "rm" "-rf" "target")
+           (sh "rm" "-rf" ".cpcache"))}
+  
+  gdrive:auth
+  {:doc "Authenticate with Google Drive"
+   :task (sh "npx" "-y" "@modelcontextprotocol/server-gdrive")}
+  
+  gdrive:test
+  {:doc "Test MCP server connection"
+   :task (println "Testing Google Drive MCP connection...")}}}
+
+

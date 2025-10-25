@@ -1,0 +1,55 @@
+{:paths ["src"]
+ 
+ :tasks
+ {
+  
+  ;; Test abbreviation with worst-case scenario
+  test
+  {:doc "Test course title abbreviation with worst-case graintime"
+   :task (do
+           (load-file "src/graincourse_title_abbrev/core.clj")
+           (require '[graincourse-title-abbrev.core :as abbrev])
+           
+           (def worst-graintime "12025-10-23--2359--PDT--moon-u_bhadrapada--asc-sag359--sun-12th--kae3g")
+           (def long-title "introduction-to-functional-programming-and-type-systems")
+           
+           (println "Testing graincourse-title-abbrev:")
+           (println "")
+           (println "Original title:" long-title)
+           (println "Title length:" (count long-title))
+           (println "")
+           (println "Worst-case graintime:" worst-graintime)
+           (println "Graintime length:" (count worst-graintime))
+           (println "")
+           
+           (def budget (abbrev/calculate-title-budget "kae3g" worst-graintime))
+           (println "Title budget:" budget "chars")
+           (println "")
+           
+           (def abbreviated (abbrev/abbreviate-course-title long-title budget))
+           (println "Abbreviated title:" abbreviated)
+           (println "Abbreviated length:" (count abbreviated))
+           (println "")
+           
+           (def result (abbrev/format-grainpath-with-abbreviation "course" "kae3g" long-title worst-graintime))
+           (println "Grainpath:")
+           (println (:grainpath result))
+           (println "")
+           (println "Validation:" (:validation result)))}
+  
+  ;; Interactive abbreviation
+  abbrev
+  {:doc "Abbreviate a course title for a given graintime (usage: bb abbrev TITLE GRAINTIME)"
+   :task (let [title (first *command-line-args*)
+               graintime (second *command-line-args*)
+               username (or (nth *command-line-args* 2 nil) "kae3g")]
+           (if (and title graintime)
+             (let [result (abbrev/format-grainpath-with-abbreviation "course" username title graintime)]
+               (when (:abbreviated result)
+                 (println "⚠️  Title abbreviated:" (:original-title result) "→" (:abbreviated-title result)))
+               (println "✨ Grainpath:")
+               (println (:grainpath result))
+               (println "")
+               (println "📏 Length:" (:length (:validation result)) "/100 chars"))
+             (println "Usage: bb abbrev 'course-title' 'graintime' [username]")))}}}}
+

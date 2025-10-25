@@ -1,0 +1,32 @@
+{:connections
+ {:starlink
+  {:name "Starlink"                    ;; Replace with your NetworkManager connection name
+   :priority 1                         ;; Lower = higher priority
+   :preferred true                     ;; Prefer this connection when available
+   :min-quality 60                     ;; Minimum quality threshold (0-100)
+   :ping-host "1.1.1.1"               ;; Host to ping for quality check
+   :ping-count 3                       ;; Number of pings
+   :ping-timeout 2000}                 ;; Timeout in ms
+  
+  :cellular
+  {:name "Cellular-Tethering"          ;; Replace with your hotspot connection name
+   :priority 2                         ;; Fallback connection
+   :preferred false
+   :min-quality 40
+   :ping-host "8.8.8.8"
+   :ping-count 3
+   :ping-timeout 3000}}
+ 
+ :monitoring
+ {:check-interval 30                   ;; Check connection quality every 30 seconds
+  :retry-interval 10                   ;; Retry failed connection after 10 seconds
+  :switch-threshold 3                  ;; Switch after 3 consecutive quality failures
+  :notify true                         ;; Show desktop notifications
+  :log-file "/tmp/grainwifi.log"}
+ 
+ :switching
+ {:auto-switch true                    ;; Enable automatic switching
+  :prefer-starlink true                ;; Always try Starlink first
+  :hysteresis 60                       ;; Wait 60s before switching back to preferred
+  :graceful-switch true}}              ;; Wait for downloads to finish
+

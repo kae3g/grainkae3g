@@ -1,0 +1,5 @@
+# NEVER commit secrets!
+personal/.env
+personal/*.env
+personal/load-from-1password.sh
+personal/secrets.edn

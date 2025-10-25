@@ -1,0 +1,86 @@
+{:solana-sns-domains
+ {:portfolio-summary
+  {:total-domains 238
+   :sns-domains 24
+   :categories {:business ["guitarcenter.sol" "groceryoutlet.sol" "cloverfarms.sol" "bonix.sol"]
+                :geographic ["sanramon.sol" "sanfranciscocounty.sol" "marincounty.sol"]
+                :personal ["raynavallandingham.sol" "autumnmiller.sol" "quinnewers.sol"]
+                :educational ["phillipsandover.sol" "exeter.sol"]
+                :brands ["guayaki.sol" "fendercustomshop.sol" "anvil.sol" "aldn.sol"]
+                :technical ["xplorer.sol" "nvbc.sol"]
+                :creative ["sahararay.sol" "rossforless.sol" "rombauer.sol"]
+                :financial ["redwoodcu.sol" "redwoodcreditunion.sol"]}}
+
+  :sns-domains-detailed
+  [{:domain "xplorer.sol" :category :technical :potential :high :description "Explorer/analytics platform"}
+   {:domain "sanramon.sol" :category :geographic :potential :medium :description "San Ramon location-based"}
+   {:domain "sanfranciscocounty.sol" :category :geographic :potential :high :description "San Francisco County official"}
+   {:domain "sahararay.sol" :category :creative :potential :medium :description "Creative/artistic brand"}
+   {:domain "raynavallandingham.sol" :category :personal :potential :medium :description "Personal brand/portfolio"}
+   {:domain "rossforless.sol" :category :creative :potential :medium :description "Creative/retail brand"}
+   {:domain "rombauer.sol" :category :creative :potential :medium :description "Creative/artistic brand"}
+   {:domain "redwoodcu.sol" :category :financial :potential :high :description "Redwood Credit Union"}
+   {:domain "redwoodcreditunion.sol" :category :financial :potential :high :description "Redwood Credit Union full name"}
+   {:domain "quinnewers.sol" :category :personal :potential :medium :description "Personal brand/portfolio"}
+   {:domain "phillipsandover.sol" :category :educational :potential :high :description "Phillips Academy Andover"}
+   {:domain "nvbc.sol" :category :technical :potential :medium :description "Technical/blockchain related"}
+   {:domain "marincounty.sol" :category :geographic :potential :medium :description "Marin County location-based"}
+   {:domain "guitarcenter.sol" :category :business :potential :high :description "Guitar Center retail chain"}
+   {:domain "guayaki.sol" :category :brands :potential :high :description "Guayaki yerba mate brand"}
+   {:domain "groceryoutlet.sol" :category :business :potential :high :description "Grocery Outlet retail chain"}
+   {:domain "fendercustomshop.sol" :category :brands :potential :high :description "Fender Custom Shop"}
+   {:domain "exeter.sol" :category :educational :potential :high :description "Exeter Academy"}
+   {:domain "cloverfarms.sol" :category :business :potential :medium :description "Clover Farms agricultural"}
+   {:domain "bonix.sol" :category :business :potential :medium :description "Bonix brand/business"}
+   {:domain "autumnmiller.sol" :category :personal :potential :medium :description "Personal brand/portfolio"}
+   {:domain "anvil.sol" :category :brands :potential :high :description "Anvil development platform"}
+   {:domain "aldn.sol" :category :brands :potential :medium :description "ALDN brand/abbreviation"}]
+
+  :grain-network-integration
+  {:multi-chain-sovereignty
+   "These .sol domains represent Solana ecosystem integration within the Grain Network's multi-chain architecture"
+   
+   :potential-use-cases
+   ["DeFi applications on Solana"
+    "NFT marketplaces and collections"
+    "Cross-chain bridge interfaces"
+    "Educational content delivery"
+    "Community governance platforms"
+    "Brand identity and marketing"
+    "Personal portfolio websites"
+    "Business service platforms"]
+   
+   :technical-considerations
+   ["SNS (Solana Name Service) integration"
+    "Cross-chain wallet connectivity"
+    "ICP canister integration for .sol domains"
+    "Hedera integration for multi-chain identity"
+    "Mobile app integration (Grainphone)"
+    "Cost tracking and analytics"]}
+
+  :business-strategy
+  {:high-potential-domains
+   ["sanfranciscocounty.sol" "guitarcenter.sol" "guayaki.sol" "groceryoutlet.sol"
+    "fendercustomshop.sol" "exeter.sol" "phillipsandover.sol" "anvil.sol"]
+   
+   :development-priorities
+   ["Focus on high-potential domains first"
+    "Create template/personal separation for each domain"
+    "Implement Grain Network philosophy across all domains"
+    "Build cross-chain integration capabilities"
+    "Develop educational content for each domain category"]
+   
+   :revenue-potential
+   ["Domain leasing and subdomain management"
+    "Cross-chain service integration"
+    "Educational content monetization"
+    "Brand partnership opportunities"
+    "Technical consulting and development services"]}
+
+  :next-steps
+  ["Categorize domains by development priority"
+   "Create development roadmap for each domain"
+   "Implement Grain Network branding and philosophy"
+   "Build cross-chain integration infrastructure"
+   "Develop educational content and documentation"
+   "Establish community governance frameworks"]}}

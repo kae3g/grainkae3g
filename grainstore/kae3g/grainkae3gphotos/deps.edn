@@ -1,0 +1,52 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        org.clojure/core.async {:mvn/version "1.6.681"}
+        org.clojure/data.json {:mvn/version "2.4.0"}
+        clojure.java-time/clojure.java-time {:mvn/version "1.2.0"}
+        babashka/fs {:mvn/version "0.4.20"}
+        
+        ; Nostr integration
+        nostr-clj/nostr {:mvn/version "0.1.0"}
+        
+        ; ICP integration
+        ic-cdk/ic-cdk {:mvn/version "0.19.0-beta.3"}
+        
+        ; Image processing (AVIF, HEIC, PNG, JPG support)
+        org.imgscalr/imgscalr-lib {:mvn/version "4.2"}
+        com.twelvemonkeys.imageio/imageio-core {:mvn/version "3.10.1"}
+        com.twelvemonkeys.imageio/imageio-jpeg {:mvn/version "3.10.1"}
+        com.twelvemonkeys.imageio/imageio-png {:mvn/version "3.10.1"}
+        com.twelvemonkeys.imageio/imageio-heic {:mvn/version "3.10.1"}
+        com.twelvemonkeys.imageio/imageio-avif {:mvn/version "3.10.1"}
+        
+        ; EXIF metadata (Fujifilm camera support)
+        com.drewnoakes/metadata-extractor {:mvn/version "2.18.0"}
+        
+        ; FFmpeg integration for advanced processing
+        net.bramp.ffmpeg/ffmpeg {:mvn/version "0.7.0"}
+        
+        ; Humble UI for desktop app
+        io.github.humbleui/humbleui {:mvn/version "0.15.0"}
+        
+        ; s6 integration
+        clojure-s6/clojure-s6 {:local/root "../clojure-s6"}
+        
+        ; HTTP client for Nostr relays
+        clj-http/clj-http {:mvn/version "3.12.3"}
+        
+        ; EDN data format
+        org.clojure/tools.reader {:mvn/version "1.3.6"}}
+ 
+ :aliases {:dev {:extra-paths ["dev" "test"]}
+           :test {:extra-paths ["test"]}
+           :build {:deps {io.github.clojure/tools.build
+                          {:git/tag "v0.9.6" :git/sha "8e78a67"}}
+                   :ns-default build}
+           :uberjar {:replace-deps {org.clojure/clojure
+                                   {:mvn/version "1.11.1"}}
+                     :replace-deps {io.github.clojure/tools.build
+                                   {:git/tag "v0.9.6" :git/sha "8e78a67"}}
+                     :ns-default build
+                     :exec-fn hf.depstar/uberjar
+                     :exec-args {:target "target/grainphotos.jar"}}}}
+

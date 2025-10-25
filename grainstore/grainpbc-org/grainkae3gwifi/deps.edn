@@ -1,0 +1,11 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        org.clojure/core.async {:mvn/version "1.6.681"}
+        babashka/fs {:mvn/version "0.5.20"}
+        babashka/process {:mvn/version "0.5.21"}
+        clojure.java-time/clojure.java-time {:mvn/version "1.4.2"}}
+ :aliases
+ {:dev {:extra-paths ["dev"]
+        :extra-deps {nrepl/nrepl {:mvn/version "1.1.0"}
+                     cider/cider-nrepl {:mvn/version "0.42.1"}}}}}
+

@@ -1,0 +1,46 @@
+Source: grainspace
+Section: net
+Priority: optional
+Maintainer: kae3g <kj3x39@gmail.com>
+Build-Depends: debhelper-compat (= 13),
+               clojure,
+               openjdk-17-jdk,
+               leiningen,
+               nodejs,
+               npm
+Standards-Version: 4.6.0
+Homepage: https://grain.network
+Vcs-Git: https://github.com/grainpbc/grainspace.git
+Vcs-Browser: https://github.com/grainpbc/grainspace
+Rules-Requires-Root: no
+
+Package: grainspace
+Architecture: all
+Depends: ${misc:Depends},
+         clojure,
+         openjdk-17-jre,
+         nodejs,
+         git
+Recommends: dfx,
+            s6
+Suggests: postgresql
+Description: Unified decentralized platform for the Grain Network
+ Grainspace is a comprehensive decentralized platform that integrates:
+  - ICP (Internet Computer Protocol) canisters
+  - Nostr decentralized social protocol
+  - Urbit personal server network
+  - Grainspace Network identity management
+ .
+ It provides a unified interface for managing decentralized applications,
+ photos, writing, and development workflows across the Grain Hardware
+ Ecosystem (Graincamera, Grainwriter, Grainpack).
+ .
+ Features:
+  - Self-hosted AI development with Qwen3, Gemini, Llama, GPT-OS
+  - Native AVIF photo management
+  - E-ink writing device integration
+  - External GPU acceleration support
+  - Decentralized identity via Urbit Azimuth
+  - Multi-chain payment support (ICP + Solana)
+
+

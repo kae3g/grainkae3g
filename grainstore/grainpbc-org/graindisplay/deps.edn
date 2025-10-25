@@ -1,0 +1,16 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        io.github.humbleui/humbleui {:mvn/version "0.10.0"}
+        io.github.humbleui/fonts {:mvn/version "0.1.0"}
+        io.github.humbleui/jwm {:mvn/version "0.3.0"}
+        clojure-s6 {:local/root "../clojure-s6"}
+        clojure-sixos {:local/root "../clojure-sixos"}
+        graintime {:local/root "../graintime"}
+        babashka/fs {:mvn/version "0.4.0"}
+        clojure.java-time {:mvn/version "0.3.2"}
+        clojure.core.async {:mvn/version "1.6.681"}}
+ :aliases {:dev {:extra-paths ["dev"]}
+           :native {:jvm-opts ["-Dclojure.compiler.direct-linking=true"]}
+           :appimage {:extra-deps {io.github.clj-appimage/clj-appimage {:mvn/version "0.1.0"}}}}
+ :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
+             "clojars" {:url "https://repo.clojars.org/"}}}

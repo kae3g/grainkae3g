@@ -1,0 +1,165 @@
+{:paths ["src"]
+ 
+ :tasks
+ {;; Personalize a template repository
+  personalize
+  {:doc "Personalize a grain6pbc template for your graindevname (usage: bb personalize DEVNAME MODULE [TEMPLATE_DIR])"
+   :task (let [args *command-line-args*
+               devname (nth args 0 nil)
+               module (nth args 1 nil)
+               template-dir (nth args 2 (str "../../" module))]
+           (if (and devname module)
+             (do
+               (load-file "src/grainsource_personalize/core.clj")
+               (require '[grainsource-personalize.core :as p])
+               
+               (println "")
+               (println "🌾 Personalizing Grain Repository")
+               (println "")
+               (println (str "  GrainDevName: " devname))
+               (println (str "  Module: " module))
+               (println (str "  Template: " template-dir))
+               (println "")
+               
+               (let [repo-name (str "grain" devname module)
+                     output-dir (str "../../../" repo-name)]
+                 (println (str "  Output: " repo-name "/"))
+                 (println "")
+                 (println "📋 Steps:")
+                 
+                 ;; Step 1: Copy template
+                 (println "  1. Copying template...")
+                 (shell "cp" "-r" template-dir output-dir)
+                 (println "     ✓ Copied")
+                 
+                 ;; Step 2: Ungitignore personal/
+                 (println "  2. Removing personal/ from .gitignore...")
+                 (let [gitignore (str output-dir "/.gitignore")]
+                   (when (.exists (io/file gitignore))
+                     (let [updated ((resolve 'p/ungitignore-personal) gitignore)]
+                       (spit gitignore updated)
+                       (println "     ✓ Updated .gitignore"))))
+                 
+                 ;; Step 3: Update references
+                 (println "  3. Updating references...")
+                 (let [replacements (:replacements
+                                     ((resolve 'p/update-references)
+                                      {:from "grain6pbc"
+                                       :to devname
+                                       :module module
+                                       :dir output-dir}))]
+                   ;; Update README.md
+                   (when (.exists (io/file (str output-dir "/README.md")))
+                     ((resolve 'p/apply-replacements)
+                      (str output-dir "/README.md")
+                      replacements))
+                   ;; Update bb.edn
+                   (when (.exists (io/file (str output-dir "/bb.edn")))
+                     ((resolve 'p/apply-replacements)
+                      (str output-dir "/bb.edn")
+                      replacements))
+                   (println "     ✓ Updated references"))
+                 
+                 ;; Step 4: Git remotes info
+                 (println "  4. Git remotes:")
+                 (let [remotes ((resolve 'p/setup-remotes)
+                               {:graindevname devname
+                                :module module
+                                :github true
+                                :codeberg true})]
+                   (println (str "     GitHub: " (:github-url remotes)))
+                   (println (str "     Codeberg: " (:codeberg-url remotes)))
+                   (println "")
+                   (println "     Run these commands in the new repo:")
+                   (doseq [cmd (:commands remotes)]
+                     (println (str "       " cmd))))
+                 
+                 (println "")
+                 (println "✨ Personalization complete!")
+                 (println "")
+                 (println (str "  cd " output-dir))
+                 (println "  git init")
+                 (println "  git add -A")
+                 (println (str "  git commit -m 'Initial commit: " repo-name "'"))
+                 (println "  # Then add remotes and push")
+                 (println "")))
+             (do
+               (println "")
+               (println "Usage: bb personalize GRAINDEVNAME MODULE [TEMPLATE_DIR]")
+               (println "")
+               (println "Examples:")
+               (println "  bb personalize kae3g course")
+               (println "  bb personalize jen3g time ~/grain6pbc/graintime")
+               (println "  bb personalize sam2k zsh")
+               (println ""))))}
+  
+  ;; Verify personalization
+  verify
+  {:doc "Verify that a repository has been properly personalized (usage: bb verify REPO_DIR)"
+   :task (let [repo-dir (first *command-line-args*)]
+           (if repo-dir
+             (do
+               (load-file "src/grainsource_personalize/core.clj")
+               (require '[grainsource-personalize.core :as p])
+               
+               (println "")
+               (println "🔍 Verifying Personalization")
+               (println "")
+               
+               (let [result ((resolve 'p/verify-personalization) repo-dir)]
+                 (if (:valid result)
+                   (do
+                     (println "✅ Personalization verified!")
+                     (println "")
+                     (println "  All checks passed:") 
+                     (println (str "  - personal/ NOT in .gitignore: ✓"))
+                     (println (str "  - No grain6pbc references: ✓"))
+                     (println (str "  - Git repository: ✓"))
+                     (println ""))
+                   (do
+                     (println "❌ Personalization incomplete")
+                     (println "")
+                     (println "  Issues found:")
+                     (doseq [issue (:issues result)]
+                       (println (str "  - " issue)))
+                     (println "")))))
+             (do
+               (println "")
+               (println "Usage: bb verify REPO_DIR")
+               (println "")
+               (println "Example:")
+               (println "  bb verify ../grainkae3gcourse")
+               (println ""))))}
+  
+  ;; Batch personalize common modules
+  batch-personalize
+  {:doc "Personalize all common modules for a graindevname (usage: bb batch-personalize DEVNAME)"
+   :task (let [devname (first *command-line-args*)
+               modules ["course" "time" "zsh" "envvars" "display"]]
+           (if devname
+             (do
+               (println "")
+               (println "🌾 Batch Personalizing Grain Modules")
+               (println "")
+               (println (str "  GrainDevName: " devname))
+               (println (str "  Modules: " (str/join ", " modules)))
+               (println "")
+               
+               (doseq [module modules]
+                 (let [template-dir (str "../../" module)]
+                   (when (.exists (io/file template-dir))
+                     (println (str "📦 Personalizing " module "..."))
+                     (shell "bb" "personalize" devname module template-dir)
+                     (println ""))))
+               
+               (println "✨ Batch personalization complete!")
+               (println ""))
+             (do
+               (println "")
+               (println "Usage: bb batch-personalize GRAINDEVNAME")
+               (println "")
+               (println "Example:")
+               (println "  bb batch-personalize kae3g")
+               (println ""))))}}
+}
+

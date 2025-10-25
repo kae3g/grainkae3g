@@ -1,0 +1,43 @@
+#!/usr/bin/env bb
+
+(require '[clojure.string :as str])
+
+(defn print-setup-reminder []
+  (println "🌐 COURSE DEPLOYMENT SETUP REMINDER")
+  (println "====================================")
+  (println "")
+  (println "⚠️  IMPORTANT: Manual setup required before deployment!")
+  (println "")
+  (println "📋 GITHUB PAGES SETUP:")
+  (println "1. Go to your GitHub repository")
+  (println "2. Click Settings → Pages")
+  (println "3. Under 'Source', select 'GitHub Actions'")
+  (println "   (NOT 'Deploy from a branch')")
+  (println "4. Save settings")
+  (println "5. Repository will use gh-pages branch automatically")
+  (println "")
+  (println "📋 CODEBERG PAGES SETUP:")
+  (println "1. Go to your Codeberg repository")
+  (println "2. Click Settings → Pages")
+  (println "3. Enable 'Pages' manually")
+  (println "4. Repository will use 'pages' branch automatically")
+  (println "")
+  (println "🚀 AFTER SETUP:")
+  (println "Run: gb flow")
+  (println "This will build and deploy to both platforms")
+  (println "")
+  (println "📖 URLs will be:")
+  (println "• GitHub: https://{org}.github.io/{repo}/")
+  (println "• Codeberg: https://{org}.codeberg.page/{repo}/")
+  (println "")
+  (println "❌ Common Issues:")
+  (println "• GitHub: Forgot to enable Pages in settings")
+  (println "• Codeberg: Forgot to manually enable Pages")
+  (println "• Both: Authentication not configured")
+  (println "")
+  (println "🌾 Happy course publishing!"))
+
+(defn main []
+  (print-setup-reminder))
+
+(main)

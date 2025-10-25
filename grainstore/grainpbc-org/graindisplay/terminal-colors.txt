@@ -1,0 +1,37 @@
+# GrainDisplay Bedtime Warm Theme for Terminal
+# Apply these colors to your terminal emulator
+
+# Background: #1A0F0A (warm black)
+# Foreground: #FFF8DC (warm white)
+# Cursor: #FF8C00 (deep orange)
+
+# Color Palette:
+# 0: #1A0F0A (warm black)
+# 1: #8B4513 (warm red)
+# 2: #228B22 (warm green)
+# 3: #FFA500 (warm yellow)
+# 4: #4682B4 (warm blue)
+# 5: #BA55D3 (warm magenta)
+# 6: #40E0D0 (warm cyan)
+# 7: #FFF8DC (warm white)
+# 8: #3C2B1F (bright black)
+# 9: #D2691E (bright red)
+# 10: #90EE90 (bright green)
+# 11: #FFD700 (bright yellow)
+# 12: #87CEEB (bright blue)
+# 13: #DDA0DD (bright magenta)
+# 14: #AFEEEE (bright cyan)
+# 15: #FFFFFF (bright white)
+
+# For GNOME Terminal:
+gconftool-2 --set /apps/gnome-terminal/profiles/Default/background_color --type string '#1A0F0A'
+gconftool-2 --set /apps/gnome-terminal/profiles/Default/foreground_color --type string '#FFF8DC'
+
+# For Alacritty (add to ~/.config/alacritty/alacritty.yml):
+[colors.primary]
+background = '0x1A0F0A'
+foreground = '0xFFF8DC'
+
+[colors.cursor]
+text = '0x1A0F0A'
+cursor = '0xFF8C00'

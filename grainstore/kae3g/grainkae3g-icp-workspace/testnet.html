@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grain6 ICP Local Testnet</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .status {
+            background: rgba(0, 255, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #00ff00;
+        }
+        .canister-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .test-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        .result {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .urls {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .urls a {
+            color: #00ff00;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+        .urls a:hover {
+            background: rgba(0, 255, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌾 Grain6 ICP Local Testnet</h1>
+        
+        <div class="status">
+            <h3>✅ ICP Replica Status: Healthy</h3>
+            <p>Local ICP testnet is running and ready for development</p>
+        </div>
+        
+        <div class="canister-info">
+            <h3>📦 Deployed Canister</h3>
+            <p><strong>Canister ID:</strong> lqy7q-dh777-77777-aaaaq-cai</p>
+            <p><strong>Status:</strong> Active and tested</p>
+            <p><strong>Language:</strong> Motoko (ICP native)</p>
+        </div>
+        
+        <div class="urls">
+            <h3>🔗 Local URLs</h3>
+            <a href="http://127.0.0.1:4943/?canisterId=lz3um-vp777-77777-aaaba-cai&id=lqy7q-dh777-77777-aaaaq-cai" target="_blank">
+                ICP Candid Interface
+            </a>
+            <a href="http://localhost:4943" target="_blank">
+                ICP Replica Dashboard
+            </a>
+            <a href="http://localhost:3000" target="_blank">
+                This Website (if running)
+            </a>
+        </div>
+        
+        <div class="test-section">
+            <h3>🧪 Test Canister Functions</h3>
+            <button onclick="testStatus()">Test Status</button>
+            <button onclick="testGraintime()">Test Graintime</button>
+            <button onclick="testGrainpath()">Test Grainpath</button>
+            <button onclick="testGraincontacts()">Test Graincontacts</button>
+            <button onclick="testGraincourse()">Test Graincourse</button>
+            <button onclick="testGrainbook()">Test Grainbook</button>
+            <div id="result" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🚀 Development Commands</h3>
+            <div class="result">
+# Start ICP replica
+dfx start --clean --background
+
+# Deploy canister
+dfx deploy
+
+# Test canister
+dfx canister call grain6_icp status
+
+# Get canister ID
+dfx canister id grain6_icp
+
+# Stop replica
+dfx stop
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canisterId = 'lqy7q-dh777-77777-aaaaq-cai';
+        const replicaUrl = 'http://127.0.0.1:4943';
+        
+        async function callCanister(method, args = []) {
+            try {
+                const response = await fetch(`${replicaUrl}/api/v2/canister/${canisterId}/call`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        method: method,
+                        args: args
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.text();
+                return result;
+            } catch (error) {
+                return `Error: ${error.message}`;
+            }
+        }
+        
+        function showResult(result) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = result;
+        }
+        
+        async function testStatus() {
+            const result = await callCanister('status');
+            showResult(`Status: ${result}`);
+        }
+        
+        async function testGraintime() {
+            const result = await callCanister('getGraintime', ['kae3g']);
+            showResult(`Graintime: ${result}`);
+        }
+        
+        async function testGrainpath() {
+            const result = await callCanister('getGrainpath', ['grain6-get-started']);
+            showResult(`Grainpath: ${result}`);
+        }
+        
+        async function testGraincontacts() {
+            const result = await callCanister('getGraincontacts', ['kae3g']);
+            showResult(`Graincontacts: ${result}`);
+        }
+        
+        async function testGraincourse() {
+            const result = await callCanister('getGraincourse', ['grain6-get-started']);
+            showResult(`Graincourse: ${result}`);
+        }
+        
+        async function testGrainbook() {
+            const result = await callCanister('getGrainbook', ['personal-notes']);
+            showResult(`Grainbook: ${result}`);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "canisters": {
+    "urbit-identity": {
+      "main": "canisters/urbit-identity/src/lib.rs",
+      "type": "rust",
+      "candid": "canisters/urbit-identity/src/urbit_identity.did",
+      "package": "urbit-identity"
+    }
+  }
+}

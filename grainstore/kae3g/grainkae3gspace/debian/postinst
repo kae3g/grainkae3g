@@ -1,0 +1,72 @@
+#!/bin/sh
+# postinst script for grainspace
+
+set -e
+
+case "$1" in
+    configure)
+        # Create grainspace user and group if they don't exist
+        if ! getent group grainspace > /dev/null; then
+            addgroup --system grainspace
+        fi
+        
+        if ! getent passwd grainspace > /dev/null; then
+            adduser --system --ingroup grainspace --home /var/lib/grainspace \
+                --no-create-home --disabled-password --disabled-login \
+                --gecos "Grainspace service user" grainspace
+        fi
+        
+        # Create necessary directories
+        mkdir -p /var/lib/grainspace
+        mkdir -p /var/log/grainspace
+        
+        # Set ownership
+        chown -R grainspace:grainspace /var/lib/grainspace
+        chown -R grainspace:grainspace /var/log/grainspace
+        
+        # Set permissions
+        chmod 750 /var/lib/grainspace
+        chmod 750 /var/log/grainspace
+        
+        # Reload systemd daemon
+        if [ -d /run/systemd/system ]; then
+            systemctl --system daemon-reload >/dev/null || true
+        fi
+        
+        echo ""
+        echo "🌾 Grainspace has been installed!"
+        echo ""
+        echo "Configuration: /etc/grainspace/config.edn"
+        echo "Data directory: /var/lib/grainspace"
+        echo "Log directory: /var/log/grainspace"
+        echo ""
+        echo "To start Grainspace with systemd:"
+        echo "  sudo systemctl enable grainspace"
+        echo "  sudo systemctl start grainspace"
+        echo ""
+        echo "To start Grainspace with s6:"
+        echo "  s6-service add default grainspace"
+        echo ""
+        echo "To run manually:"
+        echo "  grainspace serve"
+        echo ""
+        echo "For more information:"
+        echo "  grainspace help"
+        echo "  https://grain.network/docs"
+        echo ""
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
+
+

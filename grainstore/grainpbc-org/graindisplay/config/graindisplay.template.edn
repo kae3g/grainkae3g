@@ -1,0 +1,149 @@
+{:graindisplay
+ {:version "1.0.0"
+  
+  ;; Local Machine Defaults
+  ;; These are YOUR preferred display settings for YOUR machine
+  :local-defaults
+  {:scaling 1.75                    ;; Text/UI scaling factor
+   :color-temperature 2000          ;; Warm lighting (1000-6500K)
+   :color-profile :srgb             ;; Color space
+   :brightness 0.8                  ;; Screen brightness (0.0-1.0)
+   :contrast 1.0                    ;; Contrast level (0.0-2.0)
+   :filters []                      ;; Applied filters [:grayscale :monochrome etc]
+   :display-mode :normal            ;; Display mode
+   :orientation :landscape}         ;; Screen orientation
+  
+  ;; External Metadata Preferences
+  ;; Controls how you handle display settings from Grainweb content creators
+  :local-preferences
+  {:honor-external-metadata true   ;; Honor content creator's intended settings?
+   
+   ;; Force Override Settings (ALWAYS applied, ignores content metadata)
+   :overrides
+   {;; Uncomment to force specific settings:
+    ;; :color-temperature 2000       ;; Always use 2000K warm lighting
+    ;; :filters [:grayscale]         ;; Always apply grayscale
+    ;; :scaling 1.75                 ;; Always use 1.75x scaling
+    }
+   
+   ;; Allow List (if non-empty, ONLY these fields honored from metadata)
+   :allow-list []                   ;; e.g., [:color-temperature :display-mode]
+   
+   ;; Deny List (NEVER honor these fields from metadata)
+   :deny-list []}                   ;; e.g., [:brightness :contrast]
+  
+  ;; Platform-Specific Settings
+  :platform
+  {:backend :gnome                  ;; :gnome, :sway, :x11, :android
+   :compositor :wayland             ;; :wayland, :x11
+   :night-light-daemon :gnome       ;; :gnome, :wlsunset, :redshift
+   :display-server :wayland}        ;; :wayland, :xorg
+  
+  ;; Daemon Settings
+  :daemon
+  {:enabled true
+   :monitor-interval 5000           ;; Check for changes every 5 seconds
+   :auto-apply-grainweb-metadata true
+   :log-level :info}
+  
+  ;; Profiles
+  ;; Quick-switch display profiles
+  :profiles
+  {:desktop-work
+   {:description "Standard desktop work environment"
+    :scaling 1.75
+    :color-temperature 2000
+    :filters [:reduce-blue-light]
+    :brightness 0.8}
+   
+   :presentation
+   {:description "Presentation mode - bright and color-accurate"
+    :scaling 1.0
+    :color-temperature 6500
+    :filters []
+    :brightness 1.0}
+   
+   :reading-warm
+   {:description "Warm reading mode for e-books"
+    :scaling 1.5
+    :color-temperature 1800
+    :filters [:reduce-blue-light :sepia]
+    :brightness 0.6}
+   
+   :grayscale-focus
+   {:description "Grayscale for focused work"
+    :scaling 1.5
+    :color-temperature 2000
+    :filters [:grayscale]
+    :brightness 0.7}
+   
+   :accessibility-high-contrast
+   {:description "High contrast for accessibility"
+    :scaling 2.0
+    :color-temperature 6500
+    :filters [:high-contrast]
+    :brightness 1.0
+    :contrast 1.5}
+   
+   :color-blind-protanopia
+   {:description "Optimized for protanopia (red-blind)"
+    :scaling 1.5
+    :filters [:protanopia]
+    :brightness 0.8}
+   
+   :graindroid-vision
+   {:description "Graindroid Phone OLED display mode"
+    :scaling 2.0
+    :color-temperature 2500
+    :color-profile :display-p3
+    :display-mode :vision
+    :brightness 0.7}
+   
+   :graindroid-ink
+   {:description "Graindroid Phone E-ink display mode"
+    :scaling 1.0
+    :color-temperature 6500        ;; No warm lighting on e-ink
+    :color-profile :grayscale
+    :display-mode :ink
+    :filters [:monochrome]
+    :brightness 1.0}}
+  
+  ;; Grainweb Integration
+  :grainweb
+  {:respect-creator-metadata true   ;; Honor display metadata in Grainweb messages
+   :cache-metadata true             ;; Cache metadata for offline viewing
+   :trust-grainmarks []             ;; Grainmarks to always trust metadata from
+   :block-grainmarks []}            ;; Grainmarks to always ignore metadata from
+  
+  ;; Grainclay Integration
+  :grainclay
+  {:url-format "neovedic-timestamp" ;; Use neovedic timestamps in paths
+   :immutable-metadata true         ;; Metadata is immutable (Clay-style)
+   :validate-timestamps true}       ;; Validate neovedic timestamp format
+  
+  ;; Examples of Grainmark Display Metadata
+  :examples
+  {:forest-sunset
+   {:grainmark-name "kae3g/forest-sunset"
+    :immutable-path "12025-10-22--1830--CDT--moon-vishakha--09thhouse18--kae3g"
+    :grainclay-url "/12025-10-22--1830--CDT--moon-vishakha--09thhouse18--kae3g/forest-sunset.grainmark"
+    :display-metadata
+    {:color-temperature 2000
+     :color-profile :display-p3
+     :display-mode :reading
+     :filters [:reduce-blue-light]
+     :intended-for [:desktop :graindroid-ink]
+     :author "kae3g"}}
+   
+   :code-review
+   {:grainmark-name "kae3g/grain-network-code-review"
+    :immutable-path "12025-10-22--1900--CDT--moon-vishakha--09thhouse19--kae3g"
+    :grainclay-url "/12025-10-22--1900--CDT--moon-vishakha--09thhouse19--kae3g/grain-network-code-review.grainmark"
+    :display-metadata
+    {:color-temperature 6500       ;; Bright for code
+     :color-profile :srgb
+     :filters []
+     :scaling 1.25                 ;; Slightly larger code
+     :intended-for [:desktop]
+     :author "kae3g"}}}}}
+

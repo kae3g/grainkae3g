@@ -147,3 +147,4 @@ Future platforms → Mapped → grain6.network
 5. **Build bridge layer documentation**
 
 This approach ensures clean separation between the existing internet and the new Grain Network while maintaining compatibility and avoiding conflicts.
+

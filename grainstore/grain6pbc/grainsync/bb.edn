@@ -1,0 +1,34 @@
+{:paths ["src" "scripts"]
+ 
+ :deps
+ {org.clojure/clojure {:mvn/version "1.11.1"}
+  babashka.fs {:mvn/version "0.3.4"}
+  clj-http {:mvn/version "3.12.3"}}
+ 
+ :tasks
+ {;; Course Management
+  course:new
+  {:doc "Create new graincourse with auto-generated graintime and grainpath"
+   :requires ([grainsync.course :as course])
+   :task (course/create-new-course!)}
+  
+  course:sync
+  {:doc "Sync existing graincourse to grainkae3g pages"
+   :requires ([grainsync.course :as course])
+   :task (course/sync-course!)}
+  
+  course:list
+  {:doc "List all available graincourses"
+   :requires ([grainsync.course :as course])
+   :task (course/list-courses)}
+  
+  ;; GitHub Integration
+  github:update-description
+  {:doc "Update GitHub repository description with Pages URL"
+   :requires ([grainsync.github :as github])
+   :task (github/update-repo-description!)}
+  
+  ;; Utility
+  test
+  {:doc "Run grainsync tests"
+   :task (println "🌾 Grainsync tests coming soon!")}}}

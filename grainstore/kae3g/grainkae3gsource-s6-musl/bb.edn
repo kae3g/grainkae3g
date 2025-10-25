@@ -1,0 +1,27 @@
+{:paths ["."]
+ 
+ :tasks
+ {download
+  {:doc "Download s6 source tarballs from skarnet.org"
+   :task (shell "bb" "scripts/download-sources.bb")}
+  
+  build:all
+  {:doc "Build skalibs, execline, and s6 with musl (static linking)"
+   :requires ([babashka.process :refer [shell]])
+   :task (shell "bb" "scripts/build-all.bb")}
+  
+  clean
+  {:doc "Clean build and install directories"
+   :task (do
+           (println "🧹 Cleaning build artifacts...")
+           (shell "rm" "-rf" "build" "install")
+           (println "✅ Cleaned!"))}
+  
+  test
+  {:doc "Test the built binaries"
+   :task (do
+           (println "🧪 Testing s6 binaries...")
+           (shell "install/bin/s6-svscan" "--help")
+           (shell "install/bin/s6-supervise" "--help")
+           (shell "install/bin/execlineb" "--help")
+           (println "✅ Tests passed!"))}}}

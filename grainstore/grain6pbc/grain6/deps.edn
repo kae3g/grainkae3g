@@ -1,0 +1,14 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        graintime {:local/root "../graintime"}
+        clojure-s6 {:local/root "../clojure-s6"}
+        clojure-sixos {:local/root "../clojure-sixos"}
+        org.clojure/core.async {:mvn/version "1.6.681"}
+        babashka/fs {:mvn/version "0.4.19"}}
+ 
+ :aliases {:test {:extra-paths ["test"]
+                  :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}}}
+           :dev {:extra-paths ["dev"]}}
+ 
+ :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
+             "clojars" {:url "https://repo.clojars.org/"}}}

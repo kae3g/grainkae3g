@@ -1,0 +1,47 @@
+{:paths ["src" "scripts"]
+ 
+ :deps
+ {;; Core Clojure - LTS version
+  org.clojure/clojure {:mvn/version "1.12.0"}
+  
+  ;; ClojureScript - Latest stable
+  org.clojure/clojurescript {:mvn/version "1.12.42"}
+  
+  ;; Spec for validation
+  org.clojure/spec.alpha {:mvn/version "0.3.218"}
+  
+  ;; Filesystem operations
+  babashka/fs {:mvn/version "0.5.20"}
+  
+  ;; HTML generation
+  hiccup/hiccup {:mvn/version "1.0.5"}
+  
+  ;; Markdown parsing
+  markdown-clj/markdown-clj {:mvn/version "1.11.4"}
+  
+  ;; YAML support
+  clj-commons/clj-yaml {:mvn/version "1.0.27"}}
+ 
+ :aliases
+ {:dev
+  {:extra-paths ["dev"]
+   :extra-deps
+   {;; Development tools
+    clj-kondo/clj-kondo {:mvn/version "2024.09.27"}
+    zprint/zprint {:mvn/version "1.2.9"}}}
+  
+  :test
+  {:extra-paths ["test"]
+   :extra-deps
+   {lambdaisland/kaocha {:mvn/version "1.91.1392"}}}
+  
+  :build
+  {:deps {io.github.clojure/tools.build
+          {:git/tag "v0.10.5" :git/sha "2a21b7a"}}
+   :ns-default build}
+  
+  :repl
+  {:extra-deps
+   {cider/cider-nrepl {:mvn/version "0.49.3"}
+    nrepl/nrepl {:mvn/version "1.3.0"}}}}}
+

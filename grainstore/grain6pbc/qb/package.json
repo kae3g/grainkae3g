@@ -1,0 +1,67 @@
+{
+  "name": "quarterback",
+  "version": "0.1.0",
+  "description": "Universal Quarterback for Grain Network - NPM distribution of grainpbc/qb",
+  "main": "index.js",
+  "bin": {
+    "qb": "./bin/qb.js",
+    "quarterback": "./bin/qb.js"
+  },
+  "scripts": {
+    "install": "node scripts/install.js",
+    "postinstall": "node scripts/postinstall.js",
+    "test": "bb qb:help"
+  },
+  "keywords": [
+    "quarterback",
+    "grain-network",
+    "grainbarrel",
+    "qb",
+    "gb",
+    "deployment",
+    "workflow",
+    "babashka",
+    "clojure"
+  ],
+  "author": "Grain Network <grainpbc@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grainpbc/quarterback.git"
+  },
+  "homepage": "https://grainpbc.github.io/quarterback/",
+  "bugs": {
+    "url": "https://github.com/grainpbc/quarterback/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "babashka": "^1.0.0"
+  },
+  "peerDependencies": {
+    "babashka": ">=1.0.0"
+  },
+  "files": [
+    "bin/",
+    "scripts/",
+    "src/",
+    "template/",
+    "personal/",
+    "bb.edn",
+    "README.md",
+    "LICENSE"
+  ],
+  "directories": {
+    "bin": "./bin",
+    "lib": "./src",
+    "doc": "./docs"
+  },
+  "grain-network": {
+    "module": "qb",
+    "abstraction": "gb",
+    "philosophy": "now == next + 1",
+    "version": "0.1.0"
+  }
+}
+

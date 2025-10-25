@@ -1,0 +1,37 @@
+{:paths ["src" "scripts" "test"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        babashka/fs {:mvn/version "0.2.14"}
+        clj-http {:mvn/version "3.12.3"}
+        clj-time {:mvn/version "0.15.2"}
+        java-time {:mvn/version "0.2.2"}}
+ :tasks
+ {;; Domain Management
+  domains:list
+  {:doc "List all grain6 domains and their status"
+   :task (shell "bb" "scripts/domains-list.bb")}
+  
+  domains:check
+  {:doc "Check domain expiration and renewal status"
+   :task (shell "bb" "scripts/domains-check.bb")}
+  
+  domains:renew
+  {:doc "Renew domains (interactive)"
+   :task (shell "bb" "scripts/domains-renew.bb")}
+  
+  ;; Grain6OS Integration
+  grain6os:status
+  {:doc "Check grain6os==grainsixos status with clojure-sixos"
+   :task (shell "bb" "scripts/grain6os-status.bb")}
+  
+  grain6os:sync
+  {:doc "Sync grain6os with grainsixos domains"
+   :task (shell "bb" "scripts/grain6os-sync.bb")}
+  
+  ;; Configuration
+  config:show
+  {:doc "Show graindomains configuration"
+   :task (shell "bb" "scripts/config-show.bb")}
+  
+  config:update
+  {:doc "Update graindomains configuration"
+   :task (shell "bb" "scripts/config-update.bb")}}}

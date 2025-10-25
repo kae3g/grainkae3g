@@ -1,0 +1,64 @@
+{:paths ["src" "scripts"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        babashka.fs {:mvn/version "0.3.4"}
+        clj-http {:mvn/version "3.12.3"}
+        clj-time {:mvn/version "0.15.2"}
+        java-time {:mvn/version "0.3.3"}}
+ 
+ :tasks
+ {;; Core grainclay flow commands (like gb flow)
+  flow
+  {:doc "Complete grainclay workflow: publish, distribute, sync"
+   :task (shell "bb" "scripts/grainclay-flow.bb")}
+  
+  flow:publish
+  {:doc "Publish content to grainclay network"
+   :task (shell "bb" "scripts/grainclay-publish.bb")}
+  
+  flow:distribute
+  {:doc "Distribute published content across platforms"
+   :task (shell "bb" "scripts/grainclay-distribute.bb")}
+  
+  flow:sync
+  {:doc "Sync content with remote repositories"
+   :task (shell "bb" "scripts/grainclay-sync.bb")}
+  
+  ;; Content management
+  content:create
+  {:doc "Create new content with grainclay structure"
+   :task (shell "bb" "scripts/grainclay-create.bb")}
+  
+  content:watch
+  {:doc "Watch content for changes and auto-publish"
+   :task (shell "bb" "scripts/grainclay-watch.bb")}
+  
+  content:list
+  {:doc "List all published content"
+   :task (shell "bb" "scripts/grainclay-list.bb")}
+  
+  ;; Network operations
+  network:status
+  {:doc "Check grainclay network status"
+   :task (shell "bb" "scripts/grainclay-network-status.bb")}
+  
+  network:sync
+  {:doc "Sync with grainclay network"
+   :task (shell "bb" "scripts/grainclay-network-sync.bb")}
+  
+  ;; Configuration
+  config:show
+  {:doc "Show current grainclay configuration"
+   :task (shell "bb" "-e" "(require 'grainclay.config) (grainclay.config/show-config)")}
+  
+  config:update
+  {:doc "Update grainclay configuration"
+   :task (shell "bb" "scripts/grainclay-config-update.bb")}
+  
+  ;; Utilities
+  cleanup
+  {:doc "Clean up old grainclay content"
+   :task (shell "bb" "scripts/grainclay-cleanup.bb")}
+  
+  validate
+  {:doc "Validate grainclay content structure"
+   :task (shell "bb" "scripts/grainclay-validate.bb")}}}

@@ -1,0 +1,17 @@
+# Personal configuration (not tracked)
+config/graindisplay.personal.edn
+*.personal.edn
+
+# Build artifacts
+target/
+*.jar
+.cpcache/
+.nrepl-port
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+

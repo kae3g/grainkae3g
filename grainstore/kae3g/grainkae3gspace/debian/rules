@@ -1,0 +1,72 @@
+#!/usr/bin/make -f
+# Debian packaging rules for Grainspace
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export PATH := $(JAVA_HOME)/bin:$(PATH)
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	# Download Clojure dependencies
+	clojure -P
+	
+	# Build the application
+	clojure -M:build
+	
+	# Build web interface (if present)
+	if [ -d web-app ]; then \
+		cd web-app && npm install && npm run build; \
+	fi
+
+override_dh_auto_install:
+	# Install binaries
+	install -D -m 0755 target/grainspace debian/grainspace/usr/bin/grainspace
+	
+	# Install libraries
+	install -d debian/grainspace/usr/lib/grainspace
+	cp -r target/lib/* debian/grainspace/usr/lib/grainspace/
+	
+	# Install Clojure source
+	install -d debian/grainspace/usr/share/grainspace/src
+	cp -r src/* debian/grainspace/usr/share/grainspace/src/
+	
+	# Install web interface
+	if [ -d web-app/build ]; then \
+		install -d debian/grainspace/usr/share/grainspace/web; \
+		cp -r web-app/build/* debian/grainspace/usr/share/grainspace/web/; \
+	fi
+	
+	# Install configuration
+	install -D -m 0644 config/config.edn debian/grainspace/etc/grainspace/config.edn
+	
+	# Install systemd service
+	install -D -m 0644 debian/grainspace.service \
+		debian/grainspace/lib/systemd/system/grainspace.service
+	
+	# Install s6 service
+	install -d debian/grainspace/etc/s6/sv/grainspace
+	install -D -m 0755 debian/grainspace-s6-run \
+		debian/grainspace/etc/s6/sv/grainspace/run
+	
+	# Install documentation
+	install -D -m 0644 README.md debian/grainspace/usr/share/doc/grainspace/README.md
+	if [ -d docs ]; then \
+		cp -r docs/* debian/grainspace/usr/share/doc/grainspace/; \
+	fi
+
+override_dh_auto_clean:
+	# Clean build artifacts
+	rm -rf target/
+	if [ -d web-app/node_modules ]; then \
+		rm -rf web-app/node_modules/; \
+	fi
+	if [ -d web-app/build ]; then \
+		rm -rf web-app/build/; \
+	fi
+	dh_auto_clean
+
+

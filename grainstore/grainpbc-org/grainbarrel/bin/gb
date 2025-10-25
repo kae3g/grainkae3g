@@ -1,0 +1,213 @@
+#!/usr/bin/env bash
+# Grainbarrel - Grain Network Build System
+# Wrapper around Babashka with enhanced features for Grain Network
+
+set -euo pipefail
+
+# Grain Network branding
+export GRAINBARREL_VERSION="1.0.0"
+export GRAINBARREL_HOME="${GRAINBARREL_HOME:-$HOME/.config/grainbarrel}"
+export GRAINBARREL_ACTIVE=true
+
+# Colors for output
+if [[ -t 1 ]]; then
+    GRAIN_GOLD='\033[38;5;179m'
+    GRAIN_GREEN='\033[38;5;107m'
+    GRAIN_BROWN='\033[38;5;94m'
+    GRAIN_ORANGE='\033[38;5;208m'
+    RESET='\033[0m'
+    BOLD='\033[1m'
+else
+    GRAIN_GOLD=''
+    GRAIN_GREEN=''
+    GRAIN_BROWN=''
+    GRAIN_ORANGE=''
+    RESET=''
+    BOLD=''
+fi
+
+# Check if babashka is installed
+if ! command -v bb &> /dev/null; then
+    echo -e "${GRAIN_ORANGE}🌾 Grainbarrel requires Babashka (bb) to be installed.${RESET}"
+    echo -e "   Install from: ${BOLD}https://babashka.org${RESET}"
+    echo ""
+    echo "   Quick install (Linux/macOS):"
+    echo "   bash < <(curl -s https://raw.githubusercontent.com/babashka/babashka/master/install)"
+    exit 1
+fi
+
+# Get Babashka version
+BB_VERSION=$(bb --version 2>/dev/null | head -n1 | awk '{print $3}' || echo "unknown")
+
+# Grainbarrel-specific commands
+case "${1:-}" in
+    --version|-v)
+        echo -e "${GRAIN_GOLD}🌾 Grainbarrel${RESET} v${GRAINBARREL_VERSION} ${GRAIN_BROWN}(Babashka v${BB_VERSION})${RESET}"
+        echo -e "   ${GRAIN_GREEN}Grain Network Build System${RESET}"
+        exit 0
+        ;;
+    
+    version)
+        echo -e "${GRAIN_GOLD}🌾 Grainbarrel${RESET} v${GRAINBARREL_VERSION}"
+        echo -e "   Babashka: v${BB_VERSION}"
+        echo -e "   Location: $(which bb)"
+        echo -e "   Config: ${GRAINBARREL_HOME}"
+        exit 0
+        ;;
+    
+    help|--help|-h)
+        if [ -z "${2:-}" ]; then
+            cat << EOF
+${GRAIN_GOLD}🌾 Grainbarrel${RESET} - Grain Network Build System
+
+${BOLD}Usage:${RESET}
+  gb [task|script] [args...]
+  gb [command] [options]
+
+${BOLD}Grainbarrel Commands:${RESET}
+  ${GRAIN_GREEN}gb${RESET} ${GRAIN_BROWN}version${RESET}           Show Grainbarrel and Babashka versions
+  ${GRAIN_GREEN}gb${RESET} ${GRAIN_BROWN}help${RESET} [task]       Show help (or help for specific task)
+  ${GRAIN_GREEN}gb${RESET} ${GRAIN_BROWN}tasks${RESET}             List all available tasks
+  ${GRAIN_GREEN}gb${RESET} ${GRAIN_BROWN}tasks:all${RESET}         List tasks across all grainstore modules
+  ${GRAIN_GREEN}gb${RESET} ${GRAIN_BROWN}grainstore:list${RESET}   List all grainstore modules
+
+${BOLD}Module Tasks:${RESET}
+  ${GRAIN_GREEN}gb${RESET} ${GRAIN_BROWN}icon:install${RESET} NAME      Install icon from grainicons
+  ${GRAIN_GREEN}gb${RESET} ${GRAIN_BROWN}cask:install${RESET} NAME      Install AppImage from graincasks
+  ${GRAIN_GREEN}gb${RESET} ${GRAIN_BROWN}display:info${RESET}           Show display information
+  ${GRAIN_GREEN}gb${RESET} ${GRAIN_BROWN}nightlight:enable${RESET}      Enable GNOME night light
+
+${BOLD}Standard Babashka Usage:${RESET}
+  ${GRAIN_GREEN}gb${RESET} script.clj          Run a Clojure script
+  ${GRAIN_GREEN}gb${RESET} -e '(+ 1 2)'        Evaluate Clojure expression
+  ${GRAIN_GREEN}gb${RESET} task-name           Run a task from bb.edn
+
+${BOLD}For full Babashka documentation:${RESET}
+  bb --help
+
+${BOLD}Learn more:${RESET}
+  Grainbarrel: https://github.com/grainpbc/grainbarrel
+  Babashka: https://babashka.org
+
+${GRAIN_GOLD}🌾 Grain Network${RESET} - Global Renewable technology for a sustainable future
+EOF
+            exit 0
+        else
+            # Show help for specific task
+            # For now, pass through to bb
+            bb "$@"
+        fi
+        ;;
+    
+    tasks:all)
+        echo -e "${GRAIN_GOLD}🌾 All Grainstore Module Tasks${RESET}"
+        echo ""
+        
+        # List tasks from all grainstore modules
+        if [ -f "grainstore/grainstore.edn" ]; then
+            echo -e "${GRAIN_GREEN}Scanning grainstore modules...${RESET}"
+            echo ""
+            
+            # For now, list known modules
+            for module in grainstore/*/bb.edn; do
+                if [ -f "$module" ]; then
+                    module_dir=$(dirname "$module")
+                    module_name=$(basename "$module_dir")
+                    echo -e "${GRAIN_BROWN}${module_name}:${RESET}"
+                    (cd "$module_dir" && bb tasks 2>/dev/null | grep -v "^The following tasks" | sed 's/^/  /' || echo "  (no tasks)")
+                    echo ""
+                fi
+            done
+        else
+            echo -e "${GRAIN_ORANGE}⚠️  grainstore/grainstore.edn not found${RESET}"
+            echo "   Run from grainkae3g repository root"
+        fi
+        exit 0
+        ;;
+    
+    grainstore:list)
+        echo -e "${GRAIN_GOLD}🌾 Grainstore Modules${RESET}"
+        echo ""
+        
+        if [ -d "grainstore" ]; then
+            for module in grainstore/*/; do
+                module_name=$(basename "$module")
+                if [ "$module_name" != "grainstore" ] && [ -d "$module" ]; then
+                    if [ -f "${module}README.md" ]; then
+                        # Extract first line of README
+                        desc=$(head -n1 "${module}README.md" | sed 's/^# *//')
+                        echo -e "  ${GRAIN_GREEN}${module_name}${RESET}: ${desc}"
+                    else
+                        echo -e "  ${GRAIN_GREEN}${module_name}${RESET}"
+                    fi
+                fi
+            done
+        else
+            echo -e "${GRAIN_ORANGE}⚠️  grainstore/ directory not found${RESET}"
+        fi
+        echo ""
+        exit 0
+        ;;
+    
+    # Intercept module:task format and route to correct module
+    *:*)
+        TASK_FULL="${1}"
+        MODULE="${TASK_FULL%%:*}"
+        TASK="${TASK_FULL#*:}"
+        shift
+        
+        # Map common module names to grainstore paths
+        case "$MODULE" in
+            icon)
+                MODULE_DIR="grainstore/grainicons"
+                ;;
+            cask)
+                MODULE_DIR="grainstore/graincasks"
+                ;;
+            display)
+                MODULE_DIR="grainstore/graindisplay"
+                ;;
+            nightlight)
+                MODULE_DIR="grainstore/grain-nightlight"
+                ;;
+            wifi)
+                MODULE_DIR="grainstore/grainwifi"
+                ;;
+            daemon)
+                MODULE_DIR="grainstore/graindaemon"
+                ;;
+            grainstore)
+                # Route to grainbarrel module for grainstore tasks
+                MODULE_DIR="grainstore/grainbarrel"
+                ;;
+            *)
+                MODULE_DIR="grainstore/${MODULE}"
+                ;;
+        esac
+        
+        # Check if module exists
+        if [ ! -d "$MODULE_DIR" ]; then
+            echo -e "${GRAIN_ORANGE}⚠️  Module not found: ${MODULE}${RESET}"
+            echo "   Looking for: ${MODULE_DIR}"
+            echo ""
+            echo "   Available modules:"
+            exec "$0" grainstore:list
+        fi
+        
+        # Check if module has gb.edn (or bb.edn for backward compat)
+        if [ ! -f "${MODULE_DIR}/gb.edn" ] && [ ! -f "${MODULE_DIR}/bb.edn" ]; then
+            echo -e "${GRAIN_ORANGE}⚠️  Module has no gb.edn or bb.edn: ${MODULE}${RESET}"
+            exit 1
+        fi
+        
+        # Run task in module directory
+        echo -e "${GRAIN_GOLD}🌾${RESET} Running ${GRAIN_BROWN}${MODULE}:${TASK}${RESET}"
+        # Pass the full task name (module:task format is used in bb.edn)
+        (cd "$MODULE_DIR" && bb "${MODULE}:${TASK}" "$@")
+        exit $?
+        ;;
+esac
+
+# Pass through to babashka with Grainbarrel context
+exec bb "$@"
+

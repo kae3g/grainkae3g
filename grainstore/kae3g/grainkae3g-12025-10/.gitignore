@@ -1,0 +1,45 @@
+# Build artifacts
+build/
+node_modules/
+.DS_Store
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# Package manager files
+yarn.lock
+pnpm-lock.yaml
+
+# Nix
+result
+result-*
+
+# OS
+Thumbs.db
+
+# Personal configuration
+# .config.edn is PUBLIC/PERSONAL - safe to commit (username, language, etc.)
+# .secrets.edn is PRIVATE/SECRET - NEVER commit (API keys, tokens, etc.)
+.secrets.edn
+
+# Build cache (incremental builds)
+.build-cache.edn
+
+# Generated content (build artifacts - regenerated from markdown)
+web-app/static/content/*.json
+!web-app/static/content/.gitkeep
+
+# Grainstore (separate repo)
+grainstore/

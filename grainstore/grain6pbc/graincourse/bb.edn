@@ -1,0 +1,56 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        hiccup/hiccup {:mvn/version "2.0.0-RC3"}
+        markdown-clj/markdown-clj {:mvn/version "1.11.4"}}
+ 
+ :tasks
+ {;; Show deployment setup instructions
+  setup-reminder
+  {:doc "Show GitHub Pages and Codeberg Pages setup instructions"
+   :task (shell "bb" "template/scripts/setup-reminder.bb")}
+  
+  ;; Create new immutable course
+  create-course
+  {:doc "Create new immutable course with grainpath"
+   :task (shell "bb" "template/scripts/create-course.bb" "$*")}
+  
+  ;; List all courses
+  list-courses
+  {:doc "List all courses in registry"
+   :task (shell "bb" "template/scripts/list-courses.bb" "$@")}
+  
+  ;; Show course details
+  show-course
+  {:doc "Show course details by grainpath"
+   :task (shell "bb" "template/scripts/show-course.bb" "$@")}
+  
+  ;; Build static HTML from course lessons
+  build
+  {:doc "Build course website from lessons"
+   :task (shell "bb" "template/scripts/build-course.bb")}
+  
+  ;; Deploy to GitHub Pages
+  deploy:github
+  {:doc "Deploy course to grain6pbc.github.io/course/"
+   :task (shell "bb" "template/scripts/deploy-github.bb")}
+  
+  ;; Deploy to Codeberg Pages
+  deploy:codeberg
+  {:doc "Deploy course to grain6pbc.codeberg.page/course/"
+   :task (shell "bb" "template/scripts/deploy-codeberg.bb")}
+  
+  ;; Setup symlinks for immutable grainpath subdirectories
+  setup-symlinks
+  {:doc "Setup symlinks for GitHub Pages and Codeberg Pages"
+   :task (shell "bb" "symlinks/setup-symlinks.bb")}
+  
+  ;; Deploy to both platforms
+  flow
+  {:doc "Build and deploy course to GitHub and Codeberg Pages"
+   :depends [build setup-symlinks]
+   :task (do
+           (println "Deploying to GitHub Pages...")
+           (shell "bb" "deploy:github")
+           (println "Deploying to Codeberg Pages...")
+           (shell "bb" "deploy:codeberg")
+           (println "Course deployment complete!"))}}}

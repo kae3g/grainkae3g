@@ -1,0 +1,146 @@
+{:min-bb-version "1.3.186"
+ :paths ["src"]
+ :deps {babashka/fs {:mvn/version "0.5.20"}
+        babashka/process {:mvn/version "0.5.21"}}
+ :tasks
+ {:requires ([babashka.fs :as fs]
+             [babashka.process :as p]
+             [clojure.edn :as edn]
+             [clojure.string :as str])
+  
+  ;; Installation tasks
+  daemon:install
+  {:doc "Install Graindaemon system (S6 + systemd)"
+   :task (do
+           (println "🌾 Installing Graindaemon System")
+           (println "═══════════════════════════════════════════")
+           (shell "bb" "daemon:install-s6")
+           (shell "bb" "daemon:install-systemd")
+           (println "")
+           (println "✅ Installation complete!")
+           (println "")
+           (println "Next steps:")
+           (println "  1. Edit config: vim config/daemon.edn")
+           (println "  2. Enable auto-start: systemctl --user enable graindaemon.service")
+           (println "  3. Start now: systemctl --user start graindaemon.service")
+           (println "  4. Check status: bb daemon:status"))}
+  
+  daemon:install-s6
+  {:doc "Install S6 services"
+   :task (shell "bb" "scripts/install-s6.bb")}
+  
+  daemon:install-systemd
+  {:doc "Install systemd user service"
+   :task (shell "bb" "scripts/install-systemd.bb")}
+  
+  ;; Service management
+  daemon:start-all
+  {:doc "Start all enabled daemons"
+   :task (shell "bb" "scripts/start-all.bb")}
+  
+  daemon:stop-all
+  {:doc "Stop all daemons"
+   :task (shell "bb" "scripts/stop-all.bb")}
+  
+  daemon:restart-all
+  {:doc "Restart all daemons"
+   :task (do
+           (shell "bb" "daemon:stop-all")
+           (Thread/sleep 2000)
+           (shell "bb" "daemon:start-all"))}
+  
+  daemon:status
+  {:doc "Show status of all daemons"
+   :task (shell "bb" "scripts/status.bb")}
+  
+  daemon:start
+  {:doc "Start specific daemon (usage: bb daemon:start <service>)"
+   :task (shell "bb" "scripts/start-service.bb" (or (first *command-line-args*) ""))}
+  
+  daemon:stop
+  {:doc "Stop specific daemon (usage: bb daemon:stop <service>)"
+   :task (shell "bb" "scripts/stop-service.bb" (or (first *command-line-args*) ""))}
+  
+  daemon:restart
+  {:doc "Restart specific daemon (usage: bb daemon:restart <service>)"
+   :task (let [service (or (first *command-line-args*) "")]
+           (shell "bb" "daemon:stop" service)
+           (Thread/sleep 1000)
+           (shell "bb" "daemon:start" service))}
+  
+  ;; Configuration management
+  daemon:test-config
+  {:doc "Test configuration loading"
+   :task (do
+           (println "🔧 Testing Graindaemon Configuration")
+           (println "")
+           (let [template (edn/read-string (slurp "config/daemon.template.edn"))
+                 personal (when (fs/exists? "config/daemon.edn")
+                           (edn/read-string (slurp "config/daemon.edn")))
+                 merged (if personal
+                         (merge-with merge template personal)
+                         template)]
+             (println "✅ Template config loaded")
+             (when personal
+               (println "✅ Personal config loaded"))
+             (println "")
+             (println "Enabled services:")
+             (doseq [[service-name service-config] (get-in merged [:graindaemon :services])]
+               (when (:enabled service-config)
+                 (println (str "  ✓ " (name service-name)))))
+             (println "")))}
+  
+  daemon:reload-config
+  {:doc "Reload configuration without restarting services"
+   :task (shell "bb" "scripts/reload-config.bb")}
+  
+  ;; Service creation
+  daemon:add-service
+  {:doc "Add new service (usage: bb daemon:add-service <name>)"
+   :task (shell "bb" "scripts/add-service.bb" (or (first *command-line-args*) ""))}
+  
+  ;; Health checks
+  daemon:health-check-all
+  {:doc "Run health checks for all services"
+   :task (shell "bb" "scripts/health-check.bb")}
+  
+  daemon:health-check
+  {:doc "Run health check for specific service"
+   :task (shell "bb" "scripts/health-check.bb" (or (first *command-line-args*) ""))}
+  
+  ;; Logs
+  daemon:logs
+  {:doc "View logs for specific service"
+   :task (let [service (or (first *command-line-args*) "supervisor")
+               log-file (str (System/getenv "HOME") "/.local/share/graindaemon/logs/" service ".log")]
+           (if (fs/exists? log-file)
+             (shell "tail" "-f" log-file)
+             (println (str "❌ Log file not found: " log-file))))}
+  
+  ;; Testing
+  daemon:test
+  {:doc "Test Graindaemon installation"
+   :task (do
+           (println "🧪 Testing Graindaemon Installation")
+           (println "")
+           (println "1. Checking configuration...")
+           (shell "bb" "daemon:test-config")
+           (println "2. Checking S6 directory...")
+           (let [s6-dir (str (System/getenv "HOME") "/.s6")]
+             (if (fs/exists? s6-dir)
+               (do
+                 (println "   ✅ S6 directory exists: " s6-dir)
+                 (println "   Services:")
+                 (doseq [service (fs/list-dir s6-dir)]
+                   (when (fs/directory? service)
+                     (println (str "     - " (fs/file-name service))))))
+               (println "   ❌ S6 directory not found")))
+           (println "")
+           (println "3. Checking systemd service...")
+           (let [systemd-service (str (System/getenv "HOME") "/.config/systemd/user/graindaemon.service")]
+             (if (fs/exists? systemd-service)
+               (println "   ✅ Systemd service installed")
+               (println "   ❌ Systemd service not found")))
+           (println "")
+           (println "✅ Test complete!"))}}}
+

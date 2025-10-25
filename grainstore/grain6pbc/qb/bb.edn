@@ -1,0 +1,67 @@
+{:paths ["src" "scripts" "template" "personal"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        babashka.fs {:mvn/version "0.3.4"}
+        clj-http {:mvn/version "3.12.3"}
+        clj-time {:mvn/version "0.15.2"}
+        java-time {:mvn/version "0.3.3"}}
+ :tasks
+ {;; Core qb commands (abstraction of gb)
+  qb:help
+  {:doc "Show qb (grainbarrel abstraction) help"
+   :task (shell "bb" "scripts/qb-help.bb")}
+  
+  qb:flow
+  {:doc "Complete deployment flow: commit, push to GitHub + Codeberg"
+   :task (shell "bb" "scripts/qb-flow.bb")}
+  
+  qb:status
+  {:doc "Show current qb status and configuration"
+   :task (shell "bb" "scripts/qb-status.bb")}
+  
+  qb:config:show
+  {:doc "Show current qb configuration"
+   :task (shell "bb" "scripts/qb-config-show.bb")}
+  
+  qb:config:update
+  {:doc "Update qb configuration"
+   :task (shell "bb" "scripts/qb-config-update.bb")}
+  
+  ;; Template/Personal separation
+  qb:template:sync
+  {:doc "Sync template configuration to personal"
+   :task (shell "bb" "scripts/qb-template-sync.bb")}
+  
+  qb:personal:backup
+  {:doc "Backup personal configuration"
+   :task (shell "bb" "scripts/qb-personal-backup.bb")}
+  
+  qb:personal:restore
+  {:doc "Restore personal configuration from backup"
+   :task (shell "bb" "scripts/qb-personal-restore.bb")}
+  
+  ;; Deployment workflows
+  qb:deploy:github
+  {:doc "Deploy to GitHub Pages"
+   :task (shell "bb" "scripts/qb-deploy-github.bb")}
+  
+  qb:deploy:codeberg
+  {:doc "Deploy to Codeberg Pages"
+   :task (shell "bb" "scripts/qb-deploy-codeberg.bb")}
+  
+  qb:deploy:dual
+  {:doc "Dual deploy to both GitHub and Codeberg"
+   :task (shell "bb" "scripts/qb-deploy-dual.bb")}
+  
+  ;; Grain Network integration
+  qb:grain:sync
+  {:doc "Sync with Grain Network modules"
+   :task (shell "bb" "scripts/qb-grain-sync.bb")}
+  
+  qb:grain:status
+  {:doc "Show Grain Network integration status"
+   :task (shell "bb" "scripts/qb-grain-status.bb")}
+  
+  ;; Default task
+  :default
+  {:task (shell "bb" "scripts/qb-help.bb")}}}
+

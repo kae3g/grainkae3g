@@ -1,0 +1,523 @@
+{:grainstore
+ {:version "0.5.0"
+  :timestamp "12025-10-23--0332--PDT--moon-vishakha------asc-gem000--sun-03rd--kae3g"
+  :description "Verified dependencies and submodules for the Grain Network"
+  :deployment-strategy "Dual-deploy: GitHub + Codeberg (Grainclay spec)"
+  :session 812
+  
+  ;; Session 812: Alpine Linux priority with musl libc and apk
+  :distribution-priority
+  {:primary :alpine
+   :libc-preference :musl
+   :package-formats [:apk :nix :deb :rpm]
+   :target-distros [:alpine :nixos :ubuntu :debian]
+   :philosophy "musl for portability, apk for efficiency, 88 × 10^n scaling"}
+  
+  ;; Build tools
+  :build-tools
+  {:primary :leiningen
+   :scripting :babashka
+   :nix-integration true
+   :multi-distro-support true}
+  
+  ;; Session 810: Reorganized with grainpbc/kae3g split
+  :organization
+  {:template-dir "grainpbc"
+   :personal-dirs ["kae3g"]
+   :pattern "grain{devname}{module}"
+   :description "Template modules in grainpbc/, personal configs in {devname}/"
+   :examples {:template "grainpbc/graintime"
+              :personal-kae3g "kae3g/grainkae3gtime"
+              :personal-other "{devname}/grain{devname}time"}}
+  
+  :platforms
+  {:github
+   {:org "grainpbc"
+    :base-url "https://github.com/grainpbc"
+    :pages-url "https://grainpbc.github.io"
+    :primary true}
+   :codeberg
+   {:org "grainpbc"
+    :base-url "https://codeberg.org/grainpbc"
+    :pages-url "https://grainpbc.codeberg.page"
+    :mirror true}}
+  
+  :modules
+  {;; Core Libraries
+   :clojure-s6
+   {:repos {:github "https://github.com/grainpbc/clojure-s6"
+            :codeberg "https://codeberg.org/grainpbc/clojure-s6"}
+    :pages {:github "https://grainpbc.github.io/clojure-s6"
+            :codeberg "https://grainpbc.codeberg.page/clojure-s6"}
+    :path "grainstore/clojure-s6"
+    :license "MIT"
+    :status :active
+    :description "S6 supervision suite bindings for Clojure"}
+   
+   :clojure-sixos
+   {:repos {:github "https://github.com/grainpbc/clojure-sixos"
+            :codeberg "https://codeberg.org/grainpbc/clojure-sixos"}
+    :pages {:github "https://grainpbc.github.io/clojure-sixos"
+            :codeberg "https://grainpbc.codeberg.page/clojure-sixos"}
+    :path "grainstore/clojure-sixos"
+    :license "MIT"
+    :status :active
+    :aliases ["clojure-6os"]
+    :depends-on [:clojure-s6]
+    :description "SixOS integration and file system watching"}
+   
+   :clojure-s6-alias
+   {:repos {:github "https://github.com/grainpbc/clojure-ssix"
+            :codeberg "https://codeberg.org/grainpbc/clojure-ssix"}
+    :pages {:github "https://grainpbc.github.io/clojure-ssix"
+            :codeberg "https://grainpbc.codeberg.page/clojure-ssix"}
+    :path "grainstore/clojure-ssix"
+    :license "MIT"
+    :status :active
+    :mirror-of :clojure-s6
+    :description "Alias for clojure-s6"}
+   
+   :clojure-icp
+   {:repos {:github "https://github.com/grainpbc/clojure-icp"
+            :codeberg "https://codeberg.org/grainpbc/clojure-icp"}
+    :pages {:github "https://grainpbc.github.io/clojure-icp"
+            :codeberg "https://grainpbc.codeberg.page/clojure-icp"}
+    :path "grainstore/clojure-icp"
+    :license "MIT"
+    :status :active
+    :aliases ["clojure-dfinity"]
+    :description "Internet Computer Protocol (ICP/DFINITY) integration"}
+   
+   :clojure-google-drive-mcp
+   {:repos {:github "https://github.com/grainpbc/clojure-google-drive-mcp"
+            :codeberg "https://codeberg.org/grainpbc/clojure-google-drive-mcp"}
+    :pages {:github "https://grainpbc.github.io/clojure-google-drive-mcp"
+            :codeberg "https://grainpbc.codeberg.page/clojure-google-drive-mcp"}
+    :path "grainstore/clojure-google-drive-mcp"
+    :license "MIT"
+    :status :active
+    :description "Google Drive Model Context Protocol bindings"}
+   
+   ;; UI & Build Tools
+   :babashka
+   {:repos {:github "https://github.com/babashka/babashka"
+            :external true}
+    :pages {:website "https://babashka.org"
+            :github "https://github.com/babashka/babashka"}
+    :binary {:install-url "https://raw.githubusercontent.com/babashka/babashka/master/install"
+             :command "bb"
+             :version-check "bb --version"}
+    :license "EPL-1.0"
+    :status :external-dependency
+    :description "Fast-starting Clojure scripting environment for the command line"}
+   
+   :humbleui
+   {:repos {:github "https://github.com/HumbleUI/HumbleUI"
+            :external true}
+    :pages {:github "https://github.com/HumbleUI/HumbleUI"}
+    :maven {:group-id "io.github.humbleui"
+            :artifact-id "humbleui"
+            :latest-version "1.0.0-SNAPSHOT"}
+    :license "MIT"
+    :status :external-dependency
+    :description "Cross-platform Clojure UI framework for desktop, web, and mobile"}
+   
+   :leiningen
+   {:repos {:github "https://github.com/technomancy/leiningen"
+            :external true}
+    :pages {:website "https://leiningen.org"}
+    :license "EPL-1.0"
+    :status :external-dependency
+    :description "Build automation tool for Clojure projects"}
+   
+   ;; Transpilers & Compilers
+   :clotoko
+   {:repos {:github "https://github.com/grainpbc/clotoko"
+            :codeberg "https://codeberg.org/grainpbc/clotoko"}
+    :pages {:github "https://grainpbc.github.io/clotoko"
+            :codeberg "https://grainpbc.codeberg.page/clotoko"}
+    :path "grainstore/clotoko"
+    :license "MIT"
+    :status :design
+    :aliases ["clomoko"]
+    :depends-on [:clojure-icp]
+    :description "Clojure-to-Motoko transpiler for ICP canisters"}
+   
+   ;; Package Management
+   :grainclay
+   {:repos {:github "https://github.com/grainpbc/grainclay"
+            :codeberg "https://codeberg.org/grainpbc/grainclay"}
+    :pages {:github "https://grainpbc.github.io/grainclay"
+            :codeberg "https://grainpbc.codeberg.page/grainclay"}
+    :path "grainstore/grainclay"
+    :license "MIT"
+    :status :active
+    :depends-on [:clojure-sixos :grain-metatypes]
+    :description "Networked rolling release package manager"}
+   
+   :grainconv
+   {:repos {:github "https://github.com/grainpbc/grainconv"
+            :codeberg "https://codeberg.org/grainpbc/grainconv"}
+    :pages {:github "https://grainpbc.github.io/grainconv"
+            :codeberg "https://grainpbc.codeberg.page/grainconv"}
+    :path "grainstore/grainconv"
+    :license "MIT"
+    :status :design
+    :depends-on [:grain-metatypes]
+    :description "Universal type conversion system"}
+   
+   ;; Applications
+   :grainweb
+   {:repos {:github "https://github.com/grainpbc/grainweb"
+            :codeberg "https://codeberg.org/grainpbc/grainweb"}
+    :pages {:github "https://grainpbc.github.io/grainweb"
+            :codeberg "https://grainpbc.codeberg.page/grainweb"}
+    :path "grainstore/grainweb"
+    :license "MIT"
+    :status :active
+    :depends-on [:clojure-s6 :clojure-sixos :clojure-icp 
+                 :clotoko :grainclay :grain-metatypes]
+    :description "Browser + Git explorer + Cursor/OpenAI Atlas alternative"}
+   
+   :grainmusic
+   {:repos {:github "https://github.com/grainpbc/grainmusic"
+            :codeberg "https://codeberg.org/grainpbc/grainmusic"}
+    :pages {:github "https://grainpbc.github.io/grainmusic"
+            :codeberg "https://grainpbc.codeberg.page/grainmusic"}
+    :path "grainstore/grainmusic"
+    :license "MIT"
+    :status :design
+    :depends-on [:clojure-icp :clotoko :grain-metatypes]
+    :description "Decentralized music streaming platform"}
+   
+   :grainspace
+   {:repos {:github "https://github.com/grainpbc/grainspace"
+            :codeberg "https://codeberg.org/grainpbc/grainspace"}
+    :pages {:github "https://grainpbc.github.io/grainspace"
+            :codeberg "https://grainpbc.codeberg.page/grainspace"}
+    :path "grainstore/grainspace"
+    :license "MIT"
+    :status :active
+    :depends-on [:clojure-icp :grainweb :grainmusic]
+    :description "Unified decentralized platform"}
+   
+   :graindrive
+   {:repos {:github "https://github.com/grainpbc/graindrive"
+            :codeberg "https://codeberg.org/grainpbc/graindrive"}
+    :pages {:github "https://grainpbc.github.io/graindrive"
+            :codeberg "https://grainpbc.codeberg.page/graindrive"}
+    :path "grainstore/graindrive"
+    :license "MIT"
+    :status :active
+    :depends-on [:clojure-s6 :clojure-sixos :clojure-google-drive-mcp
+                 :grainclay :grain-metatypes]
+    :description "Google Drive collaboration system with Humble UI"}
+   
+   :grainwifi
+   {:repos {:github "https://github.com/grainpbc/grainwifi"
+            :codeberg "https://codeberg.org/grainpbc/grainwifi"}
+    :pages {:github "https://grainpbc.github.io/grainwifi"
+            :codeberg "https://grainpbc.codeberg.page/grainwifi"}
+    :path "grainstore/grainwifi"
+    :license "MIT"
+    :status :active
+    :depends-on [:clojure-s6]
+    :description "Dual-wifi connection manager for Starlink + cellular"}
+   
+   :graindaemon
+   {:repos {:github "https://github.com/grainpbc/graindaemon"
+            :codeberg "https://codeberg.org/grainpbc/graindaemon"}
+    :pages {:github "https://grainpbc.github.io/graindaemon"
+            :codeberg "https://grainpbc.codeberg.page/graindaemon"}
+    :path "grainstore/graindaemon"
+    :license "MIT"
+    :status :active
+    :depends-on [:clojure-s6 :clojure-sixos]
+    :description "Universal S6/SixOS daemon framework with template/personal config split"}
+   
+   :grain-nightlight
+   {:repos {:github "https://github.com/grainpbc/grain-nightlight"
+            :codeberg "https://codeberg.org/grainpbc/grain-nightlight"}
+    :pages {:github "https://grainpbc.github.io/grain-nightlight"
+            :codeberg "https://grainpbc.codeberg.page/grain-nightlight"}
+    :path "grainstore/grain-nightlight"
+    :license "MIT"
+    :status :active
+    :depends-on [:graindaemon]
+    :description "GNOME Night Light warm filter daemon (2000K auto-start)"}
+   
+   :graindisplay
+   {:repos {:github "https://github.com/grainpbc/graindisplay"
+            :codeberg "https://codeberg.org/grainpbc/graindisplay"}
+    :pages {:github "https://grainpbc.github.io/graindisplay"
+            :codeberg "https://grainpbc.codeberg.page/graindisplay"}
+    :path "grainstore/graindisplay"
+    :license "MPL-2.0"
+    :status :active
+    :depends-on [:graindaemon :humbleui :grainneovedic :grainclay]
+    :description "Universal display management with Grainweb metadata integration"}
+   
+   :grainbarrel
+   {:repos {:github "https://github.com/grainpbc/grainbarrel"
+            :codeberg "https://codeberg.org/grainpbc/grainbarrel"}
+    :pages {:github "https://grainpbc.github.io/grainbarrel"
+            :codeberg "https://grainpbc.codeberg.page/grainbarrel"}
+    :path "grainstore/grainbarrel"
+    :license "MIT"
+    :status :active
+    :depends-on [:babashka]
+    :aliases ["gb"]
+    :description "Grain Network build system (gb command) - Babashka wrapper with task registry"}
+   
+   :graincasks
+   {:repos {:github "https://github.com/grainpbc/graincasks"
+            :codeberg "https://codeberg.org/grainpbc/graincasks"}
+    :pages {:github "https://grainpbc.github.io/graincasks"
+            :codeberg "https://grainpbc.codeberg.page/graincasks"}
+    :path "grainstore/graincasks"
+    :license "MIT"
+    :status :active
+    :depends-on [:grainicons :graindisplay :babashka]
+    :description "AppImage package manager (NOT Linuxbrew) with EDN-based cask definitions"}
+   
+   :grainicons
+   {:repos {:github "https://github.com/grainpbc/grainicons"
+            :codeberg "https://codeberg.org/grainpbc/grainicons"}
+    :pages {:github "https://grainpbc.github.io/grainicons"
+            :codeberg "https://grainpbc.codeberg.page/grainicons"}
+    :path "grainstore/grainicons"
+    :license "MIT"
+    :status :active
+    :depends-on [:babashka]
+    :description "Icon management library with template/personal split and multi-source support"}
+   
+   ;; Hardware
+   :grainwriter
+   {:repos {:github "https://github.com/grainpbc/grainwriter"
+            :codeberg "https://codeberg.org/grainpbc/grainwriter"}
+    :pages {:github "https://grainpbc.github.io/grainwriter"
+            :codeberg "https://grainpbc.codeberg.page/grainwriter"}
+    :path "grainstore/grainwriter"
+    :license "CERN-OHL-v2"
+    :status :design
+    :description "RAM-only e-ink writing device with infinite battery"}
+   
+   :graindroid
+   {:repos {:github "https://github.com/grainpbc/graindroid"
+            :codeberg "https://codeberg.org/grainpbc/graindroid"}
+    :pages {:github "https://grainpbc.github.io/graindroid"
+            :codeberg "https://grainpbc.codeberg.page/graindroid"}
+    :path "grainstore/graindroid"
+    :license "CERN-OHL-v2"
+    :status :design
+    :description "Open-hardware dual-display Android phone (Grainphone)"}
+   
+   :graincamera
+   {:repos {:github "https://github.com/grainpbc/graincamera"
+            :codeberg "https://codeberg.org/grainpbc/graincamera"}
+    :pages {:github "https://grainpbc.github.io/graincamera"
+            :codeberg "https://grainpbc.codeberg.page/graincamera"}
+    :path "grainstore/graincamera"
+    :license "CERN-OHL-v2"
+    :status :design
+    :description "Open-hardware camera with native AVIF support"}
+   
+   :grainpack
+   {:repos {:github "https://github.com/grainpbc/grainpack"
+            :codeberg "https://codeberg.org/grainpbc/grainpack"}
+    :pages {:github "https://grainpbc.github.io/grainpack"
+            :codeberg "https://grainpbc.codeberg.page/grainpack"}
+    :path "grainstore/grainpack"
+    :license "CERN-OHL-v2"
+    :status :design
+    :description "External GPU jetpack attachment for Grainwriter"}
+   
+   ;; Infrastructure
+   :grain-metatypes
+   {:repos {:github "https://github.com/grainpbc/grain-metatypes"
+            :codeberg "https://codeberg.org/grainpbc/grain-metatypes"}
+    :pages {:github "https://grainpbc.github.io/grain-metatypes"
+            :codeberg "https://grainpbc.codeberg.page/grain-metatypes"}
+    :path "grainstore/grain-metatypes"
+    :license "MIT"
+    :status :active
+    :description "Foundational type definitions (Marks, Grainframes)"}
+   
+   :grainlexicon
+   {:repos {:github "https://github.com/grainpbc/grainlexicon"
+            :codeberg "https://codeberg.org/grainpbc/grainlexicon"}
+    :pages {:github "https://grainpbc.github.io/grainlexicon"
+            :codeberg "https://grainpbc.codeberg.page/grainlexicon"}
+    :path "grainstore/grainlexicon"
+    :license "MIT"
+    :status :active
+    :aliases ["lexicon"]
+    :description "Single source of truth for documentation vocabulary"}
+   
+   :grainneovedic
+   {:repos {:github "https://github.com/grainpbc/grainneovedic"
+            :codeberg "https://codeberg.org/grainpbc/grainneovedic"}
+    :pages {:github "https://grainpbc.github.io/grainneovedic"
+            :codeberg "https://grainpbc.codeberg.page/grainneovedic"}
+    :path "grainstore/grainneovedic"
+    :license "MIT"
+    :status :active
+    :aliases ["neovedic-timestamp"]
+    :description "Neovedic timestamp system (Holocene + Vedic nakshatras)"}
+   
+   :grainsource
+   {:repos {:github "https://github.com/grainpbc/grainsource"
+            :codeberg "https://codeberg.org/grainpbc/grainsource"}
+    :pages {:github "https://grainpbc.github.io/grainsource"
+            :codeberg "https://grainpbc.codeberg.page/grainsource"}
+    :path "grainstore/grainsource"
+    :license "GPL-2.0"
+    :status :design
+    :description "Git-compatible decentralized version control"}
+   
+   ;; Organization
+   :grainpbc
+   {:repos {:github "https://github.com/grainpbc/grainpbc"
+            :codeberg "https://codeberg.org/grainpbc/grainpbc"}
+    :pages {:github "https://grainpbc.github.io/grainpbc"
+            :codeberg "https://grainpbc.codeberg.page/grainpbc"}
+    :path "grainstore/grainpbc"
+    :license "CC-BY-SA-4.0"
+    :status :active
+    :description "Public Benefit Corporation documentation"}
+   
+   :graincourse
+   {:repos {:github "https://github.com/grainpbc/graincourse"
+            :codeberg "https://codeberg.org/grainpbc/graincourse"}
+    :pages {:github "https://grainpbc.github.io/graincourse"
+            :codeberg "https://grainpbc.codeberg.page/graincourse"}
+    :path "grainstore/grainpbc/graincourse"
+    :license "MIT"
+    :status :active
+    :type :template
+    :description "Universal course publishing system with template/personal split"}
+   
+   :grainsync
+   {:repos {:github "https://github.com/grainpbc/grainsync"
+            :codeberg "https://codeberg.org/grainpbc/grainsync"}
+    :pages {:github "https://grainpbc.github.io/grainsync"
+            :codeberg "https://grainpbc.codeberg.page/grainsync"}
+    :path "grainstore/grainpbc/grainsync"
+    :license "MIT"
+    :status :active
+    :type :template
+    :depends-on [:graintime :graincourse :graincourse-sync]
+    :description "Automated graincourse creation and synchronization workflow"}
+   
+   :grainconfig
+   {:repos {:github "https://github.com/grainpbc/grainconfig"
+            :codeberg "https://codeberg.org/grainpbc/grainconfig"}
+    :pages {:github "https://grainpbc.github.io/grainconfig"
+            :codeberg "https://grainpbc.codeberg.page/grainconfig"}
+    :path "grainstore/grainpbc/grainconfig"
+    :license "MIT"
+    :status :active
+    :type :template
+    :description "Script-based configuration management for grainpbc template modules"}
+   
+   :graintime
+   {:repos {:github "https://github.com/grainpbc/graintime"
+            :codeberg "https://codeberg.org/grainpbc/graintime"}
+    :pages {:github "https://grainpbc.github.io/graintime"
+            :codeberg "https://grainpbc.codeberg.page/graintime"}
+    :path "grainstore/grainpbc/graintime"
+    :license "MIT"
+    :status :active
+    :type :template
+    :aliases ["gt"]
+    :depends-on [:grainneovedic]
+    :description "Neovedic timestamp system with graintime CLI (gt command)"}
+   
+   :grain6
+   {:repos {:github "https://github.com/grainpbc/grain6"
+            :codeberg "https://codeberg.org/grainpbc/grain6"}
+    :pages {:github "https://grainpbc.github.io/grain6"
+            :codeberg "https://grainpbc.codeberg.page/grain6"}
+    :path "grainstore/grain6"
+    :license "MIT"
+    :status :design
+    :aliases ["grainsix" "g6"]
+    :depends-on [:graintime :clojure-s6 :clojure-sixos :grainregistry]
+    :canister {:clotoko-transpilable true
+               :icp-deployable true}
+    :description "Time-aware process supervision (graintime + s6 + Behn-inspired)"}
+   
+   :grainregistry
+   {:repos {:github "https://github.com/grainpbc/grainregistry"
+            :codeberg "https://codeberg.org/grainpbc/grainregistry"}
+    :pages {:github "https://grainpbc.github.io/grainregistry"
+            :codeberg "https://grainpbc.codeberg.page/grainregistry"}
+    :path "grainstore/grainregistry"
+    :license "MIT"
+    :status :design
+    :aliases ["grainresolver" "graintypo"]
+    :depends-on [:clojure-sixos]
+    :description "Unified name resolution and typo tolerance for Grain Network"}
+   
+   :graindevname
+   {:repos {:github "https://github.com/grainpbc/graindevname"
+            :codeberg "https://codeberg.org/grainpbc/graindevname"}
+    :pages {:github "https://grainpbc.github.io/graindevname"
+            :codeberg "https://grainpbc.codeberg.page/graindevname"}
+    :path "grainstore/graindevname"
+    :license "CC-BY-SA-4.0"
+    :status :active
+    :description "5-character username convention (kae3g, jen3g) for high GitHub availability"}
+   
+   :grainzsh
+   {:repos {:github "https://github.com/grainpbc/grainzsh"
+            :codeberg "https://codeberg.org/grainpbc/grainzsh"}
+    :pages {:github "https://grainpbc.github.io/grainzsh"
+            :codeberg "https://grainpbc.codeberg.page/grainzsh"}
+    :path "grainstore/grainzsh"
+    :license "MIT"
+    :status :active
+    :description "Zsh configuration with λ prompt and template/personal split"}
+   
+   :grainenvvars
+   {:repos {:github "https://github.com/grainpbc/grainenvvars"
+            :codeberg "https://codeberg.org/grainpbc/grainenvvars"}
+    :pages {:github "https://grainpbc.github.io/grainenvvars"
+            :codeberg "https://grainpbc.codeberg.page/grainenvvars"}
+    :path "grainstore/grainenvvars"
+    :license "MIT"
+    :status :active
+    :description "Environment variable management with 1Password integration"}
+   
+   :grainaltproteinproject
+   {:repos {:github "https://github.com/grainpbc/grainaltproteinproject"
+            :codeberg "https://codeberg.org/grainpbc/grainaltproteinproject"}
+    :pages {:github "https://grainpbc.github.io/grainaltproteinproject"
+            :codeberg "https://grainpbc.codeberg.page/grainaltproteinproject"}
+    :path "grainstore/grainaltproteinproject"
+    :license "CC-BY-SA-4.0"
+    :status :active
+    :description "Sustainable food systems and plant-based nutrition advocacy"}
+   
+   :graintranscribe-youtube
+   {:repos {:github "https://github.com/grainpbc/graintranscribe-youtube"
+            :codeberg "https://codeberg.org/grainpbc/graintranscribe-youtube"}
+    :pages {:github "https://grainpbc.github.io/graintranscribe-youtube"
+            :codeberg "https://grainpbc.codeberg.page/graintranscribe-youtube"}
+    :path "grainstore/grainpbc/graintranscribe-youtube"
+    :license "MIT"
+    :status :active
+    :type :template
+    :depends-on [:grainconfig :grainenvvars]
+    :external-apis ["Gemini 2.5 Pro"]
+    :infuse-pattern true
+    :description "YouTube video transcription using Gemini 2.5 Pro with template/personal separation"}}
+  
+  :license-verification
+  {:verified-date "12025-10-22"
+   :all-permissive true
+   :licenses-allowed ["MIT" "GPL-2.0" "CERN-OHL-v2" "CC-BY-SA-4.0"]
+   :commercial-use-allowed true
+   :modification-allowed true
+   :distribution-allowed true
+   :private-use-allowed true}}}

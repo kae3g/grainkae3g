@@ -1,0 +1,11 @@
+type Time = int;
+service : {
+  getHomePage: () -> (text) query;
+  getICPPrice: () -> (float64) query;
+  getLastPriceUpdate: () -> (Time) query;
+  getProduct: (productId: text) -> (text) query;
+  getProducts: () -> (vec text) query;
+  status: () -> (text) query;
+  updateICPPrice: (newPrice: float64) -> ();
+  whoami: () -> (text) query;
+}

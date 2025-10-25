@@ -1,0 +1,16 @@
+--2025-10-23 21:06:07--  https://channels.nixos.org/nixos-unstable/latest-nixos-minimal-x86_64-linux.iso
+Resolving channels.nixos.org (channels.nixos.org)... 151.101.194.217, 151.101.2.217, 151.101.66.217, ...
+Connecting to channels.nixos.org (channels.nixos.org)|151.101.194.217|:443... connected.
+HTTP request sent, awaiting response... 302 Moved Permanently
+Location: https://releases.nixos.org/nixos/unstable/nixos-25.11pre882227.01f116e4df6a/nixos-minimal-25.11pre882227.01f116e4df6a-x86_64-linux.iso [following]
+--2025-10-23 21:06:08--  https://releases.nixos.org/nixos/unstable/nixos-25.11pre882227.01f116e4df6a/nixos-minimal-25.11pre882227.01f116e4df6a-x86_64-linux.iso
+Resolving releases.nixos.org (releases.nixos.org)... 151.101.194.217, 151.101.130.217, 151.101.66.217, ...
+Connecting to releases.nixos.org (releases.nixos.org)|151.101.194.217|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1558757376 (1.5G) [application/octet-stream]
+Saving to: ‘/home/xy/VMs/ISOs/nixos-25.11-unstable-minimal.iso’
+
+le-minimal.iso              17%[=====>                                 ] 266.53M  --.-KB/s    eta 4h 55m /home/xy/VMs/ISOs/nixos-25  17%[=====>                                 ] 266.53M  --.-KB/s    in 64m 36s 
+
+2025-10-23 22:10:44 (70.4 KB/s) - Read error at byte 279478272/1558757376 (Connection timed out). Retrying.
+

@@ -434,3 +434,4 @@ By providing well-designed, documented, and maintained templates, we accelerate 
 ---
 
 *"Great templates enable great projects, great projects enable great communities, great communities enable great innovation."* - Grain Network Philosophy
+

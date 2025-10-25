@@ -1,0 +1,42 @@
+{:paths ["src" "scripts"]
+ 
+ :deps
+ {org.clojure/clojure {:mvn/version "1.11.1"}
+  babashka.fs {:mvn/version "0.3.4"}
+  clj-http {:mvn/version "3.12.3"}}
+ 
+ :tasks
+ {;; Configuration Management
+  config:show
+  {:doc "Show current configuration for all modules"
+   :requires ([grainconfig.core :as config])
+   :task (config/show-config)}
+  
+  config:update
+  {:doc "Update configuration for a specific module"
+   :requires ([grainconfig.core :as config])
+   :task (config/update-config!)}
+  
+  config:reset
+  {:doc "Reset configuration to defaults"
+   :requires ([grainconfig.core :as config])
+   :task (config/reset-config!)}
+  
+  config:validate
+  {:doc "Validate current configuration"
+   :requires ([grainconfig.core :as config])
+   :task (config/validate-config)}
+  
+  ;; Module-specific configuration
+  grainsync:config:update
+  {:doc "Update grainsync module configuration"
+   :task (shell "bb" "scripts/grainconfig-grainsync.bb")}
+  
+  graintime:config:update
+  {:doc "Update graintime module configuration"
+   :task (shell "bb" "scripts/grainconfig-graintime.bb")}
+  
+  ;; Utility
+  test
+  {:doc "Run grainconfig tests"
+   :task (println "🌾 Grainconfig tests coming soon!")}}}

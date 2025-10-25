@@ -1,0 +1,6 @@
+{:github-base-url "https://kae3g.github.io/grainkae3g"
+ :codeberg-base-url "https://kae3g.codeberg.page/grainkae3g"
+ :course-dir "personal"
+ :symlink-dir "symlinks"
+ :keep-symlinks 5
+ :auto-cleanup true}

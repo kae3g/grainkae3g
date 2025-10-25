@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+    
+    - name: Install Clojure CLI
+      uses: DeLaGuardo/setup-clojure@12.1
+      with:
+        cli: 1.11.1.1182
+    
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.m2
+          ~/.gitlibs
+        key: ${{ runner.os }}-clojure-${{ hashFiles('**/deps.edn') }}
+        restore-keys: |
+          ${{ runner.os }}-clojure-
+    
+    - name: Run tests
+      run: clojure -M:test
+    
+    - name: Check formatting
+      run: clojure -M:dev -m clojure.tools.namespace.repl/refresh
+  
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Clojure
+      uses: DeLaGuardo/setup-clojure@12.1
+      with:
+        cli: 1.11.1.1182
+    
+    - name: Run clj-kondo
+      uses: clj-kondo/clj-kondo-action@v1
+      with:
+        args: --lint src test
+
+

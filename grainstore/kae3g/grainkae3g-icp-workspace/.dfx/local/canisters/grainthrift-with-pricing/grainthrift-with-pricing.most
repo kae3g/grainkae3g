@@ -1,0 +1,19 @@
+// Version: 1.0.0
+actor {
+  stable PRICE_UPDATE_INTERVAL : Int;
+  stable var currentICPPrice : Float;
+  stable var lastPriceUpdate : Int;
+  stable products :
+    [{
+       color : Text;
+       condition : Text;
+       id : Text;
+       imageUrl : Text;
+       listedDate : Text;
+       name : Text;
+       priceICP : Float;
+       sellerId : Text;
+       size : Text;
+       status : Text
+     }]
+};

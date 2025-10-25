@@ -1,0 +1,48 @@
+#!/bin/sh
+# postrm script for grainspace
+
+set -e
+
+case "$1" in
+    purge)
+        # Remove user and group
+        if getent passwd grainspace > /dev/null; then
+            deluser --quiet grainspace > /dev/null || true
+        fi
+        
+        if getent group grainspace > /dev/null; then
+            delgroup --quiet grainspace > /dev/null || true
+        fi
+        
+        # Remove data directories
+        rm -rf /var/lib/grainspace
+        rm -rf /var/log/grainspace
+        
+        echo ""
+        echo "Grainspace has been purged."
+        echo "All data and configuration have been removed."
+        echo ""
+    ;;
+
+    remove)
+        echo ""
+        echo "Grainspace has been removed."
+        echo "Data directory /var/lib/grainspace has been preserved."
+        echo "To remove data: sudo rm -rf /var/lib/grainspace"
+        echo ""
+    ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
+
+
