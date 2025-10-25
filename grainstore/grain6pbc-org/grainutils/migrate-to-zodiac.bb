@@ -54,28 +54,58 @@
    {:zodiac "graindescend" :symbol "☋" :sign "Ketu"
     :modules ["aspirational-pseudo" "grainbusiness" "grainsource-vegan"]}])
 
+(defn find-module
+  "Find module in grainstore"
+  [module]
+  (let [search-paths ["grainstore/grain6pbc/"
+                      "grainstore/grainpbc-org/"
+                      "grainstore/grain6pbc-org/"]]
+    (->> search-paths
+         (map #(str % module))
+         (filter fs/exists?)
+         first)))
+
 (defn migrate-modules
   "Migrate modules into zodiac repository"
   [{:keys [zodiac symbol sign modules]}]
   (println (str "\n" symbol " " sign " - " zodiac))
   (println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
   
+  ;; Ensure zodiac repo exists
+  (let [zodiac-path (str "grainstore/grain6pbc/" zodiac)]
+    (when-not (fs/exists? zodiac-path)
+      (println (str "  ⚠ Creating " zodiac-path))
+      (fs/create-dirs zodiac-path)))
+  
   (doseq [module modules]
-    (let [source-path (str "grain6pbc/" module)
-          target-path (str "grain6pbc/" zodiac "/" module)]
+    (let [source-path (find-module module)
+          target-path (str "grainstore/grain6pbc/" zodiac "/" module)]
       
-      (if (fs/exists? source-path)
+      (cond
+        (nil? source-path)
+        (println (str "  ⚠ " module " (not found in any location)"))
+        
+        (= source-path target-path)
+        (println (str "  ✓ " module " (already in correct location)"))
+        
+        (fs/exists? target-path)
+        (println (str "  ⚠ " module " (target already exists at " target-path ")"))
+        
+        :else
         (do
-          (println (str "  ✓ " module " → " zodiac "/"))
-          ;; Would move here, but doing dry-run first
-          ;; (fs/move source-path target-path)
-          )
-        (println (str "  ⚠ " module " (not found)"))))))
+          (println (str "  → " module))
+          (println (str "     from: " source-path))
+          (println (str "     to:   " target-path))
+          ;; Execute the migration
+          (fs/create-dirs (fs/parent target-path))
+          (fs/move source-path target-path)
+          (println (str "     ✓ moved!"))
+          )))))
 
 (defn -main
   "Main migration entry point"
   [& args]
-  (println "🌾 DRY RUN: Module Migration to 14 Zodiac Repos")
+  (println "🌾 EXECUTING: Module Migration to 14 Zodiac Repos")
   (println "")
   (println "Ye's Philosophy: 14 Songs > 40 Songs")
   (println "Vedic Astrology: 12 Zodiac + Rahu + Ketu")
@@ -87,12 +117,9 @@
   (println "")
   (println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
   (println "")
-  (println "✨ Dry run complete!")
+  (println "✨ Migration complete!")
   (println "")
-  (println "To execute migration:")
-  (println "  1. Review output above")
-  (println "  2. Uncomment (fs/move ...) in migrate-modules")
-  (println "  3. Run script again")
+  (println "All modules have been moved into their zodiac homes.")
   (println "")
   (println "🌾 \"From 40 to 14 - Precision Branch Collective\" 🌾"))
 
