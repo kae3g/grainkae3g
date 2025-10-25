@@ -13,7 +13,9 @@
   fixed-width formatting with 70-character limit enforcement."
   (:require [clojure.string :as str]
             [clojure.spec.alpha :as s]
-            [graintime.astromitra :as astro])
+            [graintime.generator :as gen]
+            [graintime.moon-position :as moon]
+            [graintime.nakshatra-conversion :as nakshatra])
   (:import [java.time ZonedDateTime]))
 
 ;; =============================================================================
@@ -281,11 +283,19 @@
   Location: Configured via `gt config` or default San Rafael, CA (37.9735°N, 122.5311°W)
   Time Zone: Pacific (PDT/PST)"
   ([author]
-   ;; Use accurate Vedic calculations via astromitra namespace
-   (astro/get-accurate-graintime author))
+   ;; Use real moon position calculations and nakshatra conversion
+   (let [moon-pos (moon/get-current-moon-position)
+         nakshatra-data (nakshatra/get-nakshatra-from-moon-position 
+                         (:moon-longitude moon-pos))
+         nakshatra-name (:nakshatra-abbrev nakshatra-data)]
+     (gen/get-accurate-graintime author nakshatra-name)))
   ([author datetime latitude longitude]
    ;; For custom datetime/location, use accurate calculations
-   (astro/get-accurate-graintime author)))
+   (let [moon-pos (moon/get-moon-position datetime)
+         nakshatra-data (nakshatra/get-nakshatra-from-moon-position 
+                         (:moon-longitude moon-pos))
+         nakshatra-name (:nakshatra-abbrev nakshatra-data)]
+     (gen/get-accurate-graintime author nakshatra-name))))
 
 (defn generate-graintime-at
   "Generate graintime for a specific date/time
@@ -303,8 +313,12 @@
     (generate-graintime-at \"kae3g\" \"2025-10-22 21:30\")"
   [author date-str]
   (let [date-parser (requiring-resolve 'graintime.date-parser/parse-date-with-examples)
-        datetime (date-parser date-str)]
-    (astro/get-accurate-graintime author datetime)))
+        datetime (date-parser date-str)
+        moon-pos (moon/get-moon-position datetime)
+        nakshatra-data (nakshatra/get-nakshatra-from-moon-position 
+                        (:moon-longitude moon-pos))
+        nakshatra-name (:nakshatra-abbrev nakshatra-data)]
+    (gen/get-accurate-graintime author datetime nakshatra-name)))
 
 (defn generate-grainpath
   "Generate immutable grainpath with graintime
@@ -444,7 +458,11 @@
           (s/valid? ::latitude latitude)
           (s/valid? ::longitude longitude)]
     :post [(s/valid? ::graintime-string %)]}
-   (let [graintime (astro/get-accurate-graintime author datetime latitude longitude)
+   (let [moon-pos (moon/get-moon-position datetime)
+         nakshatra-data (nakshatra/get-nakshatra-from-moon-position 
+                         (:moon-longitude moon-pos))
+         nakshatra-name (:nakshatra-abbrev nakshatra-data)
+         graintime (gen/get-accurate-graintime author datetime latitude longitude nakshatra-name)
          validation (validate-graintime-length graintime)]
      (if (:valid validation)
        graintime

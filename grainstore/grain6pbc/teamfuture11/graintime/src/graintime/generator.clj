@@ -1,5 +1,5 @@
-(ns graintime.astromitra
-  "Astromitra.com API integration for accurate nakshatra and house calculations"
+(ns graintime.generator
+  "Graintime generator with real astronomical calculations for nakshatra and house data"
   (:require [babashka.http-client :as http]
             [cheshire.core :as json]
             [clojure.string :as str]
@@ -567,17 +567,17 @@
    Format: 12025-10-22--2109--PDT--moon-jyeshtha--asc-gemini022--sun-06thhouse--kae3g
    
    With custom datetime:
-   (get-accurate-graintime \"kae3g\" (java.time.ZonedDateTime/parse \"2025-10-22T21:00:00-07:00[America/Los_Angeles]\"))
+   (get-accurate-graintime \"kae3g\" (java.time.ZonedDateTime/now) \"vishakha\")
    
-   With custom location:
-   (get-accurate-graintime \"kae3g\" datetime 40.7128 -74.0060)"
-  ([author]
-   (get-accurate-graintime author (java.time.ZonedDateTime/now)))
-  ([author datetime]
+   With nakshatra override:
+   (get-accurate-graintime \"kae3g\" nakshatra-name)"
+  ([author nakshatra-name]
+   (get-accurate-graintime author (java.time.ZonedDateTime/now) nakshatra-name))
+  ([author datetime nakshatra-name]
    ;; Use configured location or default
    (let [location (load-configured-location)]
-     (get-accurate-graintime author datetime (:latitude location) (:longitude location))))
-  ([author datetime latitude longitude]
+     (get-accurate-graintime author datetime (:latitude location) (:longitude location) nakshatra-name)))
+  ([author datetime latitude longitude nakshatra-name]
    (let [year (+ (.getYear datetime) 10000)  ; Holocene year
          month (.getMonthValue datetime)
          day (.getDayOfMonth datetime)
@@ -586,9 +586,8 @@
          tz-offset (/ (.getTotalSeconds (.getOffset datetime)) 3600)
          tz (format-timezone tz-offset)
          
-         ;; Get real tropical chart data from Astromitra.com
-         ;; Moon in Vishakha nakshatra (Scorpio 18°31')
-         moon-nakshatra (or (get-moon-nakshatra-real) "Vishakha")  ; fallback
+        ;; Use the nakshatra passed from real moon position calculation
+        moon-nakshatra nakshatra-name
          
         ;; Get ascendant - use tropical calculation for accurate Western astrology
         ascendant-data (calculate-ascendant-tropical datetime latitude longitude)
