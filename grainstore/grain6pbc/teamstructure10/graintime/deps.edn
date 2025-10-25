@@ -1,4 +1,4 @@
-{:paths ["src"]
+{:paths ["src" "resources"]
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
         babashka/http-client {:mvn/version "0.3.4"}
         cheshire/cheshire {:mvn/version "5.12.0"}}
@@ -6,4 +6,6 @@
  {:test {:extra-paths ["test"]
          :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}}}
   :repl {:extra-deps {nrepl/nrepl {:mvn/version "1.0.0"}
-                      cider/cider-nrepl {:mvn/version "0.30.0"}}}}}
+                      cider/cider-nrepl {:mvn/version "0.30.0"}}}
+  :swisseph {:extra-paths ["lib/swisseph-2.01.00-01.jar"]
+             :jvm-opts ["-Dswisseph.dir=resources/ephe"]}}}
