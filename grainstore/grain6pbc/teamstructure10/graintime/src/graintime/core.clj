@@ -14,8 +14,7 @@
   (:require [clojure.string :as str]
             [clojure.spec.alpha :as s]
             [graintime.generator :as gen]
-            [graintime.moon-position :as moon]
-            [graintime.nakshatra-conversion :as nakshatra])
+            [graintime.astroccult-parser :as astroccult])
   (:import [java.time ZonedDateTime]))
 
 ;; =============================================================================
@@ -283,18 +282,12 @@
   Location: Configured via `gt config` or default San Rafael, CA (37.9735°N, 122.5311°W)
   Time Zone: Pacific (PDT/PST)"
   ([author]
-   ;; Use real moon position calculations and nakshatra conversion
-   (let [moon-pos (moon/get-current-moon-position)
-         nakshatra-data (nakshatra/get-nakshatra-from-moon-position 
-                         (:moon-longitude moon-pos))
-         nakshatra-name (:nakshatra-abbrev nakshatra-data)]
+   ;; Use real AstrOccult.net pre-calculated nakshatra data
+   (let [nakshatra-name (astroccult/get-current-nakshatra)]
      (gen/get-accurate-graintime author nakshatra-name)))
   ([author datetime latitude longitude]
-   ;; For custom datetime/location, use accurate calculations
-   (let [moon-pos (moon/get-moon-position datetime)
-         nakshatra-data (nakshatra/get-nakshatra-from-moon-position 
-                         (:moon-longitude moon-pos))
-         nakshatra-name (:nakshatra-abbrev nakshatra-data)]
+   ;; For custom datetime/location, use AstrOccult data
+   (let [nakshatra-name (astroccult/get-nakshatra-at-time datetime)]
      (gen/get-accurate-graintime author nakshatra-name))))
 
 (defn generate-graintime-at
@@ -314,10 +307,7 @@
   [author date-str]
   (let [date-parser (requiring-resolve 'graintime.date-parser/parse-date-with-examples)
         datetime (date-parser date-str)
-        moon-pos (moon/get-moon-position datetime)
-        nakshatra-data (nakshatra/get-nakshatra-from-moon-position 
-                        (:moon-longitude moon-pos))
-        nakshatra-name (:nakshatra-abbrev nakshatra-data)]
+        nakshatra-name (astroccult/get-nakshatra-at-time datetime)]
     (gen/get-accurate-graintime author datetime nakshatra-name)))
 
 (defn generate-grainpath
@@ -458,10 +448,7 @@
           (s/valid? ::latitude latitude)
           (s/valid? ::longitude longitude)]
     :post [(s/valid? ::graintime-string %)]}
-   (let [moon-pos (moon/get-moon-position datetime)
-         nakshatra-data (nakshatra/get-nakshatra-from-moon-position 
-                         (:moon-longitude moon-pos))
-         nakshatra-name (:nakshatra-abbrev nakshatra-data)
+   (let [nakshatra-name (astroccult/get-nakshatra-at-time datetime)
          graintime (gen/get-accurate-graintime author datetime latitude longitude nakshatra-name)
          validation (validate-graintime-length graintime)]
      (if (:valid validation)
