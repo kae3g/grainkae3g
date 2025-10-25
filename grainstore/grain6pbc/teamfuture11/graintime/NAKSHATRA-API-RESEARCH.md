@@ -189,13 +189,28 @@ This gives us:
 ## Testing Strategy
 
 Test against known values from:
+- Astromitra.com (trusted live transit calculator)
 - Astro-Seek.com (trusted calculator)
 - AstroSage.com (popular Indian astrology site)
-- Manual calculation for specific dates
 
-Example test cases:
-- October 25, 2025, 00:53 PDT, San Rafael CA → Vishakha
-- [Add more known values]
+**VERIFIED TEST CASE (from Astromitra.com):**
+- **October 25, 2025, 07:21:06 PDT, Sonoma CA → Jyeshtha** ✓
+  - Moon: Jyeshtha nakshatra, 44.49% completed, Pada 2
+  - Location: Sonoma, California (very close to San Rafael)
+  
+**OUR CALCULATION RESULT (simple mean motion):**
+- **October 25, 2025, 07:20:14 PDT → Hasta** ✗
+  - Moon longitude: 161.67°
+  - Expected for Jyeshtha: ~237° - 250° (18th nakshatra)
+  - Actual: 161.67° = Hasta (13th nakshatra)
+  - **ERROR: ~76° off** (about 5.7 nakshatras!)
+
+**ROOT CAUSE:** Simple mean motion doesn't account for:
+- Moon's elliptical orbit (perigee/apogee variations)
+- Gravitational perturbations from Sun
+- Moon's actual speed varies 11-15°/day (we use fixed 13.176°/day)
+
+**SOLUTION:** We **MUST** use Swiss Ephemeris or equivalent for accurate calculations
 
 ## Resources
 
@@ -206,7 +221,32 @@ Example test cases:
 
 ---
 
-**Status:** Research complete. Recommend implementing Option 2 (Babashka + Java Swiss Ephemeris) for accurate, self-contained nakshatra calculations.
+**Status:** Research complete. Simple mean motion is **insufficient** (76° error!). Must implement Swiss Ephemeris.
+
+## Immediate Action Plan
+
+**Phase 1: Temporary Fix** (for testing format76 integration)
+- Keep the architecture we built (moon-position → nakshatra-conversion → generator)
+- Add Swiss Ephemeris dependency to deps.edn
+- Replace simple mean motion calculation with Swiss Ephemeris call
+- Verify against Astromitra.com test case (Jyeshtha)
+
+**Phase 2: Format76 Integration** (current priority)
+- Once nakshatra is accurate, integrate format76.clj into generator.clj
+- Ensure `gt` command outputs perfect 76-char graintimes
+- Test all 378 combinations with REAL data
+
+**Phase 3: Production Hardening**
+- Add offline fallback (pre-calculated nakshatra transitions)
+- Multi-location testing (Kyoto, Barcelona, London, Caspar)
+- Comprehensive test suite with known values
+
+**Next Commit:**
+- Add Swiss Ephemeris to deps.edn
+- Update moon-position.clj to use accurate calculations
+- Verify Jyeshtha result matches Astromitra
+
+The warrior doesn't build on sand. We need solid astronomical data.
 
 now == next + 1 🌾
 
