@@ -1,0 +1,144 @@
+{:tasks
+ {:requires ([clojure.string :as str]
+             [clojure.java.shell :refer [sh]])
+
+  ;; =========================================================================
+  ;; GRAINZSH TASKS
+  ;; =========================================================================
+  ;; teamprecision06 (Virgo ♍ / VI. The Lovers)
+  ;; "Every shell configuration is a marriage vow"
+  ;; =========================================================================
+
+  install
+  {:doc "Install grainzsh template to ~/.zshrc"
+   :task (let [template-path (str (System/getProperty "user.dir") "/template/.zshrc")
+               home (System/getenv "HOME")
+               zshrc-path (str home "/.zshrc")]
+           (println "💕 Installing grainzsh template...")
+           (println "")
+           (println "Creating symlink:")
+           (println "  From:" zshrc-path)
+           (println "  To:  " template-path)
+           (sh "ln" "-sf" template-path zshrc-path)
+           (println "")
+           (println "✅ Grainzsh installed!")
+           (println "")
+           (println "Reload your shell:")
+           (println "  source ~/.zshrc")
+           (println ""))}
+
+  install-personal
+  {:doc "Install personal config for current user"
+   :task (let [user (System/getenv "USER")
+               personal-path (str (System/getProperty "user.dir") "/personal/" user "/.zshrc")
+               home (System/getenv "HOME")
+               zshrc-path (str home "/.zshrc")]
+           (if (.exists (clojure.java.io/file personal-path))
+             (do
+               (println "💕 Installing personal grainzsh config...")
+               (println "")
+               (println "Creating symlink:")
+               (println "  From:" zshrc-path)
+               (println "  To:  " personal-path)
+               (sh "ln" "-sf" personal-path zshrc-path)
+               (println "")
+               (println "✅ Personal grainzsh installed!")
+               (println "")
+               (println "Reload your shell:")
+               (println "  source ~/.zshrc")
+               (println ""))
+             (do
+               (println "❌ Personal config not found at:" personal-path)
+               (println "")
+               (println "Create it first or use template:")
+               (println "  bb install")
+               (println ""))))}
+
+  check
+  {:doc "Check grainzsh installation"
+   :task (let [home (System/getenv "HOME")
+               zshrc-path (str home "/.zshrc")]
+           (println "🔍 Checking grainzsh installation...")
+           (println "")
+           (if (.exists (clojure.java.io/file zshrc-path))
+             (do
+               (println "✅ ~/.zshrc exists")
+               (let [result (sh "readlink" zshrc-path)]
+                 (if (zero? (:exit result))
+                   (println "  Symlink target:" (str/trim (:out result)))
+                   (println "  (not a symlink, regular file)"))))
+             (println "❌ ~/.zshrc not found"))
+           (println "")
+           (println "Testing zsh availability:")
+           (let [result (sh "which" "zsh")]
+             (if (zero? (:exit result))
+               (println "✅ Zsh installed at:" (str/trim (:out result)))
+               (println "❌ Zsh not found")))
+           (println ""))}
+
+  create-personal
+  {:doc "Create personal config directory and file"
+   :task (let [user (System/getenv "USER")
+               personal-dir (str (System/getProperty "user.dir") "/personal/" user)
+               personal-file (str personal-dir "/.zshrc")]
+           (println "💕 Creating personal grainzsh config...")
+           (println "")
+           (when-not (.exists (clojure.java.io/file personal-dir))
+             (clojure.java.io/make-parents (str personal-dir "/.zshrc"))
+             (println "✅ Created directory:" personal-dir))
+           (if (.exists (clojure.java.io/file personal-file))
+             (println "⚠️  Personal config already exists at:" personal-file)
+             (do
+               (spit personal-file
+                     (str "# ============================================================================\n"
+                          "# PERSONAL GRAINZSH CONFIG - " user "\n"
+                          "# ============================================================================\n"
+                          "# Your personal shell customizations\n"
+                          "# This file sources the template and adds your preferences\n"
+                          "# ============================================================================\n"
+                          "\n"
+                          "# Source template first (for base configuration)\n"
+                          "source " (System/getProperty "user.dir") "/template/.zshrc\n"
+                          "\n"
+                          "# ----------------------------------------------------------------------------\n"
+                          "# YOUR PERSONAL CUSTOMIZATIONS\n"
+                          "# ----------------------------------------------------------------------------\n"
+                          "\n"
+                          "# Add your aliases here\n"
+                          "# alias myproject='cd ~/projects/myproject'\n"
+                          "\n"
+                          "# Add your functions here\n"
+                          "# work() {\n"
+                          "#     cd ~/work\n"
+                          "# }\n"
+                          "\n"
+                          "# Add your environment variables here\n"
+                          "# export MY_VAR='value'\n"
+                          "\n"
+                          "# ============================================================================\n"
+                          "# END PERSONAL CONFIG\n"
+                          "# ============================================================================\n"))
+               (println "✅ Created personal config at:" personal-file)
+               (println "")
+               (println "Next steps:")
+               (println "  1. Edit your personal config: nano" personal-file)
+               (println "  2. Install it: bb install-personal")
+               (println ""))))}
+
+  set-default-shell
+  {:doc "Set zsh as default shell (requires password)"
+   :task (do
+           (println "💕 Setting zsh as default shell...")
+           (println "")
+           (let [zsh-path (str/trim (:out (sh "which" "zsh")))]
+             (println "Zsh location:" zsh-path)
+             (println "")
+             (println "Running: chsh -s" zsh-path)
+             (println "You'll be prompted for your password...")
+             (sh "chsh" "-s" zsh-path)
+             (println "")
+             (println "✅ Default shell updated!")
+             (println "")
+             (println "⚠️  You must logout and login for this to take effect")
+             (println "")))}}}
+

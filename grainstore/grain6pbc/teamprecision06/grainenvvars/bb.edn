@@ -1,0 +1,78 @@
+{:tasks
+ {:requires ([clojure.string :as str]
+             [clojure.java.shell :refer [sh]])
+
+  ;; =========================================================================
+  ;; GRAINENVVARS TASKS
+  ;; =========================================================================
+  ;; teamprecision06 (Virgo ♍ / VI. The Lovers)
+  ;; "Every task is a conscious choice"
+  ;; =========================================================================
+
+  validate
+  {:doc "Validate environment variables with loving precision"
+   :task (shell "bb" "template/grainenvvars-validator.bb" "personal/.env")}
+
+  check-template
+  {:doc "Validate the template file"
+   :task (shell "bb" "template/grainenvvars-validator.bb" "template/env.template")}
+
+  create-personal
+  {:doc "Create personal/.env from template"
+   :task (do
+           (println "💕 Creating personal/.env from template...")
+           (when-not (.exists (clojure.java.io/file "personal"))
+             (clojure.java.io/make-parents "personal/.env"))
+           (if (.exists (clojure.java.io/file "personal/.env"))
+             (println "⚠️  personal/.env already exists! Not overwriting.")
+             (do
+               (spit "personal/.env" 
+                     (slurp "template/env.template"))
+               (println "✅ personal/.env created!")
+               (println "")
+               (println "Next steps:")
+               (println "  1. Edit personal/.env with your real values")
+               (println "  2. Store secrets in 1Password")
+               (println "  3. Run: bb validate")
+               (println ""))))}
+
+  check-gitignore
+  {:doc "Verify personal/.env is in .gitignore"
+   :task (let [gitignore-content (when (.exists (clojure.java.io/file ".gitignore"))
+                                    (slurp ".gitignore"))]
+           (if (and gitignore-content
+                    (str/includes? gitignore-content "personal/.env"))
+             (println "✅ personal/.env is in .gitignore")
+             (do
+               (println "⚠️  personal/.env NOT in .gitignore!")
+               (println "Add this line to .gitignore:")
+               (println "  personal/.env"))))}
+
+  audit-secrets
+  {:doc "Audit git history for accidentally committed secrets"
+   :task (do
+           (println "🔍 Auditing git history for secrets...")
+           (let [result (sh "git" "log" "--all" "--oneline" 
+                           "--grep=API_KEY\\|TOKEN\\|SECRET\\|PASSWORD")]
+             (if (str/blank? (:out result))
+               (println "✅ No obvious secrets in git history")
+               (do
+                 (println "⚠️  Possible secrets found in commits:")
+                 (println (:out result))
+                 (println "")
+                 (println "If you've committed secrets, rotate them IMMEDIATELY!")))))}
+
+  install
+  {:doc "Install grainenvvars integration into shell"
+   :task (do
+           (println "💕 Installing grainenvvars integration...")
+           (println "")
+           (println "Add this to your .zshrc or .bashrc:")
+           (println "")
+           (println "# Load Grain Network environment variables")
+           (println (str "GRAIN_ENV_FILE=\"$GRAINSTORE/grain6pbc/teamprecision06/grainenvvars/personal/.env\""))
+           (println "if [ -f \"$GRAIN_ENV_FILE\" ]; then")
+           (println "    export $(cat \"$GRAIN_ENV_FILE\" | grep -v '^#' | grep -v '^$' | xargs)")
+           (println "fi")
+           (println ""))}}}
+

@@ -1,197 +1,202 @@
-# Grainzsh Template Configuration
-# Template/Personal Split - Grain Network Standard
-
 # ============================================================================
-# GRAIN NETWORK ZSH CONFIGURATION (TEMPLATE)
+# GRAINZSH - The Lovers' Shell Configuration
 # ============================================================================
-# This is the template configuration shared across all Grain Network users.
-# Personal customizations go in: personal/USERNAME/.zshrc
+# teamprecision06 (Virgo ♍ / VI. The Lovers)
+# "Every configuration is a conscious choice"
 # ============================================================================
 
 # ----------------------------------------------------------------------------
-# PATH CONFIGURATION (MUST BE FIRST)
+# CORE PHILOSOPHY
 # ----------------------------------------------------------------------------
-# Add ~/.local/bin to PATH for Grain Network tools (gb, bb, gh, etc.)
-export PATH="$HOME/.local/bin:$PATH"
+# The Lovers teach: Perfect union comes from perfect choices
+# This .zshrc is your marriage vow to your shell environment
+# Every line: a commitment. Every alias: a promise.
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# PROMPT - The Lambda (λ) Choice
+# ----------------------------------------------------------------------------
+# Simple. Clean. Functional. Timeless.
+PROMPT='λ '
+
+# ----------------------------------------------------------------------------
+# HISTORY - Remember Your Choices
+# ----------------------------------------------------------------------------
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY          # Share history across terminals
+setopt HIST_IGNORE_DUPS       # No duplicate commands
+setopt HIST_IGNORE_SPACE      # Ignore commands starting with space
+setopt HIST_REDUCE_BLANKS     # Remove unnecessary blanks
+
+# ----------------------------------------------------------------------------
+# COMPLETION - Intelligent Selection
+# ----------------------------------------------------------------------------
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'  # Case-insensitive
+zstyle ':completion:*' menu select                       # Menu selection
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" # Colored
+
+# ----------------------------------------------------------------------------
+# ENVIRONMENT VARIABLES - The First Choice
+# ----------------------------------------------------------------------------
 
 # Grain Network paths
 export GRAIN_HOME="$HOME/kae3g/grainkae3g"
 export GRAINSTORE="$GRAIN_HOME/grainstore"
 
-# ----------------------------------------------------------------------------
-# PROMPT CONFIGURATION
-# ----------------------------------------------------------------------------
-# Minimalist lambda prompt - clean and fast
-PROMPT='λ '
+# Editor choice (conscious selection)
+export EDITOR="vim"
+export VISUAL="vim"
+
+# Path choice (only essential binaries)
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$GRAINSTORE/grain6pbc/teamstructure10/graintime/bin:$PATH"
 
 # ----------------------------------------------------------------------------
-# GRAIN NETWORK ALIASES
+# GRAINENVVARS INTEGRATION - Load Environment Variables
 # ----------------------------------------------------------------------------
 
-# Grainbarrel (gb) build system
-alias gb='gb'
-alias grainbarrel='gb'
+# Load personal environment variables (if they exist)
+GRAIN_ENV_FILE="$GRAINSTORE/grain6pbc/teamprecision06/grainenvvars/personal/.env"
+if [ -f "$GRAIN_ENV_FILE" ]; then
+    export $(cat "$GRAIN_ENV_FILE" | grep -v '^#' | grep -v '^$' | xargs)
+fi
 
-# Grainstore management
-alias gs-validate='gb grainstore:validate'
-alias gs-stats='gb grainstore:stats'
-alias gs-list='gb grainstore:list'
-alias gs-docs='gb grainstore:generate-docs'
+# Or load from 1Password (if configured)
+GRAIN_1PASS_LOADER="$GRAINSTORE/grain6pbc/teamprecision06/grainenvvars/personal/load-from-1password.sh"
+if [ -f "$GRAIN_1PASS_LOADER" ]; then
+    source "$GRAIN_1PASS_LOADER"
+fi
 
-# Git shortcuts with Grain flavor
+# ----------------------------------------------------------------------------
+# ALIASES - Git (The Essential Choices)
+# ----------------------------------------------------------------------------
+
 alias g='git'
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
 alias gp='git push'
 alias gl='git log --oneline --graph --decorate'
-alias gd='git diff'
 alias gco='git checkout'
-alias gb-new='git checkout -b'
-alias gm='git checkout main'
+alias gb='git branch'
+alias gd='git diff'
 
-# Grain Network flow
+# ----------------------------------------------------------------------------
+# ALIASES - Grain Network (The Sacred Union)
+# ----------------------------------------------------------------------------
+
+# Grainbarrel (build system)
 alias grain-flow='bb flow'
-alias grain-pseudo='bb pseudo'
 alias grain-deploy='bb deploy'
+alias grain-pseudo='bb pseudo'
+alias grain-build='bb build'
 
-# Directory shortcuts
-alias cdg='cd ~/kae3g/grainkae3g'
-alias cdstore='cd ~/kae3g/grainkae3g/grainstore'
-alias cddocs='cd ~/kae3g/grainkae3g/docs'
+# Graintime (temporal precision)
+alias gt='gt'  # graintime command
 
-# Babashka/Grainbarrel tasks
-alias bb='bb'
-alias bbt='bb tasks'
+# Navigation (conscious movement)
+alias cdg='cd $GRAIN_HOME'
+alias cdstore='cd $GRAINSTORE'
+alias cddocs='cd $GRAIN_HOME/docs'
 
-# Display management
-alias grain-display='gb display:info'
-alias grain-warm='gb nightlight:status'
+# ----------------------------------------------------------------------------
+# ALIASES - System (Chosen Carefully)
+# ----------------------------------------------------------------------------
 
-# Productivity
+alias ls='ls --color=auto'
 alias ll='ls -lah'
 alias la='ls -A'
 alias l='ls -CF'
 
-# ----------------------------------------------------------------------------
-# ENVIRONMENT VARIABLES
-# ----------------------------------------------------------------------------
+alias ..='cd ..'
+alias ...='cd ../..'
 
-# Editor preferences
-export EDITOR='nano'
-export VISUAL='nano'
-
-# Clojure/Babashka
-export BABASHKA_CLASSPATH="$GRAINSTORE"
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 # ----------------------------------------------------------------------------
-# FUNCTIONS
+# FUNCTIONS - The Lovers' Helpers
 # ----------------------------------------------------------------------------
 
-# Quick grain module navigation
+# Navigate to grain module
 grain() {
     if [ -z "$1" ]; then
-        echo "Usage: grain <module-name>"
-        echo "Example: grain grainbarrel"
-        return 1
+        cd "$GRAINSTORE"
+    else
+        # Search for module in grainstore
+        local module_path=$(find "$GRAINSTORE" -maxdepth 3 -type d -name "*$1*" | head -1)
+        if [ -n "$module_path" ]; then
+            cd "$module_path"
+        else
+            echo "Module not found: $1"
+            return 1
+        fi
     fi
-    cd "$GRAINSTORE/$1" || echo "Module not found: $1"
 }
 
-# Create new grain session document
+# Find grain modules
+grain-find() {
+    if [ -z "$1" ]; then
+        echo "Usage: grain-find <pattern>"
+        return 1
+    fi
+    find "$GRAINSTORE" -maxdepth 3 -type d -name "*$1*"
+}
+
+# Create session document
 grain-session() {
-    local timestamp=$(date +"%Y-%m-%d--%H%M")
-    local session_file="$GRAIN_HOME/docs/SESSION-$timestamp.md"
-    echo "Creating new session: $session_file"
-    touch "$session_file"
+    local session_file="$GRAIN_HOME/docs/SESSION-$(date +%Y-%m-%d--%H%M).md"
+    echo "# Session $(date +%Y-%m-%d--%H%M)" > "$session_file"
+    echo "" >> "$session_file"
+    echo "## Notes" >> "$session_file"
+    echo "" >> "$session_file"
     $EDITOR "$session_file"
 }
 
-# Quick grainstore module search
-grain-find() {
-    if [ -z "$1" ]; then
-        echo "Usage: grain-find <search-term>"
-        return 1
-    fi
-    find "$GRAINSTORE" -type d -name "*$1*" -maxdepth 1
-}
-
 # ----------------------------------------------------------------------------
-# HISTORY CONFIGURATION
+# KEYBINDINGS - Emacs Style (Chosen for Efficiency)
 # ----------------------------------------------------------------------------
 
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt SHARE_HISTORY
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_FIND_NO_DUPS
-setopt HIST_SAVE_NO_DUPS
+bindkey -e  # Emacs keybindings
 
 # ----------------------------------------------------------------------------
-# COMPLETION SYSTEM
+# COLORS - Visual Clarity
 # ----------------------------------------------------------------------------
 
-autoload -Uz compinit
-compinit
-
-# Case-insensitive completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-
-# Colored completion
-zstyle ':completion:*' list-colors ''
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
 
 # ----------------------------------------------------------------------------
-# KEY BINDINGS
+# PERSONAL CONFIGURATION - Your Choices
 # ----------------------------------------------------------------------------
 
-# Emacs-style key bindings (familiar to most users)
-bindkey -e
-
-# ----------------------------------------------------------------------------
-# GRAIN ENVIRONMENT VARIABLES
-# ----------------------------------------------------------------------------
-
-# Load from personal .env file (plain file method)
-GRAIN_ENV_FILE="$GRAINSTORE/grainenvvars/personal/.env"
-if [ -f "$GRAIN_ENV_FILE" ]; then
-    export $(cat "$GRAIN_ENV_FILE" | grep -v '^#' | grep -v '^$' | xargs)
+# Load personal config if it exists (template/personal split)
+PERSONAL_ZSHRC="$GRAINSTORE/grain6pbc/teamprecision06/grainzsh/personal/.zshrc"
+if [ -f "$PERSONAL_ZSHRC" ]; then
+    source "$PERSONAL_ZSHRC"
 fi
 
-# Or load from 1Password (more secure)
-GRAIN_1PASS_LOADER="$GRAINSTORE/grainenvvars/personal/load-from-1password.sh"
-if [ -f "$GRAIN_1PASS_LOADER" ]; then
-    source "$GRAIN_1PASS_LOADER"
+# Also check user-specific personal config
+USER_PERSONAL_ZSHRC="$GRAINSTORE/grain6pbc/teamprecision06/grainzsh/personal/$USER/.zshrc"
+if [ -f "$USER_PERSONAL_ZSHRC" ]; then
+    source "$USER_PERSONAL_ZSHRC"
 fi
 
 # ----------------------------------------------------------------------------
-# PERSONAL CONFIGURATION
+# WELCOME MESSAGE - The Lovers' Blessing
 # ----------------------------------------------------------------------------
 
-# Source personal configuration if it exists
-PERSONAL_CONFIG="$HOME/.config/grainzsh/personal/.zshrc"
-if [ -f "$PERSONAL_CONFIG" ]; then
-    source "$PERSONAL_CONFIG"
-fi
-
-# Or source from grainstore personal config
-GRAINSTORE_PERSONAL="$GRAINSTORE/grainzsh/personal/.zshrc"
-if [ -f "$GRAINSTORE_PERSONAL" ]; then
-    source "$GRAINSTORE_PERSONAL"
-fi
-
-# ----------------------------------------------------------------------------
-# WELCOME MESSAGE
-# ----------------------------------------------------------------------------
-
-# Show Grain Network welcome on new shell (optional - remove if unwanted)
-if [ -t 0 ]; then
-    echo "🌾 Grain Network Shell"
-    echo "Type 'gb --help' for build system commands"
-fi
+# Uncomment to see welcome message on shell start
+# echo "λ Grainzsh loaded - The Lovers choose precision 💕"
 
 # ============================================================================
-# END GRAINZSH TEMPLATE CONFIGURATION
+# END GRAINZSH TEMPLATE
 # ============================================================================
-
+# "Every choice is an act of love. Every configuration is a commitment."
+# - teamprecision06 (Virgo ♍ / VI. The Lovers)
+# ============================================================================
