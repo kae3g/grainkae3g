@@ -129,7 +129,9 @@
               (println (str "🌾 Team: team" team-base "10"))
               (println "\n⏳ Generating graintime...\n")
               
-              (let [graintime (core/generate-graintime location team-base)]
+              ;; Generate with team name as author (location-aware coming in future with Swiss Ephemeris)
+              (let [team-full (str "team" team-base "10")
+                    graintime (core/generate-graintime team-full)]
                 (println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
                 (println (str "  " graintime))
                 (println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
