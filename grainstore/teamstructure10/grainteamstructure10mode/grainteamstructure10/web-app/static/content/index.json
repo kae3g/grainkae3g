@@ -1,0 +1,50 @@
+[ {
+  "slug" : "xbc-the-wild-within-me-vzxw",
+  "title" : "xbc. The Wild Within Me",
+  "filename" : "xbc-the-wild-within-me-vzxw.md",
+  "series" : "pluta-panthera-twin-search",
+  "sort-order" : "xbc",
+  "source-dir" : "writings"
+}, {
+  "slug" : "xbd-the-lost-signal-vzxw",
+  "title" : "xbd. The Lost Signal",
+  "filename" : "xbd-the-lost-signal-vzxw.md",
+  "series" : "pluta-panthera-twin-search",
+  "sort-order" : "xbd",
+  "source-dir" : "writings"
+}, {
+  "slug" : "xbg-the-western-city-vzxw",
+  "title" : "xbg. The Western City",
+  "filename" : "xbg-the-western-city-vzxw.md",
+  "series" : "pluta-panthera-twin-search",
+  "sort-order" : "xbg",
+  "source-dir" : "writings"
+}, {
+  "slug" : "xbh-the-meltdown-world",
+  "title" : "xbh. The Meltdown World",
+  "filename" : "xbh-the-meltdown-world.md",
+  "series" : "pluta-panthera-twin-search",
+  "sort-order" : "xbh",
+  "source-dir" : "writings"
+}, {
+  "slug" : "xbk-the-eastern-journey",
+  "title" : "xbk. The Eastern Journey",
+  "filename" : "xbk-the-eastern-journey.md",
+  "series" : "pluta-panthera-twin-search",
+  "sort-order" : "xbk",
+  "source-dir" : "writings"
+}, {
+  "slug" : "7001-instrumental-music-recommendations",
+  "title" : "7001. Instrumental Music Recommendations",
+  "filename" : "7001-instrumental-music-recommendations.md",
+  "series" : "creative-recommendations",
+  "sort-order" : "7001",
+  "source-dir" : "writings"
+}, {
+  "slug" : "7002-therhizomesys",
+  "title" : "7002. The Rhizome System: Framework Laptop + Alpine Linux + s6 + musl + Sway Wayland",
+  "filename" : "7002-therhizomesys.md",
+  "series" : "technical-implementation",
+  "sort-order" : 7002,
+  "source-dir" : "writings"
+} ]

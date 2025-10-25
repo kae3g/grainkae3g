@@ -84,6 +84,34 @@ What equals what? Not ==  but **true equivalence**. Two grainpaths might differ 
 (equiv? team01-aries team01-magician :cosmic)
 ```
 
+### `grainsource-vegan` - The Ethical Validator
+The fifth pillar - vegan alignment as STRUCTURAL REQUIREMENT. Not optional ethics but **foundational validation**. Every spec must pass vegan audit. Every type must honor life.
+
+**Vegan Validation**:
+- Terminology audits (no violent language in specs)
+- Dependency ethics (no animal-tested services)
+- Compassionate error messages (healing, not blaming)
+- Life-affirming architecture (code serves life)
+
+**The Ethics Spec**:
+```clojure
+(s/def ::vegan-compliant
+  (s/and ::technically-valid
+         ::ethically-aligned
+         ::compassionately-documented
+         ::life-affirming))
+
+;; All specs must conform
+(s/valid? ::vegan-compliant my-datastructure)
+```
+
+**The Audit**:
+```bash
+bb vegan:audit teamfire01 --check-all-specs
+bb vegan:validate dependencies.edn --no-exploitation
+bb vegan:scan error-messages --healing-only
+```
+
 ---
 
 ## 🎯 **Hermetic Wisdom**

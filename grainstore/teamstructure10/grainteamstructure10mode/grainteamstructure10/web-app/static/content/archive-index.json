@@ -1,0 +1,12 @@
+{
+  "slug" : "archive-index",
+  "meta" : {
+    "slug" : "archive-index",
+    "title" : "Archived Essays",
+    "filename" : "archive-index.md",
+    "sort-order" : 9901,
+    "source-dir" : "hidden"
+  },
+  "html" : "<h1>Archived Essays</h1><p>This directory contains archived versions of essays that have been superseded by newer versions or moved to different locations.</p><p>These essays are preserved for historical reference and to maintain immutable links for any existing references.</p><p><em>Return to <a href='/12025-10/'>Index</a></em></p>",
+  "hash" : "2025-10-22T10:21:16.81052703Z-381"
+}

@@ -1190,7 +1190,7 @@ Types (Marks) + Paths (Clay) + Containers (Grainframes)
 *"Technical excellence serves community resilience."*  
 *"Musl libc represents clean, beautiful code that serves all."*  
 *"Framework modularity demonstrates repairable, sustainable hardware."*  
-*"Alpine minimalism shows security through simplicity."*  
+*"Alpine minimalism shows security through simplicity."*
 *"Types are safety rails that enable faster, more confident development."*  
 *"80×110: Different but complementary—together they create something neither could alone."*
 ---

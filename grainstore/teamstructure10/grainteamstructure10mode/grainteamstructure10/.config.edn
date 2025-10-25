@@ -1,0 +1,40 @@
+{:site
+ {:title "teamstructure10 - The Wheel of Fortune"
+  :subtitle "Capricorn ♑ / X. Eternal Rotation"
+  :author "kae3g"
+  :copyright "12025 kae3g • teamstructure10"
+  :license "MIT"
+  :graindevname "kae3g"
+  :team "teamstructure10"
+  :tarot-card "X - Wheel of Fortune"
+  :zodiac "Capricorn ♑"
+  :element "Earth (Cardinal)"
+  :universal-body "Supple hamstrings - outrun assassins - panthera unity"
+  :league "EARTH LEAGUE 🌍"}
+ 
+ :urls
+ {:github "https://teamstructure10.github.io/grainteamstructure10"
+  :repo "https://github.com/teamstructure10/grainteamstructure10"
+  :org "https://github.com/teamstructure10"}
+ 
+ :theme
+ {:primary-color "#8B4513"    ; Earth brown (Capricorn)
+  :secondary-color "#2F4F4F"  ; Dark slate (mountain)
+  :accent-color "#DAA520"     ; Goldenrod (Wheel)
+  :background "#1a1a1a"       ; Dark (nagual void)
+  :text "#e0e0e0"             ; Light text
+  :nagual-mode true           ; glo0w aesthetic
+  :fedora-energy true}        ; Don Juan vibes
+ 
+ :navigation
+ [{:name "Home" :path "/"}
+  {:name "Vedic-Tarot Synthesis" :path "/vedic-tarot-synthesis"}
+  {:name "Roadmap" :path "/roadmap"}
+  {:name "Language Comparison" :path "/language-comparison"}
+  {:name "Foundations Research" :path "/foundations-research"}]
+ 
+ :footer
+ {:text "teamstructure10 - The Wheel of Fortune ⚙️"
+  :signature "*maintains nagual stare* 🌑"
+  :motto "now == next + 1 (but make it structural, G!)"}}
+
