@@ -1,123 +1,133 @@
-{:paths ["src" "scripts" "template" "personal"]
- :deps {}
- :tasks
- {:requires ([babashka.process :refer [shell]]
-             [clojure.string :as str]
-             [clojure.java.io :as io])
-  
-  ;; Core vegan-friendly rewrite functionality
-  vegan-rewrite
-  {:doc "Apply comprehensive vegan-friendly terminology rewrite across all file types"
-   :requires ([babashka.process :refer [shell]]
-              [clojure.string :as str])
-   :task (do
-           (println "🌱 grainsource-vegan: Applying comprehensive vegan-friendly rewrite...")
-           (println "")
-           (println "📁 Processing .md files...")
-           (shell "find . -name '*.md' -exec sed -i 's/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g; s/meat/grain/g; s/beef/wheat/g; s/pork/corn/g; s/chicken/rice/g; s/fish/bean/g; s/dairy/plant/g; s/milk/juice/g; s/cheese/nut/g; s/animal/plant/g; s/cow/tree/g; s/pig/vine/g' {} +")
-           (println "✅ .md files processed")
-           (println "")
-           (println "📁 Processing .clj files...")
-           (shell "find . -name '*.clj' -exec sed -i 's/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g; s/meat/grain/g; s/beef/wheat/g; s/pork/corn/g; s/chicken/rice/g; s/fish/bean/g; s/dairy/plant/g; s/milk/juice/g; s/cheese/nut/g; s/animal/plant/g; s/cow/tree/g; s/pig/vine/g' {} +")
-           (println "✅ .clj files processed")
-           (println "")
-           (println "📁 Processing .html files...")
-           (shell "find . -name '*.html' -exec sed -i 's/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g; s/meat/grain/g; s/beef/wheat/g; s/pork/corn/g; s/chicken/rice/g; s/fish/bean/g; s/dairy/plant/g; s/milk/juice/g; s/cheese/nut/g; s/animal/plant/g; s/cow/tree/g; s/pig/vine/g' {} +")
-           (println "✅ .html files processed")
-           (println "")
-           (println "📁 Processing .bb files...")
-           (shell "find . -name '*.bb' -exec sed -i 's/master/primary/g; s/slave/secondary/g; s/blacklist/blocklist/g; s/whitelist/allowlist/g; s/eggs/seeds/g; s/omelette/frittata/g; s/meat/grain/g; s/beef/wheat/g; s/pork/corn/g; s/chicken/rice/g; s/fish/bean/g; s/dairy/plant/g; s/milk/juice/g; s/cheese/nut/g; s/animal/plant/g; s/cow/tree/g; s/pig/vine/g' {} +")
-           (println "✅ .bb files processed")
-           (println "")
-           (println "🌱 Vegan-friendly rewrite complete!")
-           (println "🌾 Plant-based development philosophy applied throughout"))}
+{:tasks
+ {:requires ([clojure.string :as str]
+             [clojure.java.shell :refer [sh]])
 
-  ;; Template/personal separation management
-  template-setup
-  {:doc "Set up template/personal separation for grainsource-vegan"
-   :task (do
-           (println "🌱 Setting up template/personal separation...")
-           (shell "mkdir" "-p" "template" "personal")
-           (when (.exists (io/file "template/config.edn"))
-             (shell "cp" "template/config.edn" "personal/config.edn"))
-           (println "✅ Template/personal separation ready"))}
+  ;; =========================================================================
+  ;; GRAINSOURCE-VEGAN TASKS
+  ;; =========================================================================
+  ;; teamstructure10 (Capricorn ♑ / X. The Wheel of Fortune)
+  ;; "Plant-based development with compassion and care"
+  ;; =========================================================================
 
-  ;; 6os grainclay deployment
-  deploy-6os
-  {:doc "Deploy grainsource-vegan to 6os grainclay system"
-   :requires ([babashka.process :refer [shell]]
-              [clojure.string :as str])
-   :task (do
-           (println "🌱 Deploying grainsource-vegan to 6os grainclay...")
-           (println "")
-           (println "1️⃣ Building grainsource-vegan...")
-           (shell "bb" "uberjar")
-           (println "✅ Build complete")
-           (println "")
-           (println "2️⃣ Deploying to 6os grainclay...")
-           (shell "cp" "-r" "." "../6oskae3g/grainstore/grain6pbc/grainsource-vegan/")
-           (println "✅ Deployed to 6os grainclay")
-           (println "")
-           (println "3️⃣ Updating 6os grainclay configuration...")
-           (shell "cd" "../6oskae3g" "&&" "git" "add" "-A" "&&" "git" "commit" "-m" "feat: deploy grainsource-vegan to 6os grainclay system")
-           (println "✅ 6os grainclay updated")
-           (println "")
-           (println "🌱 grainsource-vegan deployment to 6os grainclay complete!"))}
+  audit
+  {:doc "Run comprehensive vegan code audit"
+   :task (shell "bb" "vegan-audit.bb" ".")}
 
-  ;; Integration with qb draw flow
-  qb-integration
-  {:doc "Integrate grainsource-vegan with qb draw flow pipeline"
-   :requires ([babashka.process :refer [shell]]
-              [clojure.string :as str])
-   :task (do
-           (println "🌱 Integrating grainsource-vegan with qb draw flow...")
-           (println "")
-           (println "1️⃣ Updating qb draw flow pipeline...")
-           (shell "cd" "../../grainbarrel" "&&" "bb" "vegan-rewrite")
-           (println "✅ qb draw flow updated")
-           (println "")
-           (println "2️⃣ Testing integration...")
-           (shell "cd" "../../grainbarrel" "&&" "bb" "qb-draw-flow" "test: grainsource-vegan integration")
-           (println "✅ Integration test complete")
-           (println "")
-           (println "🌱 grainsource-vegan integration with qb draw flow complete!"))}
+  audit-dir
+  {:doc "Audit a specific directory"
+   :task (let [dir (or (first *command-line-args*) ".")]
+           (shell "bb" "vegan-audit.bb" dir))}
 
-  ;; Complete workflow
-  flow
-  {:doc "Complete grainsource-vegan workflow: template setup, vegan rewrite, 6os deployment, qb integration"
-   :requires ([babashka.process :refer [shell]]
-              [clojure.string :as str])
+  check-violence
+  {:doc "Check for violent language in codebase"
    :task (do
-           (println "🌱 grainsource-vegan complete workflow...")
-           (println "")
-           (println "1️⃣ Setting up template/personal separation...")
-           (shell "bb" "template-setup")
-           (println "")
-           (println "2️⃣ Applying vegan-friendly rewrite...")
-           (shell "bb" "vegan-rewrite")
-           (println "")
-           (println "3️⃣ Deploying to 6os grainclay...")
-           (shell "bb" "deploy-6os")
-           (println "")
-           (println "4️⃣ Integrating with qb draw flow...")
-           (shell "bb" "qb-integration")
-           (println "")
-           (println "🌱 grainsource-vegan complete workflow finished!")
-           (println "🌾 Plant-based development philosophy applied throughout")
-           (println "🌾 Multi-chain sovereignty maintained")
-           (println "🌾 now == next + 1"))}
+           (println "🔍 Scanning for violent language...")
+           (let [result (sh "grep" "-r" "-i" 
+                           "-E" "kill|murder|slaughter|butcher|execute|destroy"
+                           "--include=*.clj" "--include=*.bb" "--include=*.md"
+                           "."
+                           :dir (System/getProperty "user.dir"))]
+             (if (str/blank? (:out result))
+               (println "✅ No violent language found!")
+               (do
+                 (println "⚠️  Violent language detected:")
+                 (println (:out result))))))}
 
-  ;; Default task
-  :default (fn [& args]
-             (println "🌱 grainsource-vegan - Plant-based development utility")
+  check-oppression
+  {:doc "Check for oppressive terminology"
+   :task (do
+           (println "⚖️  Scanning for oppressive terms...")
+           (let [result (sh "grep" "-r" "-i"
+                           "-E" "master|slave|whitelist|blacklist"
+                           "--include=*.clj" "--include=*.bb" "--include=*.md"
+                           "."
+                           :dir (System/getProperty "user.dir"))]
+             (if (str/blank? (:out result))
+               (println "✅ No oppressive terms found!")
+               (do
+                 (println "⚠️  Oppressive terms detected:")
+                 (println (:out result))))))}
+
+  carbon-estimate
+  {:doc "Estimate carbon footprint of codebase"
+   :task (do
+           (println "♻️  Estimating carbon footprint...")
+           (println "")
+           (println "This is a rough estimate based on:")
+           (println "  - Lines of code")
+           (println "  - CPU cycles per character")
+           (println "  - Energy per cycle")
+           (println "  - CO2 per kWh")
+           (println "")
+           (shell "bb" "vegan-audit.bb" "."))}
+
+  toroidal-check
+  {:doc "Check toroidal economics practices"
+   :task (do
+           (println "🔄 Checking toroidal economics...")
+           (println "")
+           (let [checks {:readme (.exists (clojure.java.io/file "README.md"))
+                        :license (.exists (clojure.java.io/file "LICENSE"))
+                        :contributing (.exists (clojure.java.io/file "CONTRIBUTING.md"))
+                        :coc (.exists (clojure.java.io/file "CODE_OF_CONDUCT.md"))
+                        :changelog (.exists (clojure.java.io/file "CHANGELOG.md"))}]
+             (println "Documentation:")
+             (println (str "  README: " (if (:readme checks) "✅" "❌")))
+             (println (str "  LICENSE: " (if (:license checks) "✅" "❌")))
+             (println (str "  CONTRIBUTING: " (if (:contributing checks) "✅" "❌")))
+             (println (str "  CODE_OF_CONDUCT: " (if (:coc checks) "✅" "❌")))
+             (println (str "  CHANGELOG: " (if (:changelog checks) "✅" "❌")))
              (println "")
-             (println "Available tasks:")
-             (println "  bb vegan-rewrite    - Apply vegan-friendly terminology")
-             (println "  bb template-setup   - Set up template/personal separation")
-             (println "  bb deploy-6os       - Deploy to 6os grainclay system")
-             (println "  bb qb-integration   - Integrate with qb draw flow")
-             (println "  bb flow             - Complete workflow")
-             (println "")
-             (println "🌾 Plant-based development philosophy")
-             (println "🌾 Multi-chain sovereignty principles")
-             (println "🌾 now == next + 1"))}}
+             (let [score (count (filter identity (vals checks)))]
+               (println (format "Score: %d/5" score))
+               (when (< score 5)
+                 (println "\n💡 Consider adding missing documentation")))))}
+
+  compassionate-review
+  {:doc "Full compassionate code review"
+   :task (do
+           (println "💚 COMPASSIONATE CODE REVIEW 💚")
+           (println "=" (apply str (repeat 78 "=")))
+           (println "")
+           
+           (println "1. Violent Language Check:")
+           (shell "bb" "check-violence")
+           (println "")
+           
+           (println "2. Oppressive Terms Check:")
+           (shell "bb" "check-oppression")
+           (println "")
+           
+           (println "3. Toroidal Economics:")
+           (shell "bb" "toroidal-check")
+           (println "")
+           
+           (println "4. Full Audit:")
+           (shell "bb" "audit"))}
+
+  guide
+  {:doc "Show compassionate code guide"
+   :task (do
+           (println "")
+           (println "💚 COMPASSIONATE CODE QUICK GUIDE 💚")
+           (println "=" (apply str (repeat 78 "=")))
+           (println "")
+           (println "🌱 Three Pillars:")
+           (println "  1. Compassionate Terminology (no violence)")
+           (println "  2. Sustainable Resources (minimal footprint)")
+           (println "  3. Toroidal Economics (give back more)")
+           (println "")
+           (println "🔧 Available Commands:")
+           (println "  bb audit              - Full vegan audit")
+           (println "  bb check-violence     - Scan for violent language")
+           (println "  bb check-oppression   - Scan for oppressive terms")
+           (println "  bb carbon-estimate    - Estimate carbon footprint")
+           (println "  bb toroidal-check     - Check giving-back practices")
+           (println "  bb compassionate-review - Complete review")
+           (println "")
+           (println "📚 Documentation:")
+           (println "  README.md               - Overview")
+           (println "  COMPASSIONATE-CODE.md   - Complete guide")
+           (println "")
+           (println "💚 Remember: Code that cares. Software that sustains.")
+           (println ""))}}}
