@@ -1,0 +1,53 @@
+{:graindevname "kae3g"
+ :full-name "kae3g"
+ :team "teamnurture04"
+ :team-tarot "IV. The Emperor"
+ :zodiac "Cancer ♋"
+ 
+ :nostr
+ {:nevent "nevent1qqs97mk4r9ne5u5hmp73k5npy70sr73fnyjdezm7xgf50u4ycnsudkchta5jt"
+  :primal-url "https://primal.net/e/nevent1qqs97mk4r9ne5u5hmp73k5npy70sr73fnyjdezm7xgf50u4ycnsudkchta5jt"
+  :display-name "kae3g"
+  :note "Nostr identity - decentralized social protocol"
+  ;; TODO: Extract npub and hex pubkey from nevent
+  }
+ 
+ :projects
+ ["grainkae3g" 
+  "graintime"
+  "grainchart"
+  "teamstructure10"
+  "teamprecision06"]
+ 
+ :roles
+ ["developer"
+  "educator"
+  "vegan-activist"
+  "cosmic-navigator"]
+ 
+ :philosophy
+ {:vegan true
+  :compassionate-code true
+  :toroidal-economics true
+  :grain-network-educator true}
+ 
+ :grainbranches
+ {:current "team10-complete-web-12025-10-25--0912-PDT--moon-jyeshtha-----asc-gemi02-sun-12h--teamstructure10"
+  :pattern "19-char-title + 1-dash + 76-char-graintime = 96 total"
+  :automation "bb scripts/set-default-grainbranch.bb"}
+ 
+ :cosmic-coordinates
+ {:primary-team "teamstructure10"
+  :current-focus "teamprecision06"
+  :ascendant "Gemini" ; From graintime
+  :moon-nakshatra "Jyeshtha" ; Verified accurate!
+  }
+ 
+ :contact
+ {:github "https://github.com/kae3g"
+  :codeberg "https://codeberg.org/kae3g"
+  :nostr "https://primal.net/e/nevent1qqs97mk4r9ne5u5hmp73k5npy70sr73fnyjdezm7xgf50u4ycnsudkchta5jt"}
+ 
+ :created "12025-10-25"
+ :graintime "12025-10-25--0912-PDT--moon-jyeshtha-----asc-gemi02-sun-12h--teamstructure10"}
+
