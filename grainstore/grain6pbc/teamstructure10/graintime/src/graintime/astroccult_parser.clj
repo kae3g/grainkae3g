@@ -219,7 +219,7 @@
   "Load Moon nakshatra transitions from EDN files"
   []
   (try
-    (let [transitions-file "resources/moon-transitions-2025-10.edn"
+    (let [transitions-file "resources/moon-transitions-all.edn"
           data (edn/read-string (slurp transitions-file))]
       (:transitions data))
     (catch Exception e
