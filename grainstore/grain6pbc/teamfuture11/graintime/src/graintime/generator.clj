@@ -8,11 +8,9 @@
             [graintime.solar-houses :as solar]
             [graintime.format76 :as fmt76]))
 
-;; Astromitra.com provides real-time planetary positions in nakshatras
-;; Default location: New Delhi, India
-;; We can scrape with custom location data
-
-(def astromitra-base-url "https://www.astromitra.com/transit/planetary-transit-in-nakshatra.php")
+;; NOTE: We now use AstrOccult.net pre-calculated data (see astroccult_parser.clj)
+;; This file contains legacy code for reference only
+;; Real-time fallback: Users can check https://www.astromitra.com/transit/planetary-transit-in-nakshatra.php
 
 (defn format-timezone
   "Format timezone offset as timezone abbreviation"

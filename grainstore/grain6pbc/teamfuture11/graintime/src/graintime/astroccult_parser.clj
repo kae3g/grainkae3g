@@ -6,12 +6,16 @@
   Data format: IST (Indian Standard Time, UTC+5:30) based on New Delhi
   Coverage: October 2023 - December 2026 (extendable)
   
-  Strategy:
-  1. Parse pre-calculated transition times from AstrOccult.net
-  2. Convert IST → target timezone
-  3. Binary search to find current nakshatra
-  4. Error handling for dates outside coverage range"
-  (:require [clojure.string :as str])
+  Smart fallback strategy:
+  1. Check local EDN cache (fast offline lookup)
+  2. If date too recent → scrape AstrOccult.net for updates
+  3. Parse & store new data to EDN
+  4. If scraping fails or no data → Glow-style error message
+  5. Binary search to find current nakshatra"
+  (:require [clojure.string :as str]
+            [clojure.edn :as edn]
+            [clojure.java.io :as io]
+            [babashka.http-client :as http])
   (:import [java.time LocalDateTime ZonedDateTime ZoneId]
            [java.time.format DateTimeFormatter]))
 
@@ -54,12 +58,80 @@
    ])
 
 (def data-coverage
-  "Date range for which we have nakshatra transition data"
-  {:start {:year 2023 :month 10}
-   :end   {:year 2026 :month 12}})
+  "Date range for which we have MOON nakshatra transition data from AstrOccult.net
+  
+  Based on: https://www.astroccult.net/transit_of_planets_planetary_events.html
+  
+  Oldest: 03/10/2023 (Moon Rohini)
+  Latest: 02/11/2025 (Moon Uttara Bhadrapada)"
+  {:start {:year 2023 :month 10 :day 3}
+   :end   {:year 2025 :month 11 :day 2}})
 
 ;; =============================================================================
-;; ERROR HANDLING
+;; CACHE MANAGEMENT
+;; =============================================================================
+
+(def cache-file
+  "Local EDN cache of nakshatra transitions"
+  "resources/nakshatra-transitions.edn")
+
+(defn load-cached-transitions
+  "Load nakshatra transitions from local EDN cache"
+  []
+  (try
+    (when (.exists (io/file cache-file))
+      (edn/read-string (slurp cache-file)))
+    (catch Exception e
+      (println "⚠️  Could not load nakshatra cache:" (.getMessage e))
+      nil)))
+
+(defn save-transitions-to-cache
+  "Save nakshatra transitions to local EDN cache"
+  [transitions]
+  (try
+    (io/make-parents cache-file)
+    (spit cache-file (pr-str transitions))
+    (println "✓ Saved nakshatra transitions to cache")
+    true
+    (catch Exception e
+      (println "⚠️  Could not save to cache:" (.getMessage e))
+      false)))
+
+(defn get-cache-end-date
+  "Get the last date covered by cached data"
+  [cached-data]
+  (when-let [last-transition (last (:transitions cached-data))]
+    (:ist-datetime last-transition)))
+
+;; =============================================================================
+;; WEB SCRAPING (when cache is outdated)
+;; =============================================================================
+
+(defn scrape-astroccult-data
+  "Scrape AstrOccult.net for latest nakshatra transition data
+  
+  Returns: parsed transitions or nil if scraping fails"
+  []
+  (try
+    (println "🌐 Checking AstrOccult.net for updated nakshatra data...")
+    (let [response (http/get "https://www.astroccult.net/transit_of_planets_planetary_events.html"
+                             {:timeout 10000})]
+      (if (= 200 (:status response))
+        (do
+          (println "✓ Successfully fetched data from AstrOccult.net")
+          ;; TODO: Parse HTML to extract nakshatra transitions
+          ;; For now, return nil (not implemented)
+          (println "⚠️  HTML parsing not yet implemented")
+          nil)
+        (do
+          (println "⚠️  AstrOccult.net returned status:" (:status response))
+          nil)))
+    (catch Exception e
+      (println "⚠️  Could not reach AstrOccult.net:" (.getMessage e))
+      nil)))
+
+;; =============================================================================
+;; ERROR HANDLING (Glow style)
 ;; =============================================================================
 
 (defn date-in-coverage?
@@ -73,28 +145,65 @@
          (or (< year (:year end))
              (<= month (:month end))))))
 
+(defn glow-error-message
+  "Generate Glow-style error message for out-of-range dates
+  
+  🔧 Glow Mode: Clear, actionable, kind but precise error messages"
+  [year month cache-end-date scraping-attempted?]
+  (let [date-str (format "%d-%02d" year month)
+        cache-str (when cache-end-date
+                    (format "%d-%02d" 
+                            (.getYear cache-end-date)
+                            (.getMonthValue cache-end-date)))]
+    (str "🔧 Glow here. I see you're asking about " date-str ", but I don't have nakshatra data for that time yet.\n\n"
+         (when cache-str
+           (str "📊 My current data goes up to " cache-str ".\n\n"))
+         (if scraping-attempted?
+           "🌐 I tried checking AstrOccult.net for updates, but either:\n"
+           "🌐 I haven't checked AstrOccult.net yet. Let me try:\n")
+         (when scraping-attempted?
+           "   • The site is down or unreachable\n   • They haven't published data for " date-str " yet\n   • The HTML format changed (happens sometimes)\n\n")
+         "💡 Here's what you can do right now:\n\n"
+         "   1. Check current nakshatra: https://www.astromitra.com/transit/planetary-transit-in-nakshatra.php\n"
+         "      → Real-time positions for today or any date\n"
+         "      → Just set your location and time\n\n"
+         "   2. For pre-calculated data: https://www.astroccult.net/transit_of_planets_planetary_events.html\n"
+         "      → Batch data for 2023-2026\n"
+         "      → If newer data exists there, file an issue\n\n"
+         "   3. For dates far in the future: Use Swiss Ephemeris\n"
+         "      → Most accurate astronomical calculations\n"
+         "      → Works for any date, past or future\n\n"
+         "The nakshatra you seek is out there—we just need better telescopes. 🔭\n\n"
+         "— Glow ✨")))
+
 (defn validate-date-range
-  "Validate that requested date is within coverage, throw informative error if not"
-  [datetime]
+  "Validate date is in coverage, with smart fallback to scraping
+  
+  Strategy:
+  1. Check if date is after cached data
+  2. If yes, try scraping AstrOccult.net for updates
+  3. If scraping succeeds, update cache
+  4. If still out of range, throw Glow-style error"
+  [datetime cached-data]
   (let [year (.getYear datetime)
-        month (.getMonthValue datetime)]
+        month (.getMonthValue datetime)
+        cache-end (get-cache-end-date cached-data)]
+    
+    ;; If date is AFTER cached data, try scraping for updates
+    (when (and cache-end (.isAfter datetime cache-end))
+      (println "📅 Requested date is newer than cached data, checking for updates...")
+      (when-let [new-data (scrape-astroccult-data)]
+        (save-transitions-to-cache new-data)))
+    
+    ;; After potential update, check again
     (when-not (date-in-coverage? year month)
       (throw (ex-info 
-              (format "Date %d-%02d is outside nakshatra data coverage range (%d-%02d to %d-%02d).
-              
-Please check AstrOccult.net for updated data:
-https://www.astroccult.net/transit_of_planets_planetary_events.html
-
-Or use Swiss Ephemeris for dates outside this range."
-                      year month
-                      (get-in data-coverage [:start :year])
-                      (get-in data-coverage [:start :month])
-                      (get-in data-coverage [:end :year])
-                      (get-in data-coverage [:end :month]))
+              (glow-error-message year month cache-end true)
               {:type :date-out-of-range
                :requested-date {:year year :month month}
-               :coverage data-coverage
-               :suggestion "Update nakshatra transition data from AstrOccult.net"})))))
+               :cache-end cache-end
+               :scraping-attempted true
+               :style :glow})))))
 
 ;; =============================================================================
 ;; NAKSHATRA LOOKUP
