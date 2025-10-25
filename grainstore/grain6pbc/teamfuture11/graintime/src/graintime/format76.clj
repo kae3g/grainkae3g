@@ -14,8 +14,7 @@
   
   Total: EXACTLY 76 chars for every combination"
   (:require [clojure.string :as str]
-            [graintime.solar-houses :as solar]
-            [graintime.generator :as gen]))
+            [graintime.solar-houses :as solar]))
 
 ;; =============================================================================
 ;; PADDING FUNCTIONS (from tested format)

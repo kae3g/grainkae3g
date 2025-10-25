@@ -5,7 +5,8 @@
             [clojure.string :as str]
             [clojure.java.io :as io]
             [graintime.sunset :as sunset]
-            [graintime.solar-houses :as solar]))
+            [graintime.solar-houses :as solar]
+            [graintime.format76 :as fmt76]))
 
 ;; Astromitra.com provides real-time planetary positions in nakshatras
 ;; Default location: New Delhi, India
@@ -605,28 +606,22 @@
                      0)  ; fallback
          
          ;; Calculate sun house using solar house clock for specific datetime and location
-         sun-house (get-sun-house-with-verbose datetime latitude longitude)]
+         sun-house (get-sun-house-with-verbose datetime latitude longitude)
+         
+         ;; Extract team-base from author (e.g., "teamstructure10" -> "structure")
+         team-base (if (str/starts-with? author "team")
+                     (str/replace author #"^team|10$" "")
+                     "structure")] ; default fallback
      
-     (let [ordinal-house (format-ordinal sun-house)
-           abbreviated-nakshatra (abbreviate-nakshatra moon-nakshatra)
-           abbreviated-zodiac (abbreviate-zodiac asc-sign)
-           ;; Pad nakshatra to 12 chars (longest is u_bhadrapada)
-           padded-nakshatra (format "%-12s" abbreviated-nakshatra)
-           padded-nakshatra (str/replace padded-nakshatra #" " "-")
-           ;; Format house as 2 digits
-           house-str (format "%02d" sun-house)
-           ordinal-suffix (cond
-                           (= sun-house 1) "st"
-                           (= sun-house 2) "nd"
-                           (= sun-house 3) "rd"
-                           :else "th")
-           formatted-house (str house-str ordinal-suffix)]
-       (format "%d-%02d-%02d--%02d%02d--%s--moon-%s-asc-%s%03d--sun-%s--%s"
-               year month day hour minute tz
-               padded-nakshatra
-               abbreviated-zodiac asc-degree
-               formatted-house
-               author)))))
+     ;; Use format76 to generate perfect 76-char graintime
+     (fmt76/generate-graintime-76
+      {:datetime datetime
+       :nakshatra moon-nakshatra
+       :asc-sign asc-sign
+       :asc-degree asc-degree
+       :sun-house sun-house
+       :team-base team-base
+       :timezone (.getZone datetime)}))))
 
 ;; Test function
 (defn test-astromitra-integration
