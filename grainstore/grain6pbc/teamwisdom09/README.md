@@ -1,5 +1,5 @@
 # 🏹 teamwisdom09 - IX. THE HERMIT
-## *Sagittarius ♐ - "The Lamp of Teaching"*
+## *Sagittarius ♐ - "The Teaching Hermit"*
 
 **Tarot**: IX - The Hermit (L'Hermite)  
 **Element**: Fire (Mutable)  
